@@ -6,6 +6,24 @@ export const BTN_PRIMARY_TYPE =
 const BTN_PRIMARY_VISUAL =
   "rounded-xl border border-white/20 bg-[#8758ed] shadow-btn-primary transition-[background-color,box-shadow,transform] duration-200 hover:bg-[#9a6ff2] hover:shadow-btn-primary-hover active:scale-[0.98] active:shadow-btn-primary-active disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100";
 
+/** Shared outline CTA shell — pairs with primary buttons in nav/toolbars */
+const BTN_OUTLINE_VISUAL =
+  "rounded-xl border border-white/[0.08] bg-transparent transition-colors hover:bg-white/5 hover:text-white";
+
+/** Standalone outline CTA — matches BTN_PRIMARY_SOLID dimensions */
+export const BTN_OUTLINE_SOLID = [
+  "inline-flex items-center justify-center gap-1.5 h-9 px-4 whitespace-nowrap cursor-pointer select-none shrink-0",
+  BTN_PRIMARY_TYPE,
+  BTN_OUTLINE_VISUAL,
+].join(" ");
+
+/** Full-width outline CTA — matches BTN_PRIMARY_BLOCK dimensions */
+export const BTN_OUTLINE_BLOCK = [
+  "inline-flex w-full items-center justify-center gap-1.5 h-[34px] px-4 cursor-pointer select-none",
+  BTN_PRIMARY_TYPE,
+  BTN_OUTLINE_VISUAL,
+].join(" ");
+
 /** Standalone CTA — header, toolbar, modal footers (matches h-9 chrome controls) */
 export const BTN_PRIMARY_SOLID = [
   "inline-flex items-center justify-center gap-1.5 h-9 px-4 whitespace-nowrap cursor-pointer select-none",

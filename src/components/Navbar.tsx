@@ -5,7 +5,12 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { BTN_PRIMARY_BLOCK, BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import {
+  BTN_OUTLINE_BLOCK,
+  BTN_OUTLINE_SOLID,
+  BTN_PRIMARY_BLOCK,
+  BTN_PRIMARY_SOLID,
+} from "@/lib/button-styles";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -68,13 +73,9 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button
-            variant="outline"
-            asChild
-            className="border-white/[0.08] bg-transparent text-white hover:bg-white/5 hover:text-white"
-          >
-            <a href="#" className="inline-flex items-center gap-2">
-              <DiscordIcon className="size-4 shrink-0" />
+          <Button variant="outline" asChild className={BTN_OUTLINE_SOLID}>
+            <a href="#" className="inline-flex items-center gap-1.5">
+              <DiscordIcon className="size-3.5 shrink-0" />
               Discord
             </a>
           </Button>
@@ -109,17 +110,13 @@ export default function Navbar() {
             ))}
           </nav>
           <div className="mt-3 flex flex-col gap-2">
-            <Button
-              variant="outline"
-              asChild
-              className="w-full border-white/[0.08] bg-transparent text-white hover:bg-white/5 hover:text-white"
-            >
+            <Button variant="outline" asChild className={BTN_OUTLINE_BLOCK}>
               <a
                 href="#"
                 onClick={closeMobileMenu}
-                className="inline-flex items-center justify-center gap-2"
+                className="inline-flex items-center justify-center gap-1.5"
               >
-                <DiscordIcon className="size-4 shrink-0" />
+                <DiscordIcon className="size-3.5 shrink-0" />
                 Discord
               </a>
             </Button>
