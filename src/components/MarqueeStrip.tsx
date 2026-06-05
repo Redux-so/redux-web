@@ -8,7 +8,34 @@ const marqueeItems = [
   "Figma",
 ] as const;
 
-const duplicatedItems = [...marqueeItems, ...marqueeItems];
+const TRACK_REPEATS = 4;
+
+type MarqueeTrackProps = {
+  trackKey: string;
+  "aria-hidden"?: boolean;
+};
+
+function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps) {
+  const items = Array.from({ length: TRACK_REPEATS }, () => marqueeItems).flat();
+
+  return (
+    <div
+      className="flex shrink-0 items-center gap-8 pr-8"
+      aria-hidden={ariaHidden}
+    >
+      {items.map((item, index) => (
+        <Fragment key={`${trackKey}-${index}`}>
+          {index > 0 ? (
+            <span className="text-white/30" aria-hidden="true">
+              ·
+            </span>
+          ) : null}
+          <span className="text-sm text-white/90 sm:text-base">{item}</span>
+        </Fragment>
+      ))}
+    </div>
+  );
+}
 
 export default function MarqueeStrip() {
   return (
@@ -19,22 +46,9 @@ export default function MarqueeStrip() {
         </p>
 
         <div className="w-full overflow-hidden">
-          <div
-            className="animate-marquee flex items-center gap-8 whitespace-nowrap"
-            style={{ width: "max-content" }}
-          >
-            {duplicatedItems.map((item, index) => (
-              <Fragment key={`${item}-${index}`}>
-                {index > 0 ? (
-                  <span className="text-white/30" aria-hidden="true">
-                    ·
-                  </span>
-                ) : null}
-                <span className="text-sm text-white/90 sm:text-base">
-                  {item}
-                </span>
-              </Fragment>
-            ))}
+          <div className="animate-marquee flex w-max items-center">
+            <MarqueeTrack trackKey="a" />
+            <MarqueeTrack trackKey="b" aria-hidden />
           </div>
         </div>
       </div>

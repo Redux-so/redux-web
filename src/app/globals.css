@@ -158,11 +158,8 @@ html {
 }
 
 .animate-marquee {
-  animation: marquee 28s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
+  animation: marquee 100s linear infinite;
+  will-change: transform;
 }
 
 @layer base {
