@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -27,26 +27,15 @@ function DiscordIcon({ className }: { className?: string }) {
 }
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const closeMobileMenu = () => setMobileOpen(false);
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 bg-[#111111]",
-        scrolled && "border-b border-white/[0.08] backdrop-blur-md",
+        "fixed inset-x-0 top-0 z-50 border-b border-white/[0.08]",
+        "bg-[#111111]/70 backdrop-blur-lg backdrop-saturate-150",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -103,7 +92,7 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-white/[0.08] bg-[#111111] px-4 pb-4 pt-2 md:hidden">
+        <div className="border-t border-white/[0.08] bg-[#111111]/70 px-4 pb-4 pt-2 backdrop-blur-lg backdrop-saturate-150 md:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <a
