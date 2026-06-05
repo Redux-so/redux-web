@@ -1,6 +1,7 @@
 import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
 import Navbar from "@/src/components/Navbar";
+import WaitlistSection from "@/src/components/WaitlistSection";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <section id="home">
         <Hero />
       </section>
+      <WaitlistSection />
       <Footer />
     </main>
   );
