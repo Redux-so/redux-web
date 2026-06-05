@@ -12,13 +12,13 @@ const duplicatedItems = [...marqueeItems, ...marqueeItems];
 
 export default function MarqueeStrip() {
   return (
-    <section className="border-y border-white/[0.08] bg-brand-surface py-7 sm:py-8">
-      <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 sm:px-6 lg:px-8">
-        <p className="shrink-0 text-sm text-white/70 sm:text-base">
+    <section className="border-y border-white/[0.08] bg-brand-surface py-9 sm:py-10">
+      <div className="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8">
+        <p className="mb-8 text-center text-sm text-white/70 sm:mb-10 sm:text-base">
           Inspired by workflows from
         </p>
 
-        <div className="min-w-0 flex-1 overflow-hidden">
+        <div className="w-full overflow-hidden">
           <div
             className="animate-marquee flex items-center gap-8 whitespace-nowrap"
             style={{ width: "max-content" }}
