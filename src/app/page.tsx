@@ -9,7 +9,7 @@ import WaitlistSection from "@/src/components/WaitlistSection";
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden bg-[#111111] text-white">
+    <main className="bg-[#111111] text-white overflow-x-hidden">
       <Navbar />
       <section id="home">
         <Hero />
@@ -19,10 +19,10 @@ export default function Home() {
       <section id="features">
         <Features />
       </section>
-      <WaitlistSection />
       <section id="faq">
         <FAQ />
       </section>
+      <WaitlistSection />
       <Footer />
     </main>
   );
