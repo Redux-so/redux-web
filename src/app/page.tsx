@@ -1,4 +1,5 @@
 import FAQ from "@/src/components/FAQ";
+import Features from "@/src/components/Features";
 import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
@@ -13,6 +14,9 @@ export default function Home() {
         <Hero />
       </section>
       <MarqueeStrip />
+      <section id="features">
+        <Features />
+      </section>
       <WaitlistSection />
       <section id="faq">
         <FAQ />
