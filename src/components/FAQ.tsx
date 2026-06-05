@@ -45,13 +45,13 @@ export default function FAQ() {
   };
 
   return (
-    <div className="px-4 py-24 sm:px-6 lg:px-8">
+    <div className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           Frequently Asked Questions
         </h2>
 
-        <div className="mt-12 divide-y divide-white/[0.08] rounded-xl border border-white/[0.08] bg-brand-surface">
+        <div className="mt-8 divide-y divide-white/[0.08] rounded-xl border border-white/[0.08] bg-brand-surface sm:mt-10">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 

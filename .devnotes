@@ -18,6 +18,15 @@
 
 ---
 
+## Spacing
+
+- Navbar offset: `main pt-16` (matches fixed `h-16` navbar)
+- Hero: top-aligned, no `min-h-screen` — `pt-12 pb-14 sm:pt-14 sm:pb-16`
+- Standard section padding: `py-14 sm:py-16`
+- Showcase: `py-10 sm:py-12` · Marquee: `py-5` · Footer: `py-10 sm:py-12`
+
+---
+
 ## Fonts
 
 - Brand font: SF Pro (Display for headings, Text for body)

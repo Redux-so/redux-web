@@ -12,7 +12,7 @@ const duplicatedItems = [...marqueeItems, ...marqueeItems];
 
 export default function MarqueeStrip() {
   return (
-    <section className="border-y border-white/[0.08] bg-brand-surface py-6">
+    <section className="border-y border-white/[0.08] bg-brand-surface py-5">
       <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 sm:px-6 lg:px-8">
         <p className="shrink-0 text-sm text-white/70 sm:text-base">
           Inspired by workflows from

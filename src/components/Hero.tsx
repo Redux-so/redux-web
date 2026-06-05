@@ -25,7 +25,7 @@ const fadeInUp: Variants = {
 
 export default function Hero() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="flex flex-col items-center px-4 pb-14 pt-12 sm:px-6 sm:pb-16 sm:pt-14 lg:px-8">
       <motion.div
         className="mx-auto max-w-3xl text-center"
         variants={containerVariants}
@@ -41,12 +41,12 @@ export default function Hero() {
 
         <motion.p
           variants={fadeInUp}
-          className="mt-6 text-lg leading-relaxed text-white/70 sm:text-xl"
+          className="mt-5 text-lg leading-relaxed text-white/70 sm:text-xl"
         >
           Organize, edit, and export photos—all from your browser
         </motion.p>
 
-        <motion.div variants={fadeInUp} className="mt-10">
+        <motion.div variants={fadeInUp} className="mt-8">
           <Button asChild className={BTN_PRIMARY_SOLID}>
             <a href="#waitlist">Join Waitlist</a>
           </Button>

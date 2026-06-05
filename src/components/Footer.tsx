@@ -84,7 +84,7 @@ const legalLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-white/[0.08] bg-[#111111]">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="max-w-sm">
             <Image

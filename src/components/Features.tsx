@@ -45,14 +45,14 @@ const fadeInUp: Variants = {
 
 export default function Features() {
   return (
-    <div className="px-4 py-24 sm:px-6 lg:px-8">
+    <div className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           Built for how you actually work
         </h2>
 
         <motion.div
-          className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3"
+          className="mt-8 grid grid-cols-1 gap-6 sm:mt-10 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

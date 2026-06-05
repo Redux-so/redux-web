@@ -52,7 +52,7 @@ export default function WaitlistSection() {
   return (
     <section
       id="waitlist"
-      className="px-4 py-24 sm:px-6 lg:px-8"
+      className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8"
     >
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
@@ -64,13 +64,13 @@ export default function WaitlistSection() {
         </p>
 
         {formState === "success" ? (
-          <p className="mt-10 text-xl font-medium text-white">
+          <p className="mt-8 text-xl font-medium text-white">
             You&apos;re on the list!
           </p>
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-start"
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-start"
           >
             <div className="flex-1">
               <input
