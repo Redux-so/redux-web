@@ -45,7 +45,7 @@ const fadeInUp: Variants = {
 
 export default function Features() {
   return (
-    <div className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+    <div className="px-4 pb-12 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           Built for how you actually work

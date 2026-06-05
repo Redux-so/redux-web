@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { SECTION_DIVIDE } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,7 +53,7 @@ export default function WaitlistSection() {
   return (
     <section
       id="waitlist"
-      className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8"
+      className={cn(SECTION_DIVIDE, "px-4 py-20 sm:px-6 sm:py-24 lg:px-8")}
     >
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">

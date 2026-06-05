@@ -21,9 +21,21 @@
 ## Spacing
 
 - Navbar offset: `main pt-16` (matches fixed `h-16` navbar)
-- Hero: top-aligned, no `min-h-screen` — `pt-12 pb-14 sm:pt-14 sm:pb-16`
-- Standard section padding: `py-14 sm:py-16`
-- Showcase: `py-10 sm:py-12` · Marquee: `py-5` · Footer: `py-10 sm:py-12`
+- Section divider token: `SECTION_DIVIDE` in `lib/section-styles.ts` — `border-t border-white/[0.08]`
+- Page layout: five visual blocks with grouped internal spacing
+
+| Block | Components | Divider |
+|-------|------------|---------|
+| 1 | Hero + Showcase (`#home`) | — |
+| 2 | Marquee strip | `border-y` band (`bg-brand-surface`) |
+| 3 | Features + FAQ (`#features`, `#faq`) | Marquee bottom border |
+| 4 | Waitlist (`#waitlist`) | `SECTION_DIVIDE` |
+| 5 | Footer | `SECTION_DIVIDE` |
+
+Grouped spacing (close but breathable):
+- Hero → Showcase: Hero `pt-16 pb-12 sm:pt-20 sm:pb-14` · Showcase `pt-6 pb-16 sm:pt-8 sm:pb-20`
+- Features → FAQ: Features `pt-20 pb-12 sm:pt-24 sm:pb-14` · FAQ `pt-8 pb-20 sm:pt-10 sm:pb-24`
+- Marquee: `py-7 sm:py-8` · Waitlist: `py-20 sm:py-24` · Footer: `py-10 sm:py-12`
 
 ---
 
@@ -185,13 +197,17 @@ export async function POST(req: NextRequest) {
 
 ## page.tsx Assembly Order
 
-<main className="bg-[#111111] text-white overflow-x-hidden">
+<main className="bg-[#111111] text-white overflow-x-hidden pt-16">
   <Navbar />
-  <section id="home"><Hero /></section>
-  <Showcase />
+  <section id="home">
+    <Hero />
+    <Showcase />
+  </section>
   <MarqueeStrip />
-  <section id="features"><Features /></section>
-  <section id="faq"><FAQ /></section>
+  <section aria-label="Product information">
+    <section id="features"><Features /></section>
+    <section id="faq"><FAQ /></section>
+  </section>
   <WaitlistSection />
   <Footer />
 </main>

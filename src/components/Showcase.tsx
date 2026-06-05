@@ -21,7 +21,7 @@ const sliders = [
 
 export default function Showcase() {
   return (
-    <section className="px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+    <div className="px-4 pb-16 pt-6 sm:px-6 sm:pb-20 sm:pt-8 lg:px-8">
       <motion.div
         className="mx-auto max-w-5xl"
         initial={{ opacity: 0, y: 32 }}
@@ -103,6 +103,6 @@ export default function Showcase() {
           </div>
         </div>
       </motion.div>
-    </section>
+    </div>
   );
 }

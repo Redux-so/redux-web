@@ -45,7 +45,7 @@ export default function FAQ() {
   };
 
   return (
-    <div className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+    <div className="px-4 pb-20 pt-8 sm:px-6 sm:pb-24 sm:pt-10 lg:px-8">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           Frequently Asked Questions

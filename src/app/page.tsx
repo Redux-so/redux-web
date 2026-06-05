@@ -13,14 +13,16 @@ export default function Home() {
       <Navbar />
       <section id="home">
         <Hero />
+        <Showcase />
       </section>
-      <Showcase />
       <MarqueeStrip />
-      <section id="features">
-        <Features />
-      </section>
-      <section id="faq">
-        <FAQ />
+      <section aria-label="Product information">
+        <section id="features">
+          <Features />
+        </section>
+        <section id="faq">
+          <FAQ />
+        </section>
       </section>
       <WaitlistSection />
       <Footer />
