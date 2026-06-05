@@ -1,16 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Outfit } from "next/font/google";
 import "./globals.css";
-
-const outfit = Outfit({
-  variable: "--font-display",
-  subsets: ["latin"],
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-body",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +14,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${dmSans.variable} h-full bg-[#111111] text-white antialiased`}
+      className="h-full bg-[#111111] text-white antialiased"
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

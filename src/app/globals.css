@@ -56,6 +56,10 @@
 }
 
 :root {
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    system-ui, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui,
+    sans-serif;
   --brand-purple: #794ade;
   --brand-bg: #111111;
   --brand-surface: #1a1a1a;

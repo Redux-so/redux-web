@@ -1,0 +1,217 @@
+# Redux Website — Developer Notes
+
+## Build Checklist
+[x] Tailwind config + globals + fonts
+[ ] Navbar
+[ ] Footer
+[ ] Hero
+[ ] WaitlistSection + API route
+[ ] FAQ
+[ ] MarqueeStrip
+[ ] Features
+[ ] Showcase
+[ ] page.tsx assembly
+[ ] PostHog + Vercel Analytics
+[ ] Sentry
+[ ] Deploy to Vercel
+[ ] Custom domain
+
+---
+
+## Fonts
+
+- Brand font: SF Pro (Display for headings, Text for body)
+- CSS vars: `--font-display`, `--font-body`
+- Do not use Outfit or DM Sans
+
+---
+
+## Full FAQ Content
+
+const faqs = [
+  {
+    question: "What is Redux?",
+    answer: "Redux is an AI-powered photo editing platform that runs entirely in your browser. It gives you professional-grade tools combined with intelligent automation to organize, edit, and deliver stunning photos faster than ever.",
+  },
+  {
+    question: "Who is Redux for?",
+    answer: "Redux is for anyone who works with photos, from hobbyists and content creators to professional photographers. Our conversational AI makes advanced editing accessible to beginners, while pros get the speed and power they need.",
+  },
+  {
+    question: "Do I need photo editing experience to use Redux?",
+    answer: "Not at all. Redux's AI assistant lets you edit by describing what you want in plain language. Just tell Redux your vision, and it applies professional edits in real-time. Experienced editors can also access our full suite of manual controls.",
+  },
+  {
+    question: "How much does Redux cost?",
+    answer: "Redux includes free core editing tools and limited AI features. Advanced AI tools can be unlocked as needed, with no subscription and pay-as-you-go access.",
+  },
+  {
+    question: "What file formats does Redux support?",
+    answer: "Redux supports JPEG, PNG, and TIFF files for editing. Free tier users can upload and export JPEG and PNG files, while paid features unlock higher resolution exports and additional format options.",
+  },
+  {
+    question: "Is my data secure?",
+    answer: "Yes. Your photos are private and protected with industry-standard encryption. We never use your images to train AI or share them with third parties. You maintain full ownership and can delete your files anytime.",
+  },
+];
+
+---
+
+## Full Features Content
+
+const features = [
+  {
+    headline: "Conversational Editing",
+    description: "Describe your edits, and our AI applies professional changes instantly. Review and refine in real-time until your photo is perfect.",
+    cta: "Ask AI",
+  },
+  {
+    headline: "Style Match",
+    description: "Recreate any style instantly. Upload a reference image, and our AI applies its aesthetic to your photo.",
+    cta: "Match a Style",
+  },
+  {
+    headline: "Smart Search",
+    description: "Find any photo by describing its content. Search by keywords and instantly surface matching images.",
+    cta: "Search Now",
+  },
+];
+
+---
+
+## Marquee Items
+
+const marqueeItems = [
+  "Adobe Photoshop",
+  "Adobe Lightroom",
+  "Luminar Neo",
+  "Canva",
+  "Figma",
+];
+
+Render pattern — duplicate for seamless loop:
+{[...marqueeItems, ...marqueeItems].map((item, i) => (
+  <span key={i}>{item}</span>
+))}
+
+---
+
+## Navbar Anchor Map
+
+| Link         | href       | Target section   |
+|--------------|------------|------------------|
+| Home         | #home      | Hero             |
+| Features     | #features  | Features section |
+| FAQ          | #faq       | FAQ section      |
+| Join Waitlist| #waitlist  | Waitlist section |
+
+---
+
+## Social Links (placeholder until confirmed)
+
+| Platform  | lucide-react icon  | href |
+|-----------|--------------------|------|
+| Instagram | Instagram          | #    |
+| LinkedIn  | Linkedin           | #    |
+| X/Twitter | Twitter            | #    |
+| Discord   | MessageCircle      | #    |
+
+---
+
+## Showcase — Pointer-Events Pattern
+
+The correct way to allow scroll but block all clicks:
+
+<div style={{ overflowY: "scroll", maxHeight: "520px", position: "relative" }}>
+
+  {/* The editor UI */}
+  <div> ...editor layout... </div>
+
+  {/* Invisible overlay — blocks clicks, allows scroll passthrough */}
+  <div style={{
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "auto",
+    zIndex: 10,
+  }} />
+
+</div>
+
+---
+
+## Prisma Schema Addition
+
+Add to schema.prisma then run: npx prisma migrate dev --name add-waitlist-entry
+
+model WaitlistEntry {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+---
+
+## API Route — /api/waitlist/route.ts
+
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+export async function POST(req: NextRequest) {
+  const { email } = await req.json();
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+  }
+
+  await prisma.waitlistEntry.upsert({
+    where: { email },
+    update: {},
+    create: { email },
+  });
+
+  return NextResponse.json({ success: true });
+}
+
+---
+
+## page.tsx Assembly Order
+
+<main className="bg-[#111111] text-white overflow-x-hidden">
+  <Navbar />
+  <section id="home"><Hero /></section>
+  <Showcase />
+  <MarqueeStrip />
+  <section id="features"><Features /></section>
+  <section id="faq"><FAQ /></section>
+  <WaitlistSection />
+  <Footer />
+</main>
+
+---
+
+## Environment Variables (.env.local)
+
+DATABASE_URL=postgresql://...
+NEXT_PUBLIC_POSTHOG_KEY=phc_...
+NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
+
+Mirror all of these in Vercel → Project → Settings → Environment Variables.
+
+---
+
+## Placeholders to Replace Before Launch
+
+- Feature card images: replace div placeholders with <Image> pointing to real app screenshots
+- Social links: replace all href="#" with real profile URLs
+- Discord button in navbar: replace href="#" with real invite link
+- Privacy Policy and Terms: create src/app/privacy/page.tsx and src/app/terms/page.tsx
+- Contact email: confirm hello@redux.photo is correct
+
+---
+
+## Future Connections to the Main App
+
+- Clerk: "Join Waitlist" becomes "Get Started" routing to Clerk sign-in once app is live
+- Prisma + Neon: WaitlistEntry lives in the same DB — no separate database needed
+- PostHog: use the same project key as the main app so waitlist and app events share one dashboard
+- Stripe: pricing/billing lives in the main app, not this site

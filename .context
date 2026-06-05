@@ -1,0 +1,157 @@
+# Redux — Waitlist Website Context
+
+## What This Project Is
+This is the public-facing waitlist/marketing website for Redux, an AI-powered browser-based photo editing platform. It is a standalone Next.js site that will eventually live alongside or be merged with the main Redux application. The primary goal of this site is to capture waitlist emails before the app launches.
+
+---
+
+## Brand
+
+Product name: Redux
+Tagline: Organize, edit, and export photos—all from your browser
+Hero headline: Your AI agent for professional photo editing
+
+Colors:
+- Main background: #111111
+- Primary/CTA buttons: #794ade
+- Surface (cards): #1a1a1a
+- Surface 2 (nested panels): #222222
+- Border: rgba(255, 255, 255, 0.08)
+
+Fonts:
+- Display/headings: SF Pro Display, CSS var --font-display
+- Body: SF Pro Text, CSS var --font-body
+- Fallback stack: -apple-system, BlinkMacSystemFont, system-ui, sans-serif
+- Loaded via system font stack in globals.css (self-host with next/font/local when .woff2 files are added to public/fonts/)
+
+---
+
+## Tech Stack
+
+- Framework: Next.js 14+ (App Router, TypeScript)
+- Styling: Tailwind CSS + CSS variables in globals.css
+- Animations: Framer Motion
+- Icons: lucide-react
+- Components: shadcn/ui (Radix primitives)
+- Fonts: SF Pro (system font stack; next/font/local when self-hosted)
+- Database: Prisma ORM + PostgreSQL (Neon) — same DB as the main app
+- Analytics: PostHog, Vercel Analytics
+- Error tracking: Sentry
+- Hosting: Vercel
+
+---
+
+## File Structure
+
+src/
+├── app/
+│   ├── layout.tsx                  # Root layout, fonts, metadata, analytics
+│   ├── page.tsx                    # Assembles all sections in order
+│   ├── globals.css                 # CSS variables, keyframes, base styles
+│   └── api/
+│       └── waitlist/
+│           └── route.ts            # POST handler — saves email to DB
+├── components/
+│   ├── Navbar.tsx
+│   ├── Hero.tsx
+│   ├── Showcase.tsx
+│   ├── MarqueeStrip.tsx
+│   ├── Features.tsx
+│   ├── FAQ.tsx
+│   ├── WaitlistSection.tsx
+│   └── Footer.tsx
+└── lib/
+    └── prisma.ts                   # Prisma client singleton
+
+---
+
+## Page Sections (in order)
+
+### Navbar
+- Logo text "Redux" — left
+- Nav links (smooth-scroll anchors): Home → #home, Features → #features, FAQ → #faq — center
+- Discord button (outline style) — right
+- Join Waitlist button (#794ade) scrolls to #waitlist — right
+- Sticky, gains backdrop-blur + bottom border on scroll
+- Mobile: hamburger menu collapse
+
+### Hero
+- id="home"
+- Headline: "Your AI agent for professional photo editing"
+- Subheadline: "Organize, edit, and export photos—all from your browser"
+- CTA button "Join Waitlist" scrolls to #waitlist
+- Framer Motion stagger fade-in on load
+
+### Showcase
+- Read-only, scrollable mock of the Redux editor UI
+- Browser frame with fake URL bar ("app.redux.photo") and window controls
+- Inner layout: left sidebar (tool icons), center canvas (photo placeholder), right panel (sliders)
+- Transparent overlay div blocks all clicks; parent div allows scroll
+- Framer Motion whileInView fade-in
+
+### Marquee Strip
+- Label: "Inspired by workflows from"
+- Scrolling items: Adobe Photoshop · Adobe Lightroom · Luminar Neo · Canva · Figma
+- CSS keyframe animation (animate-marquee), pauses on hover
+- Items duplicated for seamless loop
+
+### Features
+- id="features"
+- Three cards, responsive grid (3-col desktop, 1-col mobile)
+- Each card: image placeholder div (swap for real screenshot later), headline, description, ghost CTA button → #waitlist
+- Feature 1: "Conversational Editing" — "Describe your edits..." — button: "Ask AI"
+- Feature 2: "Style Match" — "Recreate any style instantly..." — button: "Match a Style"
+- Feature 3: "Smart Search" — "Find any photo by describing its content..." — button: "Search Now"
+- Framer Motion whileInView stagger on cards
+
+### FAQ
+- id="faq"
+- Accordion, one item open at a time, useState openIndex
+- Framer Motion AnimatePresence for height animation
+- 6 questions (see .devnotes for full content)
+
+### Waitlist Section
+- id="waitlist"
+- Headline: "Join the Waitlist"
+- Subheadline: "Get early access when we launch, plus join our founding community today."
+- Email input + "Join" button inline (stacked on mobile)
+- Three states: idle → loading → success ("You're on the list!")
+- Client-side email validation before POST to /api/waitlist
+
+### Footer
+- Left: logo, tagline, social icons (Instagram, LinkedIn, X, Discord)
+- Right: two columns — Navigation (Home, Features, FAQ, Contact → mailto:hello@redux.photo) and Legal (Privacy Policy, Terms of Service → # for now)
+- Bottom bar: "© Redux 2025. All rights reserved."
+
+---
+
+## API Route — /api/waitlist
+
+Method: POST
+Body: { email: string }
+Validation: regex check server-side
+Action: upsert into WaitlistEntry table via Prisma
+Returns: { success: true } or { error: string }
+
+Prisma model:
+model WaitlistEntry {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+---
+
+## globals.css Key Definitions
+
+:root {
+  --brand-purple: #794ade;
+  --brand-glow: rgba(121, 74, 222, 0.15);
+  --brand-border: rgba(255, 255, 255, 0.08);
+}
+
+html { scroll-behavior: smooth; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { trans
