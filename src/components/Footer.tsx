@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import type { LucideProps } from "lucide-react";
 
@@ -86,9 +87,13 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="max-w-sm">
-            <p className="font-display text-lg font-semibold tracking-tight text-white">
-              Redux
-            </p>
+            <Image
+              src="/redux-logo.png"
+              alt="Redux"
+              width={28}
+              height={28}
+              className="h-7 w-7 object-contain"
+            />
             <p className="mt-2 text-sm leading-relaxed text-white/60">
               Organize, edit, and export photos—all from your browser
             </p>

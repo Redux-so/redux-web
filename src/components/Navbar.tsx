@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -39,11 +40,15 @@ export default function Navbar() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a
-          href="#home"
-          className="font-display text-lg font-semibold tracking-tight text-white"
-        >
-          Redux
+        <a href="#home" className="inline-flex shrink-0 items-center">
+          <Image
+            src="/redux-logo.png"
+            alt="Redux"
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0 object-contain"
+            priority
+          />
         </a>
 
         <nav

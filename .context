@@ -8,6 +8,7 @@ This is the public-facing waitlist/marketing website for Redux, an AI-powered br
 ## Brand
 
 Product name: Redux
+Logo: White R icon (`public/redux-logo.png`), 32×32px in Navbar and Footer — not a text wordmark
 Tagline: Organize, edit, and export photos—all from your browser
 Hero headline: Your AI agent for professional photo editing
 
@@ -68,7 +69,7 @@ src/
 ## Page Sections (in order)
 
 ### Navbar
-- Logo text "Redux" — left
+- R icon logo (`/redux-logo.png`) — left, links to #home
 - Nav links (smooth-scroll anchors): Home → #home, Features → #features, FAQ → #faq — center
 - Discord button (outline style) — right
 - Join Waitlist button (#794ade) scrolls to #waitlist — right
