@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 
 const features = [
   {
@@ -76,11 +77,7 @@ export default function Features() {
                 <p className="flex-1 text-sm leading-relaxed text-white/70">
                   {feature.description}
                 </p>
-                <Button
-                  variant="ghost"
-                  asChild
-                  className="w-fit text-white hover:bg-white/5 hover:text-white"
-                >
+                <Button asChild className={BTN_PRIMARY_SOLID}>
                   <a href="#waitlist">{feature.cta}</a>
                 </Button>
               </div>
