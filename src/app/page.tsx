@@ -1,6 +1,7 @@
 import FAQ from "@/src/components/FAQ";
 import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
+import MarqueeStrip from "@/src/components/MarqueeStrip";
 import Navbar from "@/src/components/Navbar";
 import WaitlistSection from "@/src/components/WaitlistSection";
 
@@ -11,6 +12,7 @@ export default function Home() {
       <section id="home">
         <Hero />
       </section>
+      <MarqueeStrip />
       <WaitlistSection />
       <section id="faq">
         <FAQ />
