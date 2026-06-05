@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { BTN_PRIMARY_BLOCK, BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -77,10 +78,7 @@ export default function Navbar() {
               Discord
             </a>
           </Button>
-          <Button
-            asChild
-            className="bg-brand-purple text-white hover:bg-brand-purple/90"
-          >
+          <Button asChild className={cn(BTN_PRIMARY_SOLID, "shrink-0")}>
             <a href="#waitlist">Join Waitlist</a>
           </Button>
         </div>
@@ -125,10 +123,7 @@ export default function Navbar() {
                 Discord
               </a>
             </Button>
-            <Button
-              asChild
-              className="w-full bg-brand-purple text-white hover:bg-brand-purple/90"
-            >
+            <Button asChild className={BTN_PRIMARY_BLOCK}>
               <a href="#waitlist" onClick={closeMobileMenu}>
                 Join Waitlist
               </a>

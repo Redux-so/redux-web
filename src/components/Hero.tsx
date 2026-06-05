@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
+import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -46,11 +47,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div variants={fadeInUp} className="mt-10">
-          <Button
-            asChild
-            size="lg"
-            className="bg-brand-purple px-8 text-white hover:bg-brand-purple/90"
-          >
+          <Button asChild className={BTN_PRIMARY_SOLID}>
             <a href="#waitlist">Join Waitlist</a>
           </Button>
         </motion.div>

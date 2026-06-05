@@ -53,6 +53,18 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --shadow-btn-primary:
+    0 0 0 2px rgba(255, 255, 255, 0.12),
+    0 4px 24px rgba(135, 88, 237, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  --shadow-btn-primary-hover:
+    0 0 0 2px rgba(255, 255, 255, 0.12),
+    0 6px 28px rgba(135, 88, 237, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  --shadow-btn-primary-active:
+    0 0 0 2px rgba(255, 255, 255, 0.12),
+    0 2px 16px rgba(135, 88, 237, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 :root {

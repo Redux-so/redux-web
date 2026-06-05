@@ -3,6 +3,8 @@
 import { FormEvent, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { cn } from "@/lib/utils";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -88,7 +90,7 @@ export default function WaitlistSection() {
             <Button
               type="submit"
               disabled={formState === "loading"}
-              className="h-10 shrink-0 bg-brand-purple px-6 text-white hover:bg-brand-purple/90 disabled:opacity-50"
+              className={cn(BTN_PRIMARY_SOLID, "shrink-0")}
             >
               {formState === "loading" ? "Joining..." : "Join"}
             </Button>
