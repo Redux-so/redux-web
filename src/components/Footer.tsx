@@ -82,7 +82,7 @@ export default function Footer() {
     <footer className={cn(SECTION_DIVIDE, "bg-[#111111]")}>
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
-          <div className="max-w-sm">
+          <div className="flex max-w-sm flex-col gap-5">
             <Image
               src="/redux-logo.png"
               alt="Redux"
@@ -90,10 +90,10 @@ export default function Footer() {
               height={28}
               className="h-7 w-7 object-contain"
             />
-            <p className="mt-2 text-sm leading-relaxed text-white/60">
+            <p className="text-sm leading-relaxed text-white/60">
               Organize, edit, and export photos—all from your browser
             </p>
-            <div className="mt-5 flex items-center gap-2">
+            <div className="flex items-center gap-2">
               {socialLinks.map((social) => (
                 <Button
                   key={social.label}
