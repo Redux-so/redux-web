@@ -130,12 +130,13 @@ Render pattern — duplicate for seamless loop:
 
 ## Social Links (placeholder until confirmed)
 
-| Platform  | lucide-react icon  | href |
-|-----------|--------------------|------|
-| Instagram | Instagram          | #    |
-| LinkedIn  | Linkedin           | #    |
-| X/Twitter | Twitter            | #    |
-| Discord   | MessageCircle      | #    |
+Footer only — Instagram, LinkedIn, X (Discord lives in Navbar only).
+
+| Platform  | Icon source                    | href |
+|-----------|--------------------------------|------|
+| Instagram | Custom `InstagramIcon` SVG     | #    |
+| LinkedIn  | Custom `LinkedinIcon` SVG      | #    |
+| X         | Custom `XIcon` SVG (filled)    | #    |
 
 ---
 
