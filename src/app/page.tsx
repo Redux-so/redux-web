@@ -9,9 +9,12 @@ import WaitlistSection from "@/src/components/WaitlistSection";
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden bg-[#111111] pt-16 text-white">
+    <main
+      id="home"
+      className="overflow-x-hidden bg-[#111111] pt-16 text-white"
+    >
       <Navbar />
-      <section id="home">
+      <section>
         <Hero />
         <Showcase />
       </section>

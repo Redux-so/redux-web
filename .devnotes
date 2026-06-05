@@ -26,7 +26,7 @@
 
 | Block | Components | Divider |
 |-------|------------|---------|
-| 1 | Hero + Showcase (`#home`) | — |
+| 1 | Hero + Showcase (`#home` on `<main>`) | — |
 | 2 | Marquee strip | `border-y` band (`bg-brand-surface`) |
 | 3 | Features + FAQ (`#features`, `#faq`) | Marquee bottom border |
 | 4 | Waitlist (`#waitlist`) | `SECTION_DIVIDE` |
@@ -197,9 +197,9 @@ export async function POST(req: NextRequest) {
 
 ## page.tsx Assembly Order
 
-<main className="bg-[#111111] text-white overflow-x-hidden pt-16">
+<main id="home" className="bg-[#111111] text-white overflow-x-hidden pt-16">
   <Navbar />
-  <section id="home">
+  <section>
     <Hero />
     <Showcase />
   </section>
