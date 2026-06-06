@@ -81,7 +81,12 @@ function DiscordIcon({ className, ...props }: LucideProps) {
 }
 
 const socialLinks = [
-  { label: "Instagram", href: "#", icon: InstagramIcon },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/tryredux/",
+    icon: InstagramIcon,
+    external: true,
+  },
   { label: "LinkedIn", href: "#", icon: LinkedinIcon },
   { label: "X", href: "#", icon: XIcon },
   {
