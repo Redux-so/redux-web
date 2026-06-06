@@ -30,7 +30,7 @@ export default function Home() {
         <section id="features">
           <Features />
         </section>
-        <section id="faq">
+        <section id="faq" className="scroll-mt-12">
           <FAQ />
         </section>
       </section>
