@@ -39,7 +39,7 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
             width={LOGO_SIZE}
             height={LOGO_SIZE}
             unoptimized
-            className="h-20 w-auto sm:h-24 lg:h-28"
+            className="h-[5.25rem] w-auto sm:h-[6.25rem] lg:h-[7.25rem]"
             draggable={false}
           />
         </Fragment>
@@ -50,13 +50,13 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 
 export default function MarqueeStrip() {
   return (
-    <section className="border-y border-white/[0.08] bg-marquee-gradient pb-3 pt-5 sm:pb-4 sm:pt-6">
+    <section className="border-y border-white/[0.08] bg-marquee-gradient pb-2 pt-5 sm:pb-3 sm:pt-6">
       <div className="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8">
-        <p className="mb-2 text-center text-sm text-white/70 sm:mb-3 sm:text-base">
+        <p className="mb-1.5 text-center text-sm text-white/70 sm:mb-2 sm:text-base">
           Inspired by workflows from
         </p>
 
-        <div className="w-full overflow-hidden">
+        <div className="w-full overflow-hidden -mb-3 sm:-mb-4 lg:-mb-5">
           <div className="animate-marquee flex w-max items-center">
             <MarqueeTrack trackKey="a" />
             <MarqueeTrack trackKey="b" aria-hidden />
