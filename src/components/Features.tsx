@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import SectionLabel from "@/src/components/SectionLabel";
 import { Button } from "@/components/ui/button";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
@@ -15,6 +17,10 @@ type Feature = {
   description: string;
   cta: string;
   imagePosition: "left" | "right";
+  image?: string;
+  imageAlt?: string;
+  imageObjectPosition?: string;
+  imageScale?: number;
 };
 
 const features: Feature[] = [
@@ -24,6 +30,10 @@ const features: Feature[] = [
       "Describe your edits, and our AI applies professional changes instantly. Review and refine in real-time until your photo is perfect.",
     cta: "Ask AI",
     imagePosition: "left",
+    image: "/features/conversational-editing.png",
+    imageAlt:
+      "Redux editor with AI chat applying blue hour color edits to a mountain landscape",
+    imageObjectPosition: "60% top",
   },
   {
     headline: "Style Match",
@@ -31,6 +41,11 @@ const features: Feature[] = [
       "Recreate any style instantly. Upload a reference image, and our AI applies its aesthetic to your photo.",
     cta: "Match a Style",
     imagePosition: "right",
+    image: "/features/style-match.png",
+    imageAlt:
+      "Redux editor applying Style Match to Mount Fuji via AI chat with a reference image",
+    imageObjectPosition: "100% top",
+    imageScale: 1.15,
   },
   {
     headline: "Smart Search",
@@ -38,6 +53,10 @@ const features: Feature[] = [
       "Find any photo by describing its content. Search by keywords and instantly surface matching images.",
     cta: "Search Now",
     imagePosition: "left",
+    image: "/features/smart-search.png",
+    imageAlt:
+      "Redux library search showing results for a city skyline with water query",
+    imageObjectPosition: "center top",
   },
 ];
 
@@ -69,15 +88,37 @@ export default function Features() {
                   )}
                 >
                   <div
-                    aria-hidden="true"
                     className={cn(
-                      "min-h-[260px] w-full rounded-xl bg-[#0a0a0a] sm:min-h-[300px]",
+                      "relative min-h-[260px] w-full overflow-hidden rounded-xl bg-[#0a0a0a] sm:min-h-[300px]",
                       "mx-4 mt-4 sm:mx-5 sm:mt-5 lg:mb-5 lg:min-h-[380px] lg:flex-[1.3] lg:shrink-0 xl:min-h-[420px]",
                       feature.imagePosition === "left"
                         ? "lg:ml-5 lg:mt-5"
                         : "lg:mr-5 lg:mt-5",
                     )}
-                  />
+                    aria-hidden={feature.image ? undefined : true}
+                  >
+                    {feature.image ? (
+                      <Image
+                        src={feature.image}
+                        alt={feature.imageAlt ?? ""}
+                        fill
+                        unoptimized
+                        sizes="(max-width: 1024px) 100vw, 58vw"
+                        className="object-cover"
+                        style={{
+                          objectPosition:
+                            feature.imageObjectPosition ?? "center top",
+                          ...(feature.imageScale
+                            ? {
+                                transform: `scale(${feature.imageScale})`,
+                                transformOrigin:
+                                  feature.imageObjectPosition ?? "center top",
+                              }
+                            : {}),
+                        }}
+                      />
+                    ) : null}
+                  </div>
 
                   <div
                     className={cn(
