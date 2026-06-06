@@ -111,7 +111,7 @@ const navigationLinks = [
   { label: "Home", href: "#home" },
   { label: "Features", href: "#features" },
   { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "mailto:hello@redux.photo" },
+  { label: "Contact", href: "mailto:admin@redux.so" },
 ] as const;
 
 const legalLinks = [
