@@ -42,7 +42,7 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b border-white/[0.08]",
-        "bg-[#111111]/70 backdrop-blur-lg backdrop-saturate-150",
+        "bg-[#0a0a0a]/90 backdrop-blur-xl backdrop-saturate-125",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -96,7 +96,7 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-white/[0.08] bg-[#111111]/70 px-4 pb-4 pt-2 backdrop-blur-lg backdrop-saturate-150 md:hidden">
+        <div className="border-t border-white/[0.08] bg-[#0a0a0a]/90 px-4 pb-4 pt-2 backdrop-blur-xl backdrop-saturate-125 md:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
             {navLinks.map((link) => (
               <a

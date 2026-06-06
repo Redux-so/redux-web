@@ -79,7 +79,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className={cn(SECTION_DIVIDE, "bg-[#111111]")}>
+    <footer className={cn(SECTION_DIVIDE, "bg-[#050505]")}>
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="flex max-w-sm flex-col gap-5">

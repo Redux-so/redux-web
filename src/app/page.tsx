@@ -14,12 +14,15 @@ export default function Home() {
       className="overflow-x-hidden bg-[#111111] pt-16 text-white"
     >
       <Navbar />
-      <section>
+      <section className="bg-hero-showcase-glow">
         <Hero />
         <Showcase />
       </section>
       <MarqueeStrip />
-      <section aria-label="Product information">
+      <section
+        aria-label="Product information"
+        className="bg-hero-showcase-glow"
+      >
         <section id="features">
           <Features />
         </section>

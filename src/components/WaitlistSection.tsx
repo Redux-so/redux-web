@@ -53,7 +53,10 @@ export default function WaitlistSection() {
   return (
     <section
       id="waitlist"
-      className={cn(SECTION_DIVIDE, "px-4 py-20 sm:px-6 sm:py-24 lg:px-8")}
+      className={cn(
+        SECTION_DIVIDE,
+        "bg-waitlist-spotlight px-4 py-20 sm:px-6 sm:py-24 lg:px-8",
+      )}
     >
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
