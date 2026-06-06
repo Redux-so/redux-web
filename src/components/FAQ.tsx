@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 
+import SectionLabel from "@/src/components/SectionLabel";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -54,9 +55,13 @@ export default function FAQ() {
     <div className="px-4 pb-20 pt-8 sm:px-6 sm:pb-24 sm:pt-10 lg:px-8">
       <div className="mx-auto max-w-3xl">
         <ScrollReveal>
-          <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Frequently Asked Questions
-          </h2>
+          <div className="flex flex-col items-center gap-3">
+            <SectionLabel>FAQ</SectionLabel>
+            <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Questions? We&apos;ve got{" "}
+              <span className="text-[#9a6ff2]">answers</span>
+            </h2>
+          </div>
         </ScrollReveal>
 
         <ScrollRevealGroup

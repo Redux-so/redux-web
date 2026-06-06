@@ -1,5 +1,6 @@
 "use client";
 
+import SectionLabel from "@/src/components/SectionLabel";
 import { Button } from "@/components/ui/button";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import {
@@ -45,9 +46,13 @@ export default function Features() {
     <div className="px-4 pb-12 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
-          <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Built for how you actually work
-          </h2>
+          <div className="flex flex-col items-center gap-3">
+            <SectionLabel>Features</SectionLabel>
+            <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Professional Results,{" "}
+              <span className="text-[#9a6ff2]">Intuitive Tools</span>
+            </h2>
+          </div>
         </ScrollReveal>
 
         <ScrollRevealGroup
