@@ -4,7 +4,7 @@ export default function ShowcaseCanvas() {
   return (
     <div className="relative flex min-h-0 min-w-0 flex-1 items-center justify-center overflow-hidden bg-[#0a0a0a] p-8">
       <Image
-        src="/showcase/mount-fuji-twilight.jpg"
+        src="/showcase/mount-fuji.jpg"
         alt="Mount Fuji at twilight reflected in a lake with silhouetted reeds in the foreground"
         width={2788}
         height={3717}

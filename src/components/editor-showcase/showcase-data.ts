@@ -1,4 +1,4 @@
-export const SHOWCASE_FILENAME = "mount-fuji-twilight.jpg";
+export const SHOWCASE_FILENAME = "mount-fuji.jpg";
 
 export const SHOWCASE_ADJUSTMENTS = {
   exposure: -12,
