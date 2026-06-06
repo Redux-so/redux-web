@@ -168,8 +168,78 @@ html {
 }
 
 .animate-marquee {
-  animation: marquee 100s linear infinite;
+  animation: marquee 88s linear infinite;
   will-change: transform;
+}
+
+.marquee-edge-blur {
+  position: relative;
+}
+
+.marquee-edge-blur .animate-marquee {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 18%,
+    #000 82%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 18%,
+    #000 82%,
+    transparent 100%
+  );
+}
+
+.marquee-edge-blur::before,
+.marquee-edge-blur::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0.75rem;
+  z-index: 10;
+  width: min(10rem, 32%);
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .marquee-edge-blur::before,
+  .marquee-edge-blur::after {
+    bottom: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee-edge-blur::before,
+  .marquee-edge-blur::after {
+    bottom: 1.25rem;
+  }
+}
+
+.marquee-edge-blur::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    #0f0f0f 0%,
+    rgba(15, 15, 15, 0.88) 20%,
+    rgba(15, 15, 15, 0.5) 55%,
+    rgba(15, 15, 15, 0.15) 80%,
+    transparent 100%
+  );
+}
+
+.marquee-edge-blur::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    #0f0f0f 0%,
+    rgba(15, 15, 15, 0.88) 20%,
+    rgba(15, 15, 15, 0.5) 55%,
+    rgba(15, 15, 15, 0.15) 80%,
+    transparent 100%
+  );
 }
 
 .editor-showcase,
@@ -212,17 +282,6 @@ html {
     #2e2e2e 0%,
     #161616 32%,
     #0a0a0a 68%
-  );
-}
-
-.bg-marquee-gradient {
-  background: linear-gradient(
-    135deg,
-    #0a0a0a 0%,
-    #121212 35%,
-    #222222 50%,
-    #121212 65%,
-    #0a0a0a 100%
   );
 }
 
