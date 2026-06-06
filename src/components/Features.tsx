@@ -19,9 +19,14 @@ type Feature = {
   imagePosition: "left" | "right";
   image?: string;
   imageAlt?: string;
-  imageObjectPosition?: string;
-  imageScale?: number;
+  imageCrop?: "left" | "right" | "center";
 };
+
+const imageCropClasses = {
+  left: "object-cover object-left-top",
+  right: "object-cover object-right-top",
+  center: "object-cover object-center object-top",
+} as const;
 
 const features: Feature[] = [
   {
@@ -33,7 +38,7 @@ const features: Feature[] = [
     image: "/features/conversational-editing.png",
     imageAlt:
       "Redux editor with AI chat applying blue hour color edits to a mountain landscape",
-    imageObjectPosition: "60% top",
+    imageCrop: "left",
   },
   {
     headline: "Style Match",
@@ -44,8 +49,7 @@ const features: Feature[] = [
     image: "/features/style-match.png",
     imageAlt:
       "Redux editor applying Style Match to Mount Fuji via AI chat with a reference image",
-    imageObjectPosition: "100% top",
-    imageScale: 1.15,
+    imageCrop: "right",
   },
   {
     headline: "Smart Search",
@@ -56,7 +60,7 @@ const features: Feature[] = [
     image: "/features/smart-search.png",
     imageAlt:
       "Redux library search showing results for a city skyline with water query",
-    imageObjectPosition: "center top",
+    imageCrop: "center",
   },
 ];
 
@@ -89,8 +93,8 @@ export default function Features() {
                 >
                   <div
                     className={cn(
-                      "relative min-h-[260px] w-full overflow-hidden rounded-xl bg-[#0a0a0a] sm:min-h-[300px]",
-                      "mx-4 mt-4 sm:mx-5 sm:mt-5 lg:mb-5 lg:min-h-[380px] lg:flex-[1.3] lg:shrink-0 xl:min-h-[420px]",
+                      "relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-[#0a0a0a]",
+                      "mx-4 mt-4 sm:mx-5 sm:mt-5 lg:mb-5 lg:aspect-auto lg:min-h-[400px] lg:flex-[1.55] lg:shrink-0 xl:min-h-[440px]",
                       feature.imagePosition === "left"
                         ? "lg:ml-5 lg:mt-5"
                         : "lg:mr-5 lg:mt-5",
@@ -103,19 +107,10 @@ export default function Features() {
                         alt={feature.imageAlt ?? ""}
                         fill
                         unoptimized
-                        sizes="(max-width: 1024px) 100vw, 58vw"
-                        className="object-cover"
-                        style={{
-                          objectPosition:
-                            feature.imageObjectPosition ?? "center top",
-                          ...(feature.imageScale
-                            ? {
-                                transform: `scale(${feature.imageScale})`,
-                                transformOrigin:
-                                  feature.imageObjectPosition ?? "center top",
-                              }
-                            : {}),
-                        }}
+                        sizes="(max-width: 1024px) 100vw, 62vw"
+                        className={
+                          imageCropClasses[feature.imageCrop ?? "center"]
+                        }
                       />
                     ) : null}
                   </div>
@@ -123,7 +118,7 @@ export default function Features() {
                   <div
                     className={cn(
                       "flex flex-1 flex-col justify-center gap-4 px-4 pb-4 pt-6 sm:px-5 sm:pb-5 sm:pt-8",
-                      "lg:flex-[0.9] lg:py-10 lg:pt-10",
+                      "lg:flex-[0.85] lg:py-10 lg:pt-10",
                       feature.imagePosition === "left"
                         ? "lg:pr-10"
                         : "lg:pl-10 lg:pr-10",
