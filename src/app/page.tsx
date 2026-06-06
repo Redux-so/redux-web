@@ -2,6 +2,7 @@ import FAQ from "@/src/components/FAQ";
 import Features from "@/src/components/Features";
 import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
+import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
 import Navbar from "@/src/components/Navbar";
 import Showcase from "@/src/components/Showcase";
@@ -14,9 +15,12 @@ export default function Home() {
       className="overflow-x-hidden bg-[#111111] pt-16 text-white"
     >
       <Navbar />
-      <section className="bg-hero-showcase-glow">
-        <Hero />
-        <Showcase />
+      <section className="relative overflow-hidden bg-hero-showcase-glow">
+        <HeroParticleBackground />
+        <div className="relative z-[1]">
+          <Hero />
+          <Showcase />
+        </div>
       </section>
       <MarqueeStrip />
       <section
