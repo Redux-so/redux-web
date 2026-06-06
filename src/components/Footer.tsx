@@ -84,7 +84,12 @@ const socialLinks = [
   { label: "Instagram", href: "#", icon: InstagramIcon },
   { label: "LinkedIn", href: "#", icon: LinkedinIcon },
   { label: "X", href: "#", icon: XIcon },
-  { label: "Discord", href: "#", icon: DiscordIcon },
+  {
+    label: "Discord",
+    href: "https://discord.gg/gzHrud9nee",
+    icon: DiscordIcon,
+    external: true,
+  },
 ] as const;
 
 const navigationLinks = [
@@ -127,7 +132,16 @@ export default function Footer() {
                   asChild
                   className="border-white/[0.08] bg-transparent text-white/70 hover:bg-white/5 hover:text-white"
                 >
-                  <a href={social.href} aria-label={social.label}>
+                  <a
+                    href={social.href}
+                    aria-label={social.label}
+                    target={"external" in social && social.external ? "_blank" : undefined}
+                    rel={
+                      "external" in social && social.external
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                  >
                     <social.icon className="size-4" />
                   </a>
                 </Button>

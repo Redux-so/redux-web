@@ -134,7 +134,12 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-3 md:flex">
           <Button variant="outline" asChild className={BTN_OUTLINE_SOLID}>
-            <a href="#" className="inline-flex items-center gap-1.5">
+            <a
+              href="https://discord.gg/gzHrud9nee"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5"
+            >
               <DiscordIcon className="size-3.5 shrink-0" />
               Discord
             </a>
@@ -242,7 +247,9 @@ export default function Navbar() {
                 <motion.div variants={itemVariants}>
                   <Button variant="outline" asChild className={BTN_OUTLINE_BLOCK}>
                     <a
-                      href="#"
+                      href="https://discord.gg/gzHrud9nee"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={closeMobileMenu}
                       className="inline-flex items-center justify-center gap-1.5"
                     >
