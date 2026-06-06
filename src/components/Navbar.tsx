@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import {
   BTN_PRIMARY_BLOCK,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
+import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -18,6 +20,53 @@ const navLinks = [
   { label: "Features", href: "#features" },
   { label: "FAQ", href: "#faq" },
 ] as const;
+
+const PANEL_TRANSITION = { duration: 0.3, ease: EASE_OUT };
+const ICON_TRANSITION = { duration: 0.18, ease: EASE_OUT };
+const ITEM_TRANSITION = { duration: 0.28, ease: EASE_OUT };
+
+const menuPanelVariants: Variants = {
+  hidden: { opacity: 0, y: -8 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+};
+
+const menuPanelReducedVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+const menuListVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.06, delayChildren: 0.04 },
+  },
+};
+
+const menuListReducedVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0, delayChildren: 0 },
+  },
+};
+
+const menuItemVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: ITEM_TRANSITION,
+  },
+};
+
+const menuItemReducedVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.15 },
+  },
+};
 
 function DiscordIcon({ className }: { className?: string }) {
   return (
@@ -35,8 +84,19 @@ function DiscordIcon({ className }: { className?: string }) {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const closeMobileMenu = () => setMobileOpen(false);
+
+  const panelVariants = prefersReducedMotion
+    ? menuPanelReducedVariants
+    : menuPanelVariants;
+  const itemVariants = prefersReducedMotion
+    ? menuItemReducedVariants
+    : menuItemVariants;
+  const panelTransition = prefersReducedMotion
+    ? { duration: 0.15 }
+    : PANEL_TRANSITION;
 
   return (
     <header
@@ -86,48 +146,123 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-lg p-2 text-white md:hidden"
+          className="relative inline-flex size-9 items-center justify-center rounded-lg text-white md:hidden"
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           onClick={() => setMobileOpen((open) => !open)}
         >
-          {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          <AnimatePresence mode="wait" initial={false}>
+            {mobileOpen ? (
+              <motion.span
+                key="close"
+                className="absolute inset-0 inline-flex items-center justify-center"
+                initial={
+                  prefersReducedMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, rotate: -90 }
+                }
+                animate={
+                  prefersReducedMotion
+                    ? { opacity: 1 }
+                    : { opacity: 1, rotate: 0 }
+                }
+                exit={
+                  prefersReducedMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, rotate: 90 }
+                }
+                transition={ICON_TRANSITION}
+              >
+                <X className="size-5" />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="menu"
+                className="absolute inset-0 inline-flex items-center justify-center"
+                initial={
+                  prefersReducedMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, rotate: 90 }
+                }
+                animate={
+                  prefersReducedMotion
+                    ? { opacity: 1 }
+                    : { opacity: 1, rotate: 0 }
+                }
+                exit={
+                  prefersReducedMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, rotate: -90 }
+                }
+                transition={ICON_TRANSITION}
+              >
+                <Menu className="size-5" />
+              </motion.span>
+            )}
+          </AnimatePresence>
         </button>
       </div>
 
-      {mobileOpen && (
-        <div className="border-t border-white/[0.08] bg-[#0a0a0a]/90 px-4 pb-4 pt-2 backdrop-blur-xl backdrop-saturate-125 md:hidden">
-          <nav className="flex flex-col gap-1" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
-                onClick={closeMobileMenu}
+      <AnimatePresence initial={false}>
+        {mobileOpen ? (
+          <motion.div
+            key="mobile-menu"
+            className="overflow-hidden border-t border-white/[0.08] bg-[#0a0a0a]/90 px-4 pb-4 pt-2 backdrop-blur-xl backdrop-saturate-125 md:hidden"
+            variants={panelVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={panelTransition}
+          >
+            <motion.div
+              variants={
+                prefersReducedMotion ? menuListReducedVariants : menuListVariants
+              }
+              initial="hidden"
+              animate="visible"
+            >
+              <nav
+                className="flex flex-col gap-1"
+                aria-label="Mobile navigation"
               >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <div className="mt-3 flex flex-col gap-2">
-            <Button variant="outline" asChild className={BTN_OUTLINE_BLOCK}>
-              <a
-                href="#"
-                onClick={closeMobileMenu}
-                className="inline-flex items-center justify-center gap-1.5"
-              >
-                <DiscordIcon className="size-3.5 shrink-0" />
-                Discord
-              </a>
-            </Button>
-            <Button asChild className={BTN_PRIMARY_BLOCK}>
-              <a href="#waitlist" onClick={closeMobileMenu}>
-                Join Waitlist
-              </a>
-            </Button>
-          </div>
-        </div>
-      )}
+                {navLinks.map((link) => (
+                  <motion.div key={link.href} variants={itemVariants}>
+                    <a
+                      href={link.href}
+                      className="block rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                      onClick={closeMobileMenu}
+                    >
+                      {link.label}
+                    </a>
+                  </motion.div>
+                ))}
+              </nav>
+
+              <div className="mt-3 flex flex-col gap-2">
+                <motion.div variants={itemVariants}>
+                  <Button variant="outline" asChild className={BTN_OUTLINE_BLOCK}>
+                    <a
+                      href="#"
+                      onClick={closeMobileMenu}
+                      className="inline-flex items-center justify-center gap-1.5"
+                    >
+                      <DiscordIcon className="size-3.5 shrink-0" />
+                      Discord
+                    </a>
+                  </Button>
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                  <Button asChild className={BTN_PRIMARY_BLOCK}>
+                    <a href="#waitlist" onClick={closeMobileMenu}>
+                      Join Waitlist
+                    </a>
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }
