@@ -65,6 +65,9 @@
     0 0 0 2px rgba(255, 255, 255, 0.12),
     0 2px 16px rgba(135, 88, 237, 0.38),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  --shadow-glow: 0 0 16px rgba(104, 47, 191, 0.5), 0 0 40px rgba(104, 47, 191, 0.2);
+  --shadow-glow-sm: 0 0 8px rgba(104, 47, 191, 0.4);
+  --shadow-glow-hover: 0 0 24px rgba(104, 47, 191, 0.65), 0 0 50px rgba(104, 47, 191, 0.25);
 }
 
 :root {
@@ -73,6 +76,13 @@
   --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui,
     sans-serif;
   --brand-purple: #794ade;
+  --surface-chrome: color-mix(in srgb, black 50%, #0a0a0a);
+  --accent-editor: #682fbf;
+  --accent-end: #8b44e8;
+  --accent-glow: rgba(104, 47, 191, 0.4);
+  --accent-glow-sm: rgba(104, 47, 191, 0.25);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.12);
+  --scrollbar-thumb-hover: rgba(104, 47, 191, 0.38);
   --brand-bg: #111111;
   --brand-surface: #1a1a1a;
   --brand-surface2: #222222;
@@ -160,6 +170,39 @@ html {
 .animate-marquee {
   animation: marquee 100s linear infinite;
   will-change: transform;
+}
+
+.editor-showcase,
+.editor-showcase * {
+  box-sizing: border-box;
+}
+
+.editor-showcase button {
+  font: inherit;
+  line-height: 1;
+}
+
+.editor-showcase * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+.editor-showcase *::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.editor-showcase *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.editor-showcase *::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+
+.editor-showcase *::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 @layer base {
