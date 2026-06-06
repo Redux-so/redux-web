@@ -175,24 +175,10 @@ model WaitlistEntry {
 
 ## API Route — /api/waitlist/route.ts
 
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-
-export async function POST(req: NextRequest) {
-  const { email } = await req.json();
-
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ error: "Invalid email" }, { status: 400 });
-  }
-
-  await prisma.waitlistEntry.upsert({
-    where: { email },
-    update: {},
-    create: { email },
-  });
-
-  return NextResponse.json({ success: true });
-}
+- Validates email server-side
+- Upserts contact via Loops `PUT /api/v1/contacts/update` (`lib/loops.ts`)
+- Requires `LOOPS_API_KEY` and `LOOPS_WAITLIST_MAILING_LIST_ID`
+- Returns `{ success: true }` or `{ error: string }`
 
 ---
 
@@ -217,10 +203,14 @@ export async function POST(req: NextRequest) {
 
 ## Environment Variables (.env.local)
 
+LOOPS_API_KEY=...                    # Loops API key (server-only)
+LOOPS_WAITLIST_MAILING_LIST_ID=...   # Mailing list ID from Loops dashboard
+
 DATABASE_URL=postgresql://...
 NEXT_PUBLIC_POSTHOG_KEY=phc_...
 NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
 
+Copy `.env.example` to `.env.local` and fill in values.
 Mirror all of these in Vercel → Project → Settings → Environment Variables.
 
 ---

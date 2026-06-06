@@ -139,15 +139,9 @@ src/
 Method: POST
 Body: { email: string }
 Validation: regex check server-side
-Action: upsert into WaitlistEntry table via Prisma
+Action: upsert contact in Loops via `PUT https://app.loops.so/api/v1/contacts/update` (`lib/loops.ts`)
+Env: `LOOPS_API_KEY`, `LOOPS_WAITLIST_MAILING_LIST_ID` (server-only)
 Returns: { success: true } or { error: string }
-
-Prisma model:
-model WaitlistEntry {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  createdAt DateTime @default(now())
-}
 
 ---
 
