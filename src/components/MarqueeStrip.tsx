@@ -1,11 +1,14 @@
+import Image from "next/image";
 import { Fragment } from "react";
 
+const LOGO_SIZE = 500;
+
 const marqueeItems = [
-  "Adobe Photoshop",
-  "Adobe Lightroom",
-  "Luminar Neo",
-  "Canva",
-  "Figma",
+  { src: "/marquee/photoshop.png", alt: "Adobe Photoshop" },
+  { src: "/marquee/lightroom.png", alt: "Adobe Lightroom" },
+  { src: "/marquee/luminar-neo.png", alt: "Luminar Neo" },
+  { src: "/marquee/canva.png", alt: "Canva" },
+  { src: "/marquee/figma.png", alt: "Figma" },
 ] as const;
 
 const TRACK_REPEATS = 4;
@@ -20,7 +23,7 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 
   return (
     <div
-      className="flex shrink-0 items-center gap-8 pr-8"
+      className="flex shrink-0 items-center gap-14 pr-14 sm:gap-20 sm:pr-20"
       aria-hidden={ariaHidden}
     >
       {items.map((item, index) => (
@@ -30,7 +33,15 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
               ·
             </span>
           ) : null}
-          <span className="text-sm text-white/90 sm:text-base">{item}</span>
+          <Image
+            src={item.src}
+            alt={item.alt}
+            width={LOGO_SIZE}
+            height={LOGO_SIZE}
+            unoptimized
+            className="h-20 w-auto sm:h-24 lg:h-28"
+            draggable={false}
+          />
         </Fragment>
       ))}
     </div>
@@ -39,9 +50,9 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 
 export default function MarqueeStrip() {
   return (
-    <section className="border-y border-white/[0.08] bg-marquee-gradient py-9 sm:py-10">
+    <section className="border-y border-white/[0.08] bg-marquee-gradient pb-3 pt-5 sm:pb-4 sm:pt-6">
       <div className="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8">
-        <p className="mb-8 text-center text-sm text-white/70 sm:mb-10 sm:text-base">
+        <p className="mb-2 text-center text-sm text-white/70 sm:mb-3 sm:text-base">
           Inspired by workflows from
         </p>
 
