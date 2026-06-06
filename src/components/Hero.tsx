@@ -27,7 +27,7 @@ const fadeInUp: Variants = {
 
 export default function Hero() {
   return (
-    <div className="flex flex-col items-center px-4 pb-12 pt-16 sm:px-6 sm:pb-14 sm:pt-20 lg:px-8">
+    <div className="flex flex-col items-center px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-20 lg:px-8">
       <motion.div
         className="mx-auto max-w-3xl text-center"
         variants={containerVariants}
