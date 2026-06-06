@@ -4,6 +4,10 @@ import { FormEvent, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import {
+  ScrollRevealGroup,
+  ScrollRevealItem,
+} from "@/lib/scroll-motion";
 import { SECTION_DIVIDE } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
@@ -58,49 +62,59 @@ export default function WaitlistSection() {
         "bg-waitlist-spotlight px-4 py-20 sm:px-6 sm:py-24 lg:px-8",
       )}
     >
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-          Join the Waitlist
-        </h2>
-        <p className="mt-4 text-lg leading-relaxed text-white/70">
-          Get early access when we launch, plus join our founding community
-          today.
-        </p>
+      <ScrollRevealGroup
+        className="mx-auto max-w-2xl text-center"
+        stagger={0.12}
+      >
+        <ScrollRevealItem>
+          <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Join the Waitlist
+          </h2>
+        </ScrollRevealItem>
 
-        {formState === "success" ? (
-          <p className="mt-8 text-xl font-medium text-white">
-            You&apos;re on the list!
+        <ScrollRevealItem>
+          <p className="mt-4 text-lg leading-relaxed text-white/70">
+            Get early access when we launch, plus join our founding community
+            today.
           </p>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-start"
-          >
-            <div className="flex-1">
-              <input
-                type="email"
-                name="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder="you@example.com"
-                required
-                disabled={formState === "loading"}
-                className="h-10 w-full rounded-lg border border-white/[0.08] bg-brand-surface px-4 text-sm text-white placeholder:text-white/40 outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/30 disabled:opacity-50"
-              />
-              {error ? (
-                <p className="mt-2 text-left text-sm text-red-400">{error}</p>
-              ) : null}
-            </div>
-            <Button
-              type="submit"
-              disabled={formState === "loading"}
-              className={cn(BTN_PRIMARY_SOLID, "shrink-0")}
+        </ScrollRevealItem>
+
+        <ScrollRevealItem className="mt-8">
+          {formState === "success" ? (
+            <p className="text-xl font-medium text-white">
+              You&apos;re on the list!
+            </p>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-3 sm:flex-row sm:items-start"
             >
-              {formState === "loading" ? "Joining..." : "Join"}
-            </Button>
-          </form>
-        )}
-      </div>
+              <div className="flex-1">
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  disabled={formState === "loading"}
+                  className="h-10 w-full rounded-lg border border-white/[0.08] bg-brand-surface px-4 text-sm text-white placeholder:text-white/40 outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/30 disabled:opacity-50"
+                />
+                {error ? (
+                  <p className="mt-2 text-left text-sm text-red-400">{error}</p>
+                ) : null}
+              </div>
+              <Button
+                type="submit"
+                disabled={formState === "loading"}
+                className={cn(BTN_PRIMARY_SOLID, "shrink-0")}
+              >
+                {formState === "loading" ? "Joining..." : "Join"}
+              </Button>
+            </form>
+          )}
+        </ScrollRevealItem>
+      </ScrollRevealGroup>
     </section>
   );
 }

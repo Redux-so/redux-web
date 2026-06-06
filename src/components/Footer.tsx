@@ -1,7 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import type { LucideProps } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  ScrollReveal,
+  ScrollRevealGroup,
+  ScrollRevealItem,
+} from "@/lib/scroll-motion";
 import { SECTION_DIVIDE } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
@@ -96,8 +103,11 @@ export default function Footer() {
   return (
     <footer className={cn(SECTION_DIVIDE, "bg-[#050505]")}>
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-        <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
-          <div className="flex max-w-sm flex-col gap-5">
+        <ScrollRevealGroup
+          className="flex flex-col gap-10 lg:flex-row lg:justify-between"
+          stagger={0.1}
+        >
+          <ScrollRevealItem className="flex max-w-sm flex-col gap-5">
             <Image
               src="/redux-logo.png"
               alt="Redux"
@@ -123,51 +133,55 @@ export default function Footer() {
                 </Button>
               ))}
             </div>
-          </div>
+          </ScrollRevealItem>
 
-          <div className="flex gap-16 sm:gap-24">
-            <div>
-              <p className="text-sm font-medium text-white">Navigation</p>
-              <ul className="mt-4 space-y-3">
-                {navigationLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-white/60 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <ScrollRevealItem>
+            <div className="flex gap-16 sm:gap-24">
+              <div>
+                <p className="text-sm font-medium text-white">Navigation</p>
+                <ul className="mt-4 space-y-3">
+                  {navigationLinks.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-sm text-white/60 transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <div>
-              <p className="text-sm font-medium text-white">Legal</p>
-              <ul className="mt-4 space-y-3">
-                {legalLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-white/60 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <div>
+                <p className="text-sm font-medium text-white">Legal</p>
+                <ul className="mt-4 space-y-3">
+                  {legalLinks.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-sm text-white/60 transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-        </div>
+          </ScrollRevealItem>
+        </ScrollRevealGroup>
       </div>
 
-      <div className="border-t border-white/[0.08]">
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
-          <p className="text-sm text-white/50">
-            © Redux 2025. All rights reserved.
-          </p>
+      <ScrollReveal variant="fadeIn">
+        <div className="border-t border-white/[0.08]">
+          <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+            <p className="text-sm text-white/50">
+              © Redux 2025. All rights reserved.
+            </p>
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
     </footer>
   );
 }

@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { Fragment } from "react";
+
+import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 
 const LOGO_SIZE = 500;
 
@@ -51,18 +55,25 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 export default function MarqueeStrip() {
   return (
     <section className="border-y border-white/[0.08] bg-[#0f0f0f] pb-2 pt-5 sm:pb-3 sm:pt-6">
-      <div className="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8">
-        <p className="mb-1.5 text-center text-sm text-white/70 sm:mb-2 sm:text-base">
-          Inspired by workflows from
-        </p>
+      <ScrollRevealGroup
+        className="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8"
+        stagger={0.1}
+      >
+        <ScrollRevealItem>
+          <p className="mb-1.5 text-center text-sm text-white/70 sm:mb-2 sm:text-base">
+            Inspired by workflows from
+          </p>
+        </ScrollRevealItem>
 
-        <div className="marquee-edge-blur w-full overflow-hidden -mb-3 sm:-mb-4 lg:-mb-5">
-          <div className="animate-marquee flex w-max items-center">
-            <MarqueeTrack trackKey="a" />
-            <MarqueeTrack trackKey="b" aria-hidden />
+        <ScrollRevealItem variant="fadeIn" className="w-full">
+          <div className="marquee-edge-blur w-full overflow-hidden -mb-3 sm:-mb-4 lg:-mb-5">
+            <div className="animate-marquee flex w-max items-center">
+              <MarqueeTrack trackKey="a" />
+              <MarqueeTrack trackKey="b" aria-hidden />
+            </div>
           </div>
-        </div>
-      </div>
+        </ScrollRevealItem>
+      </ScrollRevealGroup>
     </section>
   );
 }

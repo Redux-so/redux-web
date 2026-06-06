@@ -4,6 +4,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 
+import {
+  ScrollReveal,
+  ScrollRevealGroup,
+  ScrollRevealItem,
+} from "@/lib/scroll-motion";
+
 const faqs = [
   {
     question: "What is Redux?",
@@ -47,52 +53,59 @@ export default function FAQ() {
   return (
     <div className="px-4 pb-20 pt-8 sm:px-6 sm:pb-24 sm:pt-10 lg:px-8">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-          Frequently Asked Questions
-        </h2>
+        <ScrollReveal>
+          <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Frequently Asked Questions
+          </h2>
+        </ScrollReveal>
 
-        <div className="mt-8 divide-y divide-white/[0.08] rounded-xl border border-white/[0.08] bg-brand-surface sm:mt-10">
+        <ScrollRevealGroup
+          className="mt-8 divide-y divide-white/[0.08] rounded-xl border border-white/[0.08] bg-brand-surface sm:mt-10"
+          stagger={0.06}
+        >
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <div key={faq.question}>
-                <button
-                  type="button"
-                  onClick={() => toggleItem(index)}
-                  aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] sm:px-6"
-                >
-                  <span className="text-sm font-medium text-white sm:text-base">
-                    {faq.question}
-                  </span>
-                  {isOpen ? (
-                    <Minus className="size-5 shrink-0 text-white/70" />
-                  ) : (
-                    <Plus className="size-5 shrink-0 text-white/70" />
-                  )}
-                </button>
+              <ScrollRevealItem key={faq.question}>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => toggleItem(index)}
+                    aria-expanded={isOpen}
+                    className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] sm:px-6"
+                  >
+                    <span className="text-sm font-medium text-white sm:text-base">
+                      {faq.question}
+                    </span>
+                    {isOpen ? (
+                      <Minus className="size-5 shrink-0 text-white/70" />
+                    ) : (
+                      <Plus className="size-5 shrink-0 text-white/70" />
+                    )}
+                  </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen ? (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <p className="px-5 pb-5 text-sm leading-relaxed text-white/70 sm:px-6">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
-              </div>
+                  <AnimatePresence initial={false}>
+                    {isOpen ? (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-5 pb-5 text-sm leading-relaxed text-white/70 sm:px-6">
+                          {faq.answer}
+                        </p>
+                      </motion.div>
+                    ) : null}
+                  </AnimatePresence>
+                </div>
+              </ScrollRevealItem>
             );
           })}
-        </div>
+        </ScrollRevealGroup>
       </div>
     </div>
   );
