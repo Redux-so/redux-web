@@ -56,7 +56,7 @@ export default function Features() {
         >
           {features.map((feature) => (
             <ScrollRevealItem key={feature.headline}>
-              <article className="overflow-hidden rounded-2xl border border-white/[0.08] bg-brand-surface">
+              <article className="overflow-hidden rounded-2xl border border-white/[0.08] bg-brand-surface-card">
                 <div
                   className={cn(
                     "flex flex-col lg:flex-row lg:items-stretch lg:gap-8 xl:gap-10",

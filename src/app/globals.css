@@ -43,6 +43,7 @@
   --color-brand-purple: var(--brand-purple);
   --color-brand-bg: var(--brand-bg);
   --color-brand-surface: var(--brand-surface);
+  --color-brand-surface-card: var(--brand-surface-card);
   --color-brand-surface2: var(--brand-surface2);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
@@ -85,6 +86,7 @@
   --scrollbar-thumb-hover: rgba(104, 47, 191, 0.38);
   --brand-bg: #111111;
   --brand-surface: #1a1a1a;
+  --brand-surface-card: #151515;
   --brand-surface2: #222222;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

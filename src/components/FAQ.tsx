@@ -60,7 +60,7 @@ export default function FAQ() {
         </ScrollReveal>
 
         <ScrollRevealGroup
-          className="mt-8 divide-y divide-white/[0.08] rounded-xl border border-white/[0.08] bg-brand-surface sm:mt-10"
+          className="mt-8 divide-y divide-white/[0.08] rounded-xl border border-white/[0.08] bg-brand-surface-card sm:mt-10"
           stagger={0.06}
         >
           {faqs.map((faq, index) => {
