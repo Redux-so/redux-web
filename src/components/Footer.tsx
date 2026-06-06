@@ -93,7 +93,12 @@ const socialLinks = [
     icon: LinkedinIcon,
     external: true,
   },
-  { label: "X", href: "#", icon: XIcon },
+  {
+    label: "X",
+    href: "https://x.com/tryredux",
+    icon: XIcon,
+    external: true,
+  },
   {
     label: "Discord",
     href: "https://discord.gg/gzHrud9nee",
