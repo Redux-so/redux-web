@@ -136,7 +136,7 @@ export default function Footer() {
               className="h-7 w-7 object-contain"
             />
             <p className="text-sm leading-relaxed text-white/60">
-              Organize, edit, and export photos—all from your browser
+              Organize, edit, and export photos, all from your browser
             </p>
             <div className="flex items-center gap-2">
               {socialLinks.map((social) => (
