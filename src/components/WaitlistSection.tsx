@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 
+import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import { Button } from "@/components/ui/button";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import {
@@ -59,11 +60,12 @@ export default function WaitlistSection() {
       id="waitlist"
       className={cn(
         SECTION_DIVIDE,
-        "bg-waitlist-spotlight px-4 py-20 sm:px-6 sm:py-24 lg:px-8",
+        "relative overflow-hidden bg-waitlist-spotlight px-4 py-20 sm:px-6 sm:py-24 lg:px-8",
       )}
     >
+      <HeroParticleBackground />
       <ScrollRevealGroup
-        className="mx-auto max-w-2xl text-center"
+        className="relative z-[1] mx-auto max-w-2xl text-center"
         stagger={0.12}
       >
         <ScrollRevealItem>
