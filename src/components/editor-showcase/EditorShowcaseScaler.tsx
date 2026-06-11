@@ -9,11 +9,7 @@ const DESIGN_HEIGHT = 820;
 
 function computeScale(containerWidth: number) {
   if (containerWidth === 0) return 1;
-
-  const scaleByWidth = containerWidth / DESIGN_WIDTH;
-  const scaleByHeight = (window.innerHeight * 0.75) / DESIGN_HEIGHT;
-
-  return Math.min(scaleByWidth, scaleByHeight, 1);
+  return Math.min(containerWidth / DESIGN_WIDTH, 1);
 }
 
 export default function EditorShowcaseScaler() {
@@ -37,34 +33,33 @@ export default function EditorShowcaseScaler() {
     });
 
     observer.observe(container);
-    window.addEventListener("resize", updateScale);
     updateScale();
 
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
-      window.removeEventListener("resize", updateScale);
     };
   }, []);
 
+  const scaledWidth = DESIGN_WIDTH * scale;
   const scaledHeight = DESIGN_HEIGHT * scale;
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full overflow-hidden"
-      style={{ height: scaledHeight }}
-    >
+    <div ref={containerRef} className="w-full">
       <div
-        className="absolute left-1/2 top-0 will-change-transform"
-        style={{
-          width: DESIGN_WIDTH,
-          height: DESIGN_HEIGHT,
-          transform: `translateX(-50%) scale(${scale})`,
-          transformOrigin: "top center",
-        }}
+        className="relative mx-auto overflow-hidden rounded-2xl border border-white/[0.1] shadow-2xl"
+        style={{ width: scaledWidth, height: scaledHeight }}
       >
-        <EditorShowcase />
+        <div
+          className="origin-top-left will-change-transform"
+          style={{
+            width: DESIGN_WIDTH,
+            height: DESIGN_HEIGHT,
+            transform: `scale(${scale})`,
+          }}
+        >
+          <EditorShowcase />
+        </div>
       </div>
     </div>
   );
