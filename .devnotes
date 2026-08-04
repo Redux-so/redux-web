@@ -128,15 +128,17 @@ Render pattern — duplicate for seamless loop:
 
 ---
 
-## Social Links (placeholder until confirmed)
+## Social Links
 
-Footer only — Instagram, LinkedIn, X (Discord lives in Navbar only).
+Footer — Instagram, LinkedIn, X, Discord, GitHub (Discord also in Navbar).
 
 | Platform  | Icon source                    | href |
 |-----------|--------------------------------|------|
-| Instagram | Custom `InstagramIcon` SVG     | #    |
-| LinkedIn  | Custom `LinkedinIcon` SVG      | #    |
-| X         | Custom `XIcon` SVG (filled)    | #    |
+| Instagram | Custom `InstagramIcon` SVG     | https://www.instagram.com/tryredux/ |
+| LinkedIn  | Custom `LinkedinIcon` SVG      | https://www.linkedin.com/company/tryredux |
+| X         | Custom `XIcon` SVG (filled)    | https://x.com/tryredux |
+| Discord   | Custom `DiscordIcon` SVG       | https://discord.gg/gzHrud9nee |
+| GitHub    | Custom `GithubIcon` SVG        | https://github.com/Redux-so |
 
 ---
 

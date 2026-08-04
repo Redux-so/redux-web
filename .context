@@ -128,7 +128,7 @@ src/
 - Client-side email validation before POST to /api/waitlist
 
 ### Footer
-- Left: logo, tagline, social icons (Instagram, LinkedIn, X, Discord)
+- Left: logo, tagline, social icons (Instagram, LinkedIn, X, Discord, GitHub)
 - Right: two columns — Navigation (Home, Features, FAQ, Contact → mailto:hello@redux.photo) and Legal (Privacy Policy, Terms of Service → # for now)
 - Bottom bar: "© Redux 2025. All rights reserved."
 
