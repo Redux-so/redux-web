@@ -1,5 +1,7 @@
 Official website for Redux
 
+Internal dev docs are kept locally, not in this repo.
+
 ## Environment variables
 
 Copy `.env.example` to `.env.local` and fill in your values for local development:
