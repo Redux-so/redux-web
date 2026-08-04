@@ -27,6 +27,7 @@ function wait(ms: number) {
 
 export default function WaitlistSection() {
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
   const [formState, setFormState] = useState<FormState>("idle");
   const [error, setError] = useState("");
   const prefersReducedMotion = useReducedMotion();
@@ -52,7 +53,7 @@ export default function WaitlistSection() {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, website }),
       });
 
       const elapsed = Date.now() - startedAt;
@@ -111,6 +112,16 @@ export default function WaitlistSection() {
               formState !== "idle" && "pointer-events-none invisible",
             )}
           >
+            <input
+              type="text"
+              name="website"
+              value={website}
+              onChange={(event) => setWebsite(event.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="sr-only"
+            />
             <div className="flex-1">
               <input
                 type="email"
