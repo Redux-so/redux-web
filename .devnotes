@@ -41,8 +41,8 @@ Grouped spacing (close but breathable):
 
 ## Fonts
 
-- Brand font: SF Pro (Display for headings, Text for body)
-- CSS vars: `--font-display`, `--font-body`
+- Brand font: Inter (headings + body) via `next/font/google`
+- CSS vars: `--font-inter`, `--font-display`, `--font-body`, `--font-sans`
 - Do not use Outfit or DM Sans
 
 ---

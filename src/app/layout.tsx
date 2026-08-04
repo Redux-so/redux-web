@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
+import { cn } from "@/lib/utils";
+
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Redux - AI Agent for Photo Editing",
@@ -61,7 +70,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="h-full bg-[#111111] text-white antialiased"
+      className={cn(
+        inter.variable,
+        "h-full bg-[#111111] text-white antialiased",
+      )}
     >
       <body className="min-h-full flex flex-col">
         {children}

@@ -29,8 +29,6 @@ export default function EditorShowcase() {
     <div
       className="editor-showcase flex h-full min-h-0 flex-col overflow-hidden bg-[#0a0a0a] antialiased select-none"
       style={{
-        fontFamily:
-          '-apple-system, system-ui, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif',
         lineHeight: 1.4,
         color: "#ededed",
       }}

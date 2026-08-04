@@ -28,10 +28,10 @@ Spacing:
 - Standard section padding: `py-14 sm:py-16`
 
 Fonts:
-- Display/headings: SF Pro Display, CSS var --font-display
-- Body: SF Pro Text, CSS var --font-body
-- Fallback stack: -apple-system, BlinkMacSystemFont, system-ui, sans-serif
-- Loaded via system font stack in globals.css (self-host with next/font/local when .woff2 files are added to public/fonts/)
+- Brand typeface: Inter (headings + body)
+- CSS vars: --font-inter, --font-display, --font-body, --font-sans
+- Loaded via next/font/google in src/app/layout.tsx (self-hosted at build time)
+- Fallback stack: ui-sans-serif, system-ui, sans-serif
 
 ---
 
@@ -42,7 +42,7 @@ Fonts:
 - Animations: Framer Motion
 - Icons: lucide-react
 - Components: shadcn/ui (Radix primitives)
-- Fonts: SF Pro (system font stack; next/font/local when self-hosted)
+- Fonts: Inter via next/font/google
 - Database: Prisma ORM + PostgreSQL (Neon) — same DB as the main app
 - Analytics: PostHog, Vercel Analytics
 - Error tracking: Sentry
