@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus } from "@untitledui/icons";
 import { useState } from "react";
 
 import SectionLabel from "@/src/components/SectionLabel";

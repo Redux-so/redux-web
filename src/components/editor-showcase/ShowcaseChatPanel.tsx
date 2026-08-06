@@ -2,11 +2,11 @@
 
 import {
   ArrowUp,
+  Attachment01,
   ChevronLeft,
   ChevronRight,
-  MessageCircle,
-  Paperclip,
-} from "lucide-react";
+  MessageCircle01,
+} from "@untitledui/icons";
 
 import { cn } from "@/lib/utils";
 
@@ -45,16 +45,15 @@ export default function ShowcaseChatPanel({
           className="text-[#555555] transition-colors hover:text-[#888888]"
         >
           {collapsed ? (
-            <ChevronLeft size={14} strokeWidth={2} />
+            <ChevronLeft size={14} />
           ) : (
-            <ChevronRight size={14} strokeWidth={2} />
+            <ChevronRight size={14} />
           )}
         </button>
         {!collapsed ? (
           <div className="flex items-center gap-2">
-            <MessageCircle
+            <MessageCircle01
               size={14}
-              strokeWidth={1.75}
               className="text-[#888888]"
             />
             <span className={SHOWCASE_TYPE.panelHeader}>Chat</span>
@@ -113,7 +112,7 @@ export default function ShowcaseChatPanel({
                   className="text-[#555555]"
                   aria-label="Attach file"
                 >
-                  <Paperclip size={16} strokeWidth={1.5} />
+                  <Attachment01 size={16} />
                 </button>
                 <button
                   type="button"
@@ -121,7 +120,7 @@ export default function ShowcaseChatPanel({
                   className="flex h-7 w-7 shrink-0 cursor-not-allowed items-center justify-center rounded-lg bg-white/[0.08] text-[#555555] opacity-50"
                   aria-label="Send message"
                 >
-                  <ArrowUp size={14} strokeWidth={2.5} />
+                  <ArrowUp size={14} />
                 </button>
               </div>
             </div>

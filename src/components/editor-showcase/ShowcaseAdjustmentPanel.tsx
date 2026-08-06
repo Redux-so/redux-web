@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type MouseEvent } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Star01 } from "@untitledui/icons";
 
 import { cn } from "@/lib/utils";
 
@@ -35,7 +35,6 @@ function SectionHeader({
       </span>
       <ChevronDown
         size={12}
-        strokeWidth={2}
         className={cn(
           "text-[#555555] transition-transform",
           !open && "-rotate-90",
@@ -62,8 +61,7 @@ function AIButton({
         SHOWCASE_TYPE.aiButton,
       )}
     >
-      <Star
-        strokeWidth={1.25}
+      <Star01
         className={cn(
           "size-[0.95em] shrink-0 text-[#9B6EE8]",
           !looseSpacing && "-mr-0.5",
@@ -146,9 +144,9 @@ export default function ShowcaseAdjustmentPanel({
           )}
         >
           {collapsed ? (
-            <ChevronRight size={14} strokeWidth={2} />
+            <ChevronRight size={14} />
           ) : (
-            <ChevronLeft size={14} strokeWidth={2} />
+            <ChevronLeft size={14} />
           )}
         </button>
       </div>

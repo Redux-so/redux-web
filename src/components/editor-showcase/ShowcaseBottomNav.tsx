@@ -1,7 +1,7 @@
 "use client";
 
 import type { MouseEvent } from "react";
-import { LayoutGrid, SlidersHorizontal } from "lucide-react";
+import { LayoutGrid01, Sliders01 } from "@untitledui/icons";
 
 import { cn } from "@/lib/utils";
 
@@ -36,7 +36,7 @@ export default function ShowcaseBottomNav() {
           onClick={noop}
           className="flex min-w-[72px] cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border border-transparent px-5 py-2 text-[#888888] transition-colors hover:bg-white/[0.05] hover:text-[#cccccc]"
         >
-          <LayoutGrid size={20} strokeWidth={1.5} />
+          <LayoutGrid01 size={20} />
           <span className={cn("leading-none tracking-tight", SHOWCASE_TYPE.meta)}>
             Library
           </span>
@@ -49,7 +49,7 @@ export default function ShowcaseBottomNav() {
             "border-[#682FBF]/40 bg-[#682FBF]/20 text-[#B07EF0]",
           )}
         >
-          <SlidersHorizontal size={20} strokeWidth={1.5} />
+          <Sliders01 size={20} />
           <span className={cn("leading-none tracking-tight", SHOWCASE_TYPE.meta)}>
             Editor
           </span>

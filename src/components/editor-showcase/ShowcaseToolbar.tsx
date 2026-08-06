@@ -2,14 +2,14 @@
 
 import type { MouseEvent, ReactNode } from "react";
 import {
-  Columns2,
-  History,
+  ClockRewind,
+  Columns02,
+  FlipBackward,
+  FlipForward,
   Minus,
   Plus,
-  Redo2,
-  Undo2,
-  Upload,
-} from "lucide-react";
+  Upload01,
+} from "@untitledui/icons";
 
 import { cn } from "@/lib/utils";
 
@@ -63,7 +63,7 @@ export default function ShowcaseToolbar() {
 
       <div className="flex items-center gap-[2px]">
         <ToolbarBtn label="Zoom out">
-          <Minus size={18} strokeWidth={2} />
+          <Minus size={18} />
         </ToolbarBtn>
         <button
           type="button"
@@ -76,17 +76,17 @@ export default function ShowcaseToolbar() {
           100%
         </button>
         <ToolbarBtn label="Zoom in">
-          <Plus size={18} strokeWidth={2} />
+          <Plus size={18} />
         </ToolbarBtn>
         <div className="mx-1 h-5 w-px bg-white/[0.08]" />
         <ToolbarBtn label="Before and after">
-          <Columns2 size={18} strokeWidth={1.75} />
+          <Columns02 size={18} />
         </ToolbarBtn>
         <ToolbarBtn label="Undo">
-          <Undo2 size={18} strokeWidth={1.75} />
+          <FlipBackward size={18} />
         </ToolbarBtn>
         <ToolbarBtn label="Redo" disabled>
-          <Redo2 size={18} strokeWidth={1.75} />
+          <FlipForward size={18} />
         </ToolbarBtn>
       </div>
 
@@ -99,7 +99,7 @@ export default function ShowcaseToolbar() {
           <span className={SHOWCASE_TYPE.meta}>Auto-saved</span>
         </div>
         <ToolbarBtn label="History">
-          <History size={18} strokeWidth={1.75} />
+          <ClockRewind size={18} />
         </ToolbarBtn>
         <button
           type="button"
@@ -108,9 +108,8 @@ export default function ShowcaseToolbar() {
             "inline-flex h-8 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-[#8758ed] px-3 shadow-btn-primary transition-[background-color,box-shadow] duration-200 hover:bg-[#9a6ff2] hover:shadow-btn-primary-hover",
           )}
         >
-          <Upload
+          <Upload01
             size={12}
-            strokeWidth={2}
             className="shrink-0 -scale-x-100 -scale-y-100"
           />
           <span className={cn(SHOWCASE_TYPE.button, "text-white")}>Export</span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { SquareArrowOutUpRight } from "lucide-react";
+import { LinkExternal01 } from "@untitledui/icons";
 
 import { Button } from "@/components/ui/button";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
@@ -33,7 +33,7 @@ export default function Hero() {
           >
             <a href="#waitlist" className="inline-flex items-center gap-2">
               Join Waitlist
-              <SquareArrowOutUpRight className="size-4 shrink-0" strokeWidth={2} />
+              <LinkExternal01 className="size-4 shrink-0" />
             </a>
           </Button>
         </ScrollRevealItem>
