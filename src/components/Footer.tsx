@@ -3,7 +3,6 @@
 import Image from "next/image";
 import type { LucideProps } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -96,6 +95,12 @@ function GithubIcon({ className, ...props }: LucideProps) {
 
 const socialLinks = [
   {
+    label: "X",
+    href: "https://x.com/tryredux",
+    icon: XIcon,
+    external: true,
+  },
+  {
     label: "Instagram",
     href: "https://www.instagram.com/tryredux/",
     icon: InstagramIcon,
@@ -105,12 +110,6 @@ const socialLinks = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/company/tryredux",
     icon: LinkedinIcon,
-    external: true,
-  },
-  {
-    label: "X",
-    href: "https://x.com/tryredux",
-    icon: XIcon,
     external: true,
   },
   {
@@ -147,7 +146,7 @@ export default function Footer() {
           className="flex flex-col gap-10 lg:flex-row lg:justify-between"
           stagger={0.1}
         >
-          <ScrollRevealItem className="flex max-w-sm flex-col gap-5">
+          <ScrollRevealItem className="flex max-w-sm flex-col items-start gap-5">
             <Image
               src="/redux-logo.png"
               alt="Redux"
@@ -158,28 +157,22 @@ export default function Footer() {
             <p className="text-sm leading-relaxed text-white/60">
               Organize, edit, and export photos, all from your browser
             </p>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-start gap-5">
               {socialLinks.map((social) => (
-                <Button
+                <a
                   key={social.label}
-                  variant="outline"
-                  size="icon"
-                  asChild
-                  className="border-white/[0.08] bg-transparent text-white/70 hover:bg-white/5 hover:text-white"
+                  href={social.href}
+                  aria-label={social.label}
+                  target={"external" in social && social.external ? "_blank" : undefined}
+                  rel={
+                    "external" in social && social.external
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className="text-white/50 transition-colors hover:text-white"
                 >
-                  <a
-                    href={social.href}
-                    aria-label={social.label}
-                    target={"external" in social && social.external ? "_blank" : undefined}
-                    rel={
-                      "external" in social && social.external
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                  >
-                    <social.icon className="size-4" />
-                  </a>
-                </Button>
+                  <social.icon className="size-5" />
+                </a>
               ))}
             </div>
           </ScrollRevealItem>
