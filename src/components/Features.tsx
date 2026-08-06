@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowUpRight } from "@untitledui/icons";
 import Image from "next/image";
 
 import SectionLabel from "@/src/components/SectionLabel";
@@ -130,8 +131,11 @@ export default function Features() {
                     <p className="text-base leading-relaxed text-white/70">
                       {feature.description}
                     </p>
-                    <Button asChild className={cn(BTN_PRIMARY_SOLID, "w-fit shrink-0")}>
-                      <a href="#waitlist">{feature.cta}</a>
+                    <Button asChild className={cn(BTN_PRIMARY_SOLID, "w-fit shrink-0 gap-1.5")}>
+                      <a href="#waitlist" className="inline-flex items-center gap-1.5">
+                        {feature.cta}
+                        <ArrowUpRight className="size-4 shrink-0" />
+                      </a>
                     </Button>
                   </div>
                 </div>
