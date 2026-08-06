@@ -1,8 +1,6 @@
 "use client";
 
-import { LinkExternal01 } from "@untitledui/icons";
-
-import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/shared/Icon";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import {
   ScrollRevealGroup,
@@ -26,16 +24,22 @@ export default function Hero() {
           </p>
         </ScrollRevealItem>
 
-        <ScrollRevealItem className="mt-8">
-          <Button
-            asChild
-            className={cn(BTN_PRIMARY_SOLID, "h-11 gap-2 px-6 text-sm")}
+        <ScrollRevealItem className="mt-8 flex justify-center">
+          <a
+            href="#waitlist"
+            className={cn(
+              BTN_PRIMARY_SOLID,
+              "h-11 gap-1.5 px-5 text-[15px] leading-none",
+            )}
           >
-            <a href="#waitlist" className="inline-flex items-center gap-2">
-              Join Waitlist
-              <LinkExternal01 className="size-4 shrink-0" />
-            </a>
-          </Button>
+            <span className="leading-none">Join Waitlist</span>
+            <Icon
+              name="ArrowUpRight"
+              size={20}
+              className="shrink-0"
+              aria-hidden
+            />
+          </a>
         </ScrollRevealItem>
       </ScrollRevealGroup>
     </div>
