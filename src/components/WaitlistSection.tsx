@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useState } from "react";
 
 import HeroParticleBackground from "@/src/components/HeroParticleBackground";
-import { Button } from "@/components/ui/button";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import {
   EASE_OUT,
@@ -137,13 +136,13 @@ export default function WaitlistSection() {
                 <p className="mt-2 text-left text-sm text-red-400">{error}</p>
               ) : null}
             </div>
-            <Button
+            <button
               type="submit"
               tabIndex={formState === "idle" ? 0 : -1}
-              className={cn(BTN_PRIMARY_SOLID, "shrink-0")}
+              className={`${BTN_PRIMARY_SOLID} shrink-0`}
             >
               Join
-            </Button>
+            </button>
           </form>
 
           {formState === "loading" ? (
@@ -153,7 +152,7 @@ export default function WaitlistSection() {
               aria-label="Joining waitlist"
             >
               <span
-                className="size-8 animate-spin rounded-full border-2 border-white/20 border-t-[#9a6ff2]"
+                className="size-8 animate-spin rounded-full border-2 border-white/20 border-t-[#9168eb]"
                 aria-hidden="true"
               />
             </div>

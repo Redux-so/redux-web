@@ -1,0 +1,26 @@
+/** Primary brand purple — CTAs, toasts, links, accents. */
+
+export const PRIMARY_BRAND_HEX = "#794ADE";
+export const PRIMARY_BRAND_HOVER_HEX = "#9168eb";
+
+/** Lighter tints for links on dark backgrounds. */
+export const PRIMARY_BRAND_LINK_HEX = "#A688F0";
+export const PRIMARY_BRAND_LINK_HOVER_HEX = "#BBA0F5";
+
+/** RGB tuple for rgba() shadows and glows. */
+export const PRIMARY_BRAND_RGB = "121, 74, 222";
+
+/** Tailwind class fragments (static strings for JIT). */
+export const BRAND_BG_CLASS = "bg-[#794ADE]";
+export const BRAND_BG_HOVER_CLASS = "hover:bg-[#9168eb]";
+export const BRAND_LINK_TEXT_CLASS = "text-[#A688F0]";
+export const BRAND_LINK_TEXT_HOVER_CLASS = "hover:text-[#BBA0F5]";
+
+/** Primary CTA shell shared by lib/button-styles. */
+export const BTN_PRIMARY_VISUAL = [
+  "rounded-md border border-white/20 bg-[#794ADE] shadow-btn-primary",
+  "transition-[background-color,box-shadow,transform] duration-200",
+  "hover:bg-[#9168eb] hover:shadow-btn-primary-hover",
+  "active:scale-[0.98] active:shadow-btn-primary-active",
+  "disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100",
+].join(" ");

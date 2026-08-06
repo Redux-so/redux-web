@@ -7,7 +7,6 @@ import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer
 
 import { DiscordIcon } from "@/lib/brand-social-icons";
 
-import { Button } from "@/components/ui/button";
 import {
   BTN_OUTLINE_BLOCK,
   BTN_OUTLINE_SOLID,
@@ -121,20 +120,18 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button variant="outline" asChild className={BTN_OUTLINE_SOLID}>
-            <a
-              href="https://discord.gg/gzHrud9nee"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5"
-            >
-              <DiscordIcon className="size-3.5 shrink-0" />
-              Discord
-            </a>
-          </Button>
-          <Button asChild className={cn(BTN_PRIMARY_SOLID, "shrink-0")}>
-            <a href="#waitlist">Join Waitlist</a>
-          </Button>
+          <a
+            href="https://discord.gg/gzHrud9nee"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${BTN_OUTLINE_SOLID} inline-flex items-center gap-1.5`}
+          >
+            <DiscordIcon className="size-3.5 shrink-0" />
+            Discord
+          </a>
+          <a href="#waitlist" className={`${BTN_PRIMARY_SOLID} shrink-0`}>
+            Join Waitlist
+          </a>
         </div>
 
         <button
@@ -233,25 +230,21 @@ export default function Navbar() {
 
               <div className="mt-3 flex flex-col gap-2">
                 <motion.div variants={itemVariants}>
-                  <Button variant="outline" asChild className={BTN_OUTLINE_BLOCK}>
-                    <a
-                      href="https://discord.gg/gzHrud9nee"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={closeMobileMenu}
-                      className="inline-flex items-center justify-center gap-1.5"
-                    >
-                      <DiscordIcon className="size-3.5 shrink-0" />
-                      Discord
-                    </a>
-                  </Button>
+                  <a
+                    href="https://discord.gg/gzHrud9nee"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMobileMenu}
+                    className={`${BTN_OUTLINE_BLOCK} inline-flex items-center justify-center gap-1.5`}
+                  >
+                    <DiscordIcon className="size-3.5 shrink-0" />
+                    Discord
+                  </a>
                 </motion.div>
                 <motion.div variants={itemVariants}>
-                  <Button asChild className={BTN_PRIMARY_BLOCK}>
-                    <a href="#waitlist" onClick={closeMobileMenu}>
-                      Join Waitlist
-                    </a>
-                  </Button>
+                  <a href="#waitlist" onClick={closeMobileMenu} className={BTN_PRIMARY_BLOCK}>
+                    Join Waitlist
+                  </a>
                 </motion.div>
               </div>
             </motion.div>

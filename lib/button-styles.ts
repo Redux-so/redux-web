@@ -1,14 +1,11 @@
-/** Primary label — app button scale (.context: #ffffff on controls, 13px medium) */
+import { BTN_PRIMARY_VISUAL } from "@/lib/brand-colors";
+
 export const BTN_PRIMARY_TYPE =
   "text-[13px] font-medium text-white leading-none";
 
-/** Shared primary CTA shell — bg, border, radius, shadows, hover/active */
-const BTN_PRIMARY_VISUAL =
-  "rounded-xl border border-white/20 bg-[#8758ed] shadow-btn-primary transition-[background-color,box-shadow,transform] duration-200 hover:bg-[#9a6ff2] hover:shadow-btn-primary-hover active:scale-[0.98] active:shadow-btn-primary-active disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100";
-
 /** Shared outline CTA shell — pairs with primary buttons in nav/toolbars */
 const BTN_OUTLINE_VISUAL =
-  "rounded-xl border border-white/[0.08] bg-transparent transition-colors hover:bg-white/5 hover:text-white";
+  "rounded-md border border-white/[0.08] bg-transparent transition-colors hover:bg-white/5 hover:text-white";
 
 /** Standalone outline CTA — matches BTN_PRIMARY_SOLID dimensions */
 export const BTN_OUTLINE_SOLID = [
@@ -54,10 +51,10 @@ export const BTN_PRIMARY_ICON = [
 
 /** Segmented control — selected format tab */
 export const BTN_FORMAT_SELECTED = [
-  "flex flex-1 items-center justify-center h-9 px-3 uppercase tracking-wide cursor-pointer select-none",
+  "flex flex-1 items-center justify-center h-9 px-3 cursor-pointer select-none",
   BTN_PRIMARY_TYPE,
   BTN_PRIMARY_VISUAL,
 ].join(" ");
 
 export const BTN_FORMAT_IDLE =
-  "flex flex-1 items-center justify-center h-9 px-3 rounded-xl border border-white/[0.08] bg-white/[0.05] text-[13px] font-medium text-white/80 uppercase tracking-wide hover:bg-white/[0.09] hover:border-white/[0.15] transition-colors cursor-pointer select-none";
+  "flex flex-1 items-center justify-center h-9 px-3 rounded-md border border-white/[0.08] bg-white/[0.05] text-[13px] font-medium text-white/80 hover:bg-white/[0.09] hover:border-white/[0.15] transition-colors cursor-pointer select-none";

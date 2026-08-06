@@ -17,6 +17,13 @@ import AppChromeLogo from "./AppChromeLogo";
 import { SHOWCASE_FILENAME } from "./showcase-data";
 import { SHOWCASE_TYPE } from "./showcase-typography";
 
+const SHOWCASE_EXPORT_BTN = [
+  "inline-flex h-8 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-[#8758ed] px-3",
+  "shadow-[0_0_0_2px_rgba(255,255,255,0.12),0_4px_24px_rgba(135,88,237,0.5),inset_0_1px_0_rgba(255,255,255,0.25)]",
+  "transition-[background-color,box-shadow] duration-200 hover:bg-[#9a6ff2]",
+  "hover:shadow-[0_0_0_2px_rgba(255,255,255,0.12),0_6px_28px_rgba(135,88,237,0.65),inset_0_1px_0_rgba(255,255,255,0.25)]",
+].join(" ");
+
 const noop = (e?: MouseEvent) => {
   e?.preventDefault();
 };
@@ -101,13 +108,7 @@ export default function ShowcaseToolbar() {
         <ToolbarBtn label="History">
           <ClockRewind size={18} />
         </ToolbarBtn>
-        <button
-          type="button"
-          onClick={noop}
-          className={cn(
-            "inline-flex h-8 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-[#8758ed] px-3 shadow-btn-primary transition-[background-color,box-shadow] duration-200 hover:bg-[#9a6ff2] hover:shadow-btn-primary-hover",
-          )}
-        >
+        <button type="button" onClick={noop} className={SHOWCASE_EXPORT_BTN}>
           <Upload01
             size={12}
             className="shrink-0 -scale-x-100 -scale-y-100"

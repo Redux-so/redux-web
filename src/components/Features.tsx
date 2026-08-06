@@ -1,10 +1,9 @@
 "use client";
 
-import { ArrowUpRight } from "@untitledui/icons";
 import Image from "next/image";
 
+import { Icon } from "@/components/shared/Icon";
 import SectionLabel from "@/src/components/SectionLabel";
-import { Button } from "@/components/ui/button";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import {
   ScrollReveal,
@@ -131,12 +130,21 @@ export default function Features() {
                     <p className="text-base leading-relaxed text-white/70">
                       {feature.description}
                     </p>
-                    <Button asChild className={cn(BTN_PRIMARY_SOLID, "w-fit shrink-0 gap-1.5")}>
-                      <a href="#waitlist" className="inline-flex items-center gap-1.5">
-                        {feature.cta}
-                        <ArrowUpRight className="size-4 shrink-0" />
-                      </a>
-                    </Button>
+                    <a
+                      href="#waitlist"
+                      className={cn(
+                        BTN_PRIMARY_SOLID,
+                        "w-fit shrink-0 gap-1 px-3.5 leading-none",
+                      )}
+                    >
+                      <span className="leading-none">{feature.cta}</span>
+                      <Icon
+                        name="ArrowUpRight"
+                        size={16}
+                        className="shrink-0"
+                        aria-hidden
+                      />
+                    </a>
                   </div>
                 </div>
               </article>
