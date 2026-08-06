@@ -226,7 +226,7 @@ export default function Footer() {
         <div className="border-t border-white/[0.08]">
           <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
             <p className="text-sm text-white/50">
-              © Redux 2025. All rights reserved.
+              © Redux 2026. All rights reserved.
             </p>
           </div>
         </div>
