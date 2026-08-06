@@ -34,9 +34,10 @@ export default function Hero() {
           >
             <span className="leading-none">Join Waitlist</span>
             <Icon
-              name="ArrowUpRight"
-              size={20}
-              className="shrink-0"
+              name="LinkExternal01"
+              size={16}
+              strokeWidth={2}
+              className="ml-0.5 shrink-0 !size-[18px] -translate-y-0.25"
               aria-hidden
             />
           </a>
