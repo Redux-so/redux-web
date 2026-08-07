@@ -1,330 +1,438 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, Star01 } from "@untitledui/icons";
+import { useState, type ReactNode } from "react";
 
-import { cn } from "@/lib/utils";
+import { Icon, type IconName } from "@/components/shared/Icon";
+import { BTN_PRIMARY_PANEL, BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { PANEL_HEADER, PANEL_TITLE } from "@/lib/panel-chrome";
+import {
+  SURFACE_BTN_ACTIVE,
+  SURFACE_BTN_IDLE,
+  SURFACE_SECONDARY_BTN,
+} from "@/lib/surface-colors";
+import { DiscordIcon, GithubIcon } from "@/lib/brand-social-icons";
 
-import AdjustmentSlider from "./AdjustmentSlider";
-import type { ShowcaseAdjustments } from "./showcase-data";
-import { SHOWCASE_TYPE } from "./showcase-typography";
+import AdjustmentSlider, { type SliderTrackVariant } from "./AdjustmentSlider";
+import ShowcaseHistoryVersionList from "./ShowcaseHistoryVersionList";
+import {
+  REDUX_DOCS_URL,
+  REDUX_HELP_FEEDBACK_URL,
+  type AdjustmentKey,
+  type ShowcaseAdjustments,
+} from "./showcase-data";
 
-const noop = (e: MouseEvent) => {
-  e.preventDefault();
+type ToolSection = "light" | "color" | "effects" | "retouch" | "transform" | "history";
+type ActiveTool = "blur" | "eraser" | "heal" | null;
+
+const TOOL_SECTIONS: {
+  id: Exclude<ToolSection, "history">;
+  label: string;
+  title: string;
+  iconName: IconName;
+}[] = [
+  { id: "light", label: "Light", title: "Light adjustments", iconName: "Sun" },
+  { id: "color", label: "Color", title: "Color adjustments", iconName: "Colors" },
+  { id: "effects", label: "Effects", title: "Effects adjustments", iconName: "Star04" },
+  { id: "retouch", label: "Retouch", title: "Retouch tools", iconName: "Brush01" },
+  { id: "transform", label: "Transform", title: "Crop and geometry", iconName: "Crop01" },
+];
+
+const RAIL_ICON_STROKE = 1.25;
+const RAIL_ICON_SIZE = 24;
+const RAIL_BRAND_ICON_SIZE = 22;
+const RAIL_ICON_STROKE_OVERRIDES: Partial<Record<IconName, number>> = {
+  Sun: 1.7,
 };
 
-type SectionKey = "light" | "color" | "effects" | "retouch" | "transform";
+const LIGHT_ADJUSTMENTS: { key: AdjustmentKey; label: string }[] = [
+  { key: "exposure", label: "Exposure" },
+  { key: "contrast", label: "Contrast" },
+  { key: "blacks", label: "Blacks" },
+  { key: "whites", label: "Whites" },
+  { key: "highlights", label: "Highlights" },
+  { key: "shadows", label: "Shadows" },
+];
 
-function SectionHeader({
-  label,
-  open,
-  onToggle,
-}: {
-  label: string;
-  open: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      className="flex w-full items-center justify-between px-6 py-2.5 transition-colors hover:bg-white/[0.04] first:pt-4"
-    >
-      <span className={cn("select-none", SHOWCASE_TYPE.sectionHeader)}>
-        {label}
-      </span>
-      <ChevronDown
-        size={12}
-        className={cn(
-          "text-[#555555] transition-transform",
-          !open && "-rotate-90",
-        )}
-      />
-    </button>
-  );
-}
+const COLOR_TRACK_VARIANTS: Partial<Record<AdjustmentKey, SliderTrackVariant>> = {
+  temperature: "temperature",
+  tint: "tint",
+  hue: "hue",
+};
 
-function AIButton({
-  label,
-  looseSpacing,
-}: {
-  label: string;
-  looseSpacing?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={noop}
-      className={cn(
-        "flex h-9 w-full cursor-pointer items-center justify-center rounded-lg border border-brand-purple/30 bg-brand-purple/10 px-3 transition-all duration-200 hover:border-brand-purple/50 hover:bg-brand-purple/[0.18] hover:shadow-glow-sm",
-        looseSpacing ? "gap-1" : "gap-0",
-        SHOWCASE_TYPE.aiButton,
-      )}
-    >
-      <Star01
-        className={cn(
-          "size-[0.95em] shrink-0 text-brand-link",
-          !looseSpacing && "-mr-0.5",
-        )}
-      />
-      <span
-        className={cn(
-          "inline-block origin-center scale-[0.8] truncate",
-          !looseSpacing && "-ml-1",
-        )}
-      >
-        {label}
-      </span>
-    </button>
-  );
-}
+const COLOR_ADJUSTMENTS: { key: AdjustmentKey; label: string }[] = [
+  { key: "vibrance", label: "Vibrance" },
+  { key: "saturation", label: "Saturation" },
+  { key: "temperature", label: "Temperature" },
+  { key: "tint", label: "Tint" },
+  { key: "hue", label: "Hue" },
+];
 
-function ToolBtn({ label }: { label: string }) {
-  return (
-    <button
-      type="button"
-      onClick={noop}
-      className={cn(
-        "flex h-9 w-full cursor-pointer items-center justify-center rounded-lg border border-brand-border bg-white/[0.05] px-3 capitalize transition-colors hover:border-brand-border-focus hover:bg-white/[0.09]",
-        SHOWCASE_TYPE.toolButton,
-      )}
-    >
-      <span className="inline-block origin-center scale-[0.8] truncate">
-        {label}
-      </span>
-    </button>
-  );
-}
+const EFFECTS_ADJUSTMENTS: { key: AdjustmentKey; label: string }[] = [
+  { key: "sharpen", label: "Sharpen" },
+  { key: "noiseReduction", label: "Noise Reduction" },
+  { key: "vignette", label: "Vignette" },
+  { key: "grain", label: "Grain" },
+  { key: "clarity", label: "Clarity" },
+];
 
 type ShowcaseAdjustmentPanelProps = {
-  collapsed: boolean;
-  onToggleCollapse: () => void;
   adjustments: ShowcaseAdjustments;
-  onAdjustmentChange: (key: keyof ShowcaseAdjustments, value: number) => void;
+  onPreview: (key: AdjustmentKey, value: number) => void;
+  onCommit: (key: AdjustmentKey, value: number) => void;
 };
 
-export default function ShowcaseAdjustmentPanel({
-  collapsed,
-  onToggleCollapse,
-  adjustments,
-  onAdjustmentChange,
-}: ShowcaseAdjustmentPanelProps) {
-  const [openSections, setOpenSections] = useState<Record<SectionKey, boolean>>({
-    light: true,
-    color: true,
-    effects: true,
-    retouch: true,
-    transform: true,
-  });
+function RailIcon({ iconName }: { iconName: IconName }) {
+  return (
+    <Icon
+      name={iconName}
+      size={RAIL_ICON_SIZE}
+      strokeWidth={RAIL_ICON_STROKE_OVERRIDES[iconName] ?? RAIL_ICON_STROKE}
+      aria-hidden
+    />
+  );
+}
 
-  const toggleSection = (key: SectionKey) => {
-    setOpenSections((current) => ({ ...current, [key]: !current[key] }));
-  };
+function RailBtn({
+  active,
+  title,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  title: string;
+  onClick: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={title}
+      aria-pressed={active}
+      className={[
+        "flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-xl border transition-colors",
+        active ? `${SURFACE_BTN_ACTIVE} !text-white` : SURFACE_BTN_IDLE,
+      ].join(" ")}
+    >
+      {children}
+    </button>
+  );
+}
+
+function RailLink({
+  href,
+  title,
+  children,
+}: {
+  href: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      title={title}
+      aria-label={title}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#121212] text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white"
+    >
+      {children}
+    </a>
+  );
+}
+
+function AIButton({ label }: { label: string }) {
+  return (
+    <button type="button" className={`${BTN_PRIMARY_SOLID} w-full`}>
+      <Icon name="Star01" size={16} aria-hidden />
+      {label}
+    </button>
+  );
+}
+
+function ToolBtn({
+  label,
+  active,
+  onClick,
+}: {
+  label: ReactNode;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={
+        active
+          ? `${BTN_PRIMARY_SOLID} w-full capitalize`
+          : `flex w-full items-center justify-center h-9 px-3 text-[13px] font-medium capitalize rounded-md text-white/80 ${SURFACE_SECONDARY_BTN}`
+      }
+    >
+      {label}
+    </button>
+  );
+}
+
+export default function ShowcaseAdjustmentPanel({
+  adjustments,
+  onPreview,
+  onCommit,
+}: ShowcaseAdjustmentPanelProps) {
+  const [activeSection, setActiveSection] = useState<ToolSection | null>("light");
+  const [activeTool, setActiveTool] = useState<ActiveTool>(null);
+  const [showStraighten, setShowStraighten] = useState(false);
+  const [straightenDeg, setStraightenDeg] = useState(0);
+  const [showResize, setShowResize] = useState(false);
+  const [isCropping, setIsCropping] = useState(false);
+  const [blurIntensity, setBlurIntensity] = useState(50);
+
+  function toggleActiveSection(section: ToolSection) {
+    setActiveSection((prev) => (prev === section ? null : section));
+  }
+
+  function toggleTool(tool: ActiveTool) {
+    setActiveTool((prev) => (prev === tool ? null : tool));
+  }
+
+  const activeSectionMeta = TOOL_SECTIONS.find((s) => s.id === activeSection);
+  const activeSectionLabel =
+    activeSection === "history" ? "History" : activeSectionMeta?.label ?? "";
 
   return (
-    <aside
-      className={cn(
-        "flex h-full min-w-0 shrink-0 flex-col overflow-hidden border-r border-brand-border bg-black/50 backdrop-blur-xl transition-[width] duration-200 ease-out",
-        collapsed ? "w-[44px]" : "w-[400px]",
-      )}
-    >
-      <div className="flex h-[52px] shrink-0 items-center justify-between border-b border-brand-border px-6">
-        {!collapsed ? (
-          <span className={SHOWCASE_TYPE.panelHeader}>Adjustments</span>
-        ) : null}
-        <button
-          type="button"
-          onClick={onToggleCollapse}
-          aria-label={
-            collapsed ? "Expand adjustments panel" : "Collapse adjustments panel"
-          }
-          className={cn(
-            "text-[#555555] transition-colors hover:text-[#888888]",
-            collapsed && "mx-auto",
-          )}
-        >
-          {collapsed ? (
-            <ChevronRight size={14} />
-          ) : (
-            <ChevronLeft size={14} />
-          )}
-        </button>
+    <div className="flex h-full min-w-0 shrink-0">
+      <div className="flex h-full w-[72px] shrink-0 flex-col items-center border-r border-[#2e2e2e] bg-[#121212]">
+        <div className="flex flex-col items-center gap-4 py-4">
+          {TOOL_SECTIONS.map(({ id, title, iconName }) => (
+            <RailBtn
+              key={id}
+              active={activeSection === id}
+              title={title}
+              onClick={() => toggleActiveSection(id)}
+            >
+              <RailIcon iconName={iconName} />
+            </RailBtn>
+          ))}
+          <RailBtn
+            active={activeSection === "history"}
+            title="Version history"
+            onClick={() => toggleActiveSection("history")}
+          >
+            <RailIcon iconName="ClockRewind" />
+          </RailBtn>
+        </div>
+
+        <div className="mt-auto flex w-full shrink-0 flex-col items-center gap-4 pb-4">
+          <RailLink href={REDUX_DOCS_URL} title="GitHub">
+            <GithubIcon className="h-[22px] w-[22px]" />
+          </RailLink>
+          <RailLink href={REDUX_HELP_FEEDBACK_URL} title="Help & Feedback">
+            <DiscordIcon className="h-[22px] w-[22px]" />
+          </RailLink>
+          <button
+            type="button"
+            aria-label="Account menu"
+            className="flex h-12 w-12 shrink-0 cursor-default items-center justify-center rounded-xl border border-[#121212] text-white/40 transition-colors hover:bg-[#1d1d1d] hover:text-white"
+          >
+            <div className="h-[36px] w-[36px] shrink-0 rounded-lg border border-[#2e2e2e] bg-[#1d1d1d]" />
+          </button>
+        </div>
       </div>
 
-      {!collapsed ? (
-        <div className="min-h-0 flex-1 overflow-y-auto">
-          <SectionHeader
-            label="Light"
-            open={openSections.light}
-            onToggle={() => toggleSection("light")}
-          />
-          {openSections.light ? (
-            <div>
-              <AdjustmentSlider
-                label="Exposure"
-                value={adjustments.exposure}
-                onChange={(v) => onAdjustmentChange("exposure", v)}
-              />
-              <AdjustmentSlider
-                label="Contrast"
-                value={adjustments.contrast}
-                onChange={(v) => onAdjustmentChange("contrast", v)}
-              />
-              <AdjustmentSlider
-                label="Blacks"
-                value={adjustments.blacks}
-                onChange={(v) => onAdjustmentChange("blacks", v)}
-              />
-              <AdjustmentSlider
-                label="Whites"
-                value={adjustments.whites}
-                onChange={(v) => onAdjustmentChange("whites", v)}
-              />
-              <AdjustmentSlider
-                label="Highlights"
-                value={adjustments.highlights}
-                onChange={(v) => onAdjustmentChange("highlights", v)}
-              />
-              <AdjustmentSlider
-                label="Shadows"
-                value={adjustments.shadows}
-                onChange={(v) => onAdjustmentChange("shadows", v)}
-              />
-              <div className="flex flex-col gap-2 px-6 pb-1.5 pt-2.5">
-                <AIButton label="Auto Enhance" />
-                <AIButton label="Auto Tone Balance" />
-              </div>
+      <div
+        className={[
+          "flex h-full min-w-0 shrink-0 flex-col overflow-hidden bg-[#121212] transition-[width] duration-200 ease-out",
+          activeSection ? "w-[360px] rounded-r-2xl border-r border-[#2e2e2e]" : "w-0 border-r-0",
+        ].join(" ")}
+      >
+        {activeSection ? (
+          <div className="flex h-full w-[360px] min-w-[360px] flex-col">
+            <div className={`${PANEL_HEADER} px-8`}>
+              <span className={PANEL_TITLE}>{activeSectionLabel}</span>
             </div>
-          ) : null}
 
-          <SectionHeader
-            label="Color"
-            open={openSections.color}
-            onToggle={() => toggleSection("color")}
-          />
-          {openSections.color ? (
-            <div>
-              <AdjustmentSlider
-                label="Vibrance"
-                value={adjustments.vibrance}
-                onChange={(v) => onAdjustmentChange("vibrance", v)}
-              />
-              <AdjustmentSlider
-                label="Saturation"
-                value={adjustments.saturation}
-                onChange={(v) => onAdjustmentChange("saturation", v)}
-              />
-              <AdjustmentSlider
-                label="Temperature"
-                value={adjustments.temperature}
-                onChange={(v) => onAdjustmentChange("temperature", v)}
-                variant="temperature"
-              />
-              <AdjustmentSlider
-                label="Tint"
-                value={adjustments.tint}
-                onChange={(v) => onAdjustmentChange("tint", v)}
-                variant="tint"
-              />
-              <AdjustmentSlider
-                label="Hue"
-                value={adjustments.hue}
-                onChange={(v) => onAdjustmentChange("hue", v)}
-                variant="hue"
-              />
-              <div className="flex flex-col gap-2 px-6 pb-1.5 pt-2.5">
-                <AIButton label="Smart Color Balance" />
-                <AIButton label="Style Match" />
-              </div>
-            </div>
-          ) : null}
+            {activeSection === "history" ? (
+              <ShowcaseHistoryVersionList />
+            ) : (
+              <div className="min-h-0 flex-1 overflow-y-auto" data-panel-scroll>
+                {activeSection === "light" && (
+                  <div className="pb-4 pt-4">
+                    {LIGHT_ADJUSTMENTS.map(({ key, label }) => (
+                      <AdjustmentSlider
+                        key={key}
+                        label={label}
+                        value={adjustments[key]}
+                        onChange={(v) => onPreview(key, v)}
+                        onCommit={(v) => onCommit(key, v)}
+                      />
+                    ))}
+                    <div className="flex flex-col gap-3 px-8 pb-3 pt-5">
+                      <AIButton label="Auto Enhance" />
+                      <AIButton label="Auto Tone Balance" />
+                    </div>
+                  </div>
+                )}
 
-          <SectionHeader
-            label="Effects"
-            open={openSections.effects}
-            onToggle={() => toggleSection("effects")}
-          />
-          {openSections.effects ? (
-            <div className="pb-2">
-              <AdjustmentSlider
-                label="Sharpen"
-                value={adjustments.sharpen}
-                onChange={(v) => onAdjustmentChange("sharpen", v)}
-                min={0}
-                max={100}
-              />
-              <AdjustmentSlider
-                label="Noise Reduction"
-                value={adjustments.noiseReduction}
-                onChange={(v) => onAdjustmentChange("noiseReduction", v)}
-                min={0}
-                max={100}
-              />
-              <AdjustmentSlider
-                label="Vignette"
-                value={adjustments.vignette}
-                onChange={(v) => onAdjustmentChange("vignette", v)}
-                min={0}
-                max={100}
-              />
-              <AdjustmentSlider
-                label="Grain"
-                value={adjustments.grain}
-                onChange={(v) => onAdjustmentChange("grain", v)}
-                min={0}
-                max={100}
-              />
-              <AdjustmentSlider
-                label="Clarity"
-                value={adjustments.clarity}
-                onChange={(v) => onAdjustmentChange("clarity", v)}
-                min={0}
-                max={100}
-              />
-            </div>
-          ) : null}
+                {activeSection === "color" && (
+                  <div className="pb-4 pt-4">
+                    {COLOR_ADJUSTMENTS.map(({ key, label }) => (
+                      <AdjustmentSlider
+                        key={key}
+                        label={label}
+                        value={adjustments[key]}
+                        onChange={(v) => onPreview(key, v)}
+                        onCommit={(v) => onCommit(key, v)}
+                        trackVariant={COLOR_TRACK_VARIANTS[key] ?? "neutral"}
+                      />
+                    ))}
+                    <div className="flex flex-col gap-3 px-8 pb-3 pt-5">
+                      <AIButton label="Smart Color Balance" />
+                      <AIButton label="Style Match" />
+                    </div>
+                  </div>
+                )}
 
-          <SectionHeader
-            label="Retouch"
-            open={openSections.retouch}
-            onToggle={() => toggleSection("retouch")}
-          />
-          {openSections.retouch ? (
-            <div className="flex flex-col gap-2 px-6 pb-3 pt-2">
-              <div className="grid grid-cols-2 gap-2">
-                <AIButton label="Heal" looseSpacing />
-                <ToolBtn label="Blur" />
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <ToolBtn label="Eraser" />
-              </div>
-            </div>
-          ) : null}
+                {activeSection === "effects" && (
+                  <div className="pb-4 pt-4">
+                    {EFFECTS_ADJUSTMENTS.map(({ key, label }) => (
+                      <AdjustmentSlider
+                        key={key}
+                        label={label}
+                        value={adjustments[key]}
+                        onChange={(v) => onPreview(key, v)}
+                        onCommit={(v) => onCommit(key, v)}
+                      />
+                    ))}
+                  </div>
+                )}
 
-          <SectionHeader
-            label="Transform"
-            open={openSections.transform}
-            onToggle={() => toggleSection("transform")}
-          />
-          {openSections.transform ? (
-            <div className="flex flex-col gap-2 px-6 pb-4 pt-2">
-              <div className="grid grid-cols-2 gap-2">
-                <ToolBtn label="Crop" />
-                <ToolBtn label="Rotate" />
+                {activeSection === "retouch" && (
+                  <div className="flex flex-col gap-3 px-8 pb-5 pt-4">
+                    <ToolBtn
+                      label="Blur"
+                      active={activeTool === "blur"}
+                      onClick={() => toggleTool("blur")}
+                    />
+                    {activeTool === "blur" && (
+                      <div className="flex flex-col gap-3 pt-1">
+                        <p className="text-[10px] leading-snug text-[#555555]">
+                          Paint over the area to blur in yellow, then confirm.
+                        </p>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="shrink-0 text-[11px] text-[#888888]">
+                            Intensity
+                          </span>
+                          <input
+                            type="range"
+                            min={1}
+                            max={100}
+                            step={1}
+                            value={blurIntensity}
+                            onChange={(e) => setBlurIntensity(Number(e.target.value))}
+                            className="h-[3px] flex-1 cursor-pointer accent-[#794ADE]"
+                          />
+                          <span className="w-[24px] shrink-0 text-right text-[11px] text-[#888888]">
+                            {blurIntensity}
+                          </span>
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setActiveTool(null)}
+                            className="h-[34px] flex-1 cursor-pointer rounded-md border border-[#2e2e2e] bg-[#1d1d1d] text-[13px] text-white transition-colors hover:border-[#3a3a3a]"
+                          >
+                            Cancel
+                          </button>
+                          <button type="button" className={BTN_PRIMARY_PANEL}>
+                            Confirm
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    <ToolBtn
+                      label="Eraser"
+                      active={activeTool === "eraser"}
+                      onClick={() => toggleTool("eraser")}
+                    />
+                    <ToolBtn
+                      label="Heal"
+                      active={activeTool === "heal"}
+                      onClick={() => toggleTool("heal")}
+                    />
+                  </div>
+                )}
+
+                {activeSection === "transform" && (
+                  <div className="flex flex-col gap-3 px-8 pb-5 pt-4">
+                    <ToolBtn
+                      label="Crop"
+                      active={isCropping}
+                      onClick={() => setIsCropping((v) => !v)}
+                    />
+                    <ToolBtn label="Rotate" active={false} onClick={() => {}} />
+                    <ToolBtn
+                      label="Straighten"
+                      active={showStraighten}
+                      onClick={() => setShowStraighten((v) => !v)}
+                    />
+                    {showStraighten && (
+                      <AdjustmentSlider
+                        label="Angle"
+                        value={straightenDeg}
+                        min={-45}
+                        max={45}
+                        step={0.5}
+                        onChange={setStraightenDeg}
+                        onCommit={setStraightenDeg}
+                      />
+                    )}
+                    <ToolBtn
+                      label="Resize"
+                      active={showResize}
+                      onClick={() => setShowResize((v) => !v)}
+                    />
+                    {showResize && (
+                      <div className="flex flex-col gap-3 rounded-xl border border-[#2e2e2e] bg-[#1d1d1d] p-3">
+                        <div className="flex items-center gap-2">
+                          <div className="flex flex-1 flex-col gap-1">
+                            <label className="text-[11px] font-medium text-[#555555]">
+                              Width
+                            </label>
+                            <input
+                              readOnly
+                              value={2788}
+                              className="h-[30px] w-full rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-2 text-[12px] text-white outline-none"
+                            />
+                          </div>
+                          <div className="mt-4 shrink-0 text-[#555555]">
+                            <Icon name="Lock01" size={16} aria-hidden />
+                          </div>
+                          <div className="flex flex-1 flex-col gap-1">
+                            <label className="text-[11px] font-medium text-[#555555]">
+                              Height
+                            </label>
+                            <input
+                              readOnly
+                              value={3717}
+                              className="h-[30px] w-full rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-2 text-[12px] text-white outline-none"
+                            />
+                          </div>
+                        </div>
+                        <button type="button" className={`${BTN_PRIMARY_SOLID} w-full`}>
+                          Apply
+                        </button>
+                      </div>
+                    )}
+                    <AIButton label="Generative Fill" />
+                    <AIButton label="Remove Background" />
+                  </div>
+                )}
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                <ToolBtn label="Straighten" />
-                <ToolBtn label="Resize" />
-              </div>
-              <p className={SHOWCASE_TYPE.caption}>
-                Edit / Expand
-              </p>
-              <AIButton label="Generative Fill" />
-              <AIButton label="Remove Background" />
-            </div>
-          ) : null}
-        </div>
-      ) : null}
-    </aside>
+            )}
+          </div>
+        ) : null}
+      </div>
+    </div>
   );
 }

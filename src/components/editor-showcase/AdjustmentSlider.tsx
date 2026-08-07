@@ -1,116 +1,169 @@
 "use client";
 
-import * as Slider from "@radix-ui/react-slider";
+import * as SliderPrimitive from "@radix-ui/react-slider";
 
-import { cn } from "@/lib/utils";
+export type SliderTrackVariant = "neutral" | "temperature" | "tint" | "hue";
 
-import { SHOWCASE_TYPE } from "./showcase-typography";
-
-type AdjustmentSliderProps = {
+interface AdjustmentSliderProps {
   label: string;
   value: number;
   onChange: (value: number) => void;
+  onCommit: (value: number) => void;
   min?: number;
   max?: number;
-  variant?: "neutral" | "temperature" | "tint" | "hue";
-};
+  step?: number;
+  trackVariant?: SliderTrackVariant;
+}
 
-function parseHex(hex: string) {
+const NEUTRAL_CENTER = "#888888";
+
+function clamp01(value: number): number {
+  return Math.max(0, Math.min(1, value));
+}
+
+function hexToRgb(hex: string): [number, number, number] {
   const normalized = hex.replace("#", "");
-  const value = Number.parseInt(normalized, 16);
-  return {
-    r: (value >> 16) & 255,
-    g: (value >> 8) & 255,
-    b: value & 255,
-  };
+  return [
+    parseInt(normalized.slice(0, 2), 16),
+    parseInt(normalized.slice(2, 4), 16),
+    parseInt(normalized.slice(4, 6), 16),
+  ];
 }
 
-function lerpColor(from: string, to: string, amount: number) {
-  const start = parseHex(from);
-  const end = parseHex(to);
-  const mix = Math.min(1, Math.max(0, amount));
-  const r = Math.round(start.r + (end.r - start.r) * mix);
-  const g = Math.round(start.g + (end.g - start.g) * mix);
-  const b = Math.round(start.b + (end.b - start.b) * mix);
-  return `rgb(${r}, ${g}, ${b})`;
+function rgbToHex(r: number, g: number, b: number): string {
+  return `#${[r, g, b]
+    .map((channel) => Math.round(channel).toString(16).padStart(2, "0"))
+    .join("")}`;
 }
 
-function getThumbColor(
-  variant: AdjustmentSliderProps["variant"],
+function lerpColor(from: string, to: string, amount: number): string {
+  const t = clamp01(amount);
+  const [fr, fg, fb] = hexToRgb(from);
+  const [tr, tg, tb] = hexToRgb(to);
+  return rgbToHex(fr + (tr - fr) * t, fg + (tg - fg) * t, fb + (tb - fb) * t);
+}
+
+function getTrackGradient(variant: SliderTrackVariant): string | null {
+  switch (variant) {
+    case "temperature":
+      return `linear-gradient(to right, #5b8fd4 0%, ${NEUTRAL_CENTER} 50%, #e8a454 100%)`;
+    case "tint":
+      return `linear-gradient(to right, #6db87a 0%, ${NEUTRAL_CENTER} 50%, #c96db8 100%)`;
+    case "hue":
+      return "linear-gradient(to right, hsl(0,72%,58%), hsl(60,72%,58%), hsl(120,72%,58%), hsl(180,72%,58%), hsl(240,72%,58%), hsl(300,72%,58%), hsl(360,72%,58%))";
+    default:
+      return null;
+  }
+}
+
+function getSliderAccentColor(
+  variant: SliderTrackVariant,
   value: number,
   min: number,
   max: number,
-) {
-  const ratio = (value - min) / (max - min);
+): string {
+  const t = clamp01((value - min) / (max - min));
 
   switch (variant) {
     case "temperature":
-      if (ratio <= 0.5) {
-        return lerpColor("#3b82f6", "#e5e5e5", ratio * 2);
-      }
-      return lerpColor("#e5e5e5", "#f97316", (ratio - 0.5) * 2);
+      if (t <= 0.5) return lerpColor("#5b8fd4", NEUTRAL_CENTER, t / 0.5);
+      return lerpColor(NEUTRAL_CENTER, "#e8a454", (t - 0.5) / 0.5);
     case "tint":
-      if (ratio <= 0.5) {
-        return lerpColor("#22c55e", "#e5e5e5", ratio * 2);
-      }
-      return lerpColor("#e5e5e5", "#ec4899", (ratio - 0.5) * 2);
+      if (t <= 0.5) return lerpColor("#6db87a", NEUTRAL_CENTER, t / 0.5);
+      return lerpColor(NEUTRAL_CENTER, "#c96db8", (t - 0.5) / 0.5);
     case "hue":
-      return `hsl(${(ratio * 360).toFixed(0)} 72% 52%)`;
+      return `hsl(${t * 360}, 72%, 58%)`;
     default:
       return "#e5e5e5";
   }
+}
+
+function formatSignedAdjustmentValue(value: number): string {
+  const formatted = Number.isInteger(value)
+    ? String(Math.abs(value))
+    : Math.abs(value).toFixed(1);
+  if (value > 0) return `+${formatted}`;
+  if (value < 0) return `-${formatted}`;
+  return "0";
 }
 
 export default function AdjustmentSlider({
   label,
   value,
   onChange,
+  onCommit,
   min = -100,
   max = 100,
-  variant = "neutral",
+  step = 1,
+  trackVariant = "neutral",
 }: AdjustmentSliderProps) {
-  const isColorVariant = variant !== "neutral";
-  const thumbColor = getThumbColor(variant, value, min, max);
+  const defaultValue = Math.max(min, Math.min(max, 0));
+  const isColorTrack = trackVariant !== "neutral";
+  const trackGradient = getTrackGradient(trackVariant);
+  const accentColor = getSliderAccentColor(trackVariant, value, min, max);
 
-  const trackClass = cn(
-    "relative w-full grow rounded-full",
-    variant === "neutral" && "h-[2px] bg-brand-border",
-    variant === "temperature" &&
-      "h-[4px] bg-gradient-to-r from-[#3b82f6] via-[#d4d4d4] to-[#f97316]",
-    variant === "tint" &&
-      "h-[4px] bg-gradient-to-r from-[#22c55e] via-[#d4d4d4] to-[#ec4899]",
-    variant === "hue" &&
-      "h-[4px] bg-gradient-to-r from-[#ef4444] via-[#eab308] via-[#22c55e] via-[#3b82f6] to-[#a855f7]",
-  );
+  function resetToDefault() {
+    onChange(defaultValue);
+    onCommit(defaultValue);
+  }
 
   return (
-    <div className="px-6 py-1.5">
-      <div className="mb-1.5 flex items-center justify-between">
-        <span className={SHOWCASE_TYPE.sliderLabel}>{label}</span>
-        <span className={SHOWCASE_TYPE.sliderValue}>{value}</span>
+    <div className="flex flex-col gap-3 px-8 py-3.5">
+      <div className="flex items-center justify-between">
+        <span className="text-[15px] font-medium text-[#e5e5e5] leading-none select-none">
+          {label}
+        </span>
+        <span
+          className="text-[15px] text-[#888888] leading-none tabular-nums cursor-default select-none"
+          onDoubleClick={resetToDefault}
+        >
+          {formatSignedAdjustmentValue(value)}
+        </span>
       </div>
-      <Slider.Root
-        className="relative flex h-3 w-full touch-none select-none items-center"
-        value={[value]}
-        onValueChange={([next]) => onChange(next)}
+
+      <SliderPrimitive.Root
         min={min}
         max={max}
-        step={1}
+        step={step}
+        value={[value]}
+        onValueChange={([v]) => onChange(v)}
+        onValueCommit={([v]) => onCommit(v)}
+        className="relative flex w-full touch-none select-none items-center"
       >
-        <Slider.Track className={trackClass}>
-          {variant === "neutral" ? (
-            <Slider.Range className="absolute h-full rounded-full bg-[#a3a3a3]" />
-          ) : null}
-        </Slider.Track>
-        <Slider.Thumb
-          className={cn(
-            "block size-3 rounded-full border border-white/20 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple/40",
-            !isColorVariant && "bg-[#e5e5e5]",
+        <SliderPrimitive.Track
+          className={[
+            "relative w-full grow rounded-full",
+            isColorTrack ? "h-[5px]" : "h-[3px] bg-white/[0.08]",
+          ].join(" ")}
+          style={trackGradient ? { background: trackGradient } : undefined}
+        >
+          {isColorTrack ? (
+            <>
+              <span
+                aria-hidden
+                className="pointer-events-none absolute left-1/2 top-1/2 h-[12px] w-px -translate-x-1/2 -translate-y-1/2 bg-white/25"
+              />
+              <SliderPrimitive.Range className="absolute h-full rounded-full bg-transparent" />
+            </>
+          ) : (
+            <SliderPrimitive.Range className="absolute h-full rounded-full bg-neutral-400" />
           )}
-          style={isColorVariant ? { backgroundColor: thumbColor } : undefined}
-          aria-label={label}
+        </SliderPrimitive.Track>
+        <SliderPrimitive.Thumb
+          title="Double-click to reset"
+          className={[
+            "block h-[14px] w-[14px] rounded-full outline-none cursor-pointer transition-transform hover:scale-110",
+            isColorTrack
+              ? "shadow-[0_0_0_2px_rgba(0,0,0,0.45),0_0_0_1px_rgba(255,255,255,0.2)]"
+              : "bg-[#e5e5e5] shadow-[0_0_0_1px_rgba(255,255,255,0.15)]",
+          ].join(" ")}
+          style={isColorTrack ? { backgroundColor: accentColor } : undefined}
+          onDoubleClick={(e) => {
+            e.stopPropagation();
+            resetToDefault();
+          }}
         />
-      </Slider.Root>
+      </SliderPrimitive.Root>
     </div>
   );
 }

@@ -23,6 +23,8 @@ export type ShowcaseAdjustments = {
   [K in keyof typeof SHOWCASE_ADJUSTMENTS]: number;
 };
 
+export type AdjustmentKey = keyof ShowcaseAdjustments;
+
 export const SHOWCASE_CHAT_MESSAGES = [
   {
     id: "1",
@@ -77,15 +79,33 @@ export const SHOWCASE_CHAT_MESSAGES = [
     id: "8",
     role: "assistant" as const,
     content:
-      "Vibrance +14, saturation +8, noise reduction +12. I also added clarity +20, sharpen +16, and a light vignette at +14 to frame Mount Fuji and the reflection. Exposure is at -12 for the twilight mood. You're set.",
+      "Vibrance +14, saturation +8, noise reduction +12. I also added clarity +20, sharpen +16, and a light vignette at +14 to frame Mount Fuji and the reflection. Exposure is at -12 for the twilight mood.",
     timestamp: new Date("2026-06-05T14:35:00"),
   },
 ] as const;
 
 export type ShowcaseChatMessage = (typeof SHOWCASE_CHAT_MESSAGES)[number];
 
-export const SHOWCASE_USER = {
-  name: "John Doe",
-  credits: 1250,
-  avatarUrl: null as string | null,
-};
+export const SHOWCASE_PENDING_CHANGES = [
+  { key: "temperature", label: "Temperature", from: 0, to: -22 },
+  { key: "tint", label: "Tint", from: 0, to: 12 },
+  { key: "blacks", label: "Blacks", from: 0, to: -28 },
+  { key: "shadows", label: "Shadows", from: 0, to: -12 },
+  { key: "contrast", label: "Contrast", from: 0, to: 24 },
+  { key: "highlights", label: "Highlights", from: 0, to: -16 },
+  { key: "whites", label: "Whites", from: 0, to: -8 },
+  { key: "vibrance", label: "Vibrance", from: 0, to: 14 },
+  { key: "saturation", label: "Saturation", from: 0, to: 8 },
+  { key: "exposure", label: "Exposure", from: 0, to: -12 },
+] as const;
+
+export type ShowcasePendingChange = (typeof SHOWCASE_PENDING_CHANGES)[number];
+
+export const SHOWCASE_HISTORY_VERSIONS = [
+  { id: "v3", label: "Blue hour finish", createdAt: "2026-06-05T14:33:00Z" },
+  { id: "v2", label: "Auto-saved", createdAt: "2026-06-05T14:17:00Z" },
+  { id: "v1", label: "Original import", createdAt: "2026-06-05T13:35:00Z" },
+] as const;
+
+export const REDUX_DOCS_URL = "https://github.com/Redux-so";
+export const REDUX_HELP_FEEDBACK_URL = "https://discord.com/invite/gzHrud9nee";

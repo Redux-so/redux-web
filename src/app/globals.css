@@ -258,11 +258,6 @@ html {
   box-sizing: border-box;
 }
 
-.editor-showcase button {
-  font: inherit;
-  line-height: 1;
-}
-
 .editor-showcase * {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) transparent;

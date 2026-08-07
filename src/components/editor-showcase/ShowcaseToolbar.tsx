@@ -1,121 +1,138 @@
 "use client";
 
-import type { MouseEvent, ReactNode } from "react";
-import {
-  ClockRewind,
-  Columns02,
-  FlipBackward,
-  FlipForward,
-  Minus,
-  Plus,
-  Upload01,
-} from "@untitledui/icons";
+import { useState } from "react";
 
-import { cn } from "@/lib/utils";
+import { Icon } from "@/components/shared/Icon";
+import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { SURFACE_BTN_ACTIVE, SURFACE_BTN_IDLE } from "@/lib/surface-colors";
 
-import AppChromeLogo from "./AppChromeLogo";
 import { SHOWCASE_FILENAME } from "./showcase-data";
-import { SHOWCASE_TYPE } from "./showcase-typography";
-
-const SHOWCASE_EXPORT_BTN = [
-  "inline-flex h-8 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-brand-purple px-3",
-  "shadow-[0_0_0_2px_rgba(255,255,255,0.12),0_4px_24px_rgba(121,74,222,0.5),inset_0_1px_0_rgba(255,255,255,0.25)]",
-  "transition-[background-color,box-shadow] duration-200 hover:bg-brand-purple-hover",
-  "hover:shadow-[0_0_0_2px_rgba(255,255,255,0.12),0_6px_28px_rgba(121,74,222,0.65),inset_0_1px_0_rgba(255,255,255,0.25)]",
-].join(" ");
-
-const noop = (e?: MouseEvent) => {
-  e?.preventDefault();
-};
 
 function ToolbarBtn({
+  onClick,
+  disabled,
+  title,
   children,
-  label,
-  active = false,
-  disabled = false,
 }: {
-  children: ReactNode;
-  label: string;
-  active?: boolean;
+  onClick: () => void;
   disabled?: boolean;
+  title?: string;
+  children: React.ReactNode;
 }) {
   return (
     <button
       type="button"
-      aria-label={label}
+      onClick={onClick}
       disabled={disabled}
-      onClick={noop}
-      className={cn(
-        "flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg transition-colors",
-        disabled && "cursor-not-allowed opacity-30",
-        !disabled &&
-          (active
-            ? "border border-brand-purple/40 bg-brand-purple/25 text-brand-link"
-            : "text-white/40 hover:bg-white/[0.07] hover:text-white"),
-      )}
+      title={title}
+      className={[
+        "flex shrink-0 items-center justify-center h-9 w-9 rounded-md transition-colors cursor-pointer",
+        "disabled:opacity-30 disabled:cursor-not-allowed",
+        "text-white/40 hover:bg-[#1d1d1d] hover:text-white",
+      ].join(" ")}
     >
       {children}
     </button>
   );
 }
 
-export default function ShowcaseToolbar() {
-  return (
-    <header className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-brand-border bg-black/40 pl-3 pr-3 backdrop-blur-2xl">
-      <div className="flex min-w-0 items-center pl-2">
-        <div className="shrink-0">
-          <AppChromeLogo />
-        </div>
-      </div>
+function Divider() {
+  return <div className="mx-1 h-5 w-px bg-white/[0.08]" />;
+}
 
-      <div className="flex items-center gap-[2px]">
-        <ToolbarBtn label="Zoom out">
-          <Minus size={18} />
-        </ToolbarBtn>
+export default function ShowcaseToolbar() {
+  const [zoom, setZoom] = useState(1);
+  const [showBefore, setShowBefore] = useState(false);
+
+  const zoomPercent = `${Math.round(zoom * 100)}%`;
+
+  return (
+    <div className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-[#2e2e2e] bg-[#121212] pl-3 pr-3">
+      <div className="flex min-w-0 shrink-0 items-center justify-self-start gap-3">
         <button
           type="button"
-          onClick={noop}
-          className={cn(
-            "flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-lg px-3 tabular-nums text-white transition-colors hover:bg-white/[0.07]",
-            SHOWCASE_TYPE.body,
-          )}
+          className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-2 py-1.5 text-[13px] text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white disabled:cursor-wait disabled:opacity-60"
         >
-          100%
+          <Icon name="ChevronLeft" size={16} aria-hidden />
+          Back to Library
         </button>
-        <ToolbarBtn label="Zoom in">
-          <Plus size={18} />
+      </div>
+
+      <div className="flex shrink-0 items-center justify-center gap-[2px]">
+        <ToolbarBtn
+          onClick={() => setZoom((z) => Math.max(0.25, z - 0.1))}
+          title="Zoom out"
+        >
+          <Icon name="Minus" size={20} aria-hidden />
         </ToolbarBtn>
-        <div className="mx-1 h-5 w-px bg-brand-border" />
-        <ToolbarBtn label="Before and after">
-          <Columns02 size={18} />
+
+        <button
+          type="button"
+          title="Reset zoom"
+          onClick={() => setZoom(1)}
+          className="flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-md px-3 text-[14px] tabular-nums text-white transition-colors hover:bg-[#1d1d1d]"
+        >
+          {zoomPercent}
+        </button>
+
+        <ToolbarBtn
+          onClick={() => setZoom((z) => Math.min(2, z + 0.1))}
+          title="Zoom in"
+        >
+          <Icon name="Plus" size={20} aria-hidden />
         </ToolbarBtn>
-        <ToolbarBtn label="Undo">
-          <FlipBackward size={18} />
+
+        <Divider />
+
+        <button
+          type="button"
+          title={showBefore ? "Show after" : "Show before"}
+          aria-pressed={showBefore}
+          onClick={() => setShowBefore((v) => !v)}
+          className={[
+            "flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-md border transition-colors",
+            showBefore
+              ? `${SURFACE_BTN_ACTIVE} !text-white`
+              : SURFACE_BTN_IDLE,
+          ].join(" ")}
+        >
+          <Icon name="Columns02" size={20} aria-hidden />
+        </button>
+
+        <Divider />
+
+        <ToolbarBtn onClick={() => undefined} disabled title="Undo">
+          <Icon name="FlipBackward" size={20} aria-hidden />
         </ToolbarBtn>
-        <ToolbarBtn label="Redo" disabled>
-          <FlipForward size={18} />
+        <ToolbarBtn onClick={() => undefined} disabled title="Redo">
+          <Icon name="FlipForward" size={20} aria-hidden />
         </ToolbarBtn>
       </div>
 
-      <div className="flex min-w-0 items-center justify-end gap-3">
-        <span className={cn("max-w-[22ch] truncate", SHOWCASE_TYPE.meta)}>
+      <div className="flex min-w-0 w-full max-w-full items-center justify-end gap-6 pl-3">
+        <span
+          title={SHOWCASE_FILENAME}
+          className="min-w-0 max-w-[22ch] shrink truncate text-left text-[13px] text-[#888888]"
+        >
           {SHOWCASE_FILENAME}
         </span>
-        <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-[#22c55e]" />
-          <span className={SHOWCASE_TYPE.meta}>Auto-saved</span>
+
+        <div className="flex shrink-0 items-center gap-[5px]">
+          <span className="h-2 w-2 shrink-0 rounded-full bg-[#22c55e]" />
+          <span className="whitespace-nowrap text-[13px] text-[#888888]">
+            Auto-saved
+          </span>
         </div>
-        <ToolbarBtn label="History">
-          <ClockRewind size={18} />
-        </ToolbarBtn>
-        <button type="button" onClick={noop} className={SHOWCASE_EXPORT_BTN}>
-          <Upload01
-            size={12}
-            className="shrink-0 -scale-x-100 -scale-y-100"
-          />
-          <span className={cn(SHOWCASE_TYPE.button, "text-white")}>Export</span>
+
+        <button
+          type="button"
+          title="Export / share"
+          className={`${BTN_PRIMARY_SOLID} shrink-0`}
+        >
+          <Icon name="Download01" size={16} aria-hidden />
+          Export
         </button>
       </div>
-    </header>
+    </div>
   );
 }

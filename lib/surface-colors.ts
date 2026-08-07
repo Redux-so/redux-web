@@ -20,6 +20,12 @@ export const SURFACE_INPUT =
 /** Modals, popovers, dropdown panels. */
 export const SURFACE_POPOVER = "bg-[#121212] border border-[#2e2e2e]";
 
+export const SURFACE_BTN_IDLE =
+  "border-[#121212] text-[#888888] hover:bg-[#1d1d1d] hover:text-white";
+
+export const SURFACE_BTN_ACTIVE =
+  "bg-[#1d1d1d] !border-[#2e2e2e] text-white";
+
 /** Secondary action button inside adjustment/editor panels. */
 export const SURFACE_SECONDARY_BTN =
   "border border-[#2e2e2e] bg-[#1d1d1d] text-white hover:bg-[#1d1d1d] hover:border-[#3a3a3a] transition-colors cursor-pointer";
