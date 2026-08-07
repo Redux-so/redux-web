@@ -81,6 +81,16 @@ export default function Navbar() {
 
   const closeMobileMenu = () => setMobileOpen(false);
 
+  const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+    window.history.replaceState(null, "", "#home");
+    closeMobileMenu();
+  };
+
   const panelVariants = prefersReducedMotion
     ? menuPanelReducedVariants
     : menuPanelVariants;
@@ -100,13 +110,18 @@ export default function Navbar() {
           PILL_SHELL,
         )}
       >
-        <a href="#home" className="relative z-10 inline-flex shrink-0 items-center">
+        <a
+          href="#home"
+          onClick={scrollToTop}
+          className="group relative z-10 inline-flex shrink-0 items-center rounded-md"
+          aria-label="Back to top"
+        >
           <Image
             src="/redux-logo.png"
             alt="Redux"
             width={28}
             height={28}
-            className="h-7 w-7 shrink-0 object-contain"
+            className="h-7 w-7 shrink-0 object-contain transition-[filter] duration-200 group-hover:brightness-75"
             priority
           />
         </a>
