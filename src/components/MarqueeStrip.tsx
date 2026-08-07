@@ -5,14 +5,12 @@ import { Fragment } from "react";
 
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 
-const LOGO_SIZE = 500;
-
 const marqueeItems = [
-  { src: "/marquee/photoshop.png", alt: "Adobe Photoshop" },
-  { src: "/marquee/lightroom.png", alt: "Adobe Lightroom" },
-  { src: "/marquee/luminar-neo.png", alt: "Luminar Neo" },
-  { src: "/marquee/canva.png", alt: "Canva" },
-  { src: "/marquee/figma.png", alt: "Figma" },
+  { src: "/marquee/photoshop.png", alt: "Adobe Photoshop", width: 152, height: 126 },
+  { src: "/marquee/lightroom.png", alt: "Adobe Lightroom", width: 157, height: 142 },
+  { src: "/marquee/luminar-neo.png", alt: "Luminar Neo", width: 500, height: 88 },
+  { src: "/marquee/canva.png", alt: "Canva", width: 354, height: 125 },
+  { src: "/marquee/figma.png", alt: "Figma", width: 356, height: 106 },
 ] as const;
 
 const TRACK_REPEATS = 4;
@@ -40,10 +38,10 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
           <Image
             src={item.src}
             alt={item.alt}
-            width={LOGO_SIZE}
-            height={LOGO_SIZE}
+            width={item.width}
+            height={item.height}
             unoptimized
-            className="h-[5.75rem] w-auto sm:h-[6.75rem] lg:h-[7.75rem]"
+            className="h-6 w-auto sm:h-7 lg:h-8"
             draggable={false}
           />
         </Fragment>
@@ -54,19 +52,19 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 
 export default function MarqueeStrip() {
   return (
-    <section className="border-y border-brand-border bg-marquee-gradient pb-2 pt-5 sm:pb-3 sm:pt-6">
+    <section className="border-y border-brand-border bg-marquee-gradient py-5 sm:py-6">
       <ScrollRevealGroup
-        className="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8"
+        className="mx-auto flex w-full max-w-6xl flex-col px-4 sm:px-6 lg:px-8"
         stagger={0.1}
       >
         <ScrollRevealItem>
-          <p className="mb-1.5 text-center text-sm text-white/70 sm:mb-2 sm:text-base">
+          <p className="mb-6 text-center text-sm text-white/70 sm:mb-8 sm:text-base">
             Inspired by workflows from
           </p>
         </ScrollRevealItem>
 
         <ScrollRevealItem variant="fadeIn" className="w-full">
-          <div className="marquee-edge-blur w-full overflow-hidden -mb-3 sm:-mb-4 lg:-mb-5">
+          <div className="marquee-edge-blur overflow-hidden">
             <div className="animate-marquee flex w-max items-center">
               <MarqueeTrack trackKey="a" />
               <MarqueeTrack trackKey="b" aria-hidden />

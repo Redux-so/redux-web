@@ -187,56 +187,24 @@ html {
   position: relative;
 }
 
-.marquee-edge-blur .animate-marquee {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    #000 18%,
-    #000 82%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    #000 18%,
-    #000 82%,
-    transparent 100%
-  );
-}
-
 .marquee-edge-blur::before,
 .marquee-edge-blur::after {
   content: "";
   position: absolute;
   top: 0;
-  bottom: 0.75rem;
+  bottom: 0;
   z-index: 10;
-  width: min(10rem, 32%);
+  width: min(12rem, 28%);
   pointer-events: none;
-}
-
-@media (min-width: 640px) {
-  .marquee-edge-blur::before,
-  .marquee-edge-blur::after {
-    bottom: 1rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .marquee-edge-blur::before,
-  .marquee-edge-blur::after {
-    bottom: 1.25rem;
-  }
 }
 
 .marquee-edge-blur::before {
   left: 0;
   background: linear-gradient(
     to right,
-    #161616 0%,
-    rgba(22, 22, 22, 0.88) 20%,
-    rgba(22, 22, 22, 0.5) 55%,
-    rgba(22, 22, 22, 0.15) 80%,
+    var(--marquee-fade-base) 0%,
+    color-mix(in srgb, var(--marquee-fade-base) 72%, var(--marquee-fade-mid)) 22%,
+    color-mix(in srgb, var(--marquee-fade-base) 38%, transparent) 48%,
     transparent 100%
   );
 }
@@ -245,10 +213,9 @@ html {
   right: 0;
   background: linear-gradient(
     to left,
-    #161616 0%,
-    rgba(22, 22, 22, 0.88) 20%,
-    rgba(22, 22, 22, 0.5) 55%,
-    rgba(22, 22, 22, 0.15) 80%,
+    var(--marquee-fade-base) 0%,
+    color-mix(in srgb, var(--marquee-fade-base) 72%, var(--marquee-fade-mid)) 22%,
+    color-mix(in srgb, var(--marquee-fade-base) 38%, transparent) 48%,
     transparent 100%
   );
 }
@@ -317,6 +284,8 @@ html {
 }
 
 .bg-marquee-gradient {
+  --marquee-fade-base: #161616;
+  --marquee-fade-mid: #1a1a1a;
   background-color: #161616;
   background-image: radial-gradient(
     ellipse 38% 105% at 50% 50%,
