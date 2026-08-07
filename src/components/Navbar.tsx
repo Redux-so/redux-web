@@ -149,10 +149,10 @@ export default function Navbar() {
             aria-label="Discord"
             className={cn(
               BTN_OUTLINE_SOLID,
-              "hidden size-9 shrink-0 gap-0 p-0 md:inline-flex",
+              "hidden aspect-square h-9 w-9 min-w-9 max-w-9 shrink-0 !p-0 md:inline-flex",
             )}
           >
-            <DiscordIcon className="size-[58%] shrink-0" />
+            <DiscordIcon className="size-5 shrink-0" />
           </a>
           <a
             href="#waitlist"
