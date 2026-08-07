@@ -5,10 +5,16 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          purple: "#794ade",
-          bg: "#111111",
-          surface: "#1a1a1a",
-          surface2: "#222222",
+          purple: "#794ADE",
+          "purple-hover": "#9168eb",
+          link: "#A688F0",
+          "link-hover": "#BBA0F5",
+          bg: "#161616",
+          surface: "#1d1d1d",
+          "surface-card": "#121212",
+          surface2: "#1d1d1d",
+          border: "#2e2e2e",
+          "border-focus": "#3a3a3a",
         },
       },
     },

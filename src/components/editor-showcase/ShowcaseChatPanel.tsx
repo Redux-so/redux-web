@@ -33,11 +33,11 @@ export default function ShowcaseChatPanel({
   return (
     <aside
       className={cn(
-        "flex h-full min-w-0 shrink-0 flex-col overflow-hidden border-l border-white/[0.07] bg-black/50 backdrop-blur-xl transition-[width] duration-200 ease-out",
+        "flex h-full min-w-0 shrink-0 flex-col overflow-hidden border-l border-brand-border bg-black/50 backdrop-blur-xl transition-[width] duration-200 ease-out",
         collapsed ? "w-[44px]" : "w-[400px]",
       )}
     >
-      <div className="flex h-[52px] shrink-0 items-center gap-2 border-b border-white/[0.07] px-6">
+      <div className="flex h-[52px] shrink-0 items-center gap-2 border-b border-brand-border px-6">
         <button
           type="button"
           onClick={onToggleCollapse}
@@ -79,8 +79,8 @@ export default function ShowcaseChatPanel({
                     className={cn(
                       "max-w-[88%] rounded-xl px-3.5 py-2.5",
                       isUser
-                        ? "rounded-br-sm bg-[#682FBF]/25 text-[#e5e5e5]"
-                        : "rounded-bl-sm border border-white/[0.06] bg-white/[0.04] text-[#d4d4d4]",
+                        ? "rounded-br-sm bg-brand-purple/25 text-[#e5e5e5]"
+                        : "rounded-bl-sm border border-brand-border bg-white/[0.04] text-[#d4d4d4]",
                     )}
                   >
                     <p className={SHOWCASE_TYPE.bodyPrimary}>{message.content}</p>
@@ -94,7 +94,7 @@ export default function ShowcaseChatPanel({
           </div>
 
           <div className="shrink-0 px-6 pb-6 pt-3">
-            <div className="flex flex-col gap-1 rounded-lg border border-white/[0.06] bg-[#111111] px-3 py-2">
+            <div className="flex flex-col gap-1 rounded-lg border border-brand-border bg-brand-surface-card px-3 py-2">
               <textarea
                 readOnly
                 disabled
@@ -117,7 +117,7 @@ export default function ShowcaseChatPanel({
                 <button
                   type="button"
                   disabled
-                  className="flex h-7 w-7 shrink-0 cursor-not-allowed items-center justify-center rounded-lg bg-white/[0.08] text-[#555555] opacity-50"
+                  className="flex h-7 w-7 shrink-0 cursor-not-allowed items-center justify-center rounded-lg bg-brand-surface text-[#555555] opacity-50"
                   aria-label="Send message"
                 >
                   <ArrowUp size={14} />

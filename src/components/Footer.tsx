@@ -64,7 +64,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className={cn(SECTION_DIVIDE, "bg-[#050505]")}>
+    <footer className={cn(SECTION_DIVIDE, "bg-brand-surface-card")}>
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
         <ScrollRevealGroup
           className="flex flex-col gap-10 lg:flex-row lg:justify-between"
@@ -140,7 +140,7 @@ export default function Footer() {
       </div>
 
       <ScrollReveal variant="fadeIn">
-        <div className="border-t border-white/[0.08]">
+        <div className="border-t border-brand-border">
           <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
             <p className="text-sm text-white/50">
               © Redux 2026. All rights reserved.

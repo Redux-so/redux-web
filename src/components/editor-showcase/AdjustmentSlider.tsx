@@ -74,7 +74,7 @@ export default function AdjustmentSlider({
 
   const trackClass = cn(
     "relative w-full grow rounded-full",
-    variant === "neutral" && "h-[2px] bg-white/[0.08]",
+    variant === "neutral" && "h-[2px] bg-brand-border",
     variant === "temperature" &&
       "h-[4px] bg-gradient-to-r from-[#3b82f6] via-[#d4d4d4] to-[#f97316]",
     variant === "tint" &&
@@ -104,7 +104,7 @@ export default function AdjustmentSlider({
         </Slider.Track>
         <Slider.Thumb
           className={cn(
-            "block size-3 rounded-full border border-white/20 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#682FBF]/40",
+            "block size-3 rounded-full border border-white/20 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple/40",
             !isColorVariant && "bg-[#e5e5e5]",
           )}
           style={isColorVariant ? { backgroundColor: thumbColor } : undefined}

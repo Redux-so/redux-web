@@ -5,7 +5,7 @@ export const BTN_PRIMARY_TYPE =
 
 /** Shared outline CTA shell — pairs with primary buttons in nav/toolbars */
 const BTN_OUTLINE_VISUAL =
-  "rounded-md border border-white/[0.08] bg-transparent transition-colors hover:bg-white/5 hover:text-white";
+  "rounded-md border border-brand-border bg-transparent transition-colors hover:bg-white/5 hover:text-white";
 
 /** Standalone outline CTA — matches BTN_PRIMARY_SOLID dimensions */
 export const BTN_OUTLINE_SOLID = [
@@ -57,4 +57,4 @@ export const BTN_FORMAT_SELECTED = [
 ].join(" ");
 
 export const BTN_FORMAT_IDLE =
-  "flex flex-1 items-center justify-center h-9 px-3 rounded-md border border-white/[0.08] bg-white/[0.05] text-[13px] font-medium text-white/80 hover:bg-white/[0.09] hover:border-white/[0.15] transition-colors cursor-pointer select-none";
+  "flex flex-1 items-center justify-center h-9 px-3 rounded-md border border-brand-border bg-white/[0.05] text-[13px] font-medium text-white/80 hover:bg-white/[0.09] hover:border-brand-border-focus transition-colors cursor-pointer select-none";

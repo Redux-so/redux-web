@@ -27,7 +27,7 @@ export default function EditorShowcase() {
 
   return (
     <div
-      className="editor-showcase flex h-full min-h-0 flex-col overflow-hidden bg-[#0a0a0a] antialiased select-none"
+      className="editor-showcase flex h-full min-h-0 flex-col overflow-hidden bg-brand-bg antialiased select-none"
       style={{
         lineHeight: 1.4,
         color: "#ededed",

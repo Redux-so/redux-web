@@ -18,10 +18,10 @@ import { SHOWCASE_FILENAME } from "./showcase-data";
 import { SHOWCASE_TYPE } from "./showcase-typography";
 
 const SHOWCASE_EXPORT_BTN = [
-  "inline-flex h-8 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-[#8758ed] px-3",
-  "shadow-[0_0_0_2px_rgba(255,255,255,0.12),0_4px_24px_rgba(135,88,237,0.5),inset_0_1px_0_rgba(255,255,255,0.25)]",
-  "transition-[background-color,box-shadow] duration-200 hover:bg-[#9a6ff2]",
-  "hover:shadow-[0_0_0_2px_rgba(255,255,255,0.12),0_6px_28px_rgba(135,88,237,0.65),inset_0_1px_0_rgba(255,255,255,0.25)]",
+  "inline-flex h-8 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-brand-purple px-3",
+  "shadow-[0_0_0_2px_rgba(255,255,255,0.12),0_4px_24px_rgba(121,74,222,0.5),inset_0_1px_0_rgba(255,255,255,0.25)]",
+  "transition-[background-color,box-shadow] duration-200 hover:bg-brand-purple-hover",
+  "hover:shadow-[0_0_0_2px_rgba(255,255,255,0.12),0_6px_28px_rgba(121,74,222,0.65),inset_0_1px_0_rgba(255,255,255,0.25)]",
 ].join(" ");
 
 const noop = (e?: MouseEvent) => {
@@ -50,7 +50,7 @@ function ToolbarBtn({
         disabled && "cursor-not-allowed opacity-30",
         !disabled &&
           (active
-            ? "border border-[#682FBF]/40 bg-[#682FBF]/25 text-[#B07EF0]"
+            ? "border border-brand-purple/40 bg-brand-purple/25 text-brand-link"
             : "text-white/40 hover:bg-white/[0.07] hover:text-white"),
       )}
     >
@@ -61,7 +61,7 @@ function ToolbarBtn({
 
 export default function ShowcaseToolbar() {
   return (
-    <header className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-white/[0.08] bg-black/40 pl-3 pr-3 backdrop-blur-2xl">
+    <header className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-brand-border bg-black/40 pl-3 pr-3 backdrop-blur-2xl">
       <div className="flex min-w-0 items-center pl-2">
         <div className="shrink-0">
           <AppChromeLogo />
@@ -85,7 +85,7 @@ export default function ShowcaseToolbar() {
         <ToolbarBtn label="Zoom in">
           <Plus size={18} />
         </ToolbarBtn>
-        <div className="mx-1 h-5 w-px bg-white/[0.08]" />
+        <div className="mx-1 h-5 w-px bg-brand-border" />
         <ToolbarBtn label="Before and after">
           <Columns02 size={18} />
         </ToolbarBtn>

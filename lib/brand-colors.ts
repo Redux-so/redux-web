@@ -10,11 +10,21 @@ export const PRIMARY_BRAND_LINK_HOVER_HEX = "#BBA0F5";
 /** RGB tuple for rgba() shadows and glows. */
 export const PRIMARY_BRAND_RGB = "121, 74, 222";
 
+/** Dark tint for chat user message bubbles. */
+export const CHAT_USER_BUBBLE_BG_HEX = "#1e1034";
+
 /** Tailwind class fragments (static strings for JIT). */
 export const BRAND_BG_CLASS = "bg-[#794ADE]";
 export const BRAND_BG_HOVER_CLASS = "hover:bg-[#9168eb]";
+export const BRAND_TEXT_CLASS = "text-[#794ADE]";
+export const BRAND_TEXT_HOVER_CLASS = "hover:text-[#9168eb]";
 export const BRAND_LINK_TEXT_CLASS = "text-[#A688F0]";
 export const BRAND_LINK_TEXT_HOVER_CLASS = "hover:text-[#BBA0F5]";
+export const BRAND_BORDER_CLASS = "border-[#794ADE]";
+export const BRAND_FOCUS_RING_CLASS = "focus:border-[#794ADE]/60";
+export const BRAND_ACCENT_CLASS = "accent-[#794ADE]";
+
+export const EMPTY_STATE_ICON_CLASS = "text-[#794ADE]";
 
 /** Primary CTA shell shared by lib/button-styles. */
 export const BTN_PRIMARY_VISUAL = [
@@ -24,3 +34,6 @@ export const BTN_PRIMARY_VISUAL = [
   "active:scale-[0.98] active:shadow-btn-primary-active",
   "disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100",
 ].join(" ");
+
+export const CHAT_USER_BUBBLE_CLASS =
+  "rounded-xl border border-[#794ADE]/20 bg-[#1e1034] text-[13px] font-medium text-white py-2.5 px-4";

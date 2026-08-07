@@ -54,7 +54,7 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 
 export default function MarqueeStrip() {
   return (
-    <section className="border-y border-white/[0.08] bg-[#0f0f0f] pb-2 pt-5 sm:pb-3 sm:pt-6">
+    <section className="border-y border-brand-border bg-marquee-gradient pb-2 pt-5 sm:pb-3 sm:pt-6">
       <ScrollRevealGroup
         className="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8"
         stagger={0.1}

@@ -73,7 +73,7 @@ export default function Features() {
             <SectionLabel>Features</SectionLabel>
             <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               Professional Results,{" "}
-              <span className="text-[#9a6ff2]">Intuitive Tools</span>
+              <span className="text-brand-link">Intuitive Tools</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -84,7 +84,7 @@ export default function Features() {
         >
           {features.map((feature) => (
             <ScrollRevealItem key={feature.headline}>
-              <article className="overflow-hidden rounded-2xl border border-white/[0.08] bg-brand-surface-card">
+              <article className="overflow-hidden rounded-2xl border border-brand-border bg-brand-surface-card">
                 <div
                   className={cn(
                     "flex flex-col lg:flex-row lg:items-stretch lg:gap-8 xl:gap-10",
@@ -93,7 +93,7 @@ export default function Features() {
                 >
                   <div
                     className={cn(
-                      "relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-[#0a0a0a]",
+                      "relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-brand-bg",
                       "mx-4 mt-4 sm:mx-5 sm:mt-5 lg:mb-5 lg:aspect-auto lg:min-h-[400px] lg:flex-[1.55] lg:shrink-0 xl:min-h-[440px]",
                       feature.imagePosition === "left"
                         ? "lg:ml-5 lg:mt-5"

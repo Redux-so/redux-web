@@ -59,13 +59,13 @@ export default function FAQ() {
             <SectionLabel>FAQ</SectionLabel>
             <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               Questions? We&apos;ve got{" "}
-              <span className="text-[#9a6ff2]">answers</span>
+              <span className="text-brand-link">answers</span>
             </h2>
           </div>
         </ScrollReveal>
 
         <ScrollRevealGroup
-          className="mt-8 divide-y divide-white/[0.08] rounded-xl border border-white/[0.08] bg-brand-surface-card sm:mt-10"
+          className="mt-8 divide-y divide-brand-border rounded-xl border border-brand-border bg-brand-surface-card sm:mt-10"
           stagger={0.06}
         >
           {faqs.map((faq, index) => {

@@ -41,10 +41,15 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-brand-purple: var(--brand-purple);
+  --color-brand-purple-hover: var(--brand-purple-hover);
+  --color-brand-link: var(--brand-link);
+  --color-brand-link-hover: var(--brand-link-hover);
   --color-brand-bg: var(--brand-bg);
   --color-brand-surface: var(--brand-surface);
   --color-brand-surface-card: var(--brand-surface-card);
   --color-brand-surface2: var(--brand-surface2);
+  --color-brand-border: var(--brand-border);
+  --color-brand-border-focus: var(--brand-border-focus);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -65,9 +70,9 @@
   --shadow-btn-primary-active:
     0 0 0 1px rgba(255, 255, 255, 0.06),
     inset 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 16px rgba(104, 47, 191, 0.5), 0 0 40px rgba(104, 47, 191, 0.2);
-  --shadow-glow-sm: 0 0 8px rgba(104, 47, 191, 0.4);
-  --shadow-glow-hover: 0 0 24px rgba(104, 47, 191, 0.65), 0 0 50px rgba(104, 47, 191, 0.25);
+  --shadow-glow: 0 0 16px rgba(121, 74, 222, 0.5), 0 0 40px rgba(121, 74, 222, 0.2);
+  --shadow-glow-sm: 0 0 8px rgba(121, 74, 222, 0.4);
+  --shadow-glow-hover: 0 0 24px rgba(121, 74, 222, 0.65), 0 0 50px rgba(121, 74, 222, 0.25);
 }
 
 :root {
@@ -76,17 +81,22 @@
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --brand-purple: #794ade;
-  --surface-chrome: color-mix(in srgb, black 50%, #0a0a0a);
-  --accent-editor: #682fbf;
-  --accent-end: #8b44e8;
-  --accent-glow: rgba(104, 47, 191, 0.4);
-  --accent-glow-sm: rgba(104, 47, 191, 0.25);
+  --brand-purple-hover: #9168eb;
+  --brand-link: #A688F0;
+  --brand-link-hover: #BBA0F5;
+  --surface-chrome: #121212;
+  --accent-editor: #794ade;
+  --accent-end: #9168eb;
+  --accent-glow: rgba(121, 74, 222, 0.4);
+  --accent-glow-sm: rgba(121, 74, 222, 0.25);
   --scrollbar-thumb: rgba(255, 255, 255, 0.12);
-  --scrollbar-thumb-hover: rgba(104, 47, 191, 0.38);
-  --brand-bg: #111111;
-  --brand-surface: #1a1a1a;
-  --brand-surface-card: #151515;
-  --brand-surface2: #222222;
+  --scrollbar-thumb-hover: rgba(121, 74, 222, 0.38);
+  --brand-bg: #161616;
+  --brand-surface: #1d1d1d;
+  --brand-surface-card: #121212;
+  --brand-surface2: #1d1d1d;
+  --brand-border: #2e2e2e;
+  --brand-border-focus: #3a3a3a;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -223,10 +233,10 @@ html {
   left: 0;
   background: linear-gradient(
     to right,
-    #0f0f0f 0%,
-    rgba(15, 15, 15, 0.88) 20%,
-    rgba(15, 15, 15, 0.5) 55%,
-    rgba(15, 15, 15, 0.15) 80%,
+    #161616 0%,
+    rgba(22, 22, 22, 0.88) 20%,
+    rgba(22, 22, 22, 0.5) 55%,
+    rgba(22, 22, 22, 0.15) 80%,
     transparent 100%
   );
 }
@@ -235,10 +245,10 @@ html {
   right: 0;
   background: linear-gradient(
     to left,
-    #0f0f0f 0%,
-    rgba(15, 15, 15, 0.88) 20%,
-    rgba(15, 15, 15, 0.5) 55%,
-    rgba(15, 15, 15, 0.15) 80%,
+    #161616 0%,
+    rgba(22, 22, 22, 0.88) 20%,
+    rgba(22, 22, 22, 0.5) 55%,
+    rgba(22, 22, 22, 0.15) 80%,
     transparent 100%
   );
 }
@@ -277,38 +287,48 @@ html {
 }
 
 .bg-waitlist-spotlight {
-  background-color: #0a0a0a;
+  background-color: #161616;
   background-image: radial-gradient(
     ellipse 110% 85% at 50% -15%,
     #2e2e2e 0%,
     #161616 32%,
-    #0a0a0a 68%
+    #161616 68%
   );
 }
 
 .bg-hero-showcase-glow {
-  background-color: #0a0a0a;
+  background-color: #161616;
   background-image:
     radial-gradient(
       ellipse 70% 55% at 0% 0%,
-      color-mix(in srgb, #3d3d3d 36%, transparent) 0%,
+      color-mix(in srgb, #2e2e2e 36%, transparent) 0%,
       transparent 58%
     ),
     radial-gradient(
       ellipse 65% 50% at 100% 0%,
-      color-mix(in srgb, #3d3d3d 30%, transparent) 0%,
+      color-mix(in srgb, #2e2e2e 30%, transparent) 0%,
       transparent 54%
     ),
     radial-gradient(
       ellipse 75% 60% at 100% 100%,
-      color-mix(in srgb, #3d3d3d 33%, transparent) 0%,
+      color-mix(in srgb, #3a3a3a 33%, transparent) 0%,
       transparent 58%
     ),
     radial-gradient(
       ellipse 55% 45% at 0% 100%,
-      color-mix(in srgb, #3d3d3d 26%, transparent) 0%,
+      color-mix(in srgb, #3a3a3a 26%, transparent) 0%,
       transparent 54%
     );
+}
+
+.bg-marquee-gradient {
+  background-color: #161616;
+  background-image: radial-gradient(
+    ellipse 38% 105% at 50% 50%,
+    #1f1f1f 0%,
+    #1a1a1a 32%,
+    #161616 52%
+  );
 }
 
 @layer base {

@@ -23,7 +23,7 @@ export const SHOWCASE_TYPE = {
   /** Toolbar / tool buttons */
   button: "text-[13px] font-medium leading-none",
   /** AI buttons in adjustment panel */
-  aiButton: "text-[3px] font-medium leading-none text-[#C4A0F5]",
+  aiButton: "text-[3px] font-medium leading-none text-brand-link-hover",
   /** Tool buttons in adjustment panel (Blur, Crop, etc.) */
   toolButton: "text-[3px] font-medium leading-none text-white/80",
   /** Edit / Expand sub-label */

@@ -14,10 +14,10 @@ const noop = (e: MouseEvent) => {
 
 export default function ShowcaseBottomNav() {
   return (
-    <nav className="grid h-16 shrink-0 grid-cols-[168px_1fr_168px] items-center border-t border-white/[0.08] bg-black/40 px-3 backdrop-blur-2xl">
+    <nav className="grid h-16 shrink-0 grid-cols-[168px_1fr_168px] items-center border-t border-brand-border bg-black/40 px-3 backdrop-blur-2xl">
       <div className="flex w-[168px] min-w-0 items-center gap-2.5">
         <div
-          className="h-9 w-9 shrink-0 rounded-lg border border-white/[0.08] bg-white/[0.06]"
+          className="h-9 w-9 shrink-0 rounded-lg border border-brand-border bg-white/[0.06]"
           aria-hidden
         />
         <div className="min-w-0">
@@ -46,7 +46,7 @@ export default function ShowcaseBottomNav() {
           onClick={noop}
           className={cn(
             "flex min-w-[72px] cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border px-5 py-2 transition-colors",
-            "border-[#682FBF]/40 bg-[#682FBF]/20 text-[#B07EF0]",
+            "border-brand-purple/40 bg-brand-purple/20 text-brand-link",
           )}
         >
           <Sliders01 size={20} />

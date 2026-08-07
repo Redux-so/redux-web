@@ -14,7 +14,7 @@ export default function Home() {
     <main
       id="home"
       className={cn(
-        "overflow-x-hidden bg-[#111111] text-white",
+        "overflow-x-hidden bg-brand-bg text-white",
         NAV_CLEARANCE_CLASS,
       )}
     >

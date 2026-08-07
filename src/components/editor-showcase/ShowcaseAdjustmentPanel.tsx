@@ -56,14 +56,14 @@ function AIButton({
       type="button"
       onClick={noop}
       className={cn(
-        "flex h-9 w-full cursor-pointer items-center justify-center rounded-lg border border-[#682FBF]/30 bg-[#682FBF]/[0.1] px-3 transition-all duration-200 hover:border-[#682FBF]/50 hover:bg-[#682FBF]/[0.18] hover:shadow-glow-sm",
+        "flex h-9 w-full cursor-pointer items-center justify-center rounded-lg border border-brand-purple/30 bg-brand-purple/10 px-3 transition-all duration-200 hover:border-brand-purple/50 hover:bg-brand-purple/[0.18] hover:shadow-glow-sm",
         looseSpacing ? "gap-1" : "gap-0",
         SHOWCASE_TYPE.aiButton,
       )}
     >
       <Star01
         className={cn(
-          "size-[0.95em] shrink-0 text-[#9B6EE8]",
+          "size-[0.95em] shrink-0 text-brand-link",
           !looseSpacing && "-mr-0.5",
         )}
       />
@@ -85,7 +85,7 @@ function ToolBtn({ label }: { label: string }) {
       type="button"
       onClick={noop}
       className={cn(
-        "flex h-9 w-full cursor-pointer items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.05] px-3 capitalize transition-colors hover:border-white/[0.15] hover:bg-white/[0.09]",
+        "flex h-9 w-full cursor-pointer items-center justify-center rounded-lg border border-brand-border bg-white/[0.05] px-3 capitalize transition-colors hover:border-brand-border-focus hover:bg-white/[0.09]",
         SHOWCASE_TYPE.toolButton,
       )}
     >
@@ -124,11 +124,11 @@ export default function ShowcaseAdjustmentPanel({
   return (
     <aside
       className={cn(
-        "flex h-full min-w-0 shrink-0 flex-col overflow-hidden border-r border-white/[0.07] bg-black/50 backdrop-blur-xl transition-[width] duration-200 ease-out",
+        "flex h-full min-w-0 shrink-0 flex-col overflow-hidden border-r border-brand-border bg-black/50 backdrop-blur-xl transition-[width] duration-200 ease-out",
         collapsed ? "w-[44px]" : "w-[400px]",
       )}
     >
-      <div className="flex h-[52px] shrink-0 items-center justify-between border-b border-white/[0.07] px-6">
+      <div className="flex h-[52px] shrink-0 items-center justify-between border-b border-brand-border px-6">
         {!collapsed ? (
           <span className={SHOWCASE_TYPE.panelHeader}>Adjustments</span>
         ) : null}

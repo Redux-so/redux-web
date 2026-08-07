@@ -72,7 +72,7 @@ export default function RootLayout({
       lang="en"
       className={cn(
         inter.variable,
-        "h-full bg-[#111111] text-white antialiased",
+        "h-full bg-brand-bg text-white antialiased",
       )}
     >
       <body className="min-h-full flex flex-col">

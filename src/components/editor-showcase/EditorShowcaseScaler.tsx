@@ -47,7 +47,7 @@ export default function EditorShowcaseScaler() {
   return (
     <div ref={containerRef} className="w-full">
       <div
-        className="relative mx-auto overflow-hidden rounded-2xl border border-white/[0.1] shadow-2xl"
+        className="relative mx-auto overflow-hidden rounded-2xl border border-brand-border shadow-2xl"
         style={{ width: scaledWidth, height: scaledHeight }}
       >
         <div
