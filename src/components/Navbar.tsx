@@ -124,10 +124,10 @@ export default function Navbar() {
             href="https://discord.gg/gzHrud9nee"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${BTN_OUTLINE_SOLID} inline-flex items-center gap-1.5`}
+            aria-label="Discord"
+            className={cn(BTN_OUTLINE_SOLID, "size-9 shrink-0 p-0 gap-0")}
           >
-            <DiscordIcon className="size-3.5 shrink-0" />
-            Discord
+            <DiscordIcon className="size-[58%] shrink-0" />
           </a>
           <a href="#waitlist" className={`${BTN_PRIMARY_SOLID} shrink-0`}>
             Join Waitlist
