@@ -4,15 +4,19 @@ import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
 import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
-import Navbar from "@/src/components/Navbar";
+import Navbar, { NAV_CLEARANCE_CLASS } from "@/src/components/Navbar";
 import Showcase from "@/src/components/Showcase";
 import WaitlistSection from "@/src/components/WaitlistSection";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
     <main
       id="home"
-      className="overflow-x-hidden bg-[#111111] pt-16 text-white"
+      className={cn(
+        "overflow-x-hidden bg-[#111111] text-white",
+        NAV_CLEARANCE_CLASS,
+      )}
     >
       <Navbar />
       <section className="relative overflow-hidden bg-hero-showcase-glow">
