@@ -97,7 +97,7 @@ export default function Navbar() {
       <div
         className={cn(
           "relative mx-auto flex max-w-5xl items-center",
-          "px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 lg:px-5",
+          "pl-4 pr-3 py-2.5 sm:pl-5 sm:pr-4 sm:py-3 md:px-5 lg:px-5",
           PILL_SHELL,
         )}
       >
