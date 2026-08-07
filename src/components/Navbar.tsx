@@ -8,9 +8,7 @@ import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer
 import { DiscordIcon } from "@/lib/brand-social-icons";
 
 import {
-  BTN_OUTLINE_BLOCK,
   BTN_OUTLINE_SOLID,
-  BTN_PRIMARY_BLOCK,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
 import { EASE_OUT } from "@/lib/scroll-motion";
@@ -135,7 +133,7 @@ export default function Navbar() {
             aria-label="Discord"
             className={cn(
               BTN_OUTLINE_SOLID,
-              "hidden size-9 shrink-0 gap-0 p-0 md:inline-flex",
+              "inline-flex size-9 shrink-0 gap-0 p-0",
             )}
           >
             <DiscordIcon className="size-[58%] shrink-0" />
@@ -247,21 +245,6 @@ export default function Navbar() {
                   </motion.div>
                 ))}
               </nav>
-
-              <div className="mt-3 md:hidden">
-                <motion.div variants={itemVariants}>
-                  <a
-                    href="https://discord.gg/gzHrud9nee"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeMobileMenu}
-                    className={`${BTN_OUTLINE_BLOCK} inline-flex w-full items-center justify-center gap-1.5`}
-                  >
-                    <DiscordIcon className="size-3.5 shrink-0" />
-                    Discord
-                  </a>
-                </motion.div>
-              </div>
             </motion.div>
           </motion.div>
         ) : null}
