@@ -59,8 +59,8 @@ const features: Feature[] = [
     imagePosition: "left",
     image: "/features/smart-search.png",
     imageAlt:
-      "Redux library search showing results for a city skyline with water query",
-    imageCrop: "center",
+      "Redux library search showing mountain photo results for a rural mountains query",
+    imageCrop: "left",
   },
 ];
 
