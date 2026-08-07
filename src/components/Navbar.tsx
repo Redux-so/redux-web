@@ -22,9 +22,6 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ] as const;
 
-const PILL_SHELL =
-  "rounded-full border border-white/10 bg-black/40 backdrop-blur-md shadow-lg";
-
 const PANEL_TRANSITION = { duration: 0.3, ease: EASE_OUT };
 const ICON_TRANSITION = { duration: 0.18, ease: EASE_OUT };
 const ITEM_TRANSITION = { duration: 0.28, ease: EASE_OUT };
@@ -89,14 +86,14 @@ export default function Navbar() {
     : PANEL_TRANSITION;
 
   return (
-    <header className="relative z-50 mx-4 mt-4 sm:mx-5 sm:mt-5 lg:mx-6 lg:mt-6">
-      <div
-        className={cn(
-          "relative mx-auto flex max-w-6xl items-center px-6 py-3",
-          PILL_SHELL,
-        )}
-      >
-        <a href="#home" className="relative z-10 inline-flex shrink-0 items-center">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 border-b border-white/[0.08]",
+        "bg-[#0a0a0a]/90 backdrop-blur-xl backdrop-saturate-125",
+      )}
+    >
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a href="#home" className="inline-flex shrink-0 items-center">
           <Image
             src="/redux-logo.png"
             alt="Redux"
@@ -122,13 +119,13 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="relative z-10 ml-auto hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
           <a
             href="https://discord.gg/gzHrud9nee"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Discord"
-            className={cn(BTN_OUTLINE_SOLID, "size-9 shrink-0 gap-0 p-0")}
+            className={cn(BTN_OUTLINE_SOLID, "size-9 shrink-0 p-0 gap-0")}
           >
             <DiscordIcon className="size-[58%] shrink-0" />
           </a>
@@ -139,7 +136,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="relative z-10 ml-auto inline-flex size-9 items-center justify-center rounded-lg text-white md:hidden"
+          className="relative inline-flex size-9 items-center justify-center rounded-lg text-white md:hidden"
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           onClick={() => setMobileOpen((open) => !open)}
@@ -200,11 +197,7 @@ export default function Navbar() {
         {mobileOpen ? (
           <motion.div
             key="mobile-menu"
-            className={cn(
-              "mt-2 overflow-hidden px-4 py-3 md:hidden",
-              PILL_SHELL,
-              "rounded-3xl",
-            )}
+            className="overflow-hidden border-t border-white/[0.08] bg-[#0a0a0a]/90 px-4 pb-4 pt-2 backdrop-blur-xl backdrop-saturate-125 md:hidden"
             variants={panelVariants}
             initial="hidden"
             animate="visible"
