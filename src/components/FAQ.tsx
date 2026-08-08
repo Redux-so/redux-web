@@ -1,15 +1,13 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { Minus, Plus } from "@untitledui/icons";
-import { useState } from "react";
-
-import SectionLabel from "@/src/components/SectionLabel";
 import {
-  ScrollReveal,
-  ScrollRevealGroup,
-  ScrollRevealItem,
-} from "@/lib/scroll-motion";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion-1";
+import SectionLabel from "@/src/components/SectionLabel";
+import { ScrollReveal } from "@/lib/scroll-motion";
 
 const faqs = [
   {
@@ -45,12 +43,6 @@ const faqs = [
 ] as const;
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggleItem = (index: number) => {
-    setOpenIndex((current) => (current === index ? null : index));
-  };
-
   return (
     <div className="px-4 pb-20 pt-8 sm:px-6 sm:pb-24 sm:pt-10 lg:px-8">
       <div className="mx-auto max-w-3xl">
@@ -64,53 +56,16 @@ export default function FAQ() {
           </div>
         </ScrollReveal>
 
-        <ScrollRevealGroup
-          className="mt-8 divide-y divide-brand-border rounded-xl border border-brand-border bg-brand-surface-card sm:mt-10"
-          stagger={0.06}
-        >
-          {faqs.map((faq, index) => {
-            const isOpen = openIndex === index;
-
-            return (
-              <ScrollRevealItem key={faq.question}>
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => toggleItem(index)}
-                    aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] sm:px-6"
-                  >
-                    <span className="text-sm font-medium text-white sm:text-base">
-                      {faq.question}
-                    </span>
-                    {isOpen ? (
-                      <Minus className="size-5 shrink-0 text-white/70" />
-                    ) : (
-                      <Plus className="size-5 shrink-0 text-white/70" />
-                    )}
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen ? (
-                      <motion.div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <p className="px-5 pb-5 text-sm leading-relaxed text-white/70 sm:px-6">
-                          {faq.answer}
-                        </p>
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
-                </div>
-              </ScrollRevealItem>
-            );
-          })}
-        </ScrollRevealGroup>
+        <ScrollReveal className="mt-8 sm:mt-10">
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={faq.question} value={`faq-${index}`}>
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <AccordionContent>{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </ScrollReveal>
       </div>
     </div>
   );
