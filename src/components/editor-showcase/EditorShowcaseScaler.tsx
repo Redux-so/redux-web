@@ -6,10 +6,12 @@ import EditorShowcase from "./EditorShowcase";
 
 const DESIGN_WIDTH = 1400;
 const DESIGN_HEIGHT = 820;
+/** Cap display size on large viewports; internal layout stays at DESIGN_* and scales uniformly. */
+const MAX_SCALE = 0.82;
 
 function computeScale(containerWidth: number) {
   if (containerWidth === 0) return 1;
-  return Math.min(containerWidth / DESIGN_WIDTH, 1);
+  return Math.min(containerWidth / DESIGN_WIDTH, MAX_SCALE);
 }
 
 export default function EditorShowcaseScaler() {
