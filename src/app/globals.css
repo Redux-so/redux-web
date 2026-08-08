@@ -179,7 +179,7 @@ html {
 }
 
 .animate-marquee {
-  animation: marquee 88s linear infinite;
+  animation: marquee 88s linear infinite reverse;
   will-change: transform;
 }
 
