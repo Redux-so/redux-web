@@ -26,7 +26,7 @@ export const NAV_CLEARANCE_CLASS =
   "pt-[6.75rem] sm:pt-[7.5rem] md:pt-[7.25rem] lg:pt-[7.75rem]";
 
 const PILL_SHELL =
-  "rounded-full border border-[#2e2e2e] bg-[#121212]/90 backdrop-blur-md shadow-lg";
+  "rounded-full border border-[#2e2e2e] bg-[#121212]/75 backdrop-blur-md shadow-lg";
 
 const PANEL_TRANSITION = { duration: 0.3, ease: EASE_OUT };
 const ICON_TRANSITION = { duration: 0.18, ease: EASE_OUT };
