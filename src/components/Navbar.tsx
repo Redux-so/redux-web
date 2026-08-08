@@ -105,8 +105,8 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5 lg:px-6 lg:pt-6">
       <div
         className={cn(
-          "relative mx-auto flex max-w-5xl items-center",
-          "pl-4 pr-3 py-2.5 sm:pl-5 sm:pr-4 sm:py-3 md:px-5 lg:px-5",
+          "relative mx-auto flex w-full max-w-[860px] items-center",
+          "pl-3.5 pr-2.5 py-2.5 sm:pl-4 sm:pr-3 sm:py-3 md:px-4 lg:px-4",
           PILL_SHELL,
         )}
       >
@@ -228,7 +228,7 @@ export default function Navbar() {
           <motion.div
             key="mobile-menu"
             className={cn(
-              "mx-auto mt-2 max-w-5xl overflow-hidden px-4 py-3 md:hidden",
+              "mx-auto mt-2 w-full max-w-[860px] overflow-hidden px-4 py-3 md:hidden",
               PILL_SHELL,
               "rounded-3xl",
             )}
