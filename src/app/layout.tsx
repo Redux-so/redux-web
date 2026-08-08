@@ -22,7 +22,7 @@ export const metadata: Metadata = {
       "Organize, edit, and deliver photos in seconds, all from your browser",
     url: "https://redux.so",
     siteName: "Redux",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/og-image.png", width: 1024, height: 598 }],
   },
   twitter: {
     card: "summary_large_image",
