@@ -103,10 +103,11 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5 lg:px-6 lg:pt-6">
-      <div className="flex w-fit max-w-full flex-col items-stretch">
+      <div className="flex w-[calc(100%-1rem)] max-w-full flex-col items-stretch md:w-fit">
         <div
           className={cn(
-            "inline-flex w-fit max-w-full items-center justify-between gap-10 px-4 py-2 md:gap-16 md:px-5 md:py-2.5",
+            "relative flex w-full max-w-full items-center justify-between px-4 py-2",
+            "md:inline-flex md:w-fit md:max-w-full md:gap-16 md:px-5 md:py-2.5",
             PILL_SHELL,
           )}
         >
@@ -143,7 +144,7 @@ export default function Navbar() {
             </nav>
           </div>
 
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2 md:gap-2">
             <a
               href="https://discord.gg/gzHrud9nee"
               target="_blank"
@@ -227,7 +228,7 @@ export default function Navbar() {
             <motion.div
               key="mobile-menu"
               className={cn(
-                "mt-2 overflow-hidden px-4 py-3 md:hidden",
+                "mt-2 w-full overflow-hidden px-4 py-3 md:hidden",
                 PILL_SHELL,
                 "rounded-3xl",
               )}
