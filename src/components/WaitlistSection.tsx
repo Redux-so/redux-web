@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useState } from "react";
 
+import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import { blueprintRow } from "@/lib/blueprint-grid";
@@ -82,11 +83,12 @@ export default function WaitlistSection() {
       className={cn(
         blueprintRow,
         NAV_SCROLL_OFFSET_CLASS,
-        "bg-brand-bg",
+        "relative overflow-hidden bg-brand-bg",
       )}
     >
+      <HeroParticleBackground />
       <ScrollRevealGroup
-        className="mx-auto max-w-2xl px-6 py-16 text-center sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+        className="relative z-[1] mx-auto max-w-2xl px-6 py-16 text-center sm:px-8 sm:py-20 lg:px-10 lg:py-24"
         stagger={0.12}
       >
         <ScrollRevealItem>
