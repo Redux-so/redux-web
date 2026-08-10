@@ -110,7 +110,7 @@ export default function ShowcaseChatPanel({
     <div
       className={[
         "flex h-full min-w-0 shrink-0 flex-col overflow-hidden transition-[width] duration-200 ease-out",
-        "rounded-l-2xl border-l border-[#2e2e2e] bg-[#121212]",
+        "border-l border-[#2e2e2e] bg-[#121212]",
         collapsed ? "w-[44px]" : "w-[360px]",
       ].join(" ")}
     >

@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { Fragment } from "react";
 
+import { blueprintRow } from "@/lib/blueprint-grid";
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
+import { cn } from "@/lib/utils";
 
 const marqueeItems = [
   { src: "/marquee/photoshop.png", alt: "Adobe Photoshop", width: 152, height: 126 },
@@ -52,9 +54,9 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 
 export default function MarqueeStrip() {
   return (
-    <section className="border-y border-brand-border bg-marquee-gradient py-5 sm:py-6">
+    <section className={cn(blueprintRow, "bg-marquee-gradient")}>
       <ScrollRevealGroup
-        className="mx-auto flex w-full max-w-6xl flex-col px-4 sm:px-6 lg:px-8"
+        className="flex w-full flex-col px-6 py-5 sm:px-8 sm:py-6 lg:px-10"
         stagger={0.1}
       >
         <ScrollRevealItem>

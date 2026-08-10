@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 export default function Hero() {
   return (
-    <div className="flex flex-col items-center px-4 pb-8 pt-28 sm:px-6 sm:pb-14 sm:pt-32 lg:px-8 lg:pt-36">
+    <div className="relative z-[1] px-6 pb-8 pt-10 sm:px-8 sm:pb-10 sm:pt-12 lg:px-10 lg:pt-14">
       <ScrollRevealGroup className="mx-auto max-w-3xl text-center" stagger={0.12}>
         <ScrollRevealItem>
           <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">

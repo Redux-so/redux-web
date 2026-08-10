@@ -9,12 +9,12 @@ import {
   LinkedinIcon,
   XSocialIcon,
 } from "@/lib/brand-social-icons";
+import { blueprintCol } from "@/lib/blueprint-grid";
 import {
   ScrollReveal,
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
-import { SECTION_DIVIDE } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const socialLinks = [
@@ -64,84 +64,90 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className={cn(SECTION_DIVIDE, "bg-brand-surface-card")}>
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-        <ScrollRevealGroup
-          className="flex flex-col gap-10 lg:flex-row lg:justify-between"
-          stagger={0.1}
+    <footer>
+      <ScrollRevealGroup
+        className="grid grid-cols-1 lg:grid-cols-4"
+        stagger={0.1}
+      >
+        <ScrollRevealItem
+          className={cn(blueprintCol, "flex flex-col items-start gap-5 px-6 py-10 sm:px-8 lg:px-10")}
         >
-          <ScrollRevealItem className="flex max-w-sm flex-col items-start gap-5">
-            <Image
-              src="/redux-logo.png"
-              alt="Redux"
-              width={28}
-              height={28}
-              className="h-7 w-7 object-contain"
-            />
-            <p className="text-sm leading-relaxed text-white/60">
-              Organize, edit, and export photos, all from your browser
-            </p>
-            <div className="flex items-center justify-start gap-5">
-              {socialLinks.map((social) => (
+          <Image
+            src="/redux-logo.png"
+            alt="Redux"
+            width={28}
+            height={28}
+            className="h-7 w-7 object-contain"
+          />
+          <p className="text-sm leading-relaxed text-white/60">
+            Organize, edit, and export photos, all from your browser
+          </p>
+        </ScrollRevealItem>
+
+        <ScrollRevealItem
+          className={cn(blueprintCol, "px-6 py-10 sm:px-8 lg:px-10")}
+        >
+          <p className="text-sm font-medium text-white">Navigation</p>
+          <ul className="mt-4 space-y-3">
+            {navigationLinks.map((link) => (
+              <li key={link.label}>
                 <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  target={"external" in social && social.external ? "_blank" : undefined}
-                  rel={
-                    "external" in social && social.external
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="text-white/50 transition-colors hover:text-white"
+                  href={link.href}
+                  className="text-sm text-white/60 transition-colors hover:text-white"
                 >
-                  <social.icon className="size-5" />
+                  {link.label}
                 </a>
-              ))}
-            </div>
-          </ScrollRevealItem>
+              </li>
+            ))}
+          </ul>
+        </ScrollRevealItem>
 
-          <ScrollRevealItem>
-            <div className="flex gap-16 sm:gap-24">
-              <div>
-                <p className="text-sm font-medium text-white">Navigation</p>
-                <ul className="mt-4 space-y-3">
-                  {navigationLinks.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-white/60 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <ScrollRevealItem
+          className={cn(blueprintCol, "px-6 py-10 sm:px-8 lg:px-10")}
+        >
+          <p className="text-sm font-medium text-white">Legal</p>
+          <ul className="mt-4 space-y-3">
+            {legalLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className="text-sm text-white/60 transition-colors hover:text-white"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </ScrollRevealItem>
 
-              <div>
-                <p className="text-sm font-medium text-white">Legal</p>
-                <ul className="mt-4 space-y-3">
-                  {legalLinks.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-white/60 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </ScrollRevealItem>
-        </ScrollRevealGroup>
-      </div>
+        <ScrollRevealItem
+          className={cn(blueprintCol, "px-6 py-10 sm:px-8 lg:px-10")}
+        >
+          <p className="text-sm font-medium text-white">Social</p>
+          <div className="mt-4 flex flex-wrap items-center gap-5">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                aria-label={social.label}
+                target={"external" in social && social.external ? "_blank" : undefined}
+                rel={
+                  "external" in social && social.external
+                    ? "noopener noreferrer"
+                    : undefined
+                }
+                className="text-white/50 transition-colors hover:text-white"
+              >
+                <social.icon className="size-5" />
+              </a>
+            ))}
+          </div>
+        </ScrollRevealItem>
+      </ScrollRevealGroup>
 
       <ScrollReveal variant="fadeIn">
-        <div className="border-t border-brand-border">
-          <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="border-t border-brand-border/45">
+          <div className="px-6 py-6 sm:px-8 lg:px-10">
             <p className="text-sm text-white/50">
               © Redux 2026. All rights reserved.
             </p>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Icon } from "@/components/shared/Icon";
 import SectionLabel from "@/src/components/SectionLabel";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { blueprintCol } from "@/lib/blueprint-grid";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -38,7 +39,7 @@ const features: Feature[] = [
     image: "/features/conversational-editing.png",
     imageAlt:
       "Redux editor with AI chat applying blue hour color edits to a mountain landscape",
-    imageCrop: "left",
+    imageCrop: "right",
   },
   {
     headline: "Style Match",
@@ -66,92 +67,71 @@ const features: Feature[] = [
 
 export default function Features() {
   return (
-    <div className="px-4 pb-12 pt-20 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <ScrollReveal>
-          <div className="flex flex-col items-center gap-3">
-            <SectionLabel>Features</SectionLabel>
-            <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Professional Results,{" "}
-              <span className="text-brand-link">Intuitive Tools</span>
-            </h2>
-          </div>
-        </ScrollReveal>
-
-        <ScrollRevealGroup
-          className="mt-8 flex flex-col gap-8 sm:mt-10 sm:gap-10"
-          stagger={0.12}
+    <div>
+      <ScrollReveal>
+        <div
+          className={cn(
+            "flex flex-col items-center gap-3 border-b border-brand-border/45 px-6 py-10 sm:px-8 sm:py-12 lg:px-10",
+          )}
         >
-          {features.map((feature) => (
-            <ScrollRevealItem key={feature.headline}>
-              <article className="overflow-hidden rounded-2xl border border-brand-border bg-brand-surface-card">
-                <div
-                  className={cn(
-                    "flex flex-col lg:flex-row lg:items-stretch lg:gap-8 xl:gap-10",
-                    feature.imagePosition === "right" && "lg:flex-row-reverse",
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-brand-bg",
-                      "mx-4 mt-4 sm:mx-5 sm:mt-5 lg:mb-5 lg:aspect-auto lg:min-h-[400px] lg:flex-[1.55] lg:shrink-0 xl:min-h-[440px]",
-                      feature.imagePosition === "left"
-                        ? "lg:ml-5 lg:mt-5"
-                        : "lg:mr-5 lg:mt-5",
-                    )}
-                    aria-hidden={feature.image ? undefined : true}
-                  >
-                    {feature.image ? (
-                      <Image
-                        src={feature.image}
-                        alt={feature.imageAlt ?? ""}
-                        fill
-                        unoptimized
-                        sizes="(max-width: 1024px) 100vw, 62vw"
-                        className={
-                          imageCropClasses[feature.imageCrop ?? "center"]
-                        }
-                      />
-                    ) : null}
-                  </div>
+          <SectionLabel>Features</SectionLabel>
+          <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Professional Results,{" "}
+            <span className="text-brand-link">Intuitive Tools</span>
+          </h2>
+        </div>
+      </ScrollReveal>
 
-                  <div
-                    className={cn(
-                      "flex flex-1 flex-col justify-center gap-4 px-4 pb-4 pt-6 sm:px-5 sm:pb-5 sm:pt-8",
-                      "lg:flex-[0.85] lg:py-10 lg:pt-10",
-                      feature.imagePosition === "left"
-                        ? "lg:pr-10"
-                        : "lg:pl-10 lg:pr-10",
-                    )}
-                  >
-                    <h3 className="font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                      {feature.headline}
-                    </h3>
-                    <p className="text-base leading-relaxed text-white/70">
-                      {feature.description}
-                    </p>
-                    <a
-                      href="#waitlist"
-                      className={cn(
-                        BTN_PRIMARY_SOLID,
-                        "w-fit shrink-0 gap-1 px-3.5 leading-none",
-                      )}
-                    >
-                      <span className="leading-none">{feature.cta}</span>
-                      <Icon
-                        name="ArrowUpRight"
-                        size={16}
-                        className="shrink-0"
-                        aria-hidden
-                      />
-                    </a>
-                  </div>
-                </div>
-              </article>
-            </ScrollRevealItem>
-          ))}
-        </ScrollRevealGroup>
-      </div>
+      <ScrollRevealGroup
+        className="grid grid-cols-1 lg:grid-cols-3"
+        stagger={0.12}
+      >
+        {features.map((feature) => (
+          <ScrollRevealItem
+            key={feature.headline}
+            className={cn(blueprintCol, "flex flex-col")}
+          >
+            <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-brand-border/45 bg-brand-bg">
+              {feature.image ? (
+                <Image
+                  src={feature.image}
+                  alt={feature.imageAlt ?? ""}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className={
+                    imageCropClasses[feature.imageCrop ?? "center"]
+                  }
+                />
+              ) : null}
+            </div>
+
+            <div className="flex flex-1 flex-col gap-4 px-6 py-8 sm:px-8">
+              <h3 className="font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                {feature.headline}
+              </h3>
+              <p className="flex-1 text-sm leading-relaxed text-white/70 sm:text-base">
+                {feature.description}
+              </p>
+              <a
+                href="#waitlist"
+                className={cn(
+                  BTN_PRIMARY_SOLID,
+                  "w-fit shrink-0 gap-1 px-3.5 leading-none",
+                )}
+              >
+                <span className="leading-none">{feature.cta}</span>
+                <Icon
+                  name="ArrowUpRight"
+                  size={16}
+                  className="shrink-0"
+                  aria-hidden
+                />
+              </a>
+            </div>
+          </ScrollRevealItem>
+        ))}
+      </ScrollRevealGroup>
     </div>
   );
 }

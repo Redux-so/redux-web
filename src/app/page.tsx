@@ -1,45 +1,68 @@
+import BlueprintFrame from "@/src/components/BlueprintFrame";
 import FAQ from "@/src/components/FAQ";
 import Features from "@/src/components/Features";
 import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
 import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
-import Navbar, { NAV_CLEARANCE_CLASS } from "@/src/components/Navbar";
+import Navbar, {
+  NAV_SCROLL_OFFSET_CLASS,
+  NAV_SPACER_CLASS,
+} from "@/src/components/Navbar";
 import Showcase from "@/src/components/Showcase";
 import WaitlistSection from "@/src/components/WaitlistSection";
+import { blueprintRow } from "@/lib/blueprint-grid";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
     <main
       id="home"
-      className={cn(
-        "overflow-x-hidden bg-brand-bg text-white",
-        NAV_CLEARANCE_CLASS,
-      )}
+      className="bg-brand-bg px-4 text-white sm:px-6 lg:px-8"
     >
       <Navbar />
-      <section className="relative overflow-hidden bg-hero-showcase-glow">
-        <HeroParticleBackground />
-        <div className="relative z-[1]">
+      <BlueprintFrame>
+        <div aria-hidden className={NAV_SPACER_CLASS} />
+
+        <section
+          className={cn(
+            blueprintRow,
+            "relative overflow-hidden bg-hero-showcase-glow",
+          )}
+        >
+          <HeroParticleBackground />
           <Hero />
+        </section>
+
+        <section
+          className={cn(
+            blueprintRow,
+            "relative overflow-hidden bg-hero-showcase-glow",
+          )}
+        >
           <Showcase />
-        </div>
-      </section>
-      <MarqueeStrip />
-      <section
-        aria-label="Product information"
-        className="bg-hero-showcase-glow"
-      >
-        <section id="features">
+        </section>
+
+        <MarqueeStrip />
+
+        <section
+          id="features"
+          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS)}
+        >
           <Features />
         </section>
-        <section id="faq" className="scroll-mt-12">
+
+        <section
+          id="faq"
+          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS)}
+        >
           <FAQ />
         </section>
-      </section>
-      <WaitlistSection />
-      <Footer />
+
+        <WaitlistSection />
+
+        <Footer />
+      </BlueprintFrame>
     </main>
   );
 }

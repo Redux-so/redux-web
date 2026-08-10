@@ -1,5 +1,7 @@
 "use client";
 
+import { Plus } from "@untitledui/icons";
+
 import {
   Accordion,
   AccordionContent,
@@ -8,6 +10,7 @@ import {
 } from "@/components/ui/accordion-1";
 import SectionLabel from "@/src/components/SectionLabel";
 import { ScrollReveal } from "@/lib/scroll-motion";
+import { cn } from "@/lib/utils";
 
 const faqs = [
   {
@@ -44,29 +47,29 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <div className="px-4 pb-20 pt-8 sm:px-6 sm:pb-24 sm:pt-10 lg:px-8">
-      <div className="mx-auto max-w-3xl">
-        <ScrollReveal>
-          <div className="flex flex-col items-center gap-3">
-            <SectionLabel>FAQ</SectionLabel>
-            <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Questions? We&apos;ve got{" "}
-              <span className="text-brand-link">answers</span>
-            </h2>
-          </div>
-        </ScrollReveal>
+    <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <ScrollReveal
+        className={cn(
+          "flex flex-col gap-3 border-b border-brand-border/45 px-6 py-10 sm:px-8 sm:py-12 lg:border-b-0 lg:border-r lg:px-10",
+        )}
+      >
+        <SectionLabel>FAQ</SectionLabel>
+        <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          Questions? We&apos;ve got{" "}
+          <span className="text-brand-link">answers</span>
+        </h2>
+      </ScrollReveal>
 
-        <ScrollReveal className="mt-8 sm:mt-10">
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
-              <AccordionItem key={faq.question} value={`faq-${index}`}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </ScrollReveal>
-      </div>
+      <ScrollReveal className="px-6 py-6 sm:px-8 lg:px-10 lg:py-10">
+        <Accordion type="single" collapsible className="w-full">
+          {faqs.map((faq, index) => (
+            <AccordionItem key={faq.question} value={`faq-${index}`}>
+              <AccordionTrigger icon={Plus}>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </ScrollReveal>
     </div>
   );
 }

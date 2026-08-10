@@ -4,13 +4,14 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useState } from "react";
 
 import HeroParticleBackground from "@/src/components/HeroParticleBackground";
+import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { blueprintRow } from "@/lib/blueprint-grid";
 import {
   EASE_OUT,
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
-import { SECTION_DIVIDE } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -80,13 +81,14 @@ export default function WaitlistSection() {
     <section
       id="waitlist"
       className={cn(
-        SECTION_DIVIDE,
-        "relative overflow-hidden bg-waitlist-spotlight px-4 py-20 sm:px-6 sm:py-24 lg:px-8",
+        blueprintRow,
+        NAV_SCROLL_OFFSET_CLASS,
+        "relative overflow-hidden bg-waitlist-spotlight",
       )}
     >
       <HeroParticleBackground />
       <ScrollRevealGroup
-        className="relative z-[1] mx-auto max-w-2xl text-center"
+        className="relative z-[1] mx-auto max-w-2xl px-6 py-16 text-center sm:px-8 sm:py-20 lg:px-10 lg:py-24"
         stagger={0.12}
       >
         <ScrollRevealItem>

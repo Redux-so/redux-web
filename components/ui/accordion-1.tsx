@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ChevronDown } from "@untitledui/icons";
+import { Minus, Plus } from "@untitledui/icons";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
@@ -26,7 +26,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn("border-b border-brand-border last:border-b-0", className)}
+      className={cn("border-b border-brand-border/45 last:border-b-0", className)}
       {...props}
     />
   );
@@ -35,8 +35,11 @@ function AccordionItem({
 function AccordionTrigger({
   className,
   children,
+  icon: Icon = Plus,
   ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
+}: React.ComponentProps<typeof AccordionPrimitive.Trigger> & {
+  icon?: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+}) {
   return (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
@@ -48,9 +51,13 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <ChevronDown
+        <Icon
           aria-hidden
-          className="size-5 shrink-0 text-white/70 transition-transform duration-200 group-data-[state=open]/accordion-trigger:rotate-180"
+          className="size-5 shrink-0 text-white/70 group-data-[state=open]/accordion-trigger:hidden"
+        />
+        <Minus
+          aria-hidden
+          className="hidden size-5 shrink-0 text-white/70 group-data-[state=open]/accordion-trigger:block"
         />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>

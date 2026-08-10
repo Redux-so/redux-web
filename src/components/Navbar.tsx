@@ -12,6 +12,7 @@ import {
   BTN_OUTLINE_SOLID,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
+import { blueprintRow } from "@/lib/blueprint-grid";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
@@ -21,21 +22,27 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ] as const;
 
-/** Top padding for page content below the floating fixed pill nav. */
-export const NAV_CLEARANCE_CLASS =
-  "pt-[6.75rem] sm:pt-[7.5rem] md:pt-[7.25rem] lg:pt-[7.75rem]";
+/** Scroll margin for in-page anchor targets below the fixed nav bar. */
+export const NAV_SCROLL_OFFSET_CLASS = "scroll-mt-14 sm:scroll-mt-[3.75rem]";
 
-const PILL_SHELL =
-  "rounded-full border border-[#2e2e2e] bg-[#121212]/75 backdrop-blur-md shadow-lg";
+/** Reserves space for the fixed nav bar row inside the blueprint frame. */
+export const NAV_SPACER_CLASS = "h-14 shrink-0 sm:h-[3.75rem]";
+
+/** Matches `main` horizontal inset so the bar aligns with BlueprintFrame. */
+const NAV_FIXED_INSET =
+  "fixed inset-x-0 top-0 z-50 px-4 sm:px-6 lg:px-8";
+
+const NAV_SHELL =
+  "bg-[#121212]/75 backdrop-blur-md";
 
 const PANEL_TRANSITION = { duration: 0.3, ease: EASE_OUT };
 const ICON_TRANSITION = { duration: 0.18, ease: EASE_OUT };
 const ITEM_TRANSITION = { duration: 0.28, ease: EASE_OUT };
 
 const menuPanelVariants: Variants = {
-  hidden: { opacity: 0, y: -8 },
-  visible: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -8 },
+  hidden: { opacity: 0, height: 0 },
+  visible: { opacity: 1, height: "auto" },
+  exit: { opacity: 0, height: 0 },
 };
 
 const menuPanelReducedVariants: Variants = {
@@ -102,143 +109,143 @@ export default function Navbar() {
     : PANEL_TRANSITION;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5 lg:px-6 lg:pt-6">
-      <div className="flex w-[calc(100%-1rem)] max-w-full flex-col items-stretch md:w-fit">
-        <div
-          className={cn(
-            "relative flex w-full max-w-full items-center justify-between px-4 py-2",
-            "md:inline-flex md:w-fit md:max-w-full md:gap-16 md:px-5 md:py-2.5",
-            PILL_SHELL,
-          )}
-        >
-          <div className="flex items-center gap-4 md:gap-5">
-            <a
-              href="#home"
-              onClick={scrollToTop}
-              className="group inline-flex shrink-0 items-center rounded-md"
-              aria-label="Back to top"
-            >
-              <Image
-                src="/redux-logo.png"
-                alt="Redux"
-                width={24}
-                height={24}
-                className="h-6 w-6 shrink-0 object-contain transition-[filter] duration-200 group-hover:brightness-75"
-                priority
-              />
-            </a>
+    <header className={NAV_FIXED_INSET}>
+      <div
+        className={cn(
+          "mx-auto w-full max-w-6xl",
+          blueprintRow,
+          NAV_SHELL,
+        )}
+      >
+      <div className="flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-3.5 lg:px-8">
+        <div className="flex min-w-0 items-center gap-4 md:gap-5">
+          <a
+            href="#home"
+            onClick={scrollToTop}
+            className="group inline-flex shrink-0 items-center rounded-md"
+            aria-label="Back to top"
+          >
+            <Image
+              src="/redux-logo.png"
+              alt="Redux"
+              width={24}
+              height={24}
+              className="h-6 w-6 shrink-0 object-contain transition-[filter] duration-200 group-hover:brightness-75"
+              priority
+            />
+          </a>
 
-            <nav
-              className="hidden items-center gap-5 md:flex"
-              aria-label="Main navigation"
-            >
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="whitespace-nowrap text-[13px] text-white/70 transition-colors hover:text-white"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-
-          <div className="flex shrink-0 items-center gap-2 md:gap-2">
-            <a
-              href="https://discord.gg/gzHrud9nee"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Discord"
-              className={cn(
-                BTN_OUTLINE_SOLID,
-                "hidden aspect-square h-8 w-8 min-w-8 max-w-8 shrink-0 !p-0 md:inline-flex",
-              )}
-            >
-              <DiscordIcon className="size-4 shrink-0" />
-            </a>
-            <a
-              href="#waitlist"
-              className={cn(BTN_PRIMARY_SOLID, "h-8 shrink-0 px-3 text-xs")}
-            >
-              Join Waitlist
-            </a>
-            <button
-              type="button"
-              className="relative inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-white md:hidden"
-              aria-expanded={mobileOpen}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              onClick={() => setMobileOpen((open) => !open)}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                {mobileOpen ? (
-                  <motion.span
-                    key="close"
-                    className="absolute inset-0 inline-flex items-center justify-center"
-                    initial={
-                      prefersReducedMotion
-                        ? { opacity: 0 }
-                        : { opacity: 0, rotate: -90 }
-                    }
-                    animate={
-                      prefersReducedMotion
-                        ? { opacity: 1 }
-                        : { opacity: 1, rotate: 0 }
-                    }
-                    exit={
-                      prefersReducedMotion
-                        ? { opacity: 0 }
-                        : { opacity: 0, rotate: 90 }
-                    }
-                    transition={ICON_TRANSITION}
-                  >
-                    <XClose className="size-4" />
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="menu"
-                    className="absolute inset-0 inline-flex items-center justify-center"
-                    initial={
-                      prefersReducedMotion
-                        ? { opacity: 0 }
-                        : { opacity: 0, rotate: 90 }
-                    }
-                    animate={
-                      prefersReducedMotion
-                        ? { opacity: 1 }
-                        : { opacity: 1, rotate: 0 }
-                    }
-                    exit={
-                      prefersReducedMotion
-                        ? { opacity: 0 }
-                        : { opacity: 0, rotate: -90 }
-                    }
-                    transition={ICON_TRANSITION}
-                  >
-                    <Menu01 className="size-4" />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
-          </div>
+          <nav
+            className="hidden items-center gap-5 md:flex"
+            aria-label="Main navigation"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="whitespace-nowrap text-[13px] text-white/70 transition-colors hover:text-white"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
         </div>
 
-        <AnimatePresence initial={false}>
-          {mobileOpen ? (
-            <motion.div
-              key="mobile-menu"
-              className={cn(
-                "mt-2 w-full overflow-hidden px-4 py-3 md:hidden",
-                PILL_SHELL,
-                "rounded-3xl",
+        <div className="flex shrink-0 items-center gap-2">
+          <a
+            href="https://discord.gg/gzHrud9nee"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Discord"
+            className={cn(
+              BTN_OUTLINE_SOLID,
+              "hidden aspect-square h-8 w-8 min-w-8 max-w-8 shrink-0 !p-0 md:inline-flex",
+            )}
+          >
+            <DiscordIcon className="size-4 shrink-0" />
+          </a>
+          <a
+            href="#waitlist"
+            className={cn(BTN_PRIMARY_SOLID, "h-8 shrink-0 px-3 text-xs")}
+          >
+            Join Waitlist
+          </a>
+          <button
+            type="button"
+            className="relative inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-white md:hidden"
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((open) => !open)}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {mobileOpen ? (
+                <motion.span
+                  key="close"
+                  className="absolute inset-0 inline-flex items-center justify-center"
+                  initial={
+                    prefersReducedMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, rotate: -90 }
+                  }
+                  animate={
+                    prefersReducedMotion
+                      ? { opacity: 1 }
+                      : { opacity: 1, rotate: 0 }
+                  }
+                  exit={
+                    prefersReducedMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, rotate: 90 }
+                  }
+                  transition={ICON_TRANSITION}
+                >
+                  <XClose className="size-4" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  className="absolute inset-0 inline-flex items-center justify-center"
+                  initial={
+                    prefersReducedMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, rotate: 90 }
+                  }
+                  animate={
+                    prefersReducedMotion
+                      ? { opacity: 1 }
+                      : { opacity: 1, rotate: 0 }
+                  }
+                  exit={
+                    prefersReducedMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, rotate: -90 }
+                  }
+                  transition={ICON_TRANSITION}
+                >
+                  <Menu01 className="size-4" />
+                </motion.span>
               )}
-              variants={panelVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              transition={panelTransition}
-            >
+            </AnimatePresence>
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence initial={false}>
+        {mobileOpen ? (
+          <motion.div
+            key="mobile-menu"
+            className={cn(
+              "overflow-hidden border-t border-brand-border/45 md:hidden",
+              NAV_SHELL,
+            )}
+            variants={panelVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={panelTransition}
+          >
             <motion.div
+              className="px-4 py-3 sm:px-6"
               variants={
                 prefersReducedMotion ? menuListReducedVariants : menuListVariants
               }
@@ -278,8 +285,8 @@ export default function Navbar() {
               </div>
             </motion.div>
           </motion.div>
-          ) : null}
-        </AnimatePresence>
+        ) : null}
+      </AnimatePresence>
       </div>
     </header>
   );
