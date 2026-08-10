@@ -213,6 +213,12 @@ html {
 
 .bg-waitlist-spotlight {
   background-color: #161616;
+  background-image: radial-gradient(
+    ellipse 95% 75% at 50% -15%,
+    #242424 0%,
+    #1d1d1d 30%,
+    #161616 65%
+  );
 }
 
 .bg-hero-showcase-glow {

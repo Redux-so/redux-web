@@ -83,7 +83,7 @@ export default function WaitlistSection() {
       className={cn(
         blueprintRow,
         NAV_SCROLL_OFFSET_CLASS,
-        "relative overflow-hidden bg-brand-bg",
+        "relative overflow-hidden bg-waitlist-spotlight",
       )}
     >
       <HeroParticleBackground />

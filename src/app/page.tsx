@@ -24,7 +24,7 @@ export default function Home() {
       <BlueprintFrame>
         <div aria-hidden className={NAV_SPACER_CLASS} />
 
-        <section className={cn(blueprintRow, "relative overflow-hidden bg-brand-bg")}>
+        <section className={cn(blueprintRow, "relative overflow-hidden bg-waitlist-spotlight")}>
           <HeroParticleBackground />
           <Hero />
         </section>
