@@ -24,8 +24,8 @@ type Feature = {
 };
 
 const imageCropClasses = {
-  left: "object-cover object-left-top",
-  right: "object-cover object-right-top",
+  left: "object-cover object-center object-top lg:object-left-top",
+  right: "object-cover object-center object-top lg:object-right-top",
   center: "object-cover object-center object-top",
 } as const;
 
@@ -72,7 +72,7 @@ export default function Features() {
         <div
           className={cn(
             blueprintBorderB,
-            "flex flex-col items-center gap-3 px-6 py-10 sm:px-8 sm:py-12 lg:px-10",
+            "flex flex-col items-center gap-3 px-4 py-10 sm:px-8 sm:py-12 lg:px-10",
           )}
         >
           <SectionLabel className="px-2">Features</SectionLabel>
@@ -107,7 +107,7 @@ export default function Features() {
               ) : null}
             </div>
 
-            <div className="flex flex-1 flex-col gap-4 px-6 py-8 sm:px-8">
+            <div className="flex flex-1 flex-col gap-4 px-4 py-8 sm:px-8">
               <h3 className="font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
                 {feature.headline}
               </h3>

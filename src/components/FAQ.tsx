@@ -46,7 +46,7 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <ScrollReveal className="px-6 py-10 sm:px-8 sm:py-12 lg:px-10">
+    <ScrollReveal className="px-4 py-10 sm:px-8 sm:py-12 lg:px-10">
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 sm:gap-10">
         <div className="flex flex-col items-center gap-3 text-center">
           <SectionLabel>FAQ</SectionLabel>

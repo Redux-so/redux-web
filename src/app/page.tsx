@@ -11,14 +11,14 @@ import Navbar, {
 } from "@/src/components/Navbar";
 import Showcase from "@/src/components/Showcase";
 import WaitlistSection from "@/src/components/WaitlistSection";
-import { blueprintRow } from "@/lib/blueprint-grid";
+import { blueprintRow, BLUEPRINT_PAGE_INSET } from "@/lib/blueprint-grid";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
     <main
       id="home"
-      className="bg-brand-bg px-4 text-white sm:px-6 lg:px-8"
+      className={cn("overflow-x-hidden bg-brand-bg text-white", BLUEPRINT_PAGE_INSET)}
     >
       <Navbar />
       <BlueprintFrame>

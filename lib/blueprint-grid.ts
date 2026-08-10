@@ -7,6 +7,9 @@ export const BLUEPRINT_LINE = BLUEPRINT_BORDER;
 /** Site document max width — slightly wider than the previous max-w-6xl (72rem). */
 export const BLUEPRINT_MAX_WIDTH = "max-w-[76rem]";
 
+/** Horizontal page inset — flush to viewport edges on mobile, inset from sm up. */
+export const BLUEPRINT_PAGE_INSET = "px-0 sm:px-6 lg:px-8";
+
 export const BLUEPRINT_FRAME = BLUEPRINT_LINE;
 
 export const blueprintRow = `border-b ${BLUEPRINT_BORDER}`;

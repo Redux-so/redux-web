@@ -56,7 +56,7 @@ export default function MarqueeStrip() {
   return (
     <section className={cn(blueprintRow, "bg-brand-bg")}>
       <ScrollRevealGroup
-        className="flex w-full flex-col px-6 py-5 sm:px-8 sm:py-6 lg:px-10"
+        className="flex w-full flex-col px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
         stagger={0.1}
       >
         <ScrollRevealItem>

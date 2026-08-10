@@ -88,7 +88,7 @@ export default function WaitlistSection() {
     >
       <HeroParticleBackground />
       <ScrollRevealGroup
-        className="relative z-[1] mx-auto max-w-2xl px-6 py-16 text-center sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+        className="relative z-[1] mx-auto max-w-2xl px-4 py-16 text-center sm:px-8 sm:py-20 lg:px-10 lg:py-24"
         stagger={0.12}
       >
         <ScrollRevealItem>

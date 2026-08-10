@@ -70,7 +70,7 @@ export default function Footer() {
         stagger={0.1}
       >
         <ScrollRevealItem
-          className={cn(blueprintCol, "flex flex-col items-start gap-5 px-6 py-10 sm:px-8 lg:px-10")}
+          className={cn(blueprintCol, "flex flex-col items-start gap-5 px-4 py-10 sm:px-8 lg:px-10")}
         >
           <Image
             src="/redux-logo.png"
@@ -85,7 +85,7 @@ export default function Footer() {
         </ScrollRevealItem>
 
         <ScrollRevealItem
-          className={cn(blueprintCol, "px-6 py-10 sm:px-8 lg:px-10")}
+          className={cn(blueprintCol, "px-4 py-10 sm:px-8 lg:px-10")}
         >
           <p className="text-sm font-medium text-white">Navigation</p>
           <ul className="mt-4 space-y-3">
@@ -103,7 +103,7 @@ export default function Footer() {
         </ScrollRevealItem>
 
         <ScrollRevealItem
-          className={cn(blueprintCol, "px-6 py-10 sm:px-8 lg:px-10")}
+          className={cn(blueprintCol, "px-4 py-10 sm:px-8 lg:px-10")}
         >
           <p className="text-sm font-medium text-white">Legal</p>
           <ul className="mt-4 space-y-3">
@@ -123,7 +123,7 @@ export default function Footer() {
 
       <ScrollReveal variant="fadeIn">
         <div className={blueprintBorderT}>
-          <div className="flex items-center justify-between gap-4 px-6 py-6 sm:px-8 lg:px-10">
+          <div className="flex items-center justify-between gap-4 px-4 py-6 sm:px-8 lg:px-10">
             <p className="text-sm text-white/50">
               © Redux 2026. All rights reserved.
             </p>

@@ -12,7 +12,7 @@ import {
   BTN_OUTLINE_SOLID,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
-import { BLUEPRINT_FRAME, BLUEPRINT_MAX_WIDTH } from "@/lib/blueprint-grid";
+import { BLUEPRINT_FRAME, BLUEPRINT_MAX_WIDTH, BLUEPRINT_PAGE_INSET } from "@/lib/blueprint-grid";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
@@ -29,8 +29,10 @@ export const NAV_SCROLL_OFFSET_CLASS = "scroll-mt-[3.75rem] sm:scroll-mt-16";
 export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 
 /** Matches `main` horizontal inset so the bar aligns with BlueprintFrame. */
-const NAV_FIXED_INSET =
-  "fixed inset-x-0 top-0 z-50 px-4 sm:px-6 lg:px-8";
+const NAV_FIXED_INSET = cn(
+  "fixed inset-x-0 top-0 z-50",
+  BLUEPRINT_PAGE_INSET,
+);
 
 const NAV_SHELL_SOLID = "bg-[#161616]";
 const NAV_SHELL_GLASS = "bg-[#161616]/75 backdrop-blur-md";
