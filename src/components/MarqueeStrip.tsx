@@ -54,7 +54,7 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 
 export default function MarqueeStrip() {
   return (
-    <section className={cn(blueprintRow, "bg-marquee-gradient")}>
+    <section className={cn(blueprintRow, "bg-brand-bg")}>
       <ScrollRevealGroup
         className="flex w-full flex-col px-6 py-5 sm:px-8 sm:py-6 lg:px-10"
         stagger={0.1}
@@ -66,7 +66,7 @@ export default function MarqueeStrip() {
         </ScrollRevealItem>
 
         <ScrollRevealItem variant="fadeIn" className="w-full">
-          <div className="marquee-edge-blur overflow-hidden">
+          <div className="overflow-hidden">
             <div className="animate-marquee flex w-max items-center">
               <MarqueeTrack trackKey="a" />
               <MarqueeTrack trackKey="b" aria-hidden />

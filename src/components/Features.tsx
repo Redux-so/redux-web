@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Icon } from "@/components/shared/Icon";
 import SectionLabel from "@/src/components/SectionLabel";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { blueprintCol } from "@/lib/blueprint-grid";
+import { blueprintBorderB, blueprintCol } from "@/lib/blueprint-grid";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -71,7 +71,8 @@ export default function Features() {
       <ScrollReveal>
         <div
           className={cn(
-            "flex flex-col items-center gap-3 border-b border-brand-border/45 px-6 py-10 sm:px-8 sm:py-12 lg:px-10",
+            blueprintBorderB,
+            "flex flex-col items-center gap-3 px-6 py-10 sm:px-8 sm:py-12 lg:px-10",
           )}
         >
           <SectionLabel>Features</SectionLabel>
@@ -91,7 +92,7 @@ export default function Features() {
             key={feature.headline}
             className={cn(blueprintCol, "flex flex-col")}
           >
-            <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-brand-border/45 bg-brand-bg">
+            <div className={cn("relative aspect-[16/10] w-full overflow-hidden bg-brand-bg", blueprintBorderB)}>
               {feature.image ? (
                 <Image
                   src={feature.image}

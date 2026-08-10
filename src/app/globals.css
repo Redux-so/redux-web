@@ -183,43 +183,6 @@ html {
   will-change: transform;
 }
 
-.marquee-edge-blur {
-  position: relative;
-}
-
-.marquee-edge-blur::before,
-.marquee-edge-blur::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 10;
-  width: min(12rem, 28%);
-  pointer-events: none;
-}
-
-.marquee-edge-blur::before {
-  left: 0;
-  background: linear-gradient(
-    to right,
-    var(--marquee-fade-base) 0%,
-    color-mix(in srgb, var(--marquee-fade-base) 72%, var(--marquee-fade-mid)) 22%,
-    color-mix(in srgb, var(--marquee-fade-base) 38%, transparent) 48%,
-    transparent 100%
-  );
-}
-
-.marquee-edge-blur::after {
-  right: 0;
-  background: linear-gradient(
-    to left,
-    var(--marquee-fade-base) 0%,
-    color-mix(in srgb, var(--marquee-fade-base) 72%, var(--marquee-fade-mid)) 22%,
-    color-mix(in srgb, var(--marquee-fade-base) 38%, transparent) 48%,
-    transparent 100%
-  );
-}
-
 .editor-showcase,
 .editor-showcase * {
   box-sizing: border-box;
@@ -250,49 +213,14 @@ html {
 
 .bg-waitlist-spotlight {
   background-color: #161616;
-  background-image: radial-gradient(
-    ellipse 110% 85% at 50% -15%,
-    #2e2e2e 0%,
-    #161616 32%,
-    #161616 68%
-  );
 }
 
 .bg-hero-showcase-glow {
   background-color: #161616;
-  background-image:
-    radial-gradient(
-      ellipse 70% 55% at 0% 0%,
-      color-mix(in srgb, #2e2e2e 36%, transparent) 0%,
-      transparent 58%
-    ),
-    radial-gradient(
-      ellipse 65% 50% at 100% 0%,
-      color-mix(in srgb, #2e2e2e 30%, transparent) 0%,
-      transparent 54%
-    ),
-    radial-gradient(
-      ellipse 75% 60% at 100% 100%,
-      color-mix(in srgb, #3a3a3a 33%, transparent) 0%,
-      transparent 58%
-    ),
-    radial-gradient(
-      ellipse 55% 45% at 0% 100%,
-      color-mix(in srgb, #3a3a3a 26%, transparent) 0%,
-      transparent 54%
-    );
 }
 
 .bg-marquee-gradient {
-  --marquee-fade-base: #161616;
-  --marquee-fade-mid: #1a1a1a;
   background-color: #161616;
-  background-image: radial-gradient(
-    ellipse 38% 105% at 50% 50%,
-    #1f1f1f 0%,
-    #1a1a1a 32%,
-    #161616 52%
-  );
 }
 
 @layer base {

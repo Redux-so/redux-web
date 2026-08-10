@@ -3,7 +3,6 @@ import FAQ from "@/src/components/FAQ";
 import Features from "@/src/components/Features";
 import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
-import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
 import Navbar, {
   NAV_SCROLL_OFFSET_CLASS,
@@ -24,22 +23,11 @@ export default function Home() {
       <BlueprintFrame>
         <div aria-hidden className={NAV_SPACER_CLASS} />
 
-        <section
-          className={cn(
-            blueprintRow,
-            "relative overflow-hidden bg-hero-showcase-glow",
-          )}
-        >
-          <HeroParticleBackground />
+        <section className={cn(blueprintRow, "bg-brand-bg")}>
           <Hero />
         </section>
 
-        <section
-          className={cn(
-            blueprintRow,
-            "relative overflow-hidden bg-hero-showcase-glow",
-          )}
-        >
+        <section className={cn(blueprintRow, "bg-brand-bg")}>
           <Showcase />
         </section>
 
@@ -47,14 +35,14 @@ export default function Home() {
 
         <section
           id="features"
-          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS)}
+          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
         >
           <Features />
         </section>
 
         <section
           id="faq"
-          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS)}
+          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
         >
           <FAQ />
         </section>

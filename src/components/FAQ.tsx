@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
 import SectionLabel from "@/src/components/SectionLabel";
+import { blueprintBorderB } from "@/lib/blueprint-grid";
 import { ScrollReveal } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
@@ -50,7 +51,8 @@ export default function FAQ() {
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
       <ScrollReveal
         className={cn(
-          "flex flex-col gap-3 border-b border-brand-border/45 px-6 py-10 sm:px-8 sm:py-12 lg:border-b-0 lg:border-r lg:px-10",
+          blueprintBorderB,
+          "flex flex-col gap-3 px-6 py-10 sm:px-8 sm:py-12 lg:border-b-0 lg:border-r lg:border-[#2e2e2e] lg:px-10",
         )}
       >
         <SectionLabel>FAQ</SectionLabel>

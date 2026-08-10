@@ -13,7 +13,7 @@ export default function BlueprintFrame({
   return (
     <div
       className={cn(
-        "mx-auto w-full border",
+        "mx-auto w-full border-x border-b",
         BLUEPRINT_MAX_WIDTH,
         BLUEPRINT_FRAME,
         className,

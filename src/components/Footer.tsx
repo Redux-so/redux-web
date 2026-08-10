@@ -9,7 +9,7 @@ import {
   LinkedinIcon,
   XSocialIcon,
 } from "@/lib/brand-social-icons";
-import { blueprintCol } from "@/lib/blueprint-grid";
+import { blueprintBorderT, blueprintCol } from "@/lib/blueprint-grid";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -146,7 +146,7 @@ export default function Footer() {
       </ScrollRevealGroup>
 
       <ScrollReveal variant="fadeIn">
-        <div className="border-t border-brand-border/45">
+        <div className={blueprintBorderT}>
           <div className="px-6 py-6 sm:px-8 lg:px-10">
             <p className="text-sm text-white/50">
               © Redux 2026. All rights reserved.

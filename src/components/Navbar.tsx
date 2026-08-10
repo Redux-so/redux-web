@@ -12,7 +12,7 @@ import {
   BTN_OUTLINE_SOLID,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
-import { blueprintRow, BLUEPRINT_MAX_WIDTH } from "@/lib/blueprint-grid";
+import { BLUEPRINT_FRAME, BLUEPRINT_MAX_WIDTH } from "@/lib/blueprint-grid";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
@@ -32,8 +32,7 @@ export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 const NAV_FIXED_INSET =
   "fixed inset-x-0 top-0 z-50 px-4 sm:px-6 lg:px-8";
 
-const NAV_SHELL =
-  "bg-[#121212]/75 backdrop-blur-md";
+const NAV_SHELL = "bg-[#161616]";
 
 /** Shared action button height in the desktop nav bar. */
 const NAV_ACTION_HEIGHT =
@@ -120,9 +119,9 @@ export default function Navbar() {
     <header className={NAV_FIXED_INSET}>
       <div
         className={cn(
-          "mx-auto w-full",
+          "mx-auto w-full border",
           BLUEPRINT_MAX_WIDTH,
-          blueprintRow,
+          BLUEPRINT_FRAME,
           NAV_SHELL,
         )}
       >
@@ -247,7 +246,7 @@ export default function Navbar() {
           <motion.div
             key="mobile-menu"
             className={cn(
-              "overflow-hidden border-t border-brand-border/45 md:hidden",
+              "overflow-hidden border-t border-[#2e2e2e] md:hidden",
               NAV_SHELL,
             )}
             variants={panelVariants}
