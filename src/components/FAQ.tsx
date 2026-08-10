@@ -9,9 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
 import SectionLabel from "@/src/components/SectionLabel";
-import { blueprintBorderB } from "@/lib/blueprint-grid";
 import { ScrollReveal } from "@/lib/scroll-motion";
-import { cn } from "@/lib/utils";
 
 const faqs = [
   {
@@ -48,21 +46,16 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-      <ScrollReveal
-        className={cn(
-          blueprintBorderB,
-          "flex flex-col gap-3 px-6 py-10 sm:px-8 sm:py-12 lg:border-b-0 lg:border-r lg:border-[#2e2e2e] lg:px-10",
-        )}
-      >
-        <SectionLabel>FAQ</SectionLabel>
-        <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-          Questions? We&apos;ve got{" "}
-          <span className="text-brand-link">answers</span>
-        </h2>
-      </ScrollReveal>
+    <ScrollReveal className="px-6 py-10 sm:px-8 sm:py-12 lg:px-10">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 sm:gap-10">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <SectionLabel>FAQ</SectionLabel>
+          <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Questions? We&apos;ve got{" "}
+            <span className="text-brand-link">answers</span>
+          </h2>
+        </div>
 
-      <ScrollReveal className="px-6 py-6 sm:px-8 lg:px-10 lg:py-10">
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={faq.question} value={`faq-${index}`}>
@@ -71,7 +64,7 @@ export default function FAQ() {
             </AccordionItem>
           ))}
         </Accordion>
-      </ScrollReveal>
-    </div>
+      </div>
+    </ScrollReveal>
   );
 }
