@@ -2,7 +2,7 @@
 
 import { Menu01, XClose } from "@untitledui/icons";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 
 import { DiscordIcon } from "@/lib/brand-social-icons";
@@ -32,7 +32,10 @@ export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 const NAV_FIXED_INSET =
   "fixed inset-x-0 top-0 z-50 px-4 sm:px-6 lg:px-8";
 
-const NAV_SHELL = "bg-[#161616]";
+const NAV_SHELL_SOLID = "bg-[#161616]";
+const NAV_SHELL_GLASS = "bg-[#161616]/75 backdrop-blur-md";
+const NAV_SHELL_TRANSITION =
+  "transition-[background-color,backdrop-filter] duration-200";
 
 /** Shared action button height in the desktop nav bar. */
 const NAV_ACTION_HEIGHT =
@@ -91,7 +94,21 @@ const menuItemReducedVariants: Variants = {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const updateScrollState = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, []);
+
+  const navShellClass = isScrolled ? NAV_SHELL_GLASS : NAV_SHELL_SOLID;
 
   const closeMobileMenu = () => setMobileOpen(false);
 
@@ -122,7 +139,8 @@ export default function Navbar() {
           "mx-auto w-full border",
           BLUEPRINT_MAX_WIDTH,
           BLUEPRINT_FRAME,
-          NAV_SHELL,
+          NAV_SHELL_TRANSITION,
+          navShellClass,
         )}
       >
       <div className="relative flex w-full items-center justify-between gap-4 px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8">
@@ -247,7 +265,8 @@ export default function Navbar() {
             key="mobile-menu"
             className={cn(
               "overflow-hidden border-t border-[#2e2e2e] md:hidden",
-              NAV_SHELL,
+              NAV_SHELL_TRANSITION,
+              navShellClass,
             )}
             variants={panelVariants}
             initial="hidden"
