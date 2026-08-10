@@ -6,12 +6,10 @@ import EditorShowcase from "./EditorShowcase";
 
 const DESIGN_WIDTH = 1400;
 const DESIGN_HEIGHT = 820;
-/** Cap display size on large viewports; internal layout stays at DESIGN_* and scales uniformly. */
-const MAX_SCALE = 0.82;
 
 function computeScale(containerWidth: number) {
   if (containerWidth === 0) return 1;
-  return Math.min(containerWidth / DESIGN_WIDTH, MAX_SCALE);
+  return containerWidth / DESIGN_WIDTH;
 }
 
 export default function EditorShowcaseScaler() {
@@ -49,7 +47,7 @@ export default function EditorShowcaseScaler() {
   return (
     <div ref={containerRef} className="w-full">
       <div
-        className="relative mx-auto overflow-hidden border border-brand-border/45 shadow-none"
+        className="relative overflow-hidden"
         style={{ width: scaledWidth, height: scaledHeight }}
       >
         <div
