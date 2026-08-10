@@ -149,7 +149,7 @@ export default function Navbar() {
         <a
           href="#home"
           onClick={scrollToTop}
-          className="group inline-flex shrink-0 items-center rounded-md"
+          className="group inline-flex size-9 shrink-0 items-center justify-center rounded-md"
           aria-label="Back to top"
         >
           <Image
