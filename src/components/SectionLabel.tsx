@@ -9,7 +9,7 @@ export default function SectionLabel({ children, className }: SectionLabelProps)
   return (
     <span
       className={cn(
-        "inline-flex min-w-[7.25rem] items-center justify-center rounded-full border border-brand-border bg-brand-surface-card px-3 py-1",
+        "inline-flex items-center justify-center rounded-full border border-brand-border bg-brand-surface-card px-3 py-1",
         "font-body text-[11px] font-medium uppercase tracking-[0.14em] text-white/55",
         className,
       )}

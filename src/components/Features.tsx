@@ -75,7 +75,7 @@ export default function Features() {
             "flex flex-col items-center gap-3 px-6 py-10 sm:px-8 sm:py-12 lg:px-10",
           )}
         >
-          <SectionLabel>Features</SectionLabel>
+          <SectionLabel className="px-2">Features</SectionLabel>
           <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Professional Results,{" "}
             <span className="text-brand-link">Intuitive Tools</span>
