@@ -12,7 +12,7 @@ import {
   BTN_OUTLINE_SOLID,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
-import { blueprintRow } from "@/lib/blueprint-grid";
+import { blueprintRow, BLUEPRINT_MAX_WIDTH } from "@/lib/blueprint-grid";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
@@ -120,7 +120,8 @@ export default function Navbar() {
     <header className={NAV_FIXED_INSET}>
       <div
         className={cn(
-          "mx-auto w-full max-w-6xl",
+          "mx-auto w-full",
+          BLUEPRINT_MAX_WIDTH,
           blueprintRow,
           NAV_SHELL,
         )}
