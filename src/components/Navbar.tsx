@@ -23,10 +23,10 @@ const navLinks = [
 ] as const;
 
 /** Scroll margin for in-page anchor targets below the fixed nav bar. */
-export const NAV_SCROLL_OFFSET_CLASS = "scroll-mt-14 sm:scroll-mt-[3.75rem]";
+export const NAV_SCROLL_OFFSET_CLASS = "scroll-mt-[3.75rem] sm:scroll-mt-16";
 
 /** Reserves space for the fixed nav bar row inside the blueprint frame. */
-export const NAV_SPACER_CLASS = "h-14 shrink-0 sm:h-[3.75rem]";
+export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 
 /** Matches `main` horizontal inset so the bar aligns with BlueprintFrame. */
 const NAV_FIXED_INSET =
@@ -34,6 +34,14 @@ const NAV_FIXED_INSET =
 
 const NAV_SHELL =
   "bg-[#121212]/75 backdrop-blur-md";
+
+/** Shared action button height in the desktop nav bar. */
+const NAV_ACTION_HEIGHT =
+  "!h-[34px] !min-h-[34px] !max-h-[34px] shrink-0 leading-none";
+
+/** Square icon button — width matches height exactly. */
+const NAV_ICON_BUTTON_SIZE =
+  "!size-[34px] !min-h-[34px] !min-w-[34px] !max-h-[34px] !max-w-[34px] shrink-0";
 
 const PANEL_TRANSITION = { duration: 0.3, ease: EASE_OUT };
 const ICON_TRANSITION = { duration: 0.18, ease: EASE_OUT };
@@ -117,41 +125,39 @@ export default function Navbar() {
           NAV_SHELL,
         )}
       >
-      <div className="flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-3.5 lg:px-8">
-        <div className="flex min-w-0 items-center gap-4 md:gap-5">
-          <a
-            href="#home"
-            onClick={scrollToTop}
-            className="group inline-flex shrink-0 items-center rounded-md"
-            aria-label="Back to top"
-          >
-            <Image
-              src="/redux-logo.png"
-              alt="Redux"
-              width={24}
-              height={24}
-              className="h-6 w-6 shrink-0 object-contain transition-[filter] duration-200 group-hover:brightness-75"
-              priority
-            />
-          </a>
+      <div className="relative flex w-full items-center justify-between gap-4 px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8">
+        <a
+          href="#home"
+          onClick={scrollToTop}
+          className="group inline-flex shrink-0 items-center rounded-md"
+          aria-label="Back to top"
+        >
+          <Image
+            src="/redux-logo.png"
+            alt="Redux"
+            width={28}
+            height={28}
+            className="h-7 w-7 shrink-0 object-contain transition-[filter] duration-200 group-hover:brightness-75"
+            priority
+          />
+        </a>
 
-          <nav
-            className="hidden items-center gap-5 md:flex"
-            aria-label="Main navigation"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="whitespace-nowrap text-[13px] text-white/70 transition-colors hover:text-white"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </div>
+        <nav
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex"
+          aria-label="Main navigation"
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="whitespace-nowrap text-sm text-white/70 transition-colors hover:text-white"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2.5">
           <a
             href="https://discord.gg/gzHrud9nee"
             target="_blank"
@@ -159,20 +165,25 @@ export default function Navbar() {
             aria-label="Discord"
             className={cn(
               BTN_OUTLINE_SOLID,
-              "hidden aspect-square h-8 w-8 min-w-8 max-w-8 shrink-0 !p-0 md:inline-flex",
+              NAV_ICON_BUTTON_SIZE,
+              "hidden !p-0 md:inline-flex",
             )}
           >
-            <DiscordIcon className="size-4 shrink-0" />
+            <DiscordIcon className="size-[18px] shrink-0" />
           </a>
           <a
             href="#waitlist"
-            className={cn(BTN_PRIMARY_SOLID, "h-8 shrink-0 px-3 text-xs")}
+            className={cn(
+              BTN_PRIMARY_SOLID,
+              NAV_ACTION_HEIGHT,
+              "px-3.5 text-sm",
+            )}
           >
             Join Waitlist
           </a>
           <button
             type="button"
-            className="relative inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-white md:hidden"
+            className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-lg text-white md:hidden"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((open) => !open)}
@@ -199,7 +210,7 @@ export default function Navbar() {
                   }
                   transition={ICON_TRANSITION}
                 >
-                  <XClose className="size-4" />
+                  <XClose className="size-[18px]" />
                 </motion.span>
               ) : (
                 <motion.span
@@ -222,7 +233,7 @@ export default function Navbar() {
                   }
                   transition={ICON_TRANSITION}
                 >
-                  <Menu01 className="size-4" />
+                  <Menu01 className="size-[18px]" />
                 </motion.span>
               )}
             </AnimatePresence>
@@ -245,7 +256,7 @@ export default function Navbar() {
             transition={panelTransition}
           >
             <motion.div
-              className="px-4 py-3 sm:px-6"
+              className="px-4 py-3.5 sm:px-6"
               variants={
                 prefersReducedMotion ? menuListReducedVariants : menuListVariants
               }
@@ -260,7 +271,7 @@ export default function Navbar() {
                   <motion.div key={link.href} variants={itemVariants}>
                     <a
                       href={link.href}
-                      className="block rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                      className="block rounded-lg px-3 py-2.5 text-[15px] text-white/70 transition-colors hover:bg-white/5 hover:text-white"
                       onClick={closeMobileMenu}
                     >
                       {link.label}
@@ -278,7 +289,7 @@ export default function Navbar() {
                     onClick={closeMobileMenu}
                     className={`${BTN_OUTLINE_BLOCK} inline-flex w-full items-center justify-center gap-1.5`}
                   >
-                    <DiscordIcon className="size-3.5 shrink-0" />
+                    <DiscordIcon className="size-4 shrink-0" />
                     Discord
                   </a>
                 </motion.div>
