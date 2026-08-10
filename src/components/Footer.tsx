@@ -66,7 +66,7 @@ export default function Footer() {
   return (
     <footer>
       <ScrollRevealGroup
-        className="grid grid-cols-1 lg:grid-cols-4"
+        className="grid grid-cols-1 lg:grid-cols-3"
         stagger={0.1}
       >
         <ScrollRevealItem
@@ -119,38 +119,32 @@ export default function Footer() {
             ))}
           </ul>
         </ScrollRevealItem>
-
-        <ScrollRevealItem
-          className={cn(blueprintCol, "px-6 py-10 sm:px-8 lg:px-10")}
-        >
-          <p className="text-sm font-medium text-white">Social</p>
-          <div className="mt-4 flex flex-wrap items-center gap-5">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                aria-label={social.label}
-                target={"external" in social && social.external ? "_blank" : undefined}
-                rel={
-                  "external" in social && social.external
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                className="text-white/50 transition-colors hover:text-white"
-              >
-                <social.icon className="size-5" />
-              </a>
-            ))}
-          </div>
-        </ScrollRevealItem>
       </ScrollRevealGroup>
 
       <ScrollReveal variant="fadeIn">
         <div className={blueprintBorderT}>
-          <div className="px-6 py-6 sm:px-8 lg:px-10">
+          <div className="flex items-center justify-between gap-4 px-6 py-6 sm:px-8 lg:px-10">
             <p className="text-sm text-white/50">
               © Redux 2026. All rights reserved.
             </p>
+            <div className="flex flex-wrap items-center gap-5">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  target={"external" in social && social.external ? "_blank" : undefined}
+                  rel={
+                    "external" in social && social.external
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className="text-white/50 transition-colors hover:text-white"
+                >
+                  <social.icon className="size-5" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </ScrollReveal>
