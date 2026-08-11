@@ -35,7 +35,7 @@ const NAV_FIXED_INSET = cn(
 );
 
 const NAV_SHELL_SOLID = "bg-[#161616]";
-const NAV_SHELL_GLASS = "bg-[#161616]/75 backdrop-blur-md";
+const NAV_SHELL_GLASS = "bg-[#161616]/90 backdrop-blur-md";
 const NAV_SHELL_TRANSITION =
   "transition-[background-color,backdrop-filter] duration-200";
 
@@ -265,11 +265,7 @@ export default function Navbar() {
         {mobileOpen ? (
           <motion.div
             key="mobile-menu"
-            className={cn(
-              "overflow-hidden border-t border-[#2e2e2e] md:hidden",
-              NAV_SHELL_TRANSITION,
-              navShellClass,
-            )}
+            className="overflow-hidden border-t border-[#2e2e2e] md:hidden"
             variants={panelVariants}
             initial="hidden"
             animate="visible"
