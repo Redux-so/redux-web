@@ -66,11 +66,19 @@ export default function MarqueeStrip() {
         </ScrollRevealItem>
 
         <ScrollRevealItem variant="fadeIn" className="w-full">
-          <div className="overflow-hidden">
+          <div className="relative -mx-4 overflow-hidden sm:-mx-8 lg:-mx-10">
             <div className="animate-marquee flex w-max items-center">
               <MarqueeTrack trackKey="a" />
               <MarqueeTrack trackKey="b" aria-hidden />
             </div>
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-brand-bg to-transparent sm:w-14 lg:w-16"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-brand-bg to-transparent sm:w-14 lg:w-16"
+            />
           </div>
         </ScrollRevealItem>
       </ScrollRevealGroup>
