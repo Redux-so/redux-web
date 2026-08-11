@@ -8,14 +8,36 @@ import ShowcaseChatPanel from "./ShowcaseChatPanel";
 import ShowcaseToolbar from "./ShowcaseToolbar";
 import {
   SHOWCASE_ADJUSTMENTS,
+  SHOWCASE_STYLE_MATCH_ADJUSTMENTS,
+  SHOWCASE_STYLE_MATCH_CANVAS_FILTER,
+  SHOWCASE_STYLE_MATCH_CHAT_MESSAGES,
+  SHOWCASE_STYLE_MATCH_PENDING_CHANGES,
   type AdjustmentKey,
   type ShowcaseAdjustments,
 } from "./showcase-data";
 
-export default function EditorShowcase() {
-  const [adjustments, setAdjustments] =
-    useState<ShowcaseAdjustments>({ ...SHOWCASE_ADJUSTMENTS });
+export type EditorShowcaseScenario = "default" | "styleMatch";
+
+type EditorShowcaseProps = {
+  demoMode?: boolean;
+  chatAutoScrollActive?: boolean;
+  scenario?: EditorShowcaseScenario;
+};
+
+export default function EditorShowcase({
+  demoMode = false,
+  chatAutoScrollActive = false,
+  scenario = "default",
+}: EditorShowcaseProps) {
+  const isStyleMatch = scenario === "styleMatch";
+  const [adjustments, setAdjustments] = useState<ShowcaseAdjustments>(() =>
+    isStyleMatch
+      ? { ...SHOWCASE_STYLE_MATCH_ADJUSTMENTS }
+      : { ...SHOWCASE_ADJUSTMENTS },
+  );
   const [chatCollapsed, setChatCollapsed] = useState(false);
+
+  const isChatCollapsed = demoMode ? false : chatCollapsed;
 
   const handlePreview = (key: AdjustmentKey, value: number) => {
     setAdjustments((current) => ({ ...current, [key]: value }));
@@ -34,10 +56,22 @@ export default function EditorShowcase() {
           onPreview={handlePreview}
           onCommit={handleCommit}
         />
-        <ShowcaseCanvas />
+        <ShowcaseCanvas
+          imageFilter={
+            isStyleMatch ? SHOWCASE_STYLE_MATCH_CANVAS_FILTER : undefined
+          }
+        />
         <ShowcaseChatPanel
-          collapsed={chatCollapsed}
+          collapsed={isChatCollapsed}
           onToggleCollapse={() => setChatCollapsed((v) => !v)}
+          demoMode={demoMode}
+          autoScrollActive={chatAutoScrollActive}
+          messages={
+            isStyleMatch ? SHOWCASE_STYLE_MATCH_CHAT_MESSAGES : undefined
+          }
+          pendingChanges={
+            isStyleMatch ? SHOWCASE_STYLE_MATCH_PENDING_CHANGES : undefined
+          }
         />
       </div>
     </div>

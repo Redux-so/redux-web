@@ -92,13 +92,13 @@ export default function WaitlistSection() {
         stagger={0.12}
       >
         <ScrollRevealItem>
-          <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="font-display text-3xl font-normal tracking-tight text-white sm:text-4xl">
             Join the Waitlist
           </h2>
         </ScrollRevealItem>
 
         <ScrollRevealItem>
-          <p className="mt-4 text-lg leading-relaxed text-white/70">
+          <p className="mt-4 text-base leading-relaxed text-white/70">
             Get early access when we launch, plus join our founding community
             today.
           </p>

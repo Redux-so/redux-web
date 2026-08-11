@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 import { Icon } from "@/components/shared/Icon";
 import { CHAT_USER_BUBBLE_CLASS } from "@/lib/brand-colors";
@@ -11,6 +12,8 @@ import { PANEL_HEADER, PANEL_TITLE } from "@/lib/panel-chrome";
 import {
   SHOWCASE_CHAT_MESSAGES,
   SHOWCASE_PENDING_CHANGES,
+  type ShowcaseChatMessage,
+  type ShowcasePendingChange,
 } from "./showcase-data";
 
 const CHAT_SURFACE_SHADOW =
@@ -97,20 +100,59 @@ function ShowcaseUsageRing() {
 type ShowcaseChatPanelProps = {
   collapsed: boolean;
   onToggleCollapse: () => void;
+  demoMode?: boolean;
+  autoScrollActive?: boolean;
+  messages?: readonly ShowcaseChatMessage[];
+  pendingChanges?: readonly ShowcasePendingChange[];
 };
 
 export default function ShowcaseChatPanel({
   collapsed,
   onToggleCollapse,
+  demoMode = false,
+  autoScrollActive = false,
+  messages = SHOWCASE_CHAT_MESSAGES,
+  pendingChanges = SHOWCASE_PENDING_CHANGES,
 }: ShowcaseChatPanelProps) {
   const [changesExpanded, setChangesExpanded] = useState(false);
-  const pendingCount = SHOWCASE_PENDING_CHANGES.length;
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const messagesListRef = useRef<HTMLDivElement>(null);
+  const [scrollDistance, setScrollDistance] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+  const pendingCount = pendingChanges.length;
+  const shouldAutoScroll =
+    demoMode && autoScrollActive && !prefersReducedMotion && scrollDistance > 0;
+
+  useEffect(() => {
+    if (!demoMode) return;
+
+    const container = messagesContainerRef.current;
+    const list = messagesListRef.current;
+    if (!container || !list) return;
+
+    const updateScrollDistance = () => {
+      setScrollDistance(
+        Math.max(0, list.scrollHeight - container.clientHeight),
+      );
+    };
+
+    updateScrollDistance();
+
+    const observer = new ResizeObserver(() => {
+      updateScrollDistance();
+    });
+
+    observer.observe(container);
+    observer.observe(list);
+
+    return () => observer.disconnect();
+  }, [demoMode]);
 
   return (
     <div
       className={[
         "flex h-full min-w-0 shrink-0 flex-col overflow-hidden transition-[width] duration-200 ease-out",
-        "border-l border-[#2e2e2e] bg-[#121212]",
+        "rounded-l-2xl border-l border-[#2e2e2e] bg-[#121212]",
         collapsed ? "w-[44px]" : "w-[360px]",
       ].join(" ")}
     >
@@ -131,82 +173,139 @@ export default function ShowcaseChatPanel({
           </button>
         ) : (
           <div className="flex min-w-0 items-center gap-2">
-            <button
-              type="button"
-              aria-label="Collapse chat panel"
-              onClick={onToggleCollapse}
-              className="shrink-0 cursor-pointer text-[#888888] transition-colors hover:text-white"
-            >
-              <Icon name="ChevronRight" size={16} aria-hidden />
-            </button>
+            {demoMode ? (
+              <span className="shrink-0 text-[#888888]" aria-hidden>
+                <Icon name="ChevronRight" size={16} />
+              </span>
+            ) : (
+              <button
+                type="button"
+                aria-label="Collapse chat panel"
+                onClick={onToggleCollapse}
+                className="shrink-0 cursor-pointer text-[#888888] transition-colors hover:text-white"
+              >
+                <Icon name="ChevronRight" size={16} aria-hidden />
+              </button>
+            )}
             <span className={PANEL_TITLE}>Chat</span>
           </div>
         )}
       </div>
 
       {!collapsed ? (
-        <div className="flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden">
-          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-6 py-5">
-            {SHOWCASE_CHAT_MESSAGES.map((msg) => (
-              <div
-                key={msg.id}
-                className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+          <div ref={messagesContainerRef} className="relative min-h-0 flex-1 overflow-hidden">
+            <div className="h-full overflow-hidden px-6 py-5 pr-7">
+              <motion.div
+                ref={messagesListRef}
+                className="flex flex-col gap-4"
+                animate={
+                  shouldAutoScroll
+                    ? { y: [0, -scrollDistance, 0] }
+                    : { y: 0 }
+                }
+                transition={
+                  shouldAutoScroll
+                    ? {
+                        duration: 22,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        times: [0, 0.5, 1],
+                      }
+                    : { duration: 0 }
+                }
               >
-                <div
-                  className={`max-w-[320px] whitespace-pre-wrap break-words leading-relaxed ${
-                    msg.role === "user"
-                      ? CHAT_USER_BUBBLE_CLASS
-                      : "rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-3 py-2.5 text-[14px] text-[#e5e5e5]"
-                  }`}
-                >
-                  {msg.content}
-                </div>
-              </div>
-            ))}
+                {messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
+                  >
+                    {msg.imagePreview ? (
+                      <div className="mb-1.5">
+                        <Image
+                          src={msg.imagePreview}
+                          alt=""
+                          width={140}
+                          height={100}
+                          unoptimized
+                          className="max-h-[100px] max-w-[140px] rounded-lg border border-white/[0.08] object-cover"
+                        />
+                      </div>
+                    ) : null}
+                    <div
+                      className={`max-w-[320px] whitespace-pre-wrap break-words leading-relaxed ${
+                        msg.role === "user"
+                          ? CHAT_USER_BUBBLE_CLASS
+                          : "rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-3 py-2.5 text-[14px] text-[#e5e5e5]"
+                      }`}
+                    >
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+            <div
+              aria-hidden
+              className="showcase-chat-scrollbar pointer-events-none absolute bottom-5 right-0 top-5 w-[5px]"
+            />
           </div>
 
           <div
             className={`mx-6 mb-2 shrink-0 overflow-hidden rounded-md border border-white/[0.08] bg-white/[0.04] ${CHAT_SURFACE_SHADOW}`}
           >
             <div className="flex min-w-0 items-center gap-2 px-3 py-2">
-              <button
-                type="button"
-                aria-expanded={changesExpanded}
-                aria-label={changesExpanded ? "Collapse changes" : "Expand changes"}
-                onClick={() => setChangesExpanded((prev) => !prev)}
-                className="shrink-0 cursor-pointer text-[#888888] transition-colors hover:text-white"
-              >
-                <Icon
-                  name="ChevronRight"
-                  size={16}
-                  className={[
-                    "transition-transform duration-150",
-                    changesExpanded ? "rotate-90" : "",
-                  ].join(" ")}
-                  aria-hidden
-                />
-              </button>
+              {demoMode ? (
+                <span className="shrink-0 text-[#888888]" aria-hidden>
+                  <Icon name="ChevronRight" size={16} />
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  aria-expanded={changesExpanded}
+                  aria-label={changesExpanded ? "Collapse changes" : "Expand changes"}
+                  onClick={() => setChangesExpanded((prev) => !prev)}
+                  className="shrink-0 cursor-pointer text-[#888888] transition-colors hover:text-white"
+                >
+                  <Icon
+                    name="ChevronRight"
+                    size={16}
+                    className={[
+                      "transition-transform duration-150",
+                      changesExpanded ? "rotate-90" : "",
+                    ].join(" ")}
+                    aria-hidden
+                  />
+                </button>
+              )}
 
               <span className="min-w-0 truncate text-[13px] font-medium text-[#888888]">
                 {pendingCount} Changes
               </span>
 
               <div className="ml-auto flex shrink-0 items-center gap-2">
-                <button type="button" className={BTN_SECONDARY}>
+                <button
+                  type="button"
+                  className={BTN_SECONDARY}
+                  tabIndex={demoMode ? -1 : undefined}
+                  aria-hidden={demoMode}
+                >
                   Undo all
                 </button>
                 <button
                   type="button"
                   className={`${BTN_PRIMARY_SOLID} !h-8 !px-3.5 !text-[12px] !font-semibold !rounded-md`}
+                  tabIndex={demoMode ? -1 : undefined}
+                  aria-hidden={demoMode}
                 >
                   Keep all
                 </button>
               </div>
             </div>
 
-            {changesExpanded ? (
+            {!demoMode && changesExpanded ? (
               <div className="space-y-1.5 border-t border-white/[0.06] px-3 py-2">
-                {SHOWCASE_PENDING_CHANGES.map((change) => (
+                {pendingChanges.map((change) => (
                   <div
                     key={change.key}
                     className="text-[12px] font-medium leading-snug text-[#888888]"

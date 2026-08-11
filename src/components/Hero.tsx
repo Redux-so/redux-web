@@ -19,7 +19,7 @@ export default function Hero() {
         </ScrollRevealItem>
 
         <ScrollRevealItem>
-          <p className="mt-5 text-base leading-relaxed text-white/70 sm:text-lg">
+          <p className="mt-5 text-base leading-relaxed text-white/70">
             Organize, edit, and export photos, all from your browser
           </p>
         </ScrollRevealItem>

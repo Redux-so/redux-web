@@ -3,13 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 
 import EditorShowcase from "./EditorShowcase";
-
-const DESIGN_WIDTH = 1400;
-const DESIGN_HEIGHT = 820;
+import {
+  SHOWCASE_DESIGN_HEIGHT,
+  SHOWCASE_DESIGN_WIDTH,
+} from "./showcase-layout";
 
 function computeScale(containerWidth: number) {
   if (containerWidth === 0) return 1;
-  return containerWidth / DESIGN_WIDTH;
+  return containerWidth / SHOWCASE_DESIGN_WIDTH;
 }
 
 export default function EditorShowcaseScaler() {
@@ -41,8 +42,8 @@ export default function EditorShowcaseScaler() {
     };
   }, []);
 
-  const scaledWidth = DESIGN_WIDTH * scale;
-  const scaledHeight = DESIGN_HEIGHT * scale;
+  const scaledWidth = SHOWCASE_DESIGN_WIDTH * scale;
+  const scaledHeight = SHOWCASE_DESIGN_HEIGHT * scale;
 
   return (
     <div ref={containerRef} className="w-full">
@@ -53,8 +54,8 @@ export default function EditorShowcaseScaler() {
         <div
           className="origin-top-left will-change-transform"
           style={{
-            width: DESIGN_WIDTH,
-            height: DESIGN_HEIGHT,
+            width: SHOWCASE_DESIGN_WIDTH,
+            height: SHOWCASE_DESIGN_HEIGHT,
             transform: `scale(${scale})`,
           }}
         >

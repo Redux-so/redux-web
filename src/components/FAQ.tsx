@@ -8,7 +8,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
-import SectionLabel from "@/src/components/SectionLabel";
 import { ScrollReveal } from "@/lib/scroll-motion";
 
 const faqs = [
@@ -48,13 +47,9 @@ export default function FAQ() {
   return (
     <ScrollReveal className="px-4 py-10 sm:px-8 sm:py-12 lg:px-10">
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 sm:gap-10">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <SectionLabel>FAQ</SectionLabel>
-          <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Questions? We&apos;ve got{" "}
-            <span className="text-brand-link">answers</span>
-          </h2>
-        </div>
+        <h2 className="text-center font-display text-3xl font-normal tracking-tight text-white sm:text-4xl">
+          Frequently asked questions
+        </h2>
 
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (

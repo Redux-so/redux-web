@@ -3,11 +3,12 @@
 import Image from "next/image";
 
 import { Icon } from "@/components/shared/Icon";
-import SectionLabel from "@/src/components/SectionLabel";
+import ConversationalEditingShowcaseCrop from "@/src/components/features/ConversationalEditingShowcaseCrop";
+import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowcaseCrop";
+import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcaseCrop";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { blueprintBorderB, blueprintCol } from "@/lib/blueprint-grid";
+import { blueprintBorderB } from "@/lib/blueprint-grid";
 import {
-  ScrollReveal,
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
@@ -21,6 +22,7 @@ type Feature = {
   image?: string;
   imageAlt?: string;
   imageCrop?: "left" | "right" | "center";
+  showcaseScenario?: "conversational" | "styleMatch" | "smartSearch";
 };
 
 const imageCropClasses = {
@@ -28,6 +30,13 @@ const imageCropClasses = {
   right: "object-cover object-center object-top lg:object-right-top",
   center: "object-cover object-center object-top",
 } as const;
+
+const FEATURE_IMAGE_WIDTH = "lg:w-[62%]";
+const FEATURE_TEXT_WIDTH = "lg:w-[38%]";
+/** Shared image column sizing — fixed row height on desktop keeps all three features identical. */
+const FEATURE_ROW_HEIGHT = "lg:h-[360px] xl:h-[420px]";
+const FEATURE_IMAGE_HEIGHT =
+  "aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0 lg:shrink-0";
 
 const features: Feature[] = [
   {
@@ -40,6 +49,7 @@ const features: Feature[] = [
     imageAlt:
       "Redux editor with AI chat applying blue hour color edits to a mountain landscape",
     imageCrop: "right",
+    showcaseScenario: "conversational",
   },
   {
     headline: "Style Match",
@@ -51,6 +61,7 @@ const features: Feature[] = [
     imageAlt:
       "Redux editor applying Style Match to Mount Fuji via AI chat with a reference image",
     imageCrop: "right",
+    showcaseScenario: "styleMatch",
   },
   {
     headline: "Smart Search",
@@ -62,77 +73,103 @@ const features: Feature[] = [
     imageAlt:
       "Redux library search showing mountain photo results for a rural mountains query",
     imageCrop: "left",
+    showcaseScenario: "smartSearch",
   },
 ];
 
+function FeatureRow({ feature }: { feature: Feature }) {
+  const imageOnRight = feature.imagePosition === "right";
+
+  return (
+    <div
+      className={cn(
+        "flex flex-col lg:flex-row lg:items-stretch",
+        FEATURE_ROW_HEIGHT,
+      )}
+    >
+      <div
+        className={cn(
+          "relative w-full overflow-hidden bg-brand-bg",
+          FEATURE_IMAGE_WIDTH,
+          FEATURE_IMAGE_HEIGHT,
+          blueprintBorderB,
+          "lg:border-b-0",
+          imageOnRight ? "lg:order-2" : "lg:order-1",
+        )}
+      >
+        {feature.showcaseScenario === "conversational" ? (
+          <ConversationalEditingShowcaseCrop />
+        ) : feature.showcaseScenario === "styleMatch" ? (
+          <StyleMatchShowcaseCrop />
+        ) : feature.showcaseScenario === "smartSearch" ? (
+          <SmartSearchShowcaseCrop />
+        ) : feature.image ? (
+          <Image
+            src={feature.image}
+            alt={feature.imageAlt ?? ""}
+            fill
+            unoptimized
+            sizes="(max-width: 1024px) 100vw, 62vw"
+            className={imageCropClasses[feature.imageCrop ?? "center"]}
+          />
+        ) : null}
+      </div>
+
+      <div
+        className={cn(
+          "flex flex-col justify-center px-4 py-8 sm:px-8 lg:py-0",
+          FEATURE_TEXT_WIDTH,
+          imageOnRight ? "lg:order-1" : "lg:order-2",
+        )}
+      >
+        <div className="flex flex-col gap-4">
+          <h3 className="m-0 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
+            {feature.headline}
+          </h3>
+          <p className="m-0 text-sm leading-relaxed text-white/70 sm:text-base">
+            {feature.description}
+          </p>
+          <a
+            href="#waitlist"
+            className={cn(
+              BTN_PRIMARY_SOLID,
+              "w-fit shrink-0 gap-1 px-3.5 leading-none",
+            )}
+          >
+            <span className="leading-none">{feature.cta}</span>
+            <Icon
+              name="ArrowUpRight"
+              size={16}
+              className="shrink-0"
+              aria-hidden
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Features() {
   return (
-    <div>
-      <ScrollReveal>
-        <div
-          className={cn(
-            blueprintBorderB,
-            "flex flex-col items-center gap-3 px-4 py-10 sm:px-8 sm:py-12 lg:px-10",
-          )}
-        >
-          <SectionLabel className="px-2">Features</SectionLabel>
-          <h2 className="text-center font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Professional Results,{" "}
-            <span className="text-brand-link">Intuitive Tools</span>
-          </h2>
-        </div>
-      </ScrollReveal>
-
-      <ScrollRevealGroup
-        className="grid grid-cols-1 lg:grid-cols-3"
-        stagger={0.12}
-      >
-        {features.map((feature) => (
+    <ScrollRevealGroup className="flex flex-col" stagger={0.12}>
+      {features.map((feature) =>
+        feature.showcaseScenario === "styleMatch" ? (
+          <div
+            key={feature.headline}
+            className={cn(blueprintBorderB, "last:border-b-0")}
+          >
+            <FeatureRow feature={feature} />
+          </div>
+        ) : (
           <ScrollRevealItem
             key={feature.headline}
-            className={cn(blueprintCol, "flex flex-col")}
+            className={cn(blueprintBorderB, "last:border-b-0")}
           >
-            <div className={cn("relative aspect-[16/10] w-full overflow-hidden bg-brand-bg", blueprintBorderB)}>
-              {feature.image ? (
-                <Image
-                  src={feature.image}
-                  alt={feature.imageAlt ?? ""}
-                  fill
-                  unoptimized
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className={
-                    imageCropClasses[feature.imageCrop ?? "center"]
-                  }
-                />
-              ) : null}
-            </div>
-
-            <div className="flex flex-1 flex-col gap-4 px-4 py-8 sm:px-8">
-              <h3 className="font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
-                {feature.headline}
-              </h3>
-              <p className="flex-1 text-sm leading-relaxed text-white/70 sm:text-base">
-                {feature.description}
-              </p>
-              <a
-                href="#waitlist"
-                className={cn(
-                  BTN_PRIMARY_SOLID,
-                  "w-fit shrink-0 gap-1 px-3.5 leading-none",
-                )}
-              >
-                <span className="leading-none">{feature.cta}</span>
-                <Icon
-                  name="ArrowUpRight"
-                  size={16}
-                  className="shrink-0"
-                  aria-hidden
-                />
-              </a>
-            </div>
+            <FeatureRow feature={feature} />
           </ScrollRevealItem>
-        ))}
-      </ScrollRevealGroup>
-    </div>
+        ),
+      )}
+    </ScrollRevealGroup>
   );
 }

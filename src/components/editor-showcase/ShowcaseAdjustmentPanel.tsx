@@ -243,7 +243,9 @@ export default function ShowcaseAdjustmentPanel({
       <div
         className={[
           "flex h-full min-w-0 shrink-0 flex-col overflow-hidden bg-[#121212] transition-[width] duration-200 ease-out",
-          activeSection ? "w-[360px] border-r border-[#2e2e2e]" : "w-0 border-r-0",
+          activeSection
+            ? "w-[360px] rounded-r-2xl border-r border-[#2e2e2e]"
+            : "w-0 border-r-0",
         ].join(" ")}
       >
         {activeSection ? (

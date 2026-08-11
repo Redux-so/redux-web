@@ -84,9 +84,68 @@ export const SHOWCASE_CHAT_MESSAGES = [
   },
 ] as const;
 
-export type ShowcaseChatMessage = (typeof SHOWCASE_CHAT_MESSAGES)[number];
+export type ShowcaseChatMessage = {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  timestamp?: Date;
+  imagePreview?: string;
+};
 
-export const SHOWCASE_PENDING_CHANGES = [
+export type ShowcasePendingChange = {
+  key: string;
+  label: string;
+  from: number;
+  to: number;
+};
+
+export const SHOWCASE_STYLE_MATCH_ADJUSTMENTS = {
+  exposure: 5,
+  contrast: 28,
+  blacks: -12,
+  whites: -6,
+  highlights: -14,
+  shadows: -18,
+  vibrance: 18,
+  saturation: 12,
+  temperature: 22,
+  tint: 8,
+  hue: 0,
+  sharpen: 10,
+  noiseReduction: 8,
+  vignette: 8,
+  grain: 0,
+  clarity: 12,
+} as const satisfies ShowcaseAdjustments;
+
+export const SHOWCASE_STYLE_MATCH_CANVAS_FILTER =
+  "brightness(1.05) contrast(1.22) saturate(1.18) sepia(0.1) hue-rotate(12deg)";
+
+export const SHOWCASE_STYLE_MATCH_CHAT_MESSAGES: ShowcaseChatMessage[] = [
+  {
+    id: "sm-1",
+    role: "user",
+    content:
+      "Match the style of this reference and apply it to my photo on the canvas.",
+    imagePreview: "/features/style-match-reference.jpg",
+  },
+  {
+    id: "sm-2",
+    role: "assistant",
+    content:
+      "I've applied Style Match from your reference. Temperature +22 for warm peach highlights on the sky and peak, tint +8, contrast +28 to emphasize the silhouette, saturation +12 and vibrance +18 for richer color, highlights -14 and shadows -18 with a cool blue offset in the darker areas, and a soft atmospheric haze in the lower third to match the misty valley look.",
+  },
+];
+
+export const SHOWCASE_STYLE_MATCH_PENDING_CHANGES: ShowcasePendingChange[] = [
+  { key: "temperature", label: "Temperature", from: 0, to: 22 },
+  { key: "tint", label: "Tint", from: 0, to: 8 },
+  { key: "contrast", label: "Contrast", from: 0, to: 28 },
+  { key: "saturation", label: "Saturation", from: 0, to: 12 },
+  { key: "vibrance", label: "Vibrance", from: 0, to: 18 },
+];
+
+export const SHOWCASE_PENDING_CHANGES: ShowcasePendingChange[] = [
   { key: "temperature", label: "Temperature", from: 0, to: -22 },
   { key: "tint", label: "Tint", from: 0, to: 12 },
   { key: "blacks", label: "Blacks", from: 0, to: -28 },
@@ -97,9 +156,7 @@ export const SHOWCASE_PENDING_CHANGES = [
   { key: "vibrance", label: "Vibrance", from: 0, to: 14 },
   { key: "saturation", label: "Saturation", from: 0, to: 8 },
   { key: "exposure", label: "Exposure", from: 0, to: -12 },
-] as const;
-
-export type ShowcasePendingChange = (typeof SHOWCASE_PENDING_CHANGES)[number];
+];
 
 export const SHOWCASE_HISTORY_VERSIONS = [
   { id: "v3", label: "Blue hour finish", createdAt: "2026-06-05T14:33:00Z" },
