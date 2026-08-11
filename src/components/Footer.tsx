@@ -123,11 +123,11 @@ export default function Footer() {
 
       <ScrollReveal variant="fadeIn">
         <div className={blueprintBorderT}>
-          <div className="flex items-center justify-between gap-4 px-4 py-6 sm:px-8 lg:px-10">
+          <div className="flex flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
             <p className="text-sm text-white/50">
               © Redux 2026. All rights reserved.
             </p>
-            <div className="flex flex-wrap items-center gap-5">
+            <div className="flex shrink-0 items-center gap-4 sm:gap-5">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
