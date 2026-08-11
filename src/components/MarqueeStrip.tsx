@@ -15,7 +15,7 @@ const marqueeItems = [
   { src: "/marquee/figma.png", alt: "Figma", width: 356, height: 106 },
 ] as const;
 
-const TRACK_REPEATS = 4;
+const TRACK_REPEATS = 1;
 
 type MarqueeTrackProps = {
   trackKey: string;
@@ -66,7 +66,7 @@ export default function MarqueeStrip() {
         </ScrollRevealItem>
 
         <ScrollRevealItem variant="fadeIn" className="w-full">
-          <div className="relative -mx-4 overflow-hidden sm:-mx-8 lg:-mx-10">
+          <div className="relative mx-auto w-full max-w-xl overflow-hidden sm:max-w-2xl md:max-w-3xl lg:max-w-4xl">
             <div className="animate-marquee flex w-max items-center">
               <MarqueeTrack trackKey="a" />
               <MarqueeTrack trackKey="b" aria-hidden />
