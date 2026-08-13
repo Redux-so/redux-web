@@ -8,7 +8,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
+import { blueprintBorderB } from "@/lib/blueprint-grid";
 import { ScrollReveal } from "@/lib/scroll-motion";
+import { cn } from "@/lib/utils";
+
+const FAQ_SECTION_LABEL =
+  "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
 
 const faqs = [
   {
@@ -43,23 +48,36 @@ const faqs = [
   },
 ] as const;
 
+function FaqSectionIntro() {
+  return (
+    <ScrollReveal
+      variant="fadeIn"
+      className={cn(
+        blueprintBorderB,
+        "px-4 py-5 sm:px-8 sm:py-6 lg:px-10",
+      )}
+    >
+      <p className={cn("m-0", FAQ_SECTION_LABEL)}>Frequently asked questions</p>
+    </ScrollReveal>
+  );
+}
+
 export default function FAQ() {
   return (
-    <ScrollReveal className="px-4 py-10 sm:px-8 sm:py-12 lg:px-10">
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-8 sm:gap-10">
-        <h2 className="text-center font-display text-3xl font-normal tracking-tight text-white sm:text-4xl">
-          Frequently asked questions
-        </h2>
-
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={faq.question} value={`faq-${index}`}>
-              <AccordionTrigger icon={Plus}>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </ScrollReveal>
+    <div className="flex flex-col">
+      <FaqSectionIntro />
+      <ScrollReveal className="px-4 py-8 sm:px-8 sm:py-10 lg:px-10">
+        <div className="mx-auto w-full max-w-3xl">
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={faq.question} value={`faq-${index}`}>
+                <AccordionTrigger icon={Plus}>{faq.question}</AccordionTrigger>
+                <AccordionContent>{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </ScrollReveal>
+    </div>
   );
 }

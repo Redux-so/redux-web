@@ -9,6 +9,7 @@ import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcase
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import { blueprintBorderB } from "@/lib/blueprint-grid";
 import {
+  ScrollReveal,
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
@@ -37,6 +38,9 @@ const FEATURE_TEXT_WIDTH = "lg:w-[38%]";
 const FEATURE_ROW_HEIGHT = "lg:h-[360px] xl:h-[420px]";
 const FEATURE_IMAGE_HEIGHT =
   "aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0 lg:shrink-0";
+
+const FEATURES_SECTION_LABEL =
+  "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
 
 const features: Feature[] = [
   {
@@ -150,9 +154,25 @@ function FeatureRow({ feature }: { feature: Feature }) {
   );
 }
 
+function FeaturesSectionIntro() {
+  return (
+    <ScrollReveal
+      variant="fadeIn"
+      className={cn(
+        blueprintBorderB,
+        "px-4 py-5 sm:px-8 sm:py-6 lg:px-10",
+      )}
+    >
+      <p className={cn("m-0", FEATURES_SECTION_LABEL)}>Features</p>
+    </ScrollReveal>
+  );
+}
+
 export default function Features() {
   return (
-    <ScrollRevealGroup className="flex flex-col" stagger={0.12}>
+    <div className="flex flex-col">
+      <FeaturesSectionIntro />
+      <ScrollRevealGroup className="flex flex-col" stagger={0.12}>
       {features.map((feature) =>
         feature.showcaseScenario === "styleMatch" ? (
           <div
@@ -170,6 +190,7 @@ export default function Features() {
           </ScrollRevealItem>
         ),
       )}
-    </ScrollRevealGroup>
+      </ScrollRevealGroup>
+    </div>
   );
 }
