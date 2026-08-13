@@ -5,9 +5,13 @@ export type LibraryShowcaseImage = {
   alt: string;
 };
 
-export const SHOWCASE_SEARCH_QUERY = "skyline";
-
 export const SHOWCASE_LIBRARY_GREETING = "Good afternoon, Levi";
+
+export type SmartSearchDemoScenario = {
+  id: string;
+  query: string;
+  results: LibraryShowcaseImage[];
+};
 
 export const SHOWCASE_SKYLINE_RESULTS: LibraryShowcaseImage[] = [
   {
@@ -40,6 +44,48 @@ export const SHOWCASE_SKYLINE_RESULTS: LibraryShowcaseImage[] = [
     src: "/features/smart-search/skyline-5.jpg",
     alt: "Motion-blurred pedestrians crossing an urban street at night",
   },
+];
+
+export const SHOWCASE_MOUNTAIN_RESULTS: LibraryShowcaseImage[] = [
+  {
+    id: "m1",
+    filename: "filler-3.jpg",
+    src: "/features/smart-search/filler-3.jpg",
+    alt: "Snow-capped mountain peaks above a sea of clouds",
+  },
+  {
+    id: "m2",
+    filename: "filler-4.jpg",
+    src: "/features/smart-search/filler-4.jpg",
+    alt: "Mount Fuji reflected in a lake at twilight",
+  },
+  {
+    id: "m3",
+    filename: "filler-7.jpg",
+    src: "/features/smart-search/filler-7.jpg",
+    alt: "Scottish highlands valley with mist and sunset light",
+  },
+  {
+    id: "m4",
+    filename: "filler-2.jpg",
+    src: "/features/smart-search/filler-2.jpg",
+    alt: "Desert canyon with sandstone cliffs",
+  },
+];
+
+export const SHOWCASE_F1_RESULTS: LibraryShowcaseImage[] = [
+  {
+    id: "car1",
+    filename: "filler-6.jpg",
+    src: "/features/smart-search/filler-6.jpg",
+    alt: "Aston Martin Formula 1 racing car close-up",
+  },
+];
+
+export const SHOWCASE_SEARCH_SCENARIOS: SmartSearchDemoScenario[] = [
+  { id: "skyline", query: "skyline", results: SHOWCASE_SKYLINE_RESULTS },
+  { id: "mountains", query: "mountains", results: SHOWCASE_MOUNTAIN_RESULTS },
+  { id: "f1-car", query: "f1 car", results: SHOWCASE_F1_RESULTS },
 ];
 
 export const SHOWCASE_LIBRARY_FILLER: LibraryShowcaseImage[] = [

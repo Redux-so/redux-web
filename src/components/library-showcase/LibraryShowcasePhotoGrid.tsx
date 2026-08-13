@@ -10,6 +10,7 @@ import LibraryShowcasePhotoCard from "./LibraryShowcasePhotoCard";
 
 type LibraryShowcasePhotoGridProps = {
   phase: LibrarySearchDemoPhase;
+  scenarioKey: string;
   fillerImages: readonly LibraryShowcaseImage[];
   resultImages: readonly LibraryShowcaseImage[];
 };
@@ -53,10 +54,12 @@ function AnimatedGrid({ images }: { images: readonly LibraryShowcaseImage[] }) {
 
 export default function LibraryShowcasePhotoGrid({
   phase,
+  scenarioKey,
   fillerImages,
   resultImages,
 }: LibraryShowcasePhotoGridProps) {
   const images = phase === "results" ? resultImages : fillerImages;
+  const gridKey = phase === "results" ? `results-${scenarioKey}` : "filler";
 
   return (
     <div className="flex flex-col gap-5 px-6 py-5">
@@ -67,10 +70,7 @@ export default function LibraryShowcasePhotoGrid({
       ) : (
         <p className="mb-0 text-[12px] font-semibold text-[#888888]">RECENT</p>
       )}
-      <AnimatedGrid
-        images={images}
-        key={phase === "results" ? "results" : "filler"}
-      />
+      <AnimatedGrid images={images} key={gridKey} />
     </div>
   );
 }
