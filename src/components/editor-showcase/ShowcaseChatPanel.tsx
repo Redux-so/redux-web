@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useMotionValue, useTransform, animate } from "framer-motion";
 
 import { Icon } from "@/components/shared/Icon";
 import { CHAT_USER_BUBBLE_CLASS } from "@/lib/brand-colors";
@@ -116,23 +116,39 @@ export default function ShowcaseChatPanel({
 }: ShowcaseChatPanelProps) {
   const [changesExpanded, setChangesExpanded] = useState(false);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const messagesViewportRef = useRef<HTMLDivElement>(null);
   const messagesListRef = useRef<HTMLDivElement>(null);
   const [scrollDistance, setScrollDistance] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const messageScrollY = useMotionValue(0);
   const prefersReducedMotion = useReducedMotion();
   const pendingCount = pendingChanges.length;
   const shouldAutoScroll =
     demoMode && autoScrollActive && !prefersReducedMotion && scrollDistance > 0;
 
+  const trackHeight = Math.max(0, viewportHeight - 40);
+  /** Short decorative thumb — matches the original ~32% track height. */
+  const thumbHeight = Math.max(24, trackHeight * 0.32);
+  const maxThumbTop = Math.max(0, trackHeight - thumbHeight);
+
+  const thumbTop = useTransform(messageScrollY, (latestY) => {
+    if (scrollDistance <= 0) return 0;
+    const progress = Math.min(1, Math.max(0, -latestY / scrollDistance));
+    return progress * maxThumbTop;
+  });
+
   useEffect(() => {
     if (!demoMode) return;
 
     const container = messagesContainerRef.current;
+    const viewport = messagesViewportRef.current;
     const list = messagesListRef.current;
-    if (!container || !list) return;
+    if (!container || !viewport || !list) return;
 
     const updateScrollDistance = () => {
+      setViewportHeight(container.clientHeight);
       setScrollDistance(
-        Math.max(0, list.scrollHeight - container.clientHeight),
+        Math.max(0, list.scrollHeight - viewport.clientHeight),
       );
     };
 
@@ -143,10 +159,27 @@ export default function ShowcaseChatPanel({
     });
 
     observer.observe(container);
+    observer.observe(viewport);
     observer.observe(list);
 
     return () => observer.disconnect();
   }, [demoMode]);
+
+  useEffect(() => {
+    if (!shouldAutoScroll || scrollDistance <= 0) {
+      messageScrollY.set(0);
+      return;
+    }
+
+    const controls = animate(messageScrollY, [0, -scrollDistance, 0], {
+      duration: 22,
+      repeat: Infinity,
+      ease: "easeInOut",
+      times: [0, 0.5, 1],
+    });
+
+    return () => controls.stop();
+  }, [shouldAutoScroll, scrollDistance, messageScrollY]);
 
   return (
     <div
@@ -195,25 +228,14 @@ export default function ShowcaseChatPanel({
       {!collapsed ? (
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
           <div ref={messagesContainerRef} className="relative min-h-0 flex-1 overflow-hidden">
-            <div className="h-full overflow-hidden px-6 py-5 pr-7">
+            <div
+              ref={messagesViewportRef}
+              className="showcase-chat-messages h-full overflow-hidden px-6 py-5 pr-7"
+            >
               <motion.div
                 ref={messagesListRef}
                 className="flex flex-col gap-4"
-                animate={
-                  shouldAutoScroll
-                    ? { y: [0, -scrollDistance, 0] }
-                    : { y: 0 }
-                }
-                transition={
-                  shouldAutoScroll
-                    ? {
-                        duration: 22,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        times: [0, 0.5, 1],
-                      }
-                    : { duration: 0 }
-                }
+                style={{ y: messageScrollY }}
               >
                 {messages.map((msg) => (
                   <div
@@ -245,10 +267,17 @@ export default function ShowcaseChatPanel({
                 ))}
               </motion.div>
             </div>
-            <div
-              aria-hidden
-              className="showcase-chat-scrollbar pointer-events-none absolute bottom-5 right-0 top-5 w-[5px]"
-            />
+            {scrollDistance > 0 ? (
+              <div
+                aria-hidden
+                className="pointer-events-none absolute bottom-5 right-0 top-5 w-[5px]"
+              >
+                <motion.div
+                  className="absolute left-0 w-full rounded-full bg-[var(--scrollbar-thumb)]"
+                  style={{ height: thumbHeight, top: thumbTop }}
+                />
+              </div>
+            ) : null}
           </div>
 
           <div
