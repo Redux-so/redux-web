@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Fragment } from "react";
 
 import { Icon } from "@/components/shared/Icon";
 import ConversationalEditingShowcaseCrop from "@/src/components/features/ConversationalEditingShowcaseCrop";
@@ -41,6 +42,10 @@ const FEATURE_IMAGE_HEIGHT =
 
 const FEATURES_SECTION_LABEL =
   "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
+
+/** Equal space above/below each card and around centered grid dividers. */
+const FEATURE_CARD_SPACE = "my-8 sm:my-10";
+const FEATURE_CARD_STACK_PADDING = "py-8 sm:py-10";
 
 const features: Feature[] = [
   {
@@ -172,24 +177,34 @@ export default function Features() {
   return (
     <div className="flex flex-col">
       <FeaturesSectionIntro />
-      <ScrollRevealGroup className="flex flex-col" stagger={0.12}>
-      {features.map((feature) =>
-        feature.showcaseScenario === "styleMatch" ? (
-          <div
-            key={feature.headline}
-            className={cn(blueprintBorderB, "last:border-b-0")}
-          >
-            <FeatureRow feature={feature} />
-          </div>
-        ) : (
-          <ScrollRevealItem
-            key={feature.headline}
-            className={cn(blueprintBorderB, "last:border-b-0")}
-          >
-            <FeatureRow feature={feature} />
-          </ScrollRevealItem>
-        ),
-      )}
+      <ScrollRevealGroup
+        className={cn("flex flex-col", FEATURE_CARD_STACK_PADDING)}
+        stagger={0.12}
+      >
+      {features.map((feature, index) => {
+        const row =
+          feature.showcaseScenario === "styleMatch" ? (
+            <div key={feature.headline}>
+              <FeatureRow feature={feature} />
+            </div>
+          ) : (
+            <ScrollRevealItem key={feature.headline}>
+              <FeatureRow feature={feature} />
+            </ScrollRevealItem>
+          );
+
+        return (
+          <Fragment key={feature.headline}>
+            {row}
+            {index < features.length - 1 ? (
+              <div
+                aria-hidden
+                className={cn(blueprintBorderB, FEATURE_CARD_SPACE)}
+              />
+            ) : null}
+          </Fragment>
+        );
+      })}
       </ScrollRevealGroup>
     </div>
   );
