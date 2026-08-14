@@ -17,8 +17,8 @@ type LibraryShowcasePhotoGridProps = {
 
 function AnimatedGrid({ images }: { images: readonly LibraryShowcaseImage[] }) {
   const prefersReducedMotion = useReducedMotion();
-  const duration = prefersReducedMotion ? 0 : 0.25;
-  const stagger = prefersReducedMotion ? 0 : 0.035;
+  const duration = prefersReducedMotion ? 0 : 0.2;
+  const stagger = prefersReducedMotion ? 0 : 0.03;
 
   return (
     <motion.div

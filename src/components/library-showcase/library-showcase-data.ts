@@ -156,11 +156,11 @@ export const SHOWCASE_LIBRARY_ALBUMS = [
   { id: "a2", name: "Cityscapes" },
 ] as const;
 
-export const SHOWCASE_SEARCH_TYPE_MS = 65;
-export const SHOWCASE_SEARCH_ERASE_MS = 35;
-export const SHOWCASE_SEARCH_START_DELAY_MS = 300;
-export const SHOWCASE_SEARCH_RESULTS_DELAY_MS = 200;
-export const SHOWCASE_SEARCH_HOLD_MS = 4000;
-export const SHOWCASE_SEARCH_IDLE_DELAY_MS = 400;
+export const SHOWCASE_SEARCH_TYPE_MS = 52;
+export const SHOWCASE_SEARCH_ERASE_MS = 28;
+export const SHOWCASE_SEARCH_START_DELAY_MS = 240;
+export const SHOWCASE_SEARCH_RESULTS_DELAY_MS = 160;
+export const SHOWCASE_SEARCH_HOLD_MS = 3200;
+export const SHOWCASE_SEARCH_IDLE_DELAY_MS = 300;
 
 export type LibrarySearchDemoPhase = "idle" | "typing" | "results" | "erasing";
