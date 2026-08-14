@@ -8,7 +8,7 @@ import ConversationalEditingShowcaseCrop from "@/src/components/features/Convers
 import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowcaseCrop";
 import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcaseCrop";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { blueprintBorderB } from "@/lib/blueprint-grid";
+import { BLUEPRINT_BORDER, blueprintBorderB } from "@/lib/blueprint-grid";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -39,6 +39,11 @@ const FEATURE_TEXT_WIDTH = "lg:w-[38%]";
 const FEATURE_ROW_HEIGHT = "lg:h-[360px] xl:h-[420px]";
 const FEATURE_IMAGE_HEIGHT =
   "aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0 lg:shrink-0";
+
+const FEATURE_SHOWCASE_FRAME = cn(
+  "overflow-hidden rounded-2xl border bg-brand-bg",
+  BLUEPRINT_BORDER,
+);
 
 const FEATURES_SECTION_LABEL =
   "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
@@ -98,11 +103,10 @@ function FeatureRow({ feature }: { feature: Feature }) {
     >
       <div
         className={cn(
-          "relative w-full overflow-hidden bg-brand-bg",
+          "relative w-full",
           FEATURE_IMAGE_WIDTH,
           FEATURE_IMAGE_HEIGHT,
-          blueprintBorderB,
-          "lg:border-b-0",
+          FEATURE_SHOWCASE_FRAME,
           imageOnRight ? "lg:order-2" : "lg:order-1",
         )}
       >
