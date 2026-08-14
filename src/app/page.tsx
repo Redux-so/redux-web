@@ -1,4 +1,5 @@
 import BlueprintFrame from "@/src/components/BlueprintFrame";
+import EditShowcaseSection from "@/src/components/EditShowcaseSection";
 import FAQ from "@/src/components/FAQ";
 import Features from "@/src/components/Features";
 import Footer from "@/src/components/Footer";
@@ -40,6 +41,13 @@ export default function Home() {
           className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
         >
           <Features />
+        </section>
+
+        <section
+          id="edit-showcase"
+          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
+        >
+          <EditShowcaseSection />
         </section>
 
         <section
