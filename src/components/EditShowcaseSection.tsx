@@ -7,6 +7,7 @@ import {
   EDIT_SHOWCASE_BOTTOM_ROW,
   EDIT_SHOWCASE_PHOTO_ASPECT,
   EDIT_SHOWCASE_PHOTO_FRAME,
+  EDIT_SHOWCASE_PRIORITY_COUNT,
   EDIT_SHOWCASE_TOP_ROW,
   type EditShowcasePhoto,
 } from "@/src/components/edit-showcase/edit-showcase-data";
@@ -25,9 +26,16 @@ type PhotoMarqueeRowProps = {
   photos: readonly EditShowcasePhoto[];
   direction: "left" | "right";
   trackKey: string;
+  priorityCount?: number;
 };
 
-function PhotoCard({ photo }: { photo: EditShowcasePhoto }) {
+function PhotoCard({
+  photo,
+  priority = false,
+}: {
+  photo: EditShowcasePhoto;
+  priority?: boolean;
+}) {
   return (
     <div
       className={cn(
@@ -40,7 +48,8 @@ function PhotoCard({ photo }: { photo: EditShowcasePhoto }) {
         src={photo.src}
         alt={photo.alt}
         fill
-        unoptimized
+        loading="eager"
+        priority={priority}
         sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 360px"
         className="object-cover"
         draggable={false}
@@ -52,10 +61,12 @@ function PhotoCard({ photo }: { photo: EditShowcasePhoto }) {
 function PhotoMarqueeTrack({
   photos,
   trackKey,
+  priorityCount = 0,
   "aria-hidden": ariaHidden,
 }: {
   photos: readonly EditShowcasePhoto[];
   trackKey: string;
+  priorityCount?: number;
   "aria-hidden"?: boolean;
 }) {
   return (
@@ -63,14 +74,23 @@ function PhotoMarqueeTrack({
       className="flex shrink-0 items-center gap-4 pr-4 sm:gap-6 sm:pr-6"
       aria-hidden={ariaHidden}
     >
-      {photos.map((photo) => (
-        <PhotoCard key={`${trackKey}-${photo.id}`} photo={photo} />
+      {photos.map((photo, index) => (
+        <PhotoCard
+          key={`${trackKey}-${photo.id}`}
+          photo={photo}
+          priority={!ariaHidden && index < priorityCount}
+        />
       ))}
     </div>
   );
 }
 
-function PhotoMarqueeRow({ photos, direction, trackKey }: PhotoMarqueeRowProps) {
+function PhotoMarqueeRow({
+  photos,
+  direction,
+  trackKey,
+  priorityCount = 0,
+}: PhotoMarqueeRowProps) {
   const prefersReducedMotion = useReducedMotion();
   const animationClass =
     direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
@@ -78,8 +98,12 @@ function PhotoMarqueeRow({ photos, direction, trackKey }: PhotoMarqueeRowProps) 
   if (prefersReducedMotion) {
     return (
       <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-        {photos.map((photo) => (
-          <PhotoCard key={photo.id} photo={photo} />
+        {photos.map((photo, index) => (
+          <PhotoCard
+            key={photo.id}
+            photo={photo}
+            priority={index < priorityCount}
+          />
         ))}
       </div>
     );
@@ -88,10 +112,15 @@ function PhotoMarqueeRow({ photos, direction, trackKey }: PhotoMarqueeRowProps) 
   return (
     <div className="relative w-full overflow-hidden">
       <div className={cn("flex w-max items-center", animationClass)}>
-        <PhotoMarqueeTrack photos={photos} trackKey={`${trackKey}-a`} />
+        <PhotoMarqueeTrack
+          photos={photos}
+          trackKey={`${trackKey}-a`}
+          priorityCount={priorityCount}
+        />
         <PhotoMarqueeTrack
           photos={photos}
           trackKey={`${trackKey}-b`}
+          priorityCount={0}
           aria-hidden
         />
       </div>
@@ -131,21 +160,22 @@ export default function EditShowcaseSection() {
         className="flex flex-col gap-8 px-4 py-10 sm:gap-10 sm:px-8 sm:py-12 lg:px-10"
         stagger={0.1}
       >
-      <ScrollRevealItem variant="fadeIn">
-        <PhotoMarqueeRow
-          photos={EDIT_SHOWCASE_TOP_ROW}
-          direction="left"
-          trackKey="edit-top"
-        />
-      </ScrollRevealItem>
+        <ScrollRevealItem variant="fadeIn">
+          <PhotoMarqueeRow
+            photos={EDIT_SHOWCASE_TOP_ROW}
+            direction="left"
+            trackKey="edit-top"
+            priorityCount={EDIT_SHOWCASE_PRIORITY_COUNT}
+          />
+        </ScrollRevealItem>
 
-      <ScrollRevealItem variant="fadeIn">
-        <PhotoMarqueeRow
-          photos={EDIT_SHOWCASE_BOTTOM_ROW}
-          direction="right"
-          trackKey="edit-bottom"
-        />
-      </ScrollRevealItem>
+        <ScrollRevealItem variant="fadeIn">
+          <PhotoMarqueeRow
+            photos={EDIT_SHOWCASE_BOTTOM_ROW}
+            direction="right"
+            trackKey="edit-bottom"
+          />
+        </ScrollRevealItem>
       </ScrollRevealGroup>
     </div>
   );

@@ -1,4 +1,5 @@
 import BlueprintFrame from "@/src/components/BlueprintFrame";
+import EditShowcasePreload from "@/src/components/EditShowcasePreload";
 import EditShowcaseSection from "@/src/components/EditShowcaseSection";
 import FAQ from "@/src/components/FAQ";
 import Features from "@/src/components/Features";
@@ -21,6 +22,7 @@ export default function Home() {
       id="home"
       className={cn("overflow-x-hidden bg-brand-bg text-white", BLUEPRINT_PAGE_INSET)}
     >
+      <EditShowcasePreload />
       <Navbar />
       <BlueprintFrame>
         <div aria-hidden className={NAV_SPACER_CLASS} />
