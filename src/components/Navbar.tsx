@@ -32,15 +32,17 @@ export const NAV_SCROLL_OFFSET_CLASS = "scroll-mt-[3.75rem] sm:scroll-mt-16";
 /** Reserves space for the fixed nav bar. */
 export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 
-const NAV_FIXED =
-  "fixed inset-x-0 top-0 z-50 overflow-visible bg-[#161616]";
+const NAV_FIXED = cn(
+  "fixed inset-x-0 top-0 z-50 overflow-visible",
+  "bg-[#161616]/90 backdrop-blur-md backdrop-saturate-150",
+);
 
 /**
  * Large wordmark that visually overflows the fixed nav height without
  * expanding the bar — negative vertical margin centers the bleed.
  */
-const NAV_LOGO_HEIGHT_CLASS = "h-[4.5rem] sm:h-[5.25rem]";
-const NAV_LOGO_BLEED_CLASS = "-my-1.5 sm:-my-2.5";
+const NAV_LOGO_HEIGHT_CLASS = "h-[4.75rem] sm:h-[5.5rem]";
+const NAV_LOGO_BLEED_CLASS = "-my-2 sm:-my-3";
 const NAV_LOGO_INTRINSIC_WIDTH = 471;
 const NAV_LOGO_INTRINSIC_HEIGHT = 117;
 
