@@ -6,6 +6,7 @@ import { FormEvent, useState } from "react";
 import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
 import {
   EASE_OUT,
   ScrollRevealGroup,
@@ -85,10 +86,16 @@ export default function WaitlistSection() {
       )}
     >
       <HeroParticleBackground />
-      <ScrollRevealGroup
-        className="relative z-[1] mx-auto max-w-2xl px-4 py-16 text-center sm:px-8 sm:py-20 lg:px-10 lg:py-24"
-        stagger={0.12}
+      <div
+        className={cn(
+          PAGE_CONTAINER,
+          "relative z-[1] py-16 sm:py-20 lg:py-24",
+        )}
       >
+        <ScrollRevealGroup
+          className="mx-auto max-w-2xl text-center"
+          stagger={0.12}
+        >
         <ScrollRevealItem>
           <h2 className="font-display text-3xl font-normal tracking-tight text-white sm:text-4xl">
             Join the Waitlist
@@ -171,7 +178,8 @@ export default function WaitlistSection() {
             </motion.div>
           ) : null}
         </div>
-      </ScrollRevealGroup>
+        </ScrollRevealGroup>
+      </div>
     </section>
   );
 }

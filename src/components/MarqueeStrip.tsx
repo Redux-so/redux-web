@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Fragment } from "react";
 
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
+import { cn } from "@/lib/utils";
 
 const marqueeItems = [
   { src: "/marquee/photoshop.png", alt: "Adobe Photoshop", width: 152, height: 126 },
@@ -54,7 +56,7 @@ export default function MarqueeStrip() {
   return (
     <section className="bg-brand-bg">
       <ScrollRevealGroup
-        className="flex w-full flex-col px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
+        className={cn(PAGE_CONTAINER, "flex w-full flex-col py-5 sm:py-6")}
         stagger={0.1}
       >
         <ScrollRevealItem>
@@ -64,7 +66,7 @@ export default function MarqueeStrip() {
         </ScrollRevealItem>
 
         <ScrollRevealItem variant="fadeIn" className="w-full">
-          <div className="relative mx-auto w-full max-w-xl overflow-hidden sm:max-w-2xl md:max-w-3xl lg:max-w-4xl">
+          <div className="relative w-full overflow-hidden">
             <div className="animate-marquee flex w-max items-center">
               <MarqueeTrack trackKey="a" />
               <MarqueeTrack trackKey="b" aria-hidden />

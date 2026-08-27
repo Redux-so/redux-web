@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
 import { ScrollReveal } from "@/lib/scroll-motion";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const FAQ_SECTION_LABEL =
@@ -49,10 +50,7 @@ const faqs = [
 
 function FaqSectionIntro() {
   return (
-    <ScrollReveal
-      variant="fadeIn"
-      className="px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
-    >
+    <ScrollReveal variant="fadeIn" className="py-5 sm:py-6">
       <p className={cn("m-0", FAQ_SECTION_LABEL)}>Frequently asked questions</p>
     </ScrollReveal>
   );
@@ -60,9 +58,9 @@ function FaqSectionIntro() {
 
 export default function FAQ() {
   return (
-    <div className="flex flex-col">
+    <div className={cn(PAGE_CONTAINER, "flex flex-col")}>
       <FaqSectionIntro />
-      <ScrollReveal className="px-4 py-8 sm:px-8 sm:py-10 lg:px-10">
+      <ScrollReveal className="py-8 sm:py-10">
         <div className="mx-auto w-full max-w-3xl">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (

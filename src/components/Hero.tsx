@@ -2,6 +2,7 @@
 
 import { Icon } from "@/components/shared/Icon";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
 import {
   ScrollRevealGroup,
   ScrollRevealItem,
@@ -10,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export default function Hero() {
   return (
-    <div className="relative z-[1] px-4 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
+    <div className={cn(PAGE_CONTAINER, "relative z-[1] py-10 sm:py-12 lg:py-14")}>
       <ScrollRevealGroup className="mx-auto max-w-3xl text-center" stagger={0.12}>
         <ScrollRevealItem>
           <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">

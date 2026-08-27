@@ -12,11 +12,14 @@ import {
   BTN_OUTLINE_SOLID,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
+import { SITE_CONTAINER } from "@/lib/section-styles";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
-const NAV_CONTAINER =
-  "mx-auto grid w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 py-3.5 sm:px-8 sm:py-4 lg:px-12";
+const NAV_CONTAINER = cn(
+  SITE_CONTAINER,
+  "grid grid-cols-[1fr_auto_1fr] items-center gap-4 py-3.5 sm:py-4",
+);
 
 const navLinks = [
   { label: "Home", href: "#home" },
