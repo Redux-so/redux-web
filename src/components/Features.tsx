@@ -8,6 +8,7 @@ import ConversationalEditingShowcaseCrop from "@/src/components/features/Convers
 import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowcaseCrop";
 import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcaseCrop";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -164,7 +165,7 @@ function FeaturesSectionIntro() {
   return (
     <ScrollReveal
       variant="fadeIn"
-      className="px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
+      className="py-5 sm:py-6"
     >
       <p className={cn("m-0", FEATURES_SECTION_LABEL)}>Features</p>
     </ScrollReveal>
@@ -173,7 +174,7 @@ function FeaturesSectionIntro() {
 
 export default function Features() {
   return (
-    <div className="flex flex-col">
+    <div className={cn(PAGE_CONTAINER, "flex flex-col")}>
       <FeaturesSectionIntro />
       <ScrollRevealGroup
         className={cn("flex flex-col", FEATURE_CARD_STACK_PADDING)}

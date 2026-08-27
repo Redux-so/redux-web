@@ -48,7 +48,7 @@ export default function EditorShowcaseScaler() {
   return (
     <div ref={containerRef} className="w-full">
       <div
-        className="relative overflow-hidden"
+        className="relative mx-auto overflow-hidden"
         style={{ width: scaledWidth, height: scaledHeight }}
       >
         <div
