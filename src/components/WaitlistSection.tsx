@@ -78,7 +78,7 @@ export default function WaitlistSection() {
   return (
     <SectionShell className="relative z-[1]">
       <ScrollRevealGroup
-        className="mx-auto w-full max-w-2xl text-center"
+        className="mx-auto w-full max-w-lg text-center"
         stagger={0.12}
       >
         <ScrollRevealItem>
@@ -94,12 +94,12 @@ export default function WaitlistSection() {
           </p>
         </ScrollRevealItem>
 
-        <div className="relative mt-8">
+        <div className="relative mx-auto mt-8 w-full max-w-md">
           <form
             onSubmit={handleSubmit}
             aria-hidden={formState !== "idle"}
             className={cn(
-              "flex flex-col gap-3 sm:flex-row sm:items-start",
+              "flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-center",
               formState !== "idle" && "pointer-events-none invisible",
             )}
           >
