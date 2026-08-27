@@ -8,7 +8,6 @@ import ConversationalEditingShowcaseCrop from "@/src/components/features/Convers
 import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowcaseCrop";
 import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcaseCrop";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { BLUEPRINT_BORDER, blueprintBorderB } from "@/lib/blueprint-grid";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -40,15 +39,13 @@ const FEATURE_ROW_HEIGHT = "lg:h-[360px] xl:h-[420px]";
 const FEATURE_IMAGE_HEIGHT =
   "aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0 lg:shrink-0";
 
-const FEATURE_SHOWCASE_FRAME = cn(
-  "overflow-hidden rounded-2xl border bg-brand-bg",
-  BLUEPRINT_BORDER,
-);
+const FEATURE_SHOWCASE_FRAME =
+  "overflow-hidden rounded-2xl border border-[#2e2e2e] bg-brand-bg";
 
 const FEATURES_SECTION_LABEL =
   "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
 
-/** Equal space above/below each card and around centered grid dividers. */
+/** Equal space above/below each feature card. */
 const FEATURE_CARD_SPACE = "my-8 sm:my-10";
 const FEATURE_CARD_STACK_PADDING = "py-8 sm:py-10";
 
@@ -167,10 +164,7 @@ function FeaturesSectionIntro() {
   return (
     <ScrollReveal
       variant="fadeIn"
-      className={cn(
-        blueprintBorderB,
-        "px-4 py-5 sm:px-8 sm:py-6 lg:px-10",
-      )}
+      className="px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
     >
       <p className={cn("m-0", FEATURES_SECTION_LABEL)}>Features</p>
     </ScrollReveal>
@@ -201,10 +195,7 @@ export default function Features() {
           <Fragment key={feature.headline}>
             {row}
             {index < features.length - 1 ? (
-              <div
-                aria-hidden
-                className={cn(blueprintBorderB, FEATURE_CARD_SPACE)}
-              />
+              <div aria-hidden className={FEATURE_CARD_SPACE} />
             ) : null}
           </Fragment>
         );

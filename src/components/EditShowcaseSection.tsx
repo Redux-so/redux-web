@@ -11,12 +11,7 @@ import {
   EDIT_SHOWCASE_TOP_ROW,
   type EditShowcasePhoto,
 } from "@/src/components/edit-showcase/edit-showcase-data";
-import { blueprintBorderB } from "@/lib/blueprint-grid";
-import {
-  ScrollReveal,
-  ScrollRevealGroup,
-  ScrollRevealItem,
-} from "@/lib/scroll-motion";
+import { ScrollReveal, ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
 const EDIT_SHOWCASE_SECTION_LABEL =
@@ -140,10 +135,7 @@ function EditShowcaseSectionIntro() {
   return (
     <ScrollReveal
       variant="fadeIn"
-      className={cn(
-        blueprintBorderB,
-        "px-4 py-5 sm:px-8 sm:py-6 lg:px-10",
-      )}
+      className="px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
     >
       <p className={cn("m-0", EDIT_SHOWCASE_SECTION_LABEL)}>
         See how Redux can edit

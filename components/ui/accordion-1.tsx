@@ -4,7 +4,6 @@ import * as React from "react";
 import { Minus, Plus } from "@untitledui/icons";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 
-import { blueprintBorderB } from "@/lib/blueprint-grid";
 import { cn } from "@/lib/utils";
 
 function Accordion({
@@ -27,7 +26,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn(blueprintBorderB, "last:border-b-0", className)}
+      className={cn("border-b border-white/10 last:border-b-0", className)}
       {...props}
     />
   );

@@ -8,7 +8,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
-import { blueprintBorderB } from "@/lib/blueprint-grid";
 import { ScrollReveal } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
@@ -52,10 +51,7 @@ function FaqSectionIntro() {
   return (
     <ScrollReveal
       variant="fadeIn"
-      className={cn(
-        blueprintBorderB,
-        "px-4 py-5 sm:px-8 sm:py-6 lg:px-10",
-      )}
+      className="px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
     >
       <p className={cn("m-0", FAQ_SECTION_LABEL)}>Frequently asked questions</p>
     </ScrollReveal>

@@ -12,7 +12,7 @@ import {
   BTN_OUTLINE_SOLID,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
-import { BLUEPRINT_FRAME, BLUEPRINT_MAX_WIDTH, BLUEPRINT_PAGE_INSET } from "@/lib/blueprint-grid";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
@@ -25,14 +25,10 @@ const navLinks = [
 /** Scroll margin for in-page anchor targets below the fixed nav bar. */
 export const NAV_SCROLL_OFFSET_CLASS = "scroll-mt-[3.75rem] sm:scroll-mt-16";
 
-/** Reserves space for the fixed nav bar row inside the blueprint frame. */
+/** Reserves space for the fixed nav bar. */
 export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 
-/** Matches `main` horizontal inset so the bar aligns with BlueprintFrame. */
-const NAV_FIXED_INSET = cn(
-  "fixed inset-x-0 top-0 z-50",
-  BLUEPRINT_PAGE_INSET,
-);
+const NAV_FIXED = "fixed inset-x-0 top-0 z-50";
 
 const NAV_SHELL_SOLID = "bg-[#161616]";
 const NAV_SHELL_GLASS = "bg-[#161616]/90 backdrop-blur-md";
@@ -135,17 +131,8 @@ export default function Navbar() {
     : PANEL_TRANSITION;
 
   return (
-    <header className={NAV_FIXED_INSET}>
-      <div
-        className={cn(
-          "mx-auto w-full border",
-          BLUEPRINT_MAX_WIDTH,
-          BLUEPRINT_FRAME,
-          NAV_SHELL_TRANSITION,
-          navShellClass,
-        )}
-      >
-      <div className="relative flex w-full items-center justify-between gap-4 px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8">
+    <header className={cn(NAV_FIXED, NAV_SHELL_TRANSITION, navShellClass)}>
+      <div className={cn(PAGE_CONTAINER, "relative flex w-full items-center justify-between gap-4 py-3.5 sm:py-4")}>
         <a
           href="#home"
           onClick={scrollToTop}
@@ -265,7 +252,7 @@ export default function Navbar() {
         {mobileOpen ? (
           <motion.div
             key="mobile-menu"
-            className="overflow-hidden border-t border-[#2e2e2e] md:hidden"
+            className="overflow-hidden border-t border-white/10 md:hidden"
             variants={panelVariants}
             initial="hidden"
             animate="visible"
@@ -315,7 +302,6 @@ export default function Navbar() {
           </motion.div>
         ) : null}
       </AnimatePresence>
-      </div>
     </header>
   );
 }

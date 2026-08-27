@@ -6,7 +6,6 @@ import { FormEvent, useState } from "react";
 import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { blueprintRow } from "@/lib/blueprint-grid";
 import {
   EASE_OUT,
   ScrollRevealGroup,
@@ -81,7 +80,6 @@ export default function WaitlistSection() {
     <section
       id="waitlist"
       className={cn(
-        blueprintRow,
         NAV_SCROLL_OFFSET_CLASS,
         "relative overflow-hidden bg-waitlist-spotlight",
       )}

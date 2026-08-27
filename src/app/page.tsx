@@ -1,4 +1,3 @@
-import BlueprintFrame from "@/src/components/BlueprintFrame";
 import EditShowcasePreload from "@/src/components/EditShowcasePreload";
 import EditShowcaseSection from "@/src/components/EditShowcaseSection";
 import FAQ from "@/src/components/FAQ";
@@ -13,56 +12,47 @@ import Navbar, {
 } from "@/src/components/Navbar";
 import Showcase from "@/src/components/Showcase";
 import WaitlistSection from "@/src/components/WaitlistSection";
-import { blueprintRow, BLUEPRINT_PAGE_INSET } from "@/lib/blueprint-grid";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
-    <main
-      id="home"
-      className={cn("overflow-x-hidden bg-brand-bg text-white", BLUEPRINT_PAGE_INSET)}
-    >
+    <main id="home" className="overflow-x-hidden bg-brand-bg text-white">
       <EditShowcasePreload />
       <Navbar />
-      <BlueprintFrame>
-        <div aria-hidden className={NAV_SPACER_CLASS} />
+      <div aria-hidden className={NAV_SPACER_CLASS} />
 
-        <section className={cn(blueprintRow, "relative overflow-hidden bg-waitlist-spotlight")}>
-          <HeroParticleBackground />
-          <Hero />
-        </section>
+      <section className="relative overflow-hidden bg-waitlist-spotlight">
+        <HeroParticleBackground />
+        <Hero />
+      </section>
 
-        <section className={cn(blueprintRow, "bg-brand-bg")}>
-          <Showcase />
-        </section>
+      <section className="bg-brand-bg">
+        <Showcase />
+      </section>
 
-        <MarqueeStrip />
+      <MarqueeStrip />
 
-        <section
-          id="features"
-          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
-        >
-          <Features />
-        </section>
+      <section
+        id="features"
+        className={cn(NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
+      >
+        <Features />
+      </section>
 
-        <section
-          id="edit-showcase"
-          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
-        >
-          <EditShowcaseSection />
-        </section>
+      <section
+        id="edit-showcase"
+        className={cn(NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
+      >
+        <EditShowcaseSection />
+      </section>
 
-        <section
-          id="faq"
-          className={cn(blueprintRow, NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
-        >
-          <FAQ />
-        </section>
+      <section id="faq" className={cn(NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}>
+        <FAQ />
+      </section>
 
-        <WaitlistSection />
+      <WaitlistSection />
 
-        <Footer />
-      </BlueprintFrame>
+      <Footer />
     </main>
   );
 }

@@ -9,13 +9,12 @@ import {
   LinkedinIcon,
   XSocialIcon,
 } from "@/lib/brand-social-icons";
-import { blueprintBorderT, blueprintCol } from "@/lib/blueprint-grid";
+import { SECTION_DIVIDE } from "@/lib/section-styles";
 import {
   ScrollReveal,
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
-import { cn } from "@/lib/utils";
 
 const socialLinks = [
   {
@@ -69,9 +68,7 @@ export default function Footer() {
         className="grid grid-cols-1 lg:grid-cols-3"
         stagger={0.1}
       >
-        <ScrollRevealItem
-          className={cn(blueprintCol, "flex flex-col items-start gap-5 px-4 py-10 sm:px-8 lg:px-10")}
-        >
+        <ScrollRevealItem className="flex flex-col items-start gap-5 px-4 py-10 sm:px-8 lg:px-10">
           <Image
             src="/redux-logo.png"
             alt="Redux"
@@ -84,9 +81,7 @@ export default function Footer() {
           </p>
         </ScrollRevealItem>
 
-        <ScrollRevealItem
-          className={cn(blueprintCol, "px-4 py-10 sm:px-8 lg:px-10")}
-        >
+        <ScrollRevealItem className="px-4 py-10 sm:px-8 lg:px-10">
           <p className="text-sm font-medium text-white">Navigation</p>
           <ul className="mt-4 space-y-3">
             {navigationLinks.map((link) => (
@@ -102,9 +97,7 @@ export default function Footer() {
           </ul>
         </ScrollRevealItem>
 
-        <ScrollRevealItem
-          className={cn(blueprintCol, "px-4 py-10 sm:px-8 lg:px-10")}
-        >
+        <ScrollRevealItem className="px-4 py-10 sm:px-8 lg:px-10">
           <p className="text-sm font-medium text-white">Legal</p>
           <ul className="mt-4 space-y-3">
             {legalLinks.map((link) => (
@@ -122,7 +115,7 @@ export default function Footer() {
       </ScrollRevealGroup>
 
       <ScrollReveal variant="fadeIn">
-        <div className={blueprintBorderT}>
+        <div className={SECTION_DIVIDE}>
           <div className="flex flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
             <p className="text-sm text-white/50">
               © Redux 2026. All rights reserved.
