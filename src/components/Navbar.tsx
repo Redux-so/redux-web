@@ -9,7 +9,6 @@ import { DiscordIcon } from "@/lib/brand-social-icons";
 
 import {
   BTN_OUTLINE_BLOCK,
-  BTN_OUTLINE_SOLID,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
 import { SITE_CONTAINER } from "@/lib/section-styles";
@@ -48,10 +47,6 @@ const NAV_LOGO_INTRINSIC_HEIGHT = 117;
 /** Shared action button height in the desktop nav bar. */
 const NAV_ACTION_HEIGHT =
   "!h-[34px] !min-h-[34px] !max-h-[34px] shrink-0 leading-none";
-
-/** Square icon button — width matches height exactly. */
-const NAV_ICON_BUTTON_SIZE =
-  "!size-[34px] !min-h-[34px] !min-w-[34px] !max-h-[34px] !max-w-[34px] shrink-0";
 
 const PANEL_TRANSITION = { duration: 0.3, ease: EASE_OUT };
 const ICON_TRANSITION = { duration: 0.18, ease: EASE_OUT };
@@ -164,19 +159,15 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center justify-self-end gap-2.5">
+        <div className="flex shrink-0 items-center justify-self-end gap-4">
           <a
             href="https://discord.gg/gzHrud9nee"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Discord"
-            className={cn(
-              BTN_OUTLINE_SOLID,
-              NAV_ICON_BUTTON_SIZE,
-              "hidden !p-0 md:inline-flex",
-            )}
+            className="hidden shrink-0 text-white transition-colors hover:text-white/80 md:inline-flex md:items-center md:justify-center"
           >
-            <DiscordIcon className="size-[18px] shrink-0" />
+            <DiscordIcon className="size-5 shrink-0" />
           </a>
           <a
             href="#waitlist"
