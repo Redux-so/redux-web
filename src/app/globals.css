@@ -229,7 +229,7 @@ html {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-brand-bg text-white font-body;
+    @apply bg-[#121212] text-white font-body;
   }
   html {
     @apply font-body;

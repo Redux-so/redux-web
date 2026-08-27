@@ -18,15 +18,16 @@ const SECTION_BASE = cn("bg-brand-bg", SECTION_DIVIDE);
 
 export default function Home() {
   return (
-    <>
+    <div className="min-h-full bg-[#121212]">
       <EditShowcasePreload />
 
       {/*
         Sticky footer reveal: this layer scrolls over the footer (z-10 + solid bg).
         Footer is a sibling with sticky bottom-0 z-0 so it is uncovered at scroll end.
-        Keep overflow-x-hidden on main only — not this wrapper — so sticky is not broken.
+        Rounded bottom corners clip this sheet as it slides up; overflow-hidden is
+        safe here because the footer is outside this wrapper (sticky is unaffected).
       */}
-      <div className="relative z-10 bg-brand-bg text-white">
+      <div className="relative z-10 overflow-hidden rounded-b-[2.5rem] bg-brand-bg text-white sm:rounded-b-[3.25rem] lg:rounded-b-[4rem] xl:rounded-b-[5rem]">
         <Navbar />
         <div aria-hidden className={NAV_SPACER_CLASS} />
 
@@ -77,6 +78,6 @@ export default function Home() {
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 }
