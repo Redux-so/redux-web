@@ -1,16 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment } from "react";
 
 import { Icon } from "@/components/shared/Icon";
 import ConversationalEditingShowcaseCrop from "@/src/components/features/ConversationalEditingShowcaseCrop";
 import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowcaseCrop";
 import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcaseCrop";
+import SectionIntro from "@/src/components/SectionIntro";
+import SectionShell from "@/src/components/SectionShell";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { PAGE_CONTAINER } from "@/lib/section-styles";
+import { SECTION_INNER_STACK } from "@/lib/section-styles";
 import {
-  ScrollReveal,
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
@@ -42,13 +42,6 @@ const FEATURE_IMAGE_HEIGHT =
 
 const FEATURE_SHOWCASE_FRAME =
   "overflow-hidden rounded-2xl border border-[#2e2e2e] bg-brand-bg";
-
-const FEATURES_SECTION_LABEL =
-  "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
-
-/** Equal space above/below each feature card. */
-const FEATURE_CARD_SPACE = "my-8 sm:my-10";
-const FEATURE_CARD_STACK_PADDING = "py-8 sm:py-10";
 
 const features: Feature[] = [
   {
@@ -161,47 +154,26 @@ function FeatureRow({ feature }: { feature: Feature }) {
   );
 }
 
-function FeaturesSectionIntro() {
-  return (
-    <ScrollReveal
-      variant="fadeIn"
-      className="py-5 sm:py-6"
-    >
-      <p className={cn("m-0", FEATURES_SECTION_LABEL)}>Features</p>
-    </ScrollReveal>
-  );
-}
-
 export default function Features() {
   return (
-    <div className={cn(PAGE_CONTAINER, "flex flex-col")}>
-      <FeaturesSectionIntro />
-      <ScrollRevealGroup
-        className={cn("flex flex-col", FEATURE_CARD_STACK_PADDING)}
-        stagger={0.12}
-      >
-      {features.map((feature, index) => {
-        const row =
-          feature.showcaseScenario === "styleMatch" ? (
-            <div key={feature.headline}>
-              <FeatureRow feature={feature} />
-            </div>
-          ) : (
+    <SectionShell intro={<SectionIntro>Features</SectionIntro>}>
+      <ScrollRevealGroup className={SECTION_INNER_STACK} stagger={0.12}>
+        {features.map((feature) => {
+          if (feature.showcaseScenario === "styleMatch") {
+            return (
+              <div key={feature.headline}>
+                <FeatureRow feature={feature} />
+              </div>
+            );
+          }
+
+          return (
             <ScrollRevealItem key={feature.headline}>
               <FeatureRow feature={feature} />
             </ScrollRevealItem>
           );
-
-        return (
-          <Fragment key={feature.headline}>
-            {row}
-            {index < features.length - 1 ? (
-              <div aria-hidden className={FEATURE_CARD_SPACE} />
-            ) : null}
-          </Fragment>
-        );
-      })}
+        })}
       </ScrollRevealGroup>
-    </div>
+    </SectionShell>
   );
 }

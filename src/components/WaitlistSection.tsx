@@ -3,9 +3,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useState } from "react";
 
-import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
+import SectionShell from "@/src/components/SectionShell";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { PAGE_CONTAINER } from "@/lib/section-styles";
 import {
   EASE_OUT,
   ScrollRevealGroup,
@@ -77,20 +76,11 @@ export default function WaitlistSection() {
   };
 
   return (
-    <section
-      id="waitlist"
-      className={cn(NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
-    >
-      <div
-        className={cn(
-          PAGE_CONTAINER,
-          "relative z-[1] py-16 sm:py-20 lg:py-24",
-        )}
+    <SectionShell className="relative z-[1]">
+      <ScrollRevealGroup
+        className="mx-auto w-full max-w-2xl text-center"
+        stagger={0.12}
       >
-        <ScrollRevealGroup
-          className="mx-auto max-w-2xl text-center"
-          stagger={0.12}
-        >
         <ScrollRevealItem>
           <h2 className="font-display text-3xl font-normal tracking-tight text-white sm:text-4xl">
             Join the Waitlist
@@ -173,8 +163,7 @@ export default function WaitlistSection() {
             </motion.div>
           ) : null}
         </div>
-        </ScrollRevealGroup>
-      </div>
-    </section>
+      </ScrollRevealGroup>
+    </SectionShell>
   );
 }

@@ -11,11 +11,14 @@ import {
   EDIT_SHOWCASE_TOP_ROW,
   type EditShowcasePhoto,
 } from "@/src/components/edit-showcase/edit-showcase-data";
-import { ScrollReveal, ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
+import SectionIntro from "@/src/components/SectionIntro";
+import {
+  PAGE_CONTAINER,
+  SECTION_PADDING_Y,
+  SECTION_STACK_GAP,
+} from "@/lib/section-styles";
+import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
-
-const EDIT_SHOWCASE_SECTION_LABEL =
-  "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
 
 type PhotoMarqueeRowProps = {
   photos: readonly EditShowcasePhoto[];
@@ -123,25 +126,20 @@ function PhotoMarqueeRow({
   );
 }
 
-function EditShowcaseSectionIntro() {
-  return (
-    <ScrollReveal
-      variant="fadeIn"
-      className="px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
-    >
-      <p className={cn("m-0", EDIT_SHOWCASE_SECTION_LABEL)}>
-        See how Redux can edit
-      </p>
-    </ScrollReveal>
-  );
-}
-
 export default function EditShowcaseSection() {
   return (
     <div className="flex flex-col">
-      <EditShowcaseSectionIntro />
+      <div className={cn(PAGE_CONTAINER, SECTION_PADDING_Y, "pb-0")}>
+        <SectionIntro>See how Redux can edit</SectionIntro>
+      </div>
+
       <ScrollRevealGroup
-        className="flex flex-col gap-8 px-4 py-10 sm:gap-10 sm:px-8 sm:py-12 lg:px-10"
+        className={cn(
+          "flex flex-col",
+          SECTION_STACK_GAP,
+          SECTION_PADDING_Y,
+          "pt-0",
+        )}
         stagger={0.1}
       >
         <ScrollRevealItem variant="fadeIn">

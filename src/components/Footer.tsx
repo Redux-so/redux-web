@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 
+import SectionShell from "@/src/components/SectionShell";
 import {
   DiscordIcon,
   GithubIcon,
@@ -9,7 +10,7 @@ import {
   LinkedinIcon,
   XSocialIcon,
 } from "@/lib/brand-social-icons";
-import { SECTION_DIVIDE, PAGE_CONTAINER } from "@/lib/section-styles";
+import { SECTION_DIVIDE } from "@/lib/section-styles";
 import {
   ScrollReveal,
   ScrollRevealGroup,
@@ -63,12 +64,12 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className={PAGE_CONTAINER}>
+    <SectionShell className="gap-0 pb-0">
       <ScrollRevealGroup
         className="grid grid-cols-1 lg:grid-cols-3"
         stagger={0.1}
       >
-        <ScrollRevealItem className="flex flex-col items-start gap-5 py-10">
+        <ScrollRevealItem className="flex flex-col items-start gap-5">
           <Image
             src="/redux-logo.png"
             alt="Redux"
@@ -81,7 +82,7 @@ export default function Footer() {
           </p>
         </ScrollRevealItem>
 
-        <ScrollRevealItem className="py-10">
+        <ScrollRevealItem>
           <p className="text-sm font-medium text-white">Navigation</p>
           <ul className="mt-4 space-y-3">
             {navigationLinks.map((link) => (
@@ -97,7 +98,7 @@ export default function Footer() {
           </ul>
         </ScrollRevealItem>
 
-        <ScrollRevealItem className="py-10">
+        <ScrollRevealItem>
           <p className="text-sm font-medium text-white">Legal</p>
           <ul className="mt-4 space-y-3">
             {legalLinks.map((link) => (
@@ -141,6 +142,6 @@ export default function Footer() {
           </div>
         </div>
       </ScrollReveal>
-    </footer>
+    </SectionShell>
   );
 }

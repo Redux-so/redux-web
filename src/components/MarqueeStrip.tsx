@@ -3,9 +3,8 @@
 import Image from "next/image";
 import { Fragment } from "react";
 
+import SectionShell from "@/src/components/SectionShell";
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
-import { PAGE_CONTAINER } from "@/lib/section-styles";
-import { cn } from "@/lib/utils";
 
 const marqueeItems = [
   { src: "/marquee/photoshop.png", alt: "Adobe Photoshop", width: 152, height: 126 },
@@ -54,13 +53,10 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 
 export default function MarqueeStrip() {
   return (
-    <section className="bg-brand-bg">
-      <ScrollRevealGroup
-        className={cn(PAGE_CONTAINER, "flex w-full flex-col py-5 sm:py-6")}
-        stagger={0.1}
-      >
+    <SectionShell>
+      <ScrollRevealGroup className="flex w-full flex-col" stagger={0.1}>
         <ScrollRevealItem>
-          <p className="mb-6 text-center text-sm text-white/70 sm:mb-8 sm:text-base">
+          <p className="text-center text-sm text-white/70 sm:text-base">
             Inspired by workflows from
           </p>
         </ScrollRevealItem>
@@ -74,6 +70,6 @@ export default function MarqueeStrip() {
           </div>
         </ScrollRevealItem>
       </ScrollRevealGroup>
-    </section>
+    </SectionShell>
   );
 }

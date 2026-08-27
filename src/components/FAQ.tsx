@@ -8,12 +8,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
+import SectionIntro from "@/src/components/SectionIntro";
+import SectionShell from "@/src/components/SectionShell";
 import { ScrollReveal } from "@/lib/scroll-motion";
-import { PAGE_CONTAINER } from "@/lib/section-styles";
-import { cn } from "@/lib/utils";
-
-const FAQ_SECTION_LABEL =
-  "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
 
 const faqs = [
   {
@@ -48,19 +45,10 @@ const faqs = [
   },
 ] as const;
 
-function FaqSectionIntro() {
-  return (
-    <ScrollReveal variant="fadeIn" className="py-5 sm:py-6">
-      <p className={cn("m-0", FAQ_SECTION_LABEL)}>Frequently asked questions</p>
-    </ScrollReveal>
-  );
-}
-
 export default function FAQ() {
   return (
-    <div className={cn(PAGE_CONTAINER, "flex flex-col")}>
-      <FaqSectionIntro />
-      <ScrollReveal className="py-8 sm:py-10">
+    <SectionShell intro={<SectionIntro>Frequently asked questions</SectionIntro>}>
+      <ScrollReveal>
         <div className="mx-auto w-full max-w-3xl">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
@@ -72,6 +60,6 @@ export default function FAQ() {
           </Accordion>
         </div>
       </ScrollReveal>
-    </div>
+    </SectionShell>
   );
 }
