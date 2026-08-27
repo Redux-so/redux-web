@@ -2,7 +2,7 @@
 
 import { Menu01, XClose } from "@untitledui/icons";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 
 import { DiscordIcon } from "@/lib/brand-social-icons";
@@ -33,12 +33,7 @@ export const NAV_SCROLL_OFFSET_CLASS = "scroll-mt-[3.75rem] sm:scroll-mt-16";
 /** Reserves space for the fixed nav bar. */
 export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 
-const NAV_FIXED = "fixed inset-x-0 top-0 z-50";
-
-const NAV_SHELL_SOLID = "bg-[#161616]";
-const NAV_SHELL_GLASS = "bg-[#161616]/90 backdrop-blur-md";
-const NAV_SHELL_TRANSITION =
-  "transition-[background-color,backdrop-filter] duration-200";
+const NAV_FIXED = "fixed inset-x-0 top-0 z-50 bg-[#161616]";
 
 /** Shared action button height in the desktop nav bar. */
 const NAV_ACTION_HEIGHT =
@@ -97,21 +92,7 @@ const menuItemReducedVariants: Variants = {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    const updateScrollState = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    updateScrollState();
-    window.addEventListener("scroll", updateScrollState, { passive: true });
-
-    return () => window.removeEventListener("scroll", updateScrollState);
-  }, []);
-
-  const navShellClass = isScrolled ? NAV_SHELL_GLASS : NAV_SHELL_SOLID;
 
   const closeMobileMenu = () => setMobileOpen(false);
 
@@ -136,7 +117,7 @@ export default function Navbar() {
     : PANEL_TRANSITION;
 
   return (
-    <header className={cn(NAV_FIXED, NAV_SHELL_TRANSITION, navShellClass)}>
+    <header className={NAV_FIXED}>
       <div className={cn(NAV_CONTAINER)}>
         <a
           href="#home"

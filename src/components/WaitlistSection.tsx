@@ -3,7 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useState } from "react";
 
-import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import { PAGE_CONTAINER } from "@/lib/section-styles";
@@ -80,12 +79,8 @@ export default function WaitlistSection() {
   return (
     <section
       id="waitlist"
-      className={cn(
-        NAV_SCROLL_OFFSET_CLASS,
-        "relative overflow-hidden bg-waitlist-spotlight",
-      )}
+      className={cn(NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
     >
-      <HeroParticleBackground />
       <div
         className={cn(
           PAGE_CONTAINER,

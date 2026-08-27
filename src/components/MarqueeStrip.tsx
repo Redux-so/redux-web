@@ -71,14 +71,6 @@ export default function MarqueeStrip() {
               <MarqueeTrack trackKey="a" />
               <MarqueeTrack trackKey="b" aria-hidden />
             </div>
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-brand-bg to-transparent sm:w-14 lg:w-16"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-brand-bg to-transparent sm:w-14 lg:w-16"
-            />
           </div>
         </ScrollRevealItem>
       </ScrollRevealGroup>

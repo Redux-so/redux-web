@@ -4,7 +4,6 @@ import FAQ from "@/src/components/FAQ";
 import Features from "@/src/components/Features";
 import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
-import HeroParticleBackground from "@/src/components/HeroParticleBackground";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
 import Navbar, {
   NAV_SCROLL_OFFSET_CLASS,
@@ -21,8 +20,7 @@ export default function Home() {
       <Navbar />
       <div aria-hidden className={NAV_SPACER_CLASS} />
 
-      <section className="relative overflow-hidden bg-waitlist-spotlight">
-        <HeroParticleBackground />
+      <section className="bg-brand-bg">
         <Hero />
       </section>
 

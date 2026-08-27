@@ -70,9 +70,6 @@
   --shadow-btn-primary-active:
     0 0 0 1px rgba(255, 255, 255, 0.06),
     inset 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 16px rgba(121, 74, 222, 0.5), 0 0 40px rgba(121, 74, 222, 0.2);
-  --shadow-glow-sm: 0 0 8px rgba(121, 74, 222, 0.4);
-  --shadow-glow-hover: 0 0 24px rgba(121, 74, 222, 0.65), 0 0 50px rgba(121, 74, 222, 0.25);
 }
 
 :root {
@@ -87,9 +84,6 @@
   --surface-chrome: #121212;
   --accent-editor: #794ade;
   --accent-end: #9168eb;
-  --accent-glow: rgba(121, 74, 222, 0.4);
-  --accent-glow-sm: rgba(121, 74, 222, 0.25);
-  --accent-glow-rgb: 121, 74, 222;
   --scrollbar-thumb: rgba(255, 255, 255, 0.12);
   --scrollbar-thumb-hover: rgba(121, 74, 222, 0.38);
   --brand-bg: #161616;
@@ -228,64 +222,6 @@ html {
 
 .editor-showcase .showcase-chat-messages::-webkit-scrollbar {
   display: none;
-}
-
-.bg-waitlist-spotlight {
-  background-color: #161616;
-  background-image: radial-gradient(
-    ellipse 95% 75% at 50% -15%,
-    #242424 0%,
-    #1d1d1d 30%,
-    #161616 65%
-  );
-}
-
-.bg-hero-showcase-glow {
-  background-color: #161616;
-}
-
-.bg-marquee-gradient {
-  background-color: #161616;
-}
-
-.accent-glow-heading {
-  position: relative;
-  isolation: isolate;
-}
-
-.accent-glow-heading::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: -1;
-  width: min(110%, 52rem);
-  height: 10rem;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    ellipse 120% 80% at center,
-    rgba(var(--accent-glow-rgb), 0.28) 0%,
-    transparent 72%
-  );
-  filter: blur(56px);
-  pointer-events: none;
-}
-
-.accent-glow-surface {
-  box-shadow:
-    inset 0 0 44px rgba(var(--accent-glow-rgb), 0.19),
-    0 0 24px rgba(var(--accent-glow-rgb), 0.13);
-  transition:
-    box-shadow 0.3s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.accent-glow-surface:hover,
-.accent-glow-surface:focus-within {
-  box-shadow:
-    inset 0 0 52px rgba(var(--accent-glow-rgb), 0.38),
-    0 0 32px rgba(var(--accent-glow-rgb), 0.23);
 }
 
 @layer base {
