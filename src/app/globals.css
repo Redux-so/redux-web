@@ -86,7 +86,7 @@
   --accent-end: #9168eb;
   --scrollbar-thumb: rgba(255, 255, 255, 0.12);
   --scrollbar-thumb-hover: rgba(121, 74, 222, 0.38);
-  --brand-bg: #161616;
+  --brand-bg: #121212;
   --brand-surface: #1d1d1d;
   --brand-surface-card: #121212;
   --brand-surface2: #1d1d1d;
@@ -229,7 +229,7 @@ html {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-[#121212] text-white font-body;
+    @apply bg-[#0E0E0E] text-white font-body;
   }
   html {
     @apply font-body;

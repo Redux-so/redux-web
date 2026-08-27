@@ -18,7 +18,7 @@ const SECTION_BASE = cn("bg-brand-bg", SECTION_DIVIDE);
 
 export default function Home() {
   return (
-    <div className="min-h-full bg-[#121212]">
+    <div className="min-h-full bg-[#0E0E0E]">
       <EditShowcasePreload />
 
       {/*

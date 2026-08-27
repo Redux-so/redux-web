@@ -9,7 +9,7 @@ const config: Config = {
           "purple-hover": "#9168eb",
           link: "#A688F0",
           "link-hover": "#BBA0F5",
-          bg: "#161616",
+          bg: "#121212",
           surface: "#1d1d1d",
           "surface-card": "#121212",
           surface2: "#1d1d1d",

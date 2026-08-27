@@ -34,7 +34,7 @@ export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 
 const NAV_FIXED = cn(
   "fixed inset-x-0 top-0 z-50 overflow-visible",
-  "bg-[#161616]/90 backdrop-blur-md backdrop-saturate-150",
+  "bg-brand-bg/90 backdrop-blur-md backdrop-saturate-150",
 );
 
 /**
