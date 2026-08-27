@@ -12,9 +12,11 @@ import {
   BTN_OUTLINE_SOLID,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
-import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
+
+const NAV_CONTAINER =
+  "mx-auto grid w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 py-3.5 sm:px-8 sm:py-4 lg:px-12";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -132,11 +134,11 @@ export default function Navbar() {
 
   return (
     <header className={cn(NAV_FIXED, NAV_SHELL_TRANSITION, navShellClass)}>
-      <div className={cn(PAGE_CONTAINER, "relative flex w-full items-center justify-between gap-4 py-3.5 sm:py-4")}>
+      <div className={cn(NAV_CONTAINER)}>
         <a
           href="#home"
           onClick={scrollToTop}
-          className="group inline-flex size-9 shrink-0 items-center justify-center rounded-md"
+          className="group inline-flex size-9 shrink-0 items-center justify-center justify-self-start rounded-md"
           aria-label="Back to top"
         >
           <Image
@@ -150,7 +152,7 @@ export default function Navbar() {
         </a>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex"
+          className="hidden items-center justify-self-center gap-6 md:flex"
           aria-label="Main navigation"
         >
           {navLinks.map((link) => (
@@ -164,7 +166,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2.5">
+        <div className="flex shrink-0 items-center justify-self-end gap-2.5">
           <a
             href="https://discord.gg/gzHrud9nee"
             target="_blank"
