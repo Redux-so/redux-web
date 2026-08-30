@@ -24,7 +24,11 @@ type UseGridOverlayOptions = {
 };
 
 function geometriesEqual(a: GridGeometry, b: GridGeometry): boolean {
-  if (a.leftX !== b.leftX || a.rightX !== b.rightX) {
+  if (
+    a.leftX !== b.leftX ||
+    a.rightX !== b.rightX ||
+    a.boundsHeight !== b.boundsHeight
+  ) {
     return false;
   }
 
@@ -90,10 +94,12 @@ export function useGridOverlay({
     }
 
     const boundaryYs = getBoundaryYsRef.current?.(bounds) ?? [];
+    const boundsHeight = bounds.getBoundingClientRect().height;
 
     const nextGeometry: GridGeometry = {
       ...columns,
       boundaryYs,
+      boundsHeight,
     };
 
     if (!isValidGeometry(nextGeometry)) {

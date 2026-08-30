@@ -1,9 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment } from "react";
 
-import SectionShell from "@/src/components/SectionShell";
+import {
+  GRID_LINE_COLOR,
+  GridCornerMark,
+  GridPlusMark,
+  getColumnBoundaryPercents,
+} from "@/src/components/page-grid/shared";
+import { PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 
 const marqueeItems = [
@@ -14,71 +19,96 @@ const marqueeItems = [
   { src: "/marquee/figma.png", alt: "Figma", width: 356, height: 106 },
 ] as const;
 
-const TRACK_REPEATS = 1;
+const MARQUEE_LOGO_BOX_CLASS =
+  "flex h-7 w-full min-w-0 items-center justify-center sm:h-8 lg:h-9";
+const MARQUEE_LOGO_CLASS = "max-h-full max-w-full object-contain";
 
-/** Muted treatment for marquee logos and separators — darker grey strip tone. */
-const MARQUEE_LOGO_CLASS =
-  "h-6 w-auto opacity-40 grayscale sm:h-7 lg:h-8";
-
-const MARQUEE_DOT_CLASS = "text-[#727272]";
-
-type MarqueeTrackProps = {
-  trackKey: string;
-  "aria-hidden"?: boolean;
-};
-
-function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps) {
-  const items = Array.from({ length: TRACK_REPEATS }, () => marqueeItems).flat();
-
-  return (
-    <div
-      className="flex shrink-0 items-center gap-10 pr-10 sm:gap-14 sm:pr-14"
-      aria-hidden={ariaHidden}
-    >
-      {items.map((item, index) => (
-        <Fragment key={`${trackKey}-${index}`}>
-          {index > 0 ? (
-            <span className={MARQUEE_DOT_CLASS} aria-hidden="true">
-              ·
-            </span>
-          ) : null}
-          <Image
-            src={item.src}
-            alt={item.alt}
-            width={item.width}
-            height={item.height}
-            unoptimized
-            className={MARQUEE_LOGO_CLASS}
-            draggable={false}
-          />
-        </Fragment>
-      ))}
-    </div>
-  );
-}
+const columnBoundaries = getColumnBoundaryPercents(marqueeItems.length);
 
 export default function MarqueeStrip() {
   return (
-    <SectionShell>
-      <ScrollRevealGroup
-        className="flex min-w-0 w-full flex-col gap-6 sm:gap-8"
-        stagger={0.1}
-      >
-        <ScrollRevealItem>
-          <p className="text-center text-[11px] uppercase text-white/55 sm:text-xs">
-            Inspired by workflows from
+    <ScrollRevealGroup className="flex min-w-0 w-full flex-col" stagger={0.1}>
+      <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
+        <div className={PAGE_GRID_ALIGNED_FRAME}>
+          <p className="m-0 py-6 text-center text-base text-white/55 sm:py-8 sm:text-lg">
+            Inspired by{" "}
+            <span className="font-semibold text-white/90">workflows</span> from
           </p>
-        </ScrollRevealItem>
 
-        <ScrollRevealItem variant="fadeIn" className="w-full">
-          <div className="relative w-full overflow-hidden">
-            <div className="animate-marquee flex w-max items-center">
-              <MarqueeTrack trackKey="a" />
-              <MarqueeTrack trackKey="b" aria-hidden />
-            </div>
+          <div
+            className="relative border-y"
+            style={{ borderColor: GRID_LINE_COLOR }}
+          >
+            {columnBoundaries.map((leftPercent) => (
+              <div
+                key={`rail-${leftPercent}`}
+                className="pointer-events-none absolute inset-y-0 w-px"
+                style={{
+                  left: `${leftPercent}%`,
+                  transform: "translateX(-50%)",
+                  backgroundColor: GRID_LINE_COLOR,
+                }}
+                aria-hidden
+              />
+            ))}
+
+            {columnBoundaries.flatMap((leftPercent) => {
+              const isOuterEdge = leftPercent === 0 || leftPercent === 100;
+
+              if (isOuterEdge) {
+                return [
+                  <GridCornerMark
+                    key={`corner-top-${leftPercent}`}
+                    corner={leftPercent === 0 ? "top-left" : "top-right"}
+                    leftPercent={leftPercent}
+                    edge="top"
+                  />,
+                  <GridCornerMark
+                    key={`corner-bottom-${leftPercent}`}
+                    corner={leftPercent === 0 ? "bottom-left" : "bottom-right"}
+                    leftPercent={leftPercent}
+                    edge="bottom"
+                  />,
+                ];
+              }
+
+              return [
+                <GridPlusMark
+                  key={`plus-top-${leftPercent}`}
+                  leftPercent={leftPercent}
+                  edge="top"
+                />,
+                <GridPlusMark
+                  key={`plus-bottom-${leftPercent}`}
+                  leftPercent={leftPercent}
+                  edge="bottom"
+                />,
+              ];
+            })}
+
+            <ul className="relative z-[1] m-0 grid min-w-0 list-none grid-cols-5 p-0">
+              {marqueeItems.map((item) => (
+                <li
+                  key={item.src}
+                  className="flex min-w-0 items-center justify-center px-1 py-6 sm:px-3 sm:py-10 lg:px-4 lg:py-12"
+                >
+                  <div className={MARQUEE_LOGO_BOX_CLASS}>
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      width={item.width}
+                      height={item.height}
+                      unoptimized
+                      className={MARQUEE_LOGO_CLASS}
+                      draggable={false}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-        </ScrollRevealItem>
-      </ScrollRevealGroup>
-    </SectionShell>
+        </div>
+      </ScrollRevealItem>
+    </ScrollRevealGroup>
   );
 }

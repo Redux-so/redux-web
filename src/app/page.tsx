@@ -49,7 +49,11 @@ export default function Home() {
             <Showcase />
           </section>
 
-          <section aria-label="Inspired by workflows from" className={SECTION_BASE}>
+          <section
+            aria-label="Inspired by workflows from"
+            className="relative z-[1]"
+            data-page-grid-skip-boundary-after
+          >
             <MarqueeStrip />
           </section>
 

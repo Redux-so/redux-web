@@ -21,12 +21,19 @@ export default function PageGrid({ className }: PageGridProps) {
     const boundaryYs: number[] = [];
 
     for (let index = 0; index < sections.length - 1; index += 1) {
-      const current = sections[index]?.getBoundingClientRect();
-      const next = sections[index + 1]?.getBoundingClientRect();
+      const current = sections[index];
+      const next = sections[index + 1];
 
-      if (!current || !next) continue;
+      if (current?.hasAttribute("data-page-grid-skip-boundary-after")) {
+        continue;
+      }
 
-      boundaryYs.push((current.bottom + next.top) / 2 - boundsRect.top);
+      const currentRect = current?.getBoundingClientRect();
+      const nextRect = next?.getBoundingClientRect();
+
+      if (!currentRect || !nextRect) continue;
+
+      boundaryYs.push((currentRect.bottom + nextRect.top) / 2 - boundsRect.top);
     }
 
     return boundaryYs;
@@ -57,7 +64,7 @@ export default function PageGrid({ className }: PageGridProps) {
 
       {geometry ? (
         <div className="absolute inset-0">
-          <GridOverlayLines geometry={geometry} />
+          <GridOverlayLines geometry={geometry} hideTopBandCorners />
         </div>
       ) : null}
     </div>
