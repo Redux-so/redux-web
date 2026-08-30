@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 const NAV_CONTAINER = cn(
   SITE_CONTAINER,
-  "grid h-[3.75rem] grid-cols-[1fr_auto_1fr] items-center gap-4 overflow-visible sm:h-16",
+  "grid h-[3.75rem] min-w-0 grid-cols-[1fr_auto] items-center gap-2 overflow-visible sm:h-16 sm:grid-cols-[1fr_auto_1fr] sm:gap-4",
 );
 
 const navLinks = [
@@ -170,7 +170,7 @@ export default function Navbar() {
             className={cn(
               BTN_PRIMARY_SOLID,
               NAV_ACTION_HEIGHT,
-              "px-3.5 text-sm",
+              "px-2.5 text-xs sm:px-3.5 sm:text-sm",
             )}
           >
             Join Waitlist

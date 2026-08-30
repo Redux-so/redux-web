@@ -28,11 +28,11 @@ export default function Home() {
         Rounded bottom corners clip this sheet as it slides up; overflow-hidden is
         safe here because the footer is outside this wrapper (sticky is unaffected).
       */}
-      <div className="relative z-10 overflow-hidden rounded-b-[2.5rem] bg-brand-bg text-white sm:rounded-b-[3.25rem] lg:rounded-b-[4rem] xl:rounded-b-[5rem]">
+      <div className="relative z-10 overflow-x-clip overflow-hidden rounded-b-[2.5rem] bg-brand-bg text-white sm:rounded-b-[3.25rem] lg:rounded-b-[4rem] xl:rounded-b-[5rem]">
         <Navbar />
         <div aria-hidden className={NAV_SPACER_CLASS} />
 
-        <main className="flex flex-col overflow-x-hidden">
+        <main className="flex min-w-0 flex-col overflow-x-clip">
           <section
             id="home"
             className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}

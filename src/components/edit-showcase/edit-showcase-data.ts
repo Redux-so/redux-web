@@ -65,8 +65,9 @@ export const EDIT_SHOWCASE_PHOTO_ASPECT = "aspect-[16/10]";
 export const EDIT_SHOWCASE_PHOTO_WIDTH = 720;
 export const EDIT_SHOWCASE_PHOTO_HEIGHT = 450;
 
+/** Five-up row — each card grows with viewport so rows stay edge-to-edge on wide screens. */
 export const EDIT_SHOWCASE_PHOTO_FRAME =
-  "w-[280px] sm:w-[320px] lg:w-[360px] shrink-0";
+  "w-[max(240px,calc((100vw-7.5rem)/5))] shrink-0";
 
 /** First visible row images — preload via next/image priority. */
 export const EDIT_SHOWCASE_PRIORITY_COUNT = 3;

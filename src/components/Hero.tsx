@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 /** Shared hero CTA dimensions — keeps primary and secondary buttons pixel-matched. */
 const HERO_CTA_SIZE =
-  "!h-10 !min-h-10 !max-h-10 w-full whitespace-nowrap gap-1.5 px-4 text-sm font-medium leading-none box-border";
+  "!h-10 !min-h-10 !max-h-10 w-full min-w-0 gap-1.5 px-4 text-sm font-medium leading-none box-border sm:whitespace-nowrap";
 
 const HERO_CTA_ICON = "ml-0.5 shrink-0 !size-4 -translate-y-0.25";
 
@@ -34,8 +34,8 @@ export default function Hero() {
           </p>
         </ScrollRevealItem>
 
-        <ScrollRevealItem className="mt-8 flex justify-center">
-          <div className="inline-grid w-max max-w-full grid-cols-1 gap-3 sm:grid-flow-col sm:auto-cols-fr">
+        <ScrollRevealItem className="mt-8 flex w-full justify-center px-0">
+          <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:max-w-none sm:w-max sm:grid-flow-col sm:auto-cols-fr">
             <a
               href="#waitlist"
               className={cn(BTN_PRIMARY_SOLID, HERO_CTA_SIZE)}

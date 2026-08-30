@@ -13,9 +13,12 @@ import {
 } from "@/src/components/edit-showcase/edit-showcase-data";
 import SectionIntro from "@/src/components/SectionIntro";
 import SectionShell from "@/src/components/SectionShell";
-import { SECTION_INNER_STACK } from "@/lib/section-styles";
+import { SECTION_BLEED, SECTION_INNER_STACK } from "@/lib/section-styles";
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
+
+/** Full-bleed wrapper for photo marquees while the section label stays in PAGE_CONTAINER. */
+const MARQUEE_BLEED = SECTION_BLEED;
 
 type PhotoMarqueeRowProps = {
   photos: readonly EditShowcasePhoto[];
@@ -27,9 +30,11 @@ type PhotoMarqueeRowProps = {
 function PhotoCard({
   photo,
   priority = false,
+  className,
 }: {
   photo: EditShowcasePhoto;
   priority?: boolean;
+  className?: string;
 }) {
   return (
     <div
@@ -37,6 +42,7 @@ function PhotoCard({
         EDIT_SHOWCASE_PHOTO_FRAME,
         EDIT_SHOWCASE_PHOTO_ASPECT,
         "relative overflow-hidden rounded-2xl border border-[#2a2a2a] bg-brand-bg",
+        className,
       )}
     >
       <Image
@@ -45,7 +51,7 @@ function PhotoCard({
         fill
         loading="eager"
         priority={priority}
-        sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 360px"
+        sizes="(max-width: 640px) 240px, (max-width: 1920px) 360px, 480px"
         className="object-cover"
         draggable={false}
       />
@@ -53,25 +59,31 @@ function PhotoCard({
   );
 }
 
+type PhotoMarqueeTrackProps = {
+  photos: readonly EditShowcasePhoto[];
+  trackKey: string;
+  priorityCount?: number;
+  repeats?: number;
+  "aria-hidden"?: boolean;
+};
+
 function PhotoMarqueeTrack({
   photos,
   trackKey,
   priorityCount = 0,
+  repeats = 2,
   "aria-hidden": ariaHidden,
-}: {
-  photos: readonly EditShowcasePhoto[];
-  trackKey: string;
-  priorityCount?: number;
-  "aria-hidden"?: boolean;
-}) {
+}: PhotoMarqueeTrackProps) {
+  const items = Array.from({ length: repeats }, () => photos).flat();
+
   return (
     <div
       className="flex shrink-0 items-center gap-4 pr-4 sm:gap-6 sm:pr-6"
       aria-hidden={ariaHidden}
     >
-      {photos.map((photo, index) => (
+      {items.map((photo, index) => (
         <PhotoCard
-          key={`${trackKey}-${photo.id}`}
+          key={`${trackKey}-${photo.id}-${index}`}
           photo={photo}
           priority={!ariaHidden && index < priorityCount}
         />
@@ -92,12 +104,18 @@ function PhotoMarqueeRow({
 
   if (prefersReducedMotion) {
     return (
-      <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+      <div
+        className={cn(
+          MARQUEE_BLEED,
+          "grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-5 lg:gap-6",
+        )}
+      >
         {photos.map((photo, index) => (
           <PhotoCard
             key={photo.id}
             photo={photo}
             priority={index < priorityCount}
+            className="!w-full"
           />
         ))}
       </div>
@@ -123,15 +141,11 @@ function PhotoMarqueeRow({
   );
 }
 
-/** Full-bleed wrapper for photo marquees while the section label stays in PAGE_CONTAINER. */
-const MARQUEE_BLEED =
-  "relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden";
-
 export default function EditShowcaseSection() {
   return (
     <SectionShell intro={<SectionIntro>See how Redux can edit</SectionIntro>}>
       <ScrollRevealGroup className={SECTION_INNER_STACK} stagger={0.1}>
-        <ScrollRevealItem variant="fadeIn">
+        <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
           <div className={MARQUEE_BLEED}>
             <PhotoMarqueeRow
               photos={EDIT_SHOWCASE_TOP_ROW}
@@ -142,7 +156,7 @@ export default function EditShowcaseSection() {
           </div>
         </ScrollRevealItem>
 
-        <ScrollRevealItem variant="fadeIn">
+        <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
           <div className={MARQUEE_BLEED}>
             <PhotoMarqueeRow
               photos={EDIT_SHOWCASE_BOTTOM_ROW}

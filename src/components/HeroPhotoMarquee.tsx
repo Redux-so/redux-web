@@ -12,7 +12,7 @@ const CARD_FRAME =
   "relative shrink-0 overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-brand-surface-card sm:rounded-[2rem]";
 
 const CARD_SIZE =
-  "aspect-[3/4] w-[8.75rem] sm:w-[10rem] lg:w-[11.25rem]";
+  "aspect-[3/4] w-[7.5rem] sm:w-[10rem] lg:w-[11.25rem]";
 
 type HeroPhotoCardProps = {
   src: string | null;
@@ -103,7 +103,7 @@ export default function HeroPhotoMarquee({
       className={cn("group/hero-photo-marquee w-full", className)}
       aria-label="Sample photo edits"
     >
-      <div className="hero-photo-marquee-mask relative w-full overflow-hidden py-2">
+      <div className="hero-photo-marquee-mask relative w-full overflow-hidden py-4 sm:py-5">
         {prefersReducedMotion ? (
           <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-3 py-2 sm:gap-4">
             {images.map((src, index) => (

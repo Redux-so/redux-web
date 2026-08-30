@@ -47,7 +47,7 @@ export default function EditorShowcaseScaler() {
   const scaledHeight = SHOWCASE_DESIGN_HEIGHT * scale;
 
   return (
-    <div ref={containerRef} className="w-full">
+    <div ref={containerRef} className="min-w-0 w-full">
       <div
         className={`relative mx-auto ${SHOWCASE_OUTER_FRAME}`}
         style={{ width: scaledWidth, height: scaledHeight }}

@@ -12,14 +12,14 @@ const SHOWCASE_FRAME =
 
 const sizeClasses = {
   large: {
-    card: "min-h-[480px] gap-6 p-6 sm:min-h-[520px] sm:p-8 lg:min-h-[560px]",
-    showcase: "min-h-[240px] sm:min-h-[280px] lg:min-h-[320px]",
-    headline: "text-xl font-semibold sm:text-2xl",
+    card: "min-h-[420px] gap-6 p-5 sm:min-h-[480px] sm:p-6 lg:min-h-[560px] lg:p-8",
+    showcase: "min-h-[200px] sm:min-h-[280px] lg:min-h-[320px]",
+    headline: "text-xl font-semibold text-balance sm:text-2xl",
   },
   medium: {
-    card: "min-h-[380px] gap-5 p-5 sm:min-h-[400px] sm:p-6 lg:min-h-[420px]",
-    showcase: "min-h-[200px] sm:min-h-[220px] lg:min-h-[240px]",
-    headline: "text-lg font-semibold sm:text-xl",
+    card: "min-h-[340px] gap-5 p-5 sm:min-h-[400px] sm:p-6 lg:min-h-[420px]",
+    showcase: "min-h-[180px] sm:min-h-[220px] lg:min-h-[240px]",
+    headline: "text-lg font-semibold text-balance sm:text-xl",
   },
 } as const;
 
@@ -44,7 +44,7 @@ export default function FeatureBentoCard({
 
   return (
     <article className={cn(BENTO_CARD_BASE, styles.card, className)}>
-      <div className="flex flex-col gap-2">
+      <div className="flex min-w-0 flex-col gap-2">
         <h3
           className={cn(
             "m-0 font-display tracking-tight text-white",

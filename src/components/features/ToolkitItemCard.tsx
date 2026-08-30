@@ -11,7 +11,7 @@ export default function ToolkitItemCard({ item, className }: ToolkitItemCardProp
   return (
     <article
       className={cn(
-        "flex w-[13rem] shrink-0 flex-col gap-2 sm:w-[14rem] lg:w-[15rem]",
+        "flex w-[min(100%,13rem)] shrink-0 flex-col gap-2 sm:w-[14rem] lg:w-[15rem]",
         className,
       )}
     >

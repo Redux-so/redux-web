@@ -16,11 +16,11 @@ export default function Features() {
   return (
     <SectionShell intro={<SectionIntro>Features</SectionIntro>}>
       <ScrollRevealGroup
-        className="grid grid-cols-1 gap-4 md:grid-cols-2"
+        className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2"
         stagger={0.1}
       >
         {/* Row 1 — large hero card */}
-        <ScrollRevealItem className="md:col-span-2">
+        <ScrollRevealItem className="min-w-0 md:col-span-2">
           <FeatureBentoCard
             size="large"
             headline="Get a professional edit in seconds"
@@ -32,7 +32,7 @@ export default function Features() {
         </ScrollRevealItem>
 
         {/* Row 2 — medium cards */}
-        <ScrollRevealItem>
+        <ScrollRevealItem className="min-w-0">
           <FeatureBentoCard
             size="medium"
             headline="Get someone else's aesthetic without years of practicing it"
@@ -43,7 +43,7 @@ export default function Features() {
           </FeatureBentoCard>
         </ScrollRevealItem>
 
-        <ScrollRevealItem>
+        <ScrollRevealItem className="min-w-0">
           <FeatureBentoCard
             size="medium"
             headline="Stop scrolling through 10,000 photos to find the one"
@@ -55,7 +55,7 @@ export default function Features() {
         </ScrollRevealItem>
 
         {/* Row 3 — small pill cards */}
-        <ScrollRevealItem>
+        <ScrollRevealItem className="min-w-0">
           <FeatureSmallCard
             headline="One click, balanced tones"
             description="Auto balance exposure, contrast, and color across your whole image."
@@ -63,7 +63,7 @@ export default function Features() {
           />
         </ScrollRevealItem>
 
-        <ScrollRevealItem>
+        <ScrollRevealItem className="min-w-0">
           <FeatureSmallCard
             headline="Erase or extend, instantly"
             description="Remove backgrounds or generatively fill gaps with AI-powered inpainting."

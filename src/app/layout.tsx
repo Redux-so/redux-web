@@ -72,10 +72,10 @@ export default function RootLayout({
       lang="en"
       className={cn(
         inter.variable,
-        "h-full bg-brand-bg text-white antialiased",
+        "h-full overflow-x-clip bg-brand-bg text-white antialiased",
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col overflow-x-clip">
         {children}
         <Analytics />
       </body>

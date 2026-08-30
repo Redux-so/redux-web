@@ -5,6 +5,7 @@ import { useReducedMotion } from "framer-motion";
 
 import ToolkitItemCard from "@/src/components/features/ToolkitItemCard";
 import { TOOLKIT_ITEMS } from "@/lib/toolkit-data";
+import { PAGE_CONTAINER, SECTION_BLEED } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const toolkitHeadline = Instrument_Serif({
@@ -42,15 +43,17 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section
-      className={cn(
-        "relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden",
-        className,
-      )}
+    <div
+      className={cn("w-full min-w-0", className)}
       aria-labelledby="toolkit-marquee-heading"
     >
-      <div className="flex flex-col gap-10 px-8 sm:gap-12 sm:px-12 md:px-16 lg:flex-row lg:items-center lg:gap-16 lg:px-20 xl:gap-20 xl:px-28 2xl:px-32">
-        <div className="w-[16rem] shrink-0 text-left xl:w-[18rem]">
+      <div
+        className={cn(
+          PAGE_CONTAINER,
+          "flex flex-col gap-10 sm:gap-12 lg:flex-row lg:items-center lg:gap-16 xl:gap-20",
+        )}
+      >
+        <div className="w-full shrink-0 text-left lg:max-w-[16rem] xl:max-w-[18rem]">
           <h2
             id="toolkit-marquee-heading"
             className={cn(
@@ -67,7 +70,7 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
           </p>
         </div>
 
-        <div className="group/toolkit-marquee min-w-0 flex-1 overflow-hidden">
+        <div className="group/toolkit-marquee min-w-0 flex-1 lg:overflow-hidden">
           {prefersReducedMotion ? (
             <ul className="m-0 flex list-none flex-wrap gap-x-6 gap-y-6 p-0 sm:gap-x-8 lg:gap-x-10">
               {TOOLKIT_ITEMS.map((item) => (
@@ -77,10 +80,12 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
               ))}
             </ul>
           ) : (
-            <div className="relative w-full overflow-hidden">
-              <div className="animate-toolkit-marquee flex w-max items-start">
-                <ToolkitMarqueeTrack trackKey="a" />
-                <ToolkitMarqueeTrack trackKey="b" aria-hidden />
+            <div className={cn(SECTION_BLEED, "lg:relative lg:left-auto lg:w-auto lg:max-w-none lg:translate-x-0")}>
+              <div className="relative w-full overflow-hidden">
+                <div className="animate-toolkit-marquee flex w-max items-start">
+                  <ToolkitMarqueeTrack trackKey="a" />
+                  <ToolkitMarqueeTrack trackKey="b" aria-hidden />
+                </div>
               </div>
             </div>
           )}
@@ -98,6 +103,6 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
           ))}
         </ul>
       </div>
-    </section>
+    </div>
   );
 }

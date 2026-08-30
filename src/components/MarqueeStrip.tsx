@@ -61,7 +61,7 @@ export default function MarqueeStrip() {
   return (
     <SectionShell>
       <ScrollRevealGroup
-        className="flex w-full flex-col gap-6 sm:gap-8"
+        className="flex min-w-0 w-full flex-col gap-6 sm:gap-8"
         stagger={0.1}
       >
         <ScrollRevealItem>

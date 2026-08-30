@@ -7,7 +7,7 @@ import { ScrollReveal } from "@/lib/scroll-motion";
 export default function Showcase() {
   return (
     <SectionShell>
-      <ScrollReveal className="relative w-full">
+      <ScrollReveal className="relative min-w-0 w-full">
         <EditorShowcaseScaler />
       </ScrollReveal>
     </SectionShell>
