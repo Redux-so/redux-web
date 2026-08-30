@@ -22,7 +22,7 @@ const footerWordmarkFont = Alata({
 
 export default function Footer() {
   return (
-    <footer className="sticky bottom-0 z-0 overflow-visible bg-[#0E0E0E] text-white">
+    <footer className="sticky bottom-0 z-0 overflow-visible bg-[#050505] text-white">
       <div className={PAGE_CONTAINER}>
         <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16 lg:py-16">
           <div className="flex flex-col items-start gap-5">
