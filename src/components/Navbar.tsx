@@ -37,12 +37,7 @@ const NAV_FIXED = cn(
   "bg-brand-bg/90 backdrop-blur-md backdrop-saturate-150",
 );
 
-/**
- * Large wordmark that visually overflows the fixed nav height without
- * expanding the bar — negative vertical margin centers the bleed.
- */
-const NAV_LOGO_HEIGHT_CLASS = "h-[4.75rem] sm:h-[5.5rem]";
-const NAV_LOGO_BLEED_CLASS = "-my-2 sm:-my-3";
+const NAV_LOGO_HEIGHT_CLASS = "h-5 sm:h-6";
 const NAV_LOGO_INTRINSIC_WIDTH = 471;
 const NAV_LOGO_INTRINSIC_HEIGHT = 117;
 
@@ -129,7 +124,7 @@ export default function Navbar() {
         <a
           href="#home"
           onClick={scrollToTop}
-          className="group relative z-10 inline-flex h-[34px] shrink-0 items-center justify-self-start overflow-visible rounded-md"
+          className="group relative z-10 inline-flex h-[34px] shrink-0 items-center justify-self-start rounded-md"
           aria-label="Back to top"
         >
           <Image
@@ -139,8 +134,7 @@ export default function Navbar() {
             height={NAV_LOGO_INTRINSIC_HEIGHT}
             className={cn(
               NAV_LOGO_HEIGHT_CLASS,
-              NAV_LOGO_BLEED_CLASS,
-              "w-auto max-w-none shrink-0 origin-left object-contain object-left transition-[filter] duration-200 group-hover:brightness-75",
+              "w-auto shrink-0 origin-left object-contain object-left transition-[filter] duration-200 group-hover:brightness-75",
             )}
             priority
           />

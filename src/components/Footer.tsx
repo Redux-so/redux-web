@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 const FOOTER_LOGO_WIDTH = 471;
 const FOOTER_LOGO_HEIGHT = 117;
-const FOOTER_LOGO_HEIGHT_CLASS = "h-24 sm:h-28";
+const FOOTER_LOGO_HEIGHT_CLASS = "h-5 sm:h-6";
 
 const footerWordmarkFont = Alata({
   weight: "400",
@@ -25,7 +25,7 @@ export default function Footer() {
     <footer className="sticky bottom-0 z-0 overflow-visible bg-[#0E0E0E] text-white">
       <div className={PAGE_CONTAINER}>
         <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16 lg:py-16">
-          <div className="flex flex-col items-start gap-1">
+          <div className="flex flex-col items-start gap-5">
             <Image
               src="/redux-logo-text.png"
               alt="Redux"
@@ -33,10 +33,10 @@ export default function Footer() {
               height={FOOTER_LOGO_HEIGHT}
               className={cn(
                 FOOTER_LOGO_HEIGHT_CLASS,
-                "block w-auto max-w-none -mt-7 object-contain object-left sm:-mt-8",
+                "block w-auto object-contain object-left",
               )}
             />
-            <p className="-mt-1 max-w-xs text-sm leading-snug text-white/60">
+            <p className="max-w-xs text-sm leading-snug text-white/60">
               {SITE_MOTTO}
             </p>
           </div>
