@@ -179,12 +179,14 @@ html {
 }
 
 .animate-marquee-left {
-  animation: marquee 48s linear infinite;
+  --edit-showcase-marquee-duration: 100s;
+  animation: marquee var(--edit-showcase-marquee-duration) linear infinite;
   will-change: transform;
 }
 
 .animate-marquee-right {
-  animation: marquee 48s linear infinite reverse;
+  --edit-showcase-marquee-duration: 100s;
+  animation: marquee var(--edit-showcase-marquee-duration) linear infinite reverse;
   will-change: transform;
 }
 

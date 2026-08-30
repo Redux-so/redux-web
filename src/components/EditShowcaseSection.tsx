@@ -15,7 +15,6 @@ import SectionIntro from "@/src/components/SectionIntro";
 import {
   PAGE_CONTAINER,
   PAGE_GRID_ALIGNED_FRAME,
-  SECTION_INNER_STACK,
   SECTION_LAYOUT,
 } from "@/lib/section-styles";
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
@@ -42,7 +41,7 @@ function PhotoCard({
       className={cn(
         EDIT_SHOWCASE_PHOTO_FRAME,
         EDIT_SHOWCASE_PHOTO_ASPECT,
-        "relative overflow-hidden rounded-2xl border border-[#2a2a2a] bg-brand-bg",
+        "relative overflow-hidden rounded-2xl bg-brand-bg",
         className,
       )}
     >
@@ -52,7 +51,7 @@ function PhotoCard({
         fill
         loading="eager"
         priority={priority}
-        sizes="(max-width: 640px) 192px, (max-width: 1920px) 360px, 480px"
+        sizes="(max-width: 640px) 260px, (max-width: 1920px) 480px, 600px"
         className="object-cover"
         draggable={false}
       />
@@ -79,7 +78,7 @@ function PhotoMarqueeTrack({
 
   return (
     <div
-      className="flex shrink-0 items-center gap-4 pr-4 sm:gap-6 sm:pr-6"
+      className="flex shrink-0 items-center gap-3 pr-3 sm:gap-4 sm:pr-4"
       aria-hidden={ariaHidden}
     >
       {items.map((photo, index) => (
@@ -105,7 +104,7 @@ function PhotoMarqueeRow({
 
   if (prefersReducedMotion) {
     return (
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-5 lg:gap-6">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
         {photos.map((photo, index) => (
           <PhotoCard
             key={photo.id}
@@ -144,7 +143,10 @@ export default function EditShowcaseSection() {
         <SectionIntro>See how Redux can edit</SectionIntro>
       </div>
 
-      <ScrollRevealGroup className={SECTION_INNER_STACK} stagger={0.1}>
+      <ScrollRevealGroup
+        className="flex flex-col gap-3 sm:gap-4"
+        stagger={0.1}
+      >
         <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
           <div className={PAGE_GRID_ALIGNED_FRAME}>
             <PhotoMarqueeRow
