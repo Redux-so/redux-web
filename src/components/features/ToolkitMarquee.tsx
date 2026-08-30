@@ -1,18 +1,11 @@
 "use client";
 
-import { Instrument_Serif } from "next/font/google";
 import { useReducedMotion } from "framer-motion";
 
 import ToolkitItemCard from "@/src/components/features/ToolkitItemCard";
 import { TOOLKIT_ITEMS } from "@/lib/toolkit-data";
 import { PAGE_CONTAINER, SECTION_BLEED } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
-
-const toolkitHeadline = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
 
 type ToolkitMarqueeTrackProps = {
   trackKey: string;
@@ -57,8 +50,7 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
           <h2
             id="toolkit-marquee-heading"
             className={cn(
-              toolkitHeadline.className,
-              "m-0 text-3xl leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-[2.5rem]",
+              "font-display m-0 text-3xl leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-[2.5rem]",
             )}
           >
             The Full

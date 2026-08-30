@@ -11,12 +11,14 @@ import {
   BTN_OUTLINE_BLOCK,
   BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
-import { SITE_CONTAINER } from "@/lib/section-styles";
+import { PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
+const NAV_GRID_FRAME = cn(PAGE_GRID_ALIGNED_FRAME, "px-2 sm:px-3");
+
 const NAV_CONTAINER = cn(
-  SITE_CONTAINER,
+  NAV_GRID_FRAME,
   "grid h-[3.75rem] min-w-0 grid-cols-[1fr_auto] items-center gap-2 overflow-visible sm:h-16 sm:grid-cols-[1fr_auto_1fr] sm:gap-4",
 );
 
@@ -148,7 +150,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="whitespace-nowrap text-sm text-white/55 transition-colors hover:text-white"
+              className="whitespace-nowrap text-sm font-medium text-white/55 transition-colors hover:text-white"
             >
               {link.label}
             </a>
@@ -247,7 +249,7 @@ export default function Navbar() {
             transition={panelTransition}
           >
             <motion.div
-              className="px-4 py-3.5 sm:px-6"
+              className={cn(NAV_GRID_FRAME, "py-3.5")}
               variants={
                 prefersReducedMotion ? menuListReducedVariants : menuListVariants
               }
@@ -262,7 +264,7 @@ export default function Navbar() {
                   <motion.div key={link.href} variants={itemVariants}>
                     <a
                       href={link.href}
-                      className="block rounded-lg px-3 py-2.5 text-[15px] text-white/55 transition-colors hover:bg-white/5 hover:text-white"
+                      className="block rounded-lg px-3 py-2.5 text-[15px] font-medium text-white/55 transition-colors hover:bg-white/5 hover:text-white"
                       onClick={closeMobileMenu}
                     >
                       {link.label}

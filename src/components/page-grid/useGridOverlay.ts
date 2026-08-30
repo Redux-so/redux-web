@@ -91,6 +91,11 @@ export function useGridOverlay({
       columnsVarsChanged(bounds, columns)
     ) {
       publishGridColumnVars(bounds, columns);
+
+      const gridRoot = bounds.closest("[data-page-grid-root]");
+      if (gridRoot instanceof HTMLElement && gridRoot !== bounds) {
+        publishGridColumnVars(gridRoot, columns);
+      }
     }
 
     const boundaryYs = getBoundaryYsRef.current?.(bounds) ?? [];

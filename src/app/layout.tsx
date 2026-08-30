@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Onest } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
+
+const onest = Onest({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-onest",
+});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -71,6 +77,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
+        onest.variable,
         inter.variable,
         "h-full overflow-x-clip bg-brand-bg text-white antialiased",
       )}
