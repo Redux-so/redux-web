@@ -64,7 +64,7 @@ export default function PageGrid({ className }: PageGridProps) {
 
       {geometry ? (
         <div className="absolute inset-0">
-          <GridOverlayLines geometry={geometry} hideTopBandCorners />
+          <GridOverlayLines geometry={geometry} />
         </div>
       ) : null}
     </div>
