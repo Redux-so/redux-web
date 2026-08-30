@@ -39,7 +39,7 @@ function PhotoCard({
       className={cn(
         EDIT_SHOWCASE_PHOTO_FRAME,
         EDIT_SHOWCASE_PHOTO_ASPECT,
-        "relative overflow-hidden rounded-2xl border border-[#2e2e2e] bg-brand-bg",
+        "relative overflow-hidden rounded-2xl border border-[#2a2a2a] bg-brand-bg",
       )}
     >
       <Image

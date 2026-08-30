@@ -49,7 +49,7 @@ const fujiMain = await sharp(mountFujiPath)
 
 const styleMatchSvg = `
 <svg width="${OUTPUT_WIDTH}" height="${OUTPUT_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#0a0a0a"/>
+  <rect width="100%" height="100%" fill="#080808"/>
   <rect x="40" y="40" width="1120" height="720" rx="16" fill="#111111" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
   <text x="72" y="88" fill="#888888" font-family="-apple-system, system-ui, sans-serif" font-size="13" letter-spacing="0.08em">STYLE MATCH</text>
   <rect x="72" y="110" width="300" height="400" rx="12" fill="#1a1a1a" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
@@ -94,7 +94,7 @@ const gridPhotos = await Promise.all(
 
 const smartSearchSvg = `
 <svg width="${OUTPUT_WIDTH}" height="${OUTPUT_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#0a0a0a"/>
+  <rect width="100%" height="100%" fill="#080808"/>
   <rect x="40" y="40" width="1120" height="720" rx="16" fill="#111111" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
   <text x="72" y="88" fill="#888888" font-family="-apple-system, system-ui, sans-serif" font-size="13" letter-spacing="0.08em">LIBRARY</text>
   <rect x="72" y="108" width="1056" height="52" rx="12" fill="#1a1a1a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>

@@ -41,7 +41,7 @@ const FEATURE_IMAGE_HEIGHT =
   "aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0 lg:shrink-0";
 
 const FEATURE_SHOWCASE_FRAME =
-  "overflow-hidden rounded-2xl border border-[#2e2e2e] bg-brand-bg";
+  "overflow-hidden rounded-2xl border border-[#2a2a2a] bg-brand-bg";
 
 const features: Feature[] = [
   {
@@ -130,7 +130,7 @@ function FeatureRow({ feature }: { feature: Feature }) {
           <h3 className="m-0 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
             {feature.headline}
           </h3>
-          <p className="m-0 text-sm leading-relaxed text-white/70 sm:text-base">
+          <p className="m-0 text-sm leading-relaxed text-white/55 sm:text-base">
             {feature.description}
           </p>
           <a

@@ -8,7 +8,7 @@ export const PAGE_CONTAINER = SITE_CONTAINER;
 
 /** Uppercase section label — Features, FAQ, Edit showcase intros. */
 export const SECTION_LABEL =
-  "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
+  "text-[13px] font-semibold uppercase tracking-wide text-[#727272]";
 
 /** Standard vertical padding for constrained page sections. */
 export const SECTION_PADDING_Y = "py-12 sm:py-16 lg:py-20";

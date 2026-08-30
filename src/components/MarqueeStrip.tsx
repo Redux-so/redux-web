@@ -32,7 +32,7 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
       {items.map((item, index) => (
         <Fragment key={`${trackKey}-${index}`}>
           {index > 0 ? (
-            <span className="text-white/30" aria-hidden="true">
+            <span className="text-white/22" aria-hidden="true">
               ·
             </span>
           ) : null}
@@ -56,7 +56,7 @@ export default function MarqueeStrip() {
     <SectionShell>
       <ScrollRevealGroup className="flex w-full flex-col" stagger={0.1}>
         <ScrollRevealItem>
-          <p className="text-center text-sm text-white/70 sm:text-base">
+          <p className="text-center text-sm text-white/55 sm:text-base">
             Inspired by workflows from
           </p>
         </ScrollRevealItem>

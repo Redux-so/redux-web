@@ -148,7 +148,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="whitespace-nowrap text-sm text-white/70 transition-colors hover:text-white"
+              className="whitespace-nowrap text-sm text-white/55 transition-colors hover:text-white"
             >
               {link.label}
             </a>
@@ -262,7 +262,7 @@ export default function Navbar() {
                   <motion.div key={link.href} variants={itemVariants}>
                     <a
                       href={link.href}
-                      className="block rounded-lg px-3 py-2.5 text-[15px] text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                      className="block rounded-lg px-3 py-2.5 text-[15px] text-white/55 transition-colors hover:bg-white/5 hover:text-white"
                       onClick={closeMobileMenu}
                     >
                       {link.label}

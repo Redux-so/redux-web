@@ -23,11 +23,11 @@ const QUICK_FILTERS: { id: string; label: string; icon: IconName }[] = [
 ];
 
 const SIDEBAR_BTN_ROW =
-  "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] font-medium border border-[#121212] transition-colors";
+  "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] font-medium border border-[#101010] transition-colors";
 const SIDEBAR_BTN_IDLE =
-  "text-[#888888] hover:bg-[#1d1d1d] hover:text-white";
+  "text-[#888888] hover:bg-[#1a1a1a] hover:text-white";
 const SIDEBAR_BTN_ACTIVE =
-  "bg-[#1d1d1d] !border-[#2e2e2e] text-white";
+  "bg-[#1a1a1a] !border-[#2a2a2a] text-white";
 
 type LibraryShowcaseSidebarProps = {
   demoMode?: boolean;
@@ -122,8 +122,8 @@ export default function LibraryShowcaseSidebar({
           </span>
         </div>
 
-        <div className="mt-3 flex min-w-0 items-center gap-2.5 rounded-lg border border-[#121212] px-1.5 py-1.5">
-          <div className="h-8 w-8 shrink-0 rounded-md border border-[#2e2e2e] bg-[#1d1d1d]" />
+        <div className="mt-3 flex min-w-0 items-center gap-2.5 rounded-lg border border-[#101010] px-1.5 py-1.5">
+          <div className="h-8 w-8 shrink-0 rounded-md border border-[#2a2a2a] bg-[#1a1a1a]" />
           <div className="min-w-0 flex-1">
             <p className="truncate text-[13px] font-medium text-white">Levi</p>
             <p className="truncate text-[11px] text-[#888888]">levi@redux.so</p>

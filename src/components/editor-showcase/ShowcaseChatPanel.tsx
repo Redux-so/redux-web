@@ -20,9 +20,9 @@ const CHAT_SURFACE_SHADOW =
   "shadow-[0_1px_3px_rgba(0,0,0,0.32),0_2px_8px_rgba(0,0,0,0.14)]";
 const TOOLBAR_CHIP_H = "h-8";
 const TOOLBAR_CHIP =
-  "rounded-md border border-[#2e2e2e] bg-[#1d1d1d] shadow-[0_1px_2px_rgba(0,0,0,0.26),0_2px_5px_rgba(0,0,0,0.12)]";
+  "rounded-md border border-[#2a2a2a] bg-[#1a1a1a] shadow-[0_1px_2px_rgba(0,0,0,0.26),0_2px_5px_rgba(0,0,0,0.12)]";
 const BTN_SECONDARY =
-  "inline-flex items-center justify-center h-8 px-3.5 rounded-md border border-[#2e2e2e] bg-[#1d1d1d] text-[12px] font-semibold text-white/90 hover:border-[#3a3a3a] transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed";
+  "inline-flex items-center justify-center h-8 px-3.5 rounded-md border border-[#2a2a2a] bg-[#1a1a1a] text-[12px] font-semibold text-white/90 hover:border-[#363636] transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed";
 
 const RING_RADIUS = 7.5;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
@@ -185,7 +185,7 @@ export default function ShowcaseChatPanel({
     <div
       className={[
         "flex h-full min-w-0 shrink-0 flex-col overflow-hidden transition-[width] duration-200 ease-out",
-        "rounded-l-2xl border-l border-[#2e2e2e] bg-[#121212]",
+        "rounded-l-2xl border-l border-[#2a2a2a] bg-[#101010]",
         collapsed ? "w-[44px]" : "w-[360px]",
       ].join(" ")}
     >
@@ -258,7 +258,7 @@ export default function ShowcaseChatPanel({
                       className={`max-w-[320px] whitespace-pre-wrap break-words leading-relaxed ${
                         msg.role === "user"
                           ? CHAT_USER_BUBBLE_CLASS
-                          : "rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-3 py-2.5 text-[14px] text-[#e5e5e5]"
+                          : "rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-3 py-2.5 text-[14px] text-[#e5e5e5]"
                       }`}
                     >
                       {msg.content}
@@ -348,7 +348,7 @@ export default function ShowcaseChatPanel({
 
           <div className="shrink-0 px-6 pb-4 pt-2">
             <div
-              className={`overflow-hidden rounded-xl border border-[#2e2e2e] bg-[#1d1d1d] ${CHAT_SURFACE_SHADOW}`}
+              className={`overflow-hidden rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] ${CHAT_SURFACE_SHADOW}`}
             >
               <div className="flex min-h-[76px] items-start px-4 pb-3 pt-3">
                 <div className="flex w-full items-center gap-3.5">
@@ -370,7 +370,7 @@ export default function ShowcaseChatPanel({
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-2 border-t border-[#2e2e2e] px-4 pb-3 pt-3">
+              <div className="flex items-center justify-between gap-2 border-t border-[#2a2a2a] px-4 pb-3 pt-3">
                 <div className="flex min-w-0 shrink-0 items-center gap-1.5">
                   <div
                     className={`${TOOLBAR_CHIP} flex ${TOOLBAR_CHIP_H} w-8 items-center justify-center opacity-50`}

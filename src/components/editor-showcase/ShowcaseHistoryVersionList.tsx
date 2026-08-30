@@ -28,7 +28,7 @@ export default function ShowcaseHistoryVersionList() {
       {versions.map((version, idx) => (
         <div
           key={version.id}
-          className="group flex items-center justify-between border-b border-[#2e2e2e] px-6 py-3.5 transition-colors hover:bg-[#1d1d1d]"
+          className="group flex items-center justify-between border-b border-[#2a2a2a] px-6 py-3.5 transition-colors hover:bg-[#1a1a1a]"
         >
           <div className="flex min-w-0 flex-col gap-[2px]">
             <span className="text-[14px] text-[#e5e5e5]">

@@ -48,7 +48,7 @@ export default function EditorShowcase({
   };
 
   return (
-    <div className="editor-showcase flex h-full min-h-0 flex-col overflow-hidden bg-[#161616] text-[13px] leading-normal antialiased select-none">
+    <div className="editor-showcase flex h-full min-h-0 flex-col overflow-hidden bg-[#141414] text-[13px] leading-normal antialiased select-none">
       <ShowcaseToolbar />
       <div className="flex min-h-0 min-w-0 flex-1 overflow-hidden">
         <ShowcaseAdjustmentPanel

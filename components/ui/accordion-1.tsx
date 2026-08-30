@@ -53,11 +53,11 @@ function AccordionTrigger({
         {children}
         <Icon
           aria-hidden
-          className="size-5 shrink-0 text-white/70 group-data-[state=open]/accordion-trigger:hidden"
+          className="size-5 shrink-0 text-white/55 group-data-[state=open]/accordion-trigger:hidden"
         />
         <Minus
           aria-hidden
-          className="hidden size-5 shrink-0 text-white/70 group-data-[state=open]/accordion-trigger:block"
+          className="hidden size-5 shrink-0 text-white/55 group-data-[state=open]/accordion-trigger:block"
         />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -77,7 +77,7 @@ function AccordionContent({
     >
       <div
         className={cn(
-          "pb-4 text-sm leading-relaxed text-white/70 sm:pb-5",
+          "pb-4 text-sm leading-relaxed text-white/55 sm:pb-5",
           className,
         )}
       >

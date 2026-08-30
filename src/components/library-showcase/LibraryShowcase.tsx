@@ -128,9 +128,9 @@ export default function LibraryShowcase({
     useSmartSearchDemo(animationActive);
 
   return (
-    <div className="library-showcase flex h-full min-h-0 overflow-hidden bg-[#161616] text-[13px] leading-normal antialiased select-none">
+    <div className="library-showcase flex h-full min-h-0 overflow-hidden bg-[#141414] text-[13px] leading-normal antialiased select-none">
       <LibraryShowcaseSidebar demoMode={demoMode} />
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-[#161616]">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-[#141414]">
         <LibraryShowcaseHeader searchValue={searchValue} demoMode={demoMode} />
         <div className="min-h-0 flex-1 overflow-hidden">
           <LibraryShowcasePhotoGrid

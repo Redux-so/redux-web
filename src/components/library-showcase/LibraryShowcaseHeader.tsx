@@ -23,7 +23,7 @@ export default function LibraryShowcaseHeader({
 
       <div className="relative w-full min-w-0">
         <form
-          className="relative flex h-[52px] w-full items-center rounded-xl border border-[#2e2e2e] bg-[#1d1d1d] pl-12 pr-2 transition-colors focus-within:border-[#3a3a3a]"
+          className="relative flex h-[52px] w-full items-center rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] pl-12 pr-2 transition-colors focus-within:border-[#363636]"
           onSubmit={(event) => event.preventDefault()}
         >
           <Icon

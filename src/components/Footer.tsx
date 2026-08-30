@@ -22,7 +22,7 @@ const footerWordmarkFont = Alata({
 
 export default function Footer() {
   return (
-    <footer className="sticky bottom-0 z-0 overflow-visible bg-[#050505] text-white">
+    <footer className="sticky bottom-0 z-0 overflow-visible bg-[#040404] text-white">
       <div className={PAGE_CONTAINER}>
         <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16 lg:py-16">
           <div className="flex flex-col items-start gap-5">
@@ -36,7 +36,7 @@ export default function Footer() {
                 "block w-auto object-contain object-left",
               )}
             />
-            <p className="max-w-xs text-sm leading-snug text-white/60">
+            <p className="max-w-xs text-sm leading-snug text-white/45">
               {SITE_MOTTO}
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-white/60 transition-colors hover:text-white"
+                      className="text-sm text-white/45 transition-colors hover:text-white"
                     >
                       {link.label}
                     </a>
@@ -65,7 +65,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-white/60 transition-colors hover:text-white"
+                      className="text-sm text-white/45 transition-colors hover:text-white"
                     >
                       {link.label}
                     </a>
@@ -78,7 +78,7 @@ export default function Footer() {
 
         <div className={SECTION_DIVIDE}>
           <div className="flex flex-col gap-4 pt-6 pb-3 sm:flex-row sm:items-center sm:justify-between sm:pb-4">
-            <p className="text-sm text-white/50">
+            <p className="text-sm text-white/36">
               © Redux 2026. All rights reserved.
             </p>
             <div className="flex shrink-0 items-center gap-4 sm:gap-5">
@@ -95,7 +95,7 @@ export default function Footer() {
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  className="text-white/50 transition-colors hover:text-white"
+                  className="text-white/36 transition-colors hover:text-white"
                 >
                   <social.icon className="size-5" />
                 </a>
