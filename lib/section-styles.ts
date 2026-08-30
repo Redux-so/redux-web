@@ -1,4 +1,4 @@
-export const SECTION_DIVIDE = "border-t border-white/[0.08]";
+export const SECTION_DIVIDE = "";
 
 /** Shared max-width and horizontal padding — aligns with navbar content edges. */
 export const SITE_CONTAINER =
