@@ -9,6 +9,12 @@ import {
 } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
+/** Shared hero CTA dimensions — keeps primary and secondary buttons pixel-matched. */
+const HERO_CTA_SIZE =
+  "!h-10 !min-h-10 !max-h-10 w-full whitespace-nowrap gap-1.5 px-4 text-sm font-medium leading-none box-border";
+
+const HERO_CTA_ICON = "ml-0.5 shrink-0 !size-4 -translate-y-0.25";
+
 export default function Hero() {
   return (
     <SectionShell className="relative z-[1]">
@@ -28,22 +34,38 @@ export default function Hero() {
         </ScrollRevealItem>
 
         <ScrollRevealItem className="mt-8 flex justify-center">
-          <a
-            href="#waitlist"
-            className={cn(
-              BTN_PRIMARY_SOLID,
-              "h-10 gap-1.5 px-4 text-sm leading-none",
-            )}
-          >
-            <span className="leading-none">Join Waitlist</span>
-            <Icon
-              name="LinkExternal01"
-              size={16}
-              strokeWidth={2}
-              className="ml-0.5 shrink-0 !size-4 -translate-y-0.25"
-              aria-hidden
-            />
-          </a>
+          <div className="inline-grid w-max max-w-full grid-cols-1 gap-3 sm:grid-flow-col sm:auto-cols-fr">
+            <a
+              href="#waitlist"
+              className={cn(BTN_PRIMARY_SOLID, HERO_CTA_SIZE)}
+            >
+              <span className="leading-none">Join Waitlist</span>
+              <Icon
+                name="LinkExternal01"
+                size={16}
+                strokeWidth={2}
+                className={HERO_CTA_ICON}
+                aria-hidden
+              />
+            </a>
+            <a
+              href="#features"
+              className={cn(
+                BTN_PRIMARY_SOLID,
+                HERO_CTA_SIZE,
+                "!border-brand-border !bg-brand-surface hover:!border-white/20",
+              )}
+            >
+              <span className="leading-none">See how it works</span>
+              <Icon
+                name="ArrowNarrowDown"
+                size={16}
+                strokeWidth={2}
+                className={HERO_CTA_ICON}
+                aria-hidden
+              />
+            </a>
+          </div>
         </ScrollRevealItem>
       </ScrollRevealGroup>
     </SectionShell>
