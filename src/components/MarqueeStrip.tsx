@@ -16,6 +16,12 @@ const marqueeItems = [
 
 const TRACK_REPEATS = 1;
 
+/** Muted treatment for marquee logos and separators — darker grey strip tone. */
+const MARQUEE_LOGO_CLASS =
+  "h-6 w-auto opacity-40 grayscale sm:h-7 lg:h-8";
+
+const MARQUEE_DOT_CLASS = "text-[#727272]";
+
 type MarqueeTrackProps = {
   trackKey: string;
   "aria-hidden"?: boolean;
@@ -32,7 +38,7 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
       {items.map((item, index) => (
         <Fragment key={`${trackKey}-${index}`}>
           {index > 0 ? (
-            <span className="text-white/22" aria-hidden="true">
+            <span className={MARQUEE_DOT_CLASS} aria-hidden="true">
               ·
             </span>
           ) : null}
@@ -42,7 +48,7 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
             width={item.width}
             height={item.height}
             unoptimized
-            className="h-6 w-auto sm:h-7 lg:h-8"
+            className={MARQUEE_LOGO_CLASS}
             draggable={false}
           />
         </Fragment>
@@ -54,9 +60,12 @@ function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps
 export default function MarqueeStrip() {
   return (
     <SectionShell>
-      <ScrollRevealGroup className="flex w-full flex-col" stagger={0.1}>
+      <ScrollRevealGroup
+        className="flex w-full flex-col gap-6 sm:gap-8"
+        stagger={0.1}
+      >
         <ScrollRevealItem>
-          <p className="text-center text-sm text-white/55 sm:text-base">
+          <p className="text-center text-[11px] uppercase text-white/55 sm:text-xs">
             Inspired by workflows from
           </p>
         </ScrollRevealItem>
