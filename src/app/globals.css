@@ -188,6 +188,73 @@ html {
   will-change: transform;
 }
 
+@keyframes toolkit-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-toolkit-marquee {
+  animation: toolkit-marquee 140s linear infinite;
+  will-change: transform;
+}
+
+.group\/toolkit-marquee:hover .animate-toolkit-marquee,
+.group\/toolkit-marquee:focus-within .animate-toolkit-marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-toolkit-marquee {
+    animation: none;
+  }
+}
+
+@keyframes hero-photo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-hero-photo-marquee {
+  animation: hero-photo-marquee 90s linear infinite;
+  will-change: transform;
+}
+
+.group\/hero-photo-marquee:hover .animate-hero-photo-marquee,
+.group\/hero-photo-marquee:focus-within .animate-hero-photo-marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-photo-marquee {
+    animation: none;
+  }
+}
+
+.hero-photo-marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+}
+
 .editor-showcase,
 .editor-showcase * {
   box-sizing: border-box;

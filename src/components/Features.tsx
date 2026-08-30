@@ -1,179 +1,84 @@
 "use client";
 
-import Image from "next/image";
-
-import { Icon } from "@/components/shared/Icon";
 import ConversationalEditingShowcaseCrop from "@/src/components/features/ConversationalEditingShowcaseCrop";
+import FeatureBentoCard from "@/src/components/features/FeatureBentoCard";
+import FeatureSmallCard from "@/src/components/features/FeatureSmallCard";
+import ToolkitMarquee from "@/src/components/features/ToolkitMarquee";
 import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowcaseCrop";
 import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcaseCrop";
 import SectionIntro from "@/src/components/SectionIntro";
 import SectionShell from "@/src/components/SectionShell";
-import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { SECTION_INNER_STACK } from "@/lib/section-styles";
 import {
   ScrollRevealGroup,
   ScrollRevealItem,
+  ScrollReveal,
 } from "@/lib/scroll-motion";
-import { cn } from "@/lib/utils";
-
-type Feature = {
-  headline: string;
-  description: string;
-  cta: string;
-  imagePosition: "left" | "right";
-  image?: string;
-  imageAlt?: string;
-  imageCrop?: "left" | "right" | "center";
-  showcaseScenario?: "conversational" | "styleMatch" | "smartSearch";
-};
-
-const imageCropClasses = {
-  left: "object-cover object-center object-top lg:object-left-top",
-  right: "object-cover object-center object-top lg:object-right-top",
-  center: "object-cover object-center object-top",
-} as const;
-
-const FEATURE_IMAGE_WIDTH = "lg:w-[62%]";
-const FEATURE_TEXT_WIDTH = "lg:w-[38%]";
-/** Shared image column sizing — fixed row height on desktop keeps all three features identical. */
-const FEATURE_ROW_HEIGHT = "lg:h-[360px] xl:h-[420px]";
-const FEATURE_IMAGE_HEIGHT =
-  "aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0 lg:shrink-0";
-
-const FEATURE_SHOWCASE_FRAME =
-  "overflow-hidden rounded-2xl border border-[#2a2a2a] bg-brand-bg";
-
-const features: Feature[] = [
-  {
-    headline: "Conversational Editing",
-    description:
-      "Describe your edits, and our AI applies professional changes instantly. Review and refine in real-time until your photo is perfect.",
-    cta: "Ask AI",
-    imagePosition: "left",
-    image: "/features/conversational-editing.png",
-    imageAlt:
-      "Redux editor with AI chat applying blue hour color edits to a mountain landscape",
-    imageCrop: "right",
-    showcaseScenario: "conversational",
-  },
-  {
-    headline: "Style Match",
-    description:
-      "Recreate any style instantly. Upload a reference image, and our AI applies its aesthetic to your photo.",
-    cta: "Match a Style",
-    imagePosition: "right",
-    image: "/features/style-match.png",
-    imageAlt:
-      "Redux editor applying Style Match to Mount Fuji via AI chat with a reference image",
-    imageCrop: "right",
-    showcaseScenario: "styleMatch",
-  },
-  {
-    headline: "Smart Search",
-    description:
-      "Find any photo by describing its content. Search by keywords and instantly surface matching images.",
-    cta: "Search Now",
-    imagePosition: "left",
-    image: "/features/smart-search.png",
-    imageAlt:
-      "Redux library search showing mountain photo results for a rural mountains query",
-    imageCrop: "left",
-    showcaseScenario: "smartSearch",
-  },
-];
-
-function FeatureRow({ feature }: { feature: Feature }) {
-  const imageOnRight = feature.imagePosition === "right";
-
-  return (
-    <div
-      className={cn(
-        "flex flex-col lg:flex-row lg:items-stretch",
-        FEATURE_ROW_HEIGHT,
-      )}
-    >
-      <div
-        className={cn(
-          "relative w-full",
-          FEATURE_IMAGE_WIDTH,
-          FEATURE_IMAGE_HEIGHT,
-          FEATURE_SHOWCASE_FRAME,
-          imageOnRight ? "lg:order-2" : "lg:order-1",
-        )}
-      >
-        {feature.showcaseScenario === "conversational" ? (
-          <ConversationalEditingShowcaseCrop />
-        ) : feature.showcaseScenario === "styleMatch" ? (
-          <StyleMatchShowcaseCrop />
-        ) : feature.showcaseScenario === "smartSearch" ? (
-          <SmartSearchShowcaseCrop />
-        ) : feature.image ? (
-          <Image
-            src={feature.image}
-            alt={feature.imageAlt ?? ""}
-            fill
-            unoptimized
-            sizes="(max-width: 1024px) 100vw, 62vw"
-            className={imageCropClasses[feature.imageCrop ?? "center"]}
-          />
-        ) : null}
-      </div>
-
-      <div
-        className={cn(
-          "flex flex-col justify-center px-4 py-8 sm:px-8 lg:py-0",
-          FEATURE_TEXT_WIDTH,
-          imageOnRight ? "lg:order-1" : "lg:order-2",
-        )}
-      >
-        <div className="flex flex-col gap-4">
-          <h3 className="m-0 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
-            {feature.headline}
-          </h3>
-          <p className="m-0 text-sm leading-relaxed text-white/55 sm:text-base">
-            {feature.description}
-          </p>
-          <a
-            href="#waitlist"
-            className={cn(
-              BTN_PRIMARY_SOLID,
-              "w-fit shrink-0 gap-1 px-3.5 leading-none",
-            )}
-          >
-            <span className="leading-none">{feature.cta}</span>
-            <Icon
-              name="ArrowUpRight"
-              size={16}
-              className="shrink-0"
-              aria-hidden
-            />
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function Features() {
   return (
-    <SectionShell intro={<SectionIntro>Features</SectionIntro>}>
-      <ScrollRevealGroup className={SECTION_INNER_STACK} stagger={0.12}>
-        {features.map((feature) => {
-          if (feature.showcaseScenario === "styleMatch") {
-            return (
-              <div key={feature.headline}>
-                <FeatureRow feature={feature} />
-              </div>
-            );
-          }
+    <>
+      <SectionShell intro={<SectionIntro>Features</SectionIntro>}>
+        <ScrollRevealGroup
+          className="grid grid-cols-1 gap-4 md:grid-cols-2"
+          stagger={0.1}
+        >
+          {/* Row 1 — large hero card */}
+          <ScrollRevealItem className="md:col-span-2">
+            <FeatureBentoCard
+              size="large"
+              headline="Get a professional edit in seconds"
+              description="Describe your edits in plain language and let AI apply professional changes instantly."
+              cta="Ask AI"
+            >
+              <ConversationalEditingShowcaseCrop />
+            </FeatureBentoCard>
+          </ScrollRevealItem>
 
-          return (
-            <ScrollRevealItem key={feature.headline}>
-              <FeatureRow feature={feature} />
-            </ScrollRevealItem>
-          );
-        })}
-      </ScrollRevealGroup>
-    </SectionShell>
+          {/* Row 2 — medium cards */}
+          <ScrollRevealItem>
+            <FeatureBentoCard
+              size="medium"
+              headline="Get someone else's aesthetic without years of practicing it"
+              description="Upload a reference image and Redux applies its look to your photo in one step."
+              cta="Match a Style"
+            >
+              <StyleMatchShowcaseCrop />
+            </FeatureBentoCard>
+          </ScrollRevealItem>
+
+          <ScrollRevealItem>
+            <FeatureBentoCard
+              size="medium"
+              headline="Stop scrolling through 10,000 photos to find the one"
+              description="Search your library by describing what's in the image — keywords, scenes, subjects."
+              cta="Search Now"
+            >
+              <SmartSearchShowcaseCrop />
+            </FeatureBentoCard>
+          </ScrollRevealItem>
+
+          {/* Row 3 — small pill cards */}
+          <ScrollRevealItem>
+            <FeatureSmallCard
+              headline="One click, balanced tones"
+              description="Auto balance exposure, contrast, and color across your whole image."
+              icon="Contrast01"
+            />
+          </ScrollRevealItem>
+
+          <ScrollRevealItem>
+            <FeatureSmallCard
+              headline="Erase or extend, instantly"
+              description="Remove backgrounds or generatively fill gaps with AI-powered inpainting."
+              icon="Expand04"
+            />
+          </ScrollRevealItem>
+        </ScrollRevealGroup>
+      </SectionShell>
+
+      <ScrollReveal className="mt-10 pt-10 sm:mt-12 sm:pt-12 lg:mt-14 lg:pt-14">
+        <ToolkitMarquee />
+      </ScrollReveal>
+    </>
   );
 }

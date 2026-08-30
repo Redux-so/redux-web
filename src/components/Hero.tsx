@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@/components/shared/Icon";
+import HeroPhotoMarquee from "@/src/components/HeroPhotoMarquee";
 import SectionShell from "@/src/components/SectionShell";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import {
@@ -17,7 +18,7 @@ const HERO_CTA_ICON = "ml-0.5 shrink-0 !size-4 -translate-y-0.25";
 
 export default function Hero() {
   return (
-    <SectionShell className="relative z-[1]">
+    <SectionShell className="relative z-[1] !pb-16 sm:!pb-20 lg:!pb-28">
       <ScrollRevealGroup className="mx-auto max-w-3xl text-center" stagger={0.12}>
         <ScrollRevealItem>
           <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-balance text-white sm:text-5xl lg:text-[3.25rem]">
@@ -68,6 +69,8 @@ export default function Hero() {
           </div>
         </ScrollRevealItem>
       </ScrollRevealGroup>
+
+      <HeroPhotoMarquee className="mt-3 sm:mt-3.5 lg:mt-4" />
     </SectionShell>
   );
 }
