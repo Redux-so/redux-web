@@ -14,14 +14,16 @@ export default function Hero() {
     <SectionShell className="relative z-[1]">
       <ScrollRevealGroup className="mx-auto max-w-3xl text-center" stagger={0.12}>
         <ScrollRevealItem>
-          <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Your AI agent for professional photo editing
+          <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-balance text-white sm:text-4xl lg:text-5xl">
+            From Raw Photo to
+            <br />
+            Finished Edit in Minutes
           </h1>
         </ScrollRevealItem>
 
         <ScrollRevealItem>
           <p className="mt-5 text-base leading-relaxed text-white/70">
-            Organize, edit, and export photos, all from your browser
+                Agentic photo editing platform
           </p>
         </ScrollRevealItem>
 
