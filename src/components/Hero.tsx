@@ -14,7 +14,7 @@ export default function Hero() {
     <SectionShell className="relative z-[1]">
       <ScrollRevealGroup className="mx-auto max-w-3xl text-center" stagger={0.12}>
         <ScrollRevealItem>
-          <h1 className="font-display text-3xl font-semibold leading-tight tracking-tight text-balance text-white sm:text-4xl lg:text-5xl">
+          <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-balance text-white sm:text-5xl lg:text-[3.25rem]">
             From Raw Photo to
             <br />
             Finished Edit in Minutes
@@ -22,7 +22,7 @@ export default function Hero() {
         </ScrollRevealItem>
 
         <ScrollRevealItem>
-          <p className="mt-5 text-base leading-relaxed text-white/70">
+          <p className="mt-5 text-lg leading-relaxed text-white/70">
                 Agentic photo editing platform
           </p>
         </ScrollRevealItem>
