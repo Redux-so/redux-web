@@ -65,9 +65,9 @@ export const EDIT_SHOWCASE_PHOTO_ASPECT = "aspect-[16/10]";
 export const EDIT_SHOWCASE_PHOTO_WIDTH = 720;
 export const EDIT_SHOWCASE_PHOTO_HEIGHT = 450;
 
-/** Five-up row — each card grows with viewport so rows stay edge-to-edge on wide screens. */
+/** Size each card to fit five across the crop-guide column width. */
 export const EDIT_SHOWCASE_PHOTO_FRAME =
-  "w-[max(240px,calc((100vw-7.5rem)/5))] shrink-0";
+  "w-[max(12rem,calc((var(--page-grid-width,100%)-5rem)/5))] shrink-0 sm:w-[max(15rem,calc((var(--page-grid-width,100%)-7.5rem)/5))]";
 
 /** First visible row images — preload via next/image priority. */
 export const EDIT_SHOWCASE_PRIORITY_COUNT = 3;

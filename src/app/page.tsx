@@ -1,3 +1,4 @@
+import PageGrid from "@/src/components/PageGrid";
 import EditShowcasePreload from "@/src/components/EditShowcasePreload";
 import EditShowcaseSection from "@/src/components/EditShowcaseSection";
 import FAQ from "@/src/components/FAQ";
@@ -15,7 +16,7 @@ import WaitlistSection from "@/src/components/WaitlistSection";
 import { SECTION_DIVIDE, SECTION_VERTICAL_PADDING } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
-const SECTION_BASE = cn("bg-brand-bg", SECTION_DIVIDE, SECTION_VERTICAL_PADDING);
+const SECTION_BASE = cn("relative z-[1]", SECTION_DIVIDE, SECTION_VERTICAL_PADDING);
 
 export default function Home() {
   return (
@@ -28,11 +29,15 @@ export default function Home() {
         Rounded bottom corners clip this sheet as it slides up; overflow-hidden is
         safe here because the footer is outside this wrapper (sticky is unaffected).
       */}
-      <div className="relative z-10 overflow-x-clip overflow-hidden rounded-b-[2.5rem] bg-brand-bg text-white sm:rounded-b-[3.25rem] lg:rounded-b-[4rem] xl:rounded-b-[5rem]">
+      <div
+        data-page-grid-root
+        className="relative z-10 overflow-x-clip overflow-hidden rounded-b-[2.5rem] bg-brand-bg text-white sm:rounded-b-[3.25rem] lg:rounded-b-[4rem] xl:rounded-b-[5rem]"
+      >
         <Navbar />
         <div aria-hidden className={NAV_SPACER_CLASS} />
 
-        <main className="flex min-w-0 flex-col overflow-x-clip">
+        <main className="relative flex min-w-0 flex-col overflow-x-clip">
+          <PageGrid />
           <section
             id="home"
             className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}

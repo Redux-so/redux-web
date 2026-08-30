@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Alata } from "next/font/google";
 
+import FooterPageGrid from "@/src/components/FooterPageGrid";
 import {
   legalLinks,
   navigationLinks,
@@ -22,8 +23,10 @@ const footerWordmarkFont = Alata({
 
 export default function Footer() {
   return (
-    <footer className="sticky bottom-0 z-0 overflow-visible bg-[#040404] text-white">
-      <div className={PAGE_CONTAINER}>
+    <footer className="relative sticky bottom-0 z-0 overflow-visible bg-[#040404] text-white">
+      <FooterPageGrid />
+      <div className="relative z-[1]">
+        <div className={PAGE_CONTAINER}>
         <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16 lg:py-16">
           <div className="flex flex-col items-start gap-5">
             <Image
@@ -103,20 +106,21 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
 
-      <div
-        aria-hidden
-        className="-mt-2 max-h-[7rem] overflow-hidden sm:-mt-3 sm:max-h-[9rem] lg:max-h-[11.5rem] xl:max-h-[14rem]"
-      >
-        <p
-          className={cn(
-            footerWordmarkFont.className,
-            "text-center text-[9rem] leading-none sm:text-[12rem] lg:text-[16rem] xl:text-[20rem]",
-          )}
+        <div
+          aria-hidden
+          className="-mt-2 max-h-[7rem] overflow-hidden sm:-mt-3 sm:max-h-[9rem] lg:max-h-[11.5rem] xl:max-h-[14rem]"
         >
-          redux
-        </p>
+          <p
+            className={cn(
+              footerWordmarkFont.className,
+              "text-center text-[9rem] leading-none sm:text-[12rem] lg:text-[16rem] xl:text-[20rem]",
+            )}
+          >
+            redux
+          </p>
+        </div>
       </div>
     </footer>
   );
