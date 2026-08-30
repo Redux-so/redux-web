@@ -13,11 +13,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Redux - AI Agent for Photo Editing",
+  title: "Redux - AI for Photo Editing",
   description:
     "Organize, edit, and deliver photos in seconds, all from your browser",
   openGraph: {
-    title: "Redux - AI Agent for Photo Editing",
+    title: "Redux - AI for Photo Editing",
     description:
       "Organize, edit, and deliver photos in seconds, all from your browser",
     url: "https://redux.so",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Redux - AI Agent for Photo Editing",
+    title: "Redux - AI for Photo Editing",
     description:
       "Organize, edit, and deliver photos in seconds, all from your browser",
     images: ["/og-image.png"],
