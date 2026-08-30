@@ -12,11 +12,8 @@ import {
   type EditShowcasePhoto,
 } from "@/src/components/edit-showcase/edit-showcase-data";
 import SectionIntro from "@/src/components/SectionIntro";
-import {
-  PAGE_CONTAINER,
-  SECTION_PADDING_Y,
-  SECTION_STACK_GAP,
-} from "@/lib/section-styles";
+import SectionShell from "@/src/components/SectionShell";
+import { SECTION_INNER_STACK } from "@/lib/section-styles";
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
@@ -126,39 +123,35 @@ function PhotoMarqueeRow({
   );
 }
 
+/** Full-bleed wrapper for photo marquees while the section label stays in PAGE_CONTAINER. */
+const MARQUEE_BLEED =
+  "relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden";
+
 export default function EditShowcaseSection() {
   return (
-    <div className="flex flex-col">
-      <div className={cn(PAGE_CONTAINER, SECTION_PADDING_Y, "pb-0")}>
-        <SectionIntro>See how Redux can edit</SectionIntro>
-      </div>
-
-      <ScrollRevealGroup
-        className={cn(
-          "flex flex-col",
-          SECTION_STACK_GAP,
-          SECTION_PADDING_Y,
-          "pt-0",
-        )}
-        stagger={0.1}
-      >
+    <SectionShell intro={<SectionIntro>See how Redux can edit</SectionIntro>}>
+      <ScrollRevealGroup className={SECTION_INNER_STACK} stagger={0.1}>
         <ScrollRevealItem variant="fadeIn">
-          <PhotoMarqueeRow
-            photos={EDIT_SHOWCASE_TOP_ROW}
-            direction="left"
-            trackKey="edit-top"
-            priorityCount={EDIT_SHOWCASE_PRIORITY_COUNT}
-          />
+          <div className={MARQUEE_BLEED}>
+            <PhotoMarqueeRow
+              photos={EDIT_SHOWCASE_TOP_ROW}
+              direction="left"
+              trackKey="edit-top"
+              priorityCount={EDIT_SHOWCASE_PRIORITY_COUNT}
+            />
+          </div>
         </ScrollRevealItem>
 
         <ScrollRevealItem variant="fadeIn">
-          <PhotoMarqueeRow
-            photos={EDIT_SHOWCASE_BOTTOM_ROW}
-            direction="right"
-            trackKey="edit-bottom"
-          />
+          <div className={MARQUEE_BLEED}>
+            <PhotoMarqueeRow
+              photos={EDIT_SHOWCASE_BOTTOM_ROW}
+              direction="right"
+              trackKey="edit-bottom"
+            />
+          </div>
         </ScrollRevealItem>
       </ScrollRevealGroup>
-    </div>
+    </SectionShell>
   );
 }
