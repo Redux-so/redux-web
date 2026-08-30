@@ -21,7 +21,7 @@ export default function Hero() {
     <SectionShell className="relative z-[1]">
       <ScrollRevealGroup className="mx-auto max-w-3xl text-center" stagger={0.12}>
         <ScrollRevealItem>
-          <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight text-balance text-white sm:text-5xl lg:text-[3.25rem]">
+          <h1 className="font-display text-5xl font-[550] leading-tight tracking-tight text-balance text-white sm:text-6xl lg:text-[4rem]">
             From Raw Photo to
             <br />
             Finished Edit in Minutes
