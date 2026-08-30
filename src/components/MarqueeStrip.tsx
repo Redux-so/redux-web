@@ -30,9 +30,8 @@ export default function MarqueeStrip() {
     <ScrollRevealGroup className="flex min-w-0 w-full flex-col" stagger={0.1}>
       <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
         <div className={PAGE_GRID_ALIGNED_FRAME}>
-          <p className="m-0 py-6 text-center text-base text-white/55 sm:py-8 sm:text-lg">
-            Inspired by{" "}
-            <span className="font-semibold text-white/90">workflows</span> from
+          <p className="m-0 py-6 text-center text-sm uppercase leading-relaxed text-white/55 sm:py-8">
+            Inspired by workflows from
           </p>
 
           <div
