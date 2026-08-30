@@ -6,8 +6,7 @@ import {
   XSocialIcon,
 } from "@/lib/brand-social-icons";
 
-export const SITE_MOTTO =
-  "Organize, edit, and export photos, all from your browser";
+export const SITE_MOTTO = "Agentic photo editing platform";
 
 export const socialLinks = [
   {
