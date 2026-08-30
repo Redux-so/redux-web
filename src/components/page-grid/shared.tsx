@@ -38,8 +38,14 @@ export function measureGridColumns(
   }
 
   const gridOffset = getGridOffsetPx();
-  const leftX = sentinelRect.left - boundsRect.left - gridOffset;
-  const rightX = sentinelRect.right - boundsRect.left + gridOffset;
+  const insetLeft = sentinelRect.left - boundsRect.left;
+  const insetRight = boundsRect.right - sentinelRect.right;
+
+  /** Shrink offset on narrow viewports so rails stay inside overflow-hidden ancestors. */
+  const effectiveOffset = Math.min(gridOffset, insetLeft, insetRight);
+
+  const leftX = insetLeft - effectiveOffset;
+  const rightX = boundsRect.width - insetRight + effectiveOffset;
 
   if (!Number.isFinite(leftX) || !Number.isFinite(rightX) || rightX <= leftX) {
     return null;
@@ -79,7 +85,7 @@ export function CropMark({ x, y, side }: CropMarkProps) {
 
   return (
     <div
-      className="pointer-events-none absolute hidden md:block"
+      className="pointer-events-none absolute block max-sm:scale-90"
       style={{
         left: x,
         top: y,
