@@ -7,7 +7,7 @@ import {
   SITE_MOTTO,
   socialLinks,
 } from "@/lib/footer-content";
-import { PAGE_CONTAINER, SECTION_DIVIDE } from "@/lib/section-styles";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const FOOTER_LOGO_WIDTH = 471;
@@ -76,7 +76,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className={SECTION_DIVIDE}>
+        <div className="border-t border-white/[0.08]">
           <div className="flex flex-col gap-4 pt-6 pb-3 sm:flex-row sm:items-center sm:justify-between sm:pb-4">
             <p className="text-sm text-white/36">
               © Redux 2026. All rights reserved.

@@ -2,6 +2,10 @@
 export const SHOWCASE_DESIGN_WIDTH = 1400;
 export const SHOWCASE_DESIGN_HEIGHT = 820;
 
+/** Outer chrome for the full editor showcase — subtle radius without clipping inner UI. */
+export const SHOWCASE_OUTER_FRAME =
+  "overflow-hidden rounded-xl border border-brand-border";
+
 /** Main editor toolbar height in the showcase layout. */
 export const SHOWCASE_TOOLBAR_HEIGHT = 64;
 

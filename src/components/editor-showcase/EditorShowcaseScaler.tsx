@@ -6,6 +6,7 @@ import EditorShowcase from "./EditorShowcase";
 import {
   SHOWCASE_DESIGN_HEIGHT,
   SHOWCASE_DESIGN_WIDTH,
+  SHOWCASE_OUTER_FRAME,
 } from "./showcase-layout";
 
 function computeScale(containerWidth: number) {
@@ -48,7 +49,7 @@ export default function EditorShowcaseScaler() {
   return (
     <div ref={containerRef} className="w-full">
       <div
-        className="relative mx-auto overflow-hidden"
+        className={`relative mx-auto ${SHOWCASE_OUTER_FRAME}`}
         style={{ width: scaledWidth, height: scaledHeight }}
       >
         <div
