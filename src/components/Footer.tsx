@@ -110,12 +110,12 @@ export default function Footer() {
 
         <div
           aria-hidden
-          className="-mt-2 max-h-[7rem] overflow-hidden sm:-mt-3 sm:max-h-[9rem] lg:max-h-[11.5rem] xl:max-h-[14rem]"
+          className="-mt-2 max-h-[8rem] overflow-hidden sm:-mt-3 sm:max-h-[10rem] lg:max-h-[12.5rem] xl:max-h-[15.5rem]"
         >
           <p
             className={cn(
               footerWordmarkFont.className,
-              "text-center text-[9rem] leading-none sm:text-[12rem] lg:text-[16rem] xl:text-[20rem]",
+              "text-center text-[9rem] leading-none text-white/28 sm:text-[12rem] lg:text-[16rem] xl:text-[20rem]",
             )}
           >
             redux
