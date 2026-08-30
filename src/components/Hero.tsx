@@ -31,7 +31,7 @@ export default function Hero() {
         </ScrollRevealItem>
 
         <ScrollRevealItem className="mt-8 flex w-full justify-center px-0">
-          <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:max-w-none sm:w-max sm:grid-flow-col sm:auto-cols-max">
+          <div className="grid w-full max-w-md grid-cols-1 items-center gap-3 sm:max-w-none sm:w-max sm:grid-flow-col sm:auto-cols-max sm:items-stretch">
             <a
               href="#waitlist"
               className={cn(HERO_PILL_CTA, "hero-pill-cta--purple !px-[22px]")}

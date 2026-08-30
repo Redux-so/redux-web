@@ -264,8 +264,10 @@ html {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    height: 2.75rem;
     min-height: 2.75rem;
-    padding: 12px 24px;
+    max-height: 2.75rem;
+    padding: 0 24px;
     border-radius: 9999px;
     color: #fff;
     font-size: 16px;
@@ -340,16 +342,20 @@ html {
 
   .hero-pill-cta--nav {
     gap: 5px;
-    min-height: 2rem;
-    padding: 6px 13px;
+    height: 1.875rem;
+    min-height: 1.875rem;
+    max-height: 1.875rem;
+    padding: 0 13px;
     font-size: 12px;
   }
 
   @media (min-width: 640px) {
     .hero-pill-cta--nav {
       gap: 6px;
-      min-height: 2.1875rem;
-      padding: 7px 15px;
+      height: 2rem;
+      min-height: 2rem;
+      max-height: 2rem;
+      padding: 0 15px;
       font-size: 13px;
     }
   }
