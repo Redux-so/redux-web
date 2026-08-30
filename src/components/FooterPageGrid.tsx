@@ -9,8 +9,20 @@ type FooterPageGridProps = {
   className?: string;
 };
 
-function getFooterBoundaryYs(_bounds: HTMLElement): number[] {
-  return [0];
+function getFooterBoundaryYs(bounds: HTMLElement): number[] {
+  const boundsRect = bounds.getBoundingClientRect();
+  const boundaryYs: number[] = [0];
+
+  const copyrightDivider = bounds.querySelector<HTMLElement>(
+    "[data-footer-grid-divider]",
+  );
+
+  if (copyrightDivider) {
+    const dividerRect = copyrightDivider.getBoundingClientRect();
+    boundaryYs.push(dividerRect.top - boundsRect.top);
+  }
+
+  return boundaryYs;
 }
 
 /** Crop-guide grid for the footer — vertical rails plus a top seam line. */

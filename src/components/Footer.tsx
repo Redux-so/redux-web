@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/[0.08]">
+        <div data-footer-grid-divider className="relative">
           <div className="flex flex-col gap-4 pt-6 pb-3 sm:flex-row sm:items-center sm:justify-between sm:pb-4">
             <p className="text-sm text-white/36">
               © Redux 2026. All rights reserved.

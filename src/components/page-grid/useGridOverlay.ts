@@ -137,6 +137,12 @@ export function useGridOverlay({
       resizeObserver.observe(section);
     });
 
+    bounds
+      .querySelectorAll("[data-footer-grid-divider], [data-page-grid-boundary]")
+      .forEach((node) => {
+        resizeObserver.observe(node);
+      });
+
     window.addEventListener("resize", scheduleMeasure);
     window.addEventListener("scroll", scheduleMeasure, { passive: true });
 
