@@ -9,7 +9,6 @@ import { DiscordIcon } from "@/lib/brand-social-icons";
 
 import {
   BTN_OUTLINE_BLOCK,
-  BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
 import { PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
 import { EASE_OUT } from "@/lib/scroll-motion";
@@ -43,9 +42,9 @@ const NAV_LOGO_HEIGHT_CLASS = "h-5 sm:h-6";
 const NAV_LOGO_INTRINSIC_WIDTH = 471;
 const NAV_LOGO_INTRINSIC_HEIGHT = 117;
 
-/** Shared action button height in the desktop nav bar. */
-const NAV_ACTION_HEIGHT =
-  "!h-[34px] !min-h-[34px] !max-h-[34px] shrink-0 leading-none";
+const NAV_WAITLIST_CTA = cn(
+  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav inline-flex items-center justify-center shrink-0 no-underline",
+);
 
 const PANEL_TRANSITION = { duration: 0.3, ease: EASE_OUT };
 const ICON_TRANSITION = { duration: 0.18, ease: EASE_OUT };
@@ -169,11 +168,7 @@ export default function Navbar() {
           </a>
           <a
             href="#waitlist"
-            className={cn(
-              BTN_PRIMARY_SOLID,
-              NAV_ACTION_HEIGHT,
-              "px-2.5 text-xs sm:px-3.5 sm:text-sm",
-            )}
+            className={NAV_WAITLIST_CTA}
           >
             Join Waitlist
           </a>

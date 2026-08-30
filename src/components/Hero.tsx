@@ -3,18 +3,14 @@
 import { Icon } from "@/components/shared/Icon";
 import HeroPhotoMarquee from "@/src/components/HeroPhotoMarquee";
 import SectionShell from "@/src/components/SectionShell";
-import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import {
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
-/** Shared hero CTA dimensions — keeps primary and secondary buttons pixel-matched. */
-const HERO_CTA_SIZE =
-  "!h-10 !min-h-10 !max-h-10 w-full min-w-0 gap-1.5 px-4 text-sm font-medium leading-none box-border sm:whitespace-nowrap";
-
-const HERO_CTA_ICON = "ml-0.5 shrink-0 !size-4 -translate-y-0.25";
+const HERO_PILL_CTA =
+  "hero-pill-cta inline-flex items-center justify-center gap-2 w-full min-w-0 box-border sm:w-auto no-underline";
 
 export default function Hero() {
   return (
@@ -35,34 +31,30 @@ export default function Hero() {
         </ScrollRevealItem>
 
         <ScrollRevealItem className="mt-8 flex w-full justify-center px-0">
-          <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:max-w-none sm:w-max sm:grid-flow-col sm:auto-cols-fr">
+          <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:max-w-none sm:w-max sm:grid-flow-col sm:auto-cols-max">
             <a
               href="#waitlist"
-              className={cn(BTN_PRIMARY_SOLID, HERO_CTA_SIZE)}
+              className={cn(HERO_PILL_CTA, "hero-pill-cta--purple !px-[22px]")}
             >
               <span className="leading-none">Join Waitlist</span>
               <Icon
                 name="LinkExternal01"
                 size={16}
                 strokeWidth={2}
-                className={HERO_CTA_ICON}
+                className="shrink-0 text-white"
                 aria-hidden
               />
             </a>
             <a
               href="#features"
-              className={cn(
-                BTN_PRIMARY_SOLID,
-                HERO_CTA_SIZE,
-                "!border-brand-border !bg-brand-surface hover:!border-white/20",
-              )}
+              className={cn(HERO_PILL_CTA, "hero-pill-cta--charcoal")}
             >
               <span className="leading-none">See how it works</span>
               <Icon
                 name="ArrowNarrowDown"
                 size={16}
                 strokeWidth={2}
-                className={HERO_CTA_ICON}
+                className="shrink-0 text-white"
                 aria-hidden
               />
             </a>
