@@ -10,8 +10,9 @@ export const PAGE_CONTAINER = SITE_CONTAINER;
 export const SECTION_LABEL =
   "text-[13px] font-semibold uppercase tracking-wide text-[#727272]";
 
-/** Standard vertical padding for constrained page sections. */
-export const SECTION_PADDING_Y = "py-12 sm:py-16 lg:py-20";
+/** Equal vertical padding for every home page section — shared section rhythm. */
+export const SECTION_VERTICAL_PADDING =
+  "py-16 sm:py-20 lg:py-28";
 
 /** Gap between a section intro label and its body content. */
 export const SECTION_STACK_GAP = "gap-8 sm:gap-10";
@@ -19,9 +20,8 @@ export const SECTION_STACK_GAP = "gap-8 sm:gap-10";
 /** Vertical stack for repeated items inside a section (e.g. feature cards). */
 export const SECTION_INNER_STACK = "flex flex-col gap-10 sm:gap-12 lg:gap-14";
 
-/** Section shell — container + vertical rhythm. */
+/** Section shell — container + internal intro/content rhythm (no section margins). */
 export const SECTION_LAYOUT = [
   "flex w-full flex-col",
   SECTION_STACK_GAP,
-  SECTION_PADDING_Y,
 ].join(" ");

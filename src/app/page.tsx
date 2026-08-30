@@ -2,6 +2,7 @@ import EditShowcasePreload from "@/src/components/EditShowcasePreload";
 import EditShowcaseSection from "@/src/components/EditShowcaseSection";
 import FAQ from "@/src/components/FAQ";
 import Features from "@/src/components/Features";
+import ToolkitMarquee from "@/src/components/features/ToolkitMarquee";
 import Footer from "@/src/components/Footer";
 import Hero from "@/src/components/Hero";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
@@ -11,10 +12,10 @@ import Navbar, {
 } from "@/src/components/Navbar";
 import Showcase from "@/src/components/Showcase";
 import WaitlistSection from "@/src/components/WaitlistSection";
-import { SECTION_DIVIDE } from "@/lib/section-styles";
+import { SECTION_DIVIDE, SECTION_VERTICAL_PADDING } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
-const SECTION_BASE = cn("bg-brand-bg", SECTION_DIVIDE);
+const SECTION_BASE = cn("bg-brand-bg", SECTION_DIVIDE, SECTION_VERTICAL_PADDING);
 
 export default function Home() {
   return (
@@ -31,10 +32,10 @@ export default function Home() {
         <Navbar />
         <div aria-hidden className={NAV_SPACER_CLASS} />
 
-        <main className="overflow-x-hidden">
+        <main className="flex flex-col overflow-x-hidden">
           <section
             id="home"
-            className={cn(NAV_SCROLL_OFFSET_CLASS, "bg-brand-bg")}
+            className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}
           >
             <Hero />
           </section>
@@ -52,6 +53,10 @@ export default function Home() {
             className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}
           >
             <Features />
+          </section>
+
+          <section aria-label="The Full Toolkit" className={SECTION_BASE}>
+            <ToolkitMarquee />
           </section>
 
           <section
