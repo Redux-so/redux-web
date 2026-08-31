@@ -1,4 +1,5 @@
 import { Icon, type IconName } from "@/components/shared/Icon";
+import { UI_CARD, UI_CHIP_ACCENT } from "@/lib/ui-surface-styles";
 import { cn } from "@/lib/utils";
 
 type FeatureSmallCardProps = {
@@ -17,7 +18,8 @@ export default function FeatureSmallCard({
   return (
     <article
       className={cn(
-        "flex h-full min-w-0 flex-col items-start justify-between gap-4 overflow-hidden rounded-2xl border border-white/[0.08] bg-brand-surface-card p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6",
+        "flex h-full min-w-0 flex-col items-start justify-between gap-4 overflow-hidden p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6",
+        UI_CARD,
         className,
       )}
     >
@@ -31,7 +33,10 @@ export default function FeatureSmallCard({
       </div>
 
       <div
-        className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-brand-purple/25 bg-brand-purple/10 sm:size-14 sm:rounded-2xl"
+        className={cn(
+          "flex size-12 shrink-0 items-center justify-center sm:size-14",
+          UI_CHIP_ACCENT,
+        )}
         aria-hidden
       >
         <Icon

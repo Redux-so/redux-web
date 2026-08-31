@@ -93,6 +93,42 @@
   --brand-surface2: #1d1d1d;
   --brand-border: #2e2e2e;
   --brand-border-focus: #3a3a3a;
+
+  /* Charcoal surface — shared with hero-pill-cta--charcoal & feature cards */
+  --charcoal-bg-top: #242424;
+  --charcoal-bg-bottom: #1a1a1a;
+  --charcoal-border: rgba(255, 255, 255, 0.08);
+  --charcoal-inset-top: rgba(255, 255, 255, 0.15);
+  --charcoal-inset-bottom: rgba(0, 0, 0, 0.3);
+  --charcoal-outer-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+
+  /* Feature card tokens — darker grey than charcoal CTA */
+  --card-bg-top: #161616;
+  --card-bg-bottom: #0f0f0f;
+  --card-border: rgba(255, 255, 255, 0.07);
+  --card-border-width: 1px;
+  --card-inset-highlight: rgba(255, 255, 255, 0.1);
+  --card-inset-shadow: rgba(0, 0, 0, 0.4);
+  --card-shadow-outer: 0 4px 10px rgba(0, 0, 0, 0.45);
+  --card-radius: 1.125rem;
+
+  --panel-bg: #0a0a0a;
+  --panel-border: rgba(255, 255, 255, 0.06);
+  --panel-inset-highlight: rgba(255, 255, 255, 0.08);
+  --panel-inset-shadow: rgba(0, 0, 0, 0.45);
+  --panel-radius: 0.75rem;
+
+  --chip-bg-top: #161616;
+  --chip-bg-bottom: #0f0f0f;
+  --chip-border: rgba(255, 255, 255, 0.07);
+  --chip-inset-highlight: rgba(255, 255, 255, 0.1);
+  --chip-inset-shadow: rgba(0, 0, 0, 0.4);
+  --chip-shadow-outer: 0 4px 10px rgba(0, 0, 0, 0.45);
+  --chip-radius: 0.75rem;
+
+  --chip-active-border: rgba(255, 255, 255, 0.6);
+  --chip-active-glow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+  --chip-active-inset: rgba(255, 255, 255, 0.12);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -325,10 +361,10 @@ html {
     cursor: pointer;
     user-select: none;
     text-decoration: none;
-    --pill-border: rgba(255, 255, 255, 0.08);
-    --pill-inset-top: rgba(255, 255, 255, 0.15);
-    --pill-inset-bottom: rgba(0, 0, 0, 0.3);
-    --pill-outer: 0 4px 10px rgba(0, 0, 0, 0.35);
+    --pill-border: var(--charcoal-border);
+    --pill-inset-top: var(--charcoal-inset-top);
+    --pill-inset-bottom: var(--charcoal-inset-bottom);
+    --pill-outer: var(--charcoal-outer-shadow);
     border: 1px solid var(--pill-border);
     box-shadow:
       inset 0 1px 0 var(--pill-inset-top),
@@ -353,7 +389,11 @@ html {
   }
 
   .hero-pill-cta--charcoal {
-    background: linear-gradient(180deg, #242424, #1a1a1a);
+    background: linear-gradient(
+      180deg,
+      var(--charcoal-bg-top),
+      var(--charcoal-bg-bottom)
+    );
   }
 
   .hero-pill-cta--charcoal:hover {
@@ -422,6 +462,92 @@ html {
   .hero-pill-cta:focus-visible {
     outline: 2px solid rgba(255, 255, 255, 0.35);
     outline-offset: 2px;
+  }
+
+  .ui-card,
+  .ui-panel,
+  .ui-chip,
+  .showcase-frame {
+    position: relative;
+    isolation: isolate;
+    border: var(--card-border-width) solid var(--card-border);
+    box-shadow:
+      inset 0 1px 0 var(--card-inset-highlight),
+      inset 0 -1px 0 var(--card-inset-shadow),
+      var(--card-shadow-outer);
+  }
+
+  .ui-input {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--panel-border);
+    border-radius: var(--panel-radius);
+    background: var(--panel-bg);
+    box-shadow:
+      inset 0 1px 0 var(--panel-inset-highlight),
+      inset 0 -1px 0 var(--panel-inset-shadow);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .ui-input:focus {
+    outline: none;
+    border-color: rgba(121, 74, 222, 0.45);
+    box-shadow:
+      inset 0 1px 0 var(--panel-inset-highlight),
+      0 0 0 2px rgba(121, 74, 222, 0.22);
+  }
+
+  .ui-card {
+    border-radius: var(--card-radius);
+    background: linear-gradient(
+      180deg,
+      var(--card-bg-top) 0%,
+      var(--card-bg-bottom) 100%
+    );
+  }
+
+  .ui-panel {
+    border-color: var(--panel-border);
+    border-radius: var(--panel-radius);
+    background: var(--panel-bg);
+    box-shadow:
+      inset 0 1px 0 var(--panel-inset-highlight),
+      inset 0 -1px 0 var(--panel-inset-shadow);
+  }
+
+  .ui-chip,
+  .ui-chip--accent {
+    border-color: var(--chip-border);
+    border-radius: var(--chip-radius);
+    background: linear-gradient(
+      180deg,
+      var(--chip-bg-top) 0%,
+      var(--chip-bg-bottom) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 var(--chip-inset-highlight),
+      inset 0 -1px 0 var(--chip-inset-shadow),
+      var(--chip-shadow-outer);
+  }
+
+  .ui-chip--active {
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow:
+      inset 0 1px 0 var(--chip-active-inset),
+      var(--chip-active-glow),
+      var(--charcoal-outer-shadow);
+  }
+
+  .showcase-frame {
+    border-radius: var(--card-radius);
+    background: linear-gradient(
+      180deg,
+      var(--card-bg-top) 0%,
+      var(--card-bg-bottom) 100%
+    );
+    padding: var(--card-border-width);
   }
 }
 

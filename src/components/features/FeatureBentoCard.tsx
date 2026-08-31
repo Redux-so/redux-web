@@ -2,13 +2,12 @@ import type { ReactNode } from "react";
 
 import { Icon } from "@/components/shared/Icon";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { UI_CARD, UI_PANEL } from "@/lib/ui-surface-styles";
 import { cn } from "@/lib/utils";
 
-const BENTO_CARD_BASE =
-  "flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-brand-surface-card";
+const BENTO_CARD_BASE = cn("flex h-full flex-col overflow-hidden", UI_CARD);
 
-const SHOWCASE_FRAME =
-  "relative min-h-0 flex-1 overflow-hidden rounded-xl border border-white/[0.06] bg-brand-bg";
+const SHOWCASE_FRAME = cn("relative min-h-0 flex-1 overflow-hidden", UI_PANEL);
 
 const sizeClasses = {
   large: {
