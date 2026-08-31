@@ -264,6 +264,7 @@ html {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    box-sizing: border-box;
     height: 2.75rem;
     min-height: 2.75rem;
     max-height: 2.75rem;
@@ -309,14 +310,13 @@ html {
     --pill-border: rgba(255, 255, 255, 0.15);
     --pill-inset-top: rgba(255, 255, 255, 0.22);
     --pill-inset-bottom: rgba(0, 0, 0, 0.36);
-    --pill-outer: 0 0 0 1px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.35);
     background: linear-gradient(180deg, #7856d0, #6238b0);
   }
 
   .hero-pill-cta--purple:hover {
     --pill-border: rgba(255, 255, 255, 0.18);
     --pill-inset-top: rgba(255, 255, 255, 0.26);
-    --pill-outer: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.4);
+    --pill-outer: 0 4px 12px rgba(0, 0, 0, 0.4);
     background: linear-gradient(180deg, #8a62e4, #7048c4);
     box-shadow:
       inset 0 1px 1px var(--pill-inset-top),
@@ -342,20 +342,20 @@ html {
 
   .hero-pill-cta--nav {
     gap: 5px;
-    height: 1.875rem;
-    min-height: 1.875rem;
-    max-height: 1.875rem;
-    padding: 0 13px;
+    height: 2rem;
+    min-height: 2rem;
+    max-height: 2rem;
+    padding: 0 14px;
     font-size: 12px;
   }
 
   @media (min-width: 640px) {
     .hero-pill-cta--nav {
       gap: 6px;
-      height: 2rem;
-      min-height: 2rem;
-      max-height: 2rem;
-      padding: 0 15px;
+      height: 2.125rem;
+      min-height: 2.125rem;
+      max-height: 2.125rem;
+      padding: 0 16px;
       font-size: 13px;
     }
   }

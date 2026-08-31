@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const HERO_PILL_CTA =
-  "hero-pill-cta inline-flex items-center justify-center gap-2 w-full min-w-0 box-border sm:w-auto no-underline";
+  "hero-pill-cta inline-flex h-11 min-h-11 max-h-11 items-center justify-center gap-2 w-full min-w-0 shrink-0 box-border px-6 sm:w-auto no-underline";
 
 export default function Hero() {
   return (
@@ -31,10 +31,10 @@ export default function Hero() {
         </ScrollRevealItem>
 
         <ScrollRevealItem className="mt-8 flex w-full justify-center px-0">
-          <div className="grid w-full max-w-md grid-cols-1 items-center gap-3 sm:max-w-none sm:w-max sm:grid-flow-col sm:auto-cols-max sm:items-stretch">
+          <div className="flex w-full max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:justify-center">
             <a
               href="#waitlist"
-              className={cn(HERO_PILL_CTA, "hero-pill-cta--purple !px-[22px]")}
+              className={cn(HERO_PILL_CTA, "hero-pill-cta--purple")}
             >
               <span className="leading-none">Join Waitlist</span>
               <Icon
