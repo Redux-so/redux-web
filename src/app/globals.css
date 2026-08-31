@@ -231,13 +231,60 @@ html {
 }
 
 .group\/hero-photo-marquee:hover .animate-hero-photo-marquee,
-.group\/hero-photo-marquee:focus-within .animate-hero-photo-marquee {
+.group\/hero-photo-marquee:focus-within .animate-hero-photo-marquee,
+.group\/hero-photo-marquee:has(.hero-photo-card:hover) .animate-hero-photo-marquee {
   animation-play-state: paused;
+}
+
+.hero-photo-card {
+  position: relative;
+  z-index: 0;
+  flex-shrink: 0;
+}
+
+.hero-photo-card:hover {
+  z-index: 20;
+}
+
+.hero-photo-card__inner {
+  position: relative;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center center;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.hero-photo-card:hover .hero-photo-card__inner {
+  transform: scale(1.05);
+  box-shadow:
+    0 12px 28px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.hero-photo-card__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.group\/hero-photo-marquee:has(.hero-photo-card:hover)
+  .hero-photo-card:not(:hover)
+  .hero-photo-card__inner::after {
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-hero-photo-marquee {
     animation: none;
+  }
+
+  .hero-photo-card:hover .hero-photo-card__inner {
+    transform: none;
   }
 }
 
