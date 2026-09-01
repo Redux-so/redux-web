@@ -235,7 +235,9 @@ export default function ShowcaseAdjustmentPanel({
             aria-label="Account menu"
             className="flex h-12 w-12 shrink-0 cursor-default items-center justify-center rounded-xl border border-[#121212] text-white/40 transition-colors hover:bg-[#1d1d1d] hover:text-white"
           >
-            <div className="h-[36px] w-[36px] shrink-0 rounded-lg bg-[#1d1d1d] border border-[#2e2e2e]" />
+            <div className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] text-[13px] font-medium uppercase text-white">
+              JD
+            </div>
           </button>
         </div>
       </div>
