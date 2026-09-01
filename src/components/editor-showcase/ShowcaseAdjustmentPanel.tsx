@@ -3,7 +3,7 @@
 import { useState, type ReactNode } from "react";
 
 import { Icon, type IconName } from "@/components/shared/Icon";
-import { BTN_PRIMARY_PANEL, BTN_PRIMARY_BLOCK, BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { BTN_SOFT_BLOCK, BTN_SOFT_PANEL, BTN_SOFT_SOLID } from "@/lib/button-styles";
 import { PANEL_HEADER, PANEL_TITLE } from "@/lib/panel-chrome";
 import {
   SURFACE_BTN_ACTIVE,
@@ -144,8 +144,11 @@ function RailLink({
 
 function AIButton({ label }: { label: string }) {
   return (
-    <button type="button" className={`${BTN_PRIMARY_SOLID} w-full`}>
-      <Icon name="Star01" size={16} aria-hidden />
+    <button
+      type="button"
+      className={`flex w-full items-center justify-center gap-1.5 h-9 px-3 text-[13px] font-medium rounded-md text-white/80 ${SURFACE_SECONDARY_BTN}`}
+    >
+      <Icon name="Star01" size={16} className="shrink-0" aria-hidden />
       {label}
     </button>
   );
@@ -166,7 +169,7 @@ function ToolBtn({
       onClick={onClick}
       className={
         active
-          ? `${BTN_PRIMARY_SOLID} w-full capitalize`
+          ? `${BTN_SOFT_SOLID} w-full capitalize`
           : `flex w-full items-center justify-center h-9 px-3 text-[13px] font-medium capitalize rounded-md text-white/80 ${SURFACE_SECONDARY_BTN}`
       }
     >
@@ -348,7 +351,7 @@ export default function ShowcaseAdjustmentPanel({
                           >
                             Cancel
                           </button>
-                          <button type="button" className={BTN_PRIMARY_PANEL}>
+                          <button type="button" className={BTN_SOFT_PANEL}>
                             Confirm
                           </button>
                         </div>
@@ -427,7 +430,7 @@ export default function ShowcaseAdjustmentPanel({
                             />
                           </div>
                         </div>
-                        <button type="button" className={BTN_PRIMARY_BLOCK}>
+                        <button type="button" className={BTN_SOFT_BLOCK}>
                           Apply
                         </button>
                       </div>

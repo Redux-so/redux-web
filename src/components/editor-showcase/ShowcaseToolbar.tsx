@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Icon } from "@/components/shared/Icon";
-import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { BTN_SOFT_SOLID } from "@/lib/button-styles";
 import { SURFACE_BTN_ACTIVE, SURFACE_BTN_IDLE } from "@/lib/surface-colors";
 
 import { SHOWCASE_FILENAME } from "./showcase-data";
@@ -127,7 +127,7 @@ export default function ShowcaseToolbar() {
         <button
           type="button"
           title="Export / share"
-          className={`${BTN_PRIMARY_SOLID} shrink-0`}
+          className={`${BTN_SOFT_SOLID} shrink-0`}
         >
           <Icon name="Download01" size={16} aria-hidden />
           Export

@@ -12,8 +12,8 @@ export const SHOWCASE_INNER_CLIP =
 /** Main editor toolbar height in the showcase layout. */
 export const SHOWCASE_TOOLBAR_HEIGHT = 64;
 
-/** Expanded chat panel width inside the showcase. */
-export const SHOWCASE_CHAT_PANEL_WIDTH = 360;
+/** Expanded chat panel width inside the showcase : matches redux-app `CHAT_PANEL_WIDTH_PX`. */
+export const SHOWCASE_CHAT_PANEL_WIDTH = 420;
 
 /** Chat panel + canvas context when cropping the feature preview. */
 export const SHOWCASE_CHAT_CROP_WIDTH = SHOWCASE_CHAT_PANEL_WIDTH + 320;

@@ -26,7 +26,7 @@ export const BRAND_ACCENT_CLASS = "accent-[#794ADE]";
 
 export const EMPTY_STATE_ICON_CLASS = "text-[#794ADE]";
 
-/** Primary CTA shell shared by lib/button-styles. */
+/** Primary CTA shell shared by marketing waitlist / outline pairings. */
 export const BTN_PRIMARY_VISUAL = [
   "rounded-md border border-white/20 bg-[#794ADE] shadow-btn-primary",
   "transition-[background-color,box-shadow,transform] duration-200",
@@ -34,6 +34,9 @@ export const BTN_PRIMARY_VISUAL = [
   "active:scale-[0.98] active:shadow-btn-primary-active",
   "disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100",
 ].join(" ");
+
+/** Brand purple CTA shell : product mockup exceptions (chat send). */
+export const BTN_BRAND_VISUAL = BTN_PRIMARY_VISUAL;
 
 export const CHAT_USER_BUBBLE_CLASS =
   "rounded-xl bg-[#5C38A8] text-[13px] font-medium text-white py-2.5 px-4";
