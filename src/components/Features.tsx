@@ -14,7 +14,7 @@ import {
 
 export default function Features() {
   return (
-    <SectionShell intro={<SectionIntro>Features</SectionIntro>}>
+    <SectionShell intro={<SectionIntro variant="headline">A Smarter Way to Edit</SectionIntro>}>
       <ScrollRevealGroup
         className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2"
         stagger={0.1}
@@ -23,7 +23,7 @@ export default function Features() {
         <ScrollRevealItem className="min-w-0 md:col-span-2">
           <FeatureBentoCard
             size="large"
-            headline="Get a professional edit in seconds"
+            headline="Conversational Editing"
             description="Describe your edits in plain language and let AI apply professional changes instantly."
             cta="Ask AI"
           >
@@ -35,7 +35,7 @@ export default function Features() {
         <ScrollRevealItem className="min-w-0">
           <FeatureBentoCard
             size="medium"
-            headline="Get someone else's aesthetic without years of practicing it"
+            headline="Style Match"
             description="Upload a reference image and Redux applies its look to your photo in one step."
             cta="Match a Style"
           >
@@ -46,7 +46,7 @@ export default function Features() {
         <ScrollRevealItem className="min-w-0">
           <FeatureBentoCard
             size="medium"
-            headline="Stop scrolling through 10,000 photos to find the one"
+            headline="Smart Search"
             description="Search your library by describing what's in the image: keywords, scenes, subjects."
             cta="Search Now"
           >
@@ -57,7 +57,7 @@ export default function Features() {
         {/* Row 3: small pill cards */}
         <ScrollRevealItem className="min-w-0">
           <FeatureSmallCard
-            headline="One click, balanced tones"
+            headline="Auto Tone Balance"
             description="Auto balance exposure, contrast, and color across your whole image."
             icon="Contrast01"
           />
@@ -65,7 +65,7 @@ export default function Features() {
 
         <ScrollRevealItem className="min-w-0">
           <FeatureSmallCard
-            headline="Erase or extend, instantly"
+            headline="Generative Fill"
             description="Remove backgrounds or generatively fill gaps with AI-powered inpainting."
             icon="Expand04"
           />

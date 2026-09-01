@@ -1,13 +1,15 @@
 import type { ReactNode } from "react";
 
 import { Icon } from "@/components/shared/Icon";
-import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { UI_CARD, UI_PANEL } from "@/lib/ui-surface-styles";
+import { UI_CARD, SHOWCASE_FRAME } from "@/lib/ui-surface-styles";
 import { cn } from "@/lib/utils";
+
+const FEATURE_PILL_CTA =
+  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav inline-flex items-center justify-center shrink-0 no-underline";
 
 const BENTO_CARD_BASE = cn("flex h-full flex-col overflow-hidden", UI_CARD);
 
-const SHOWCASE_FRAME = cn("relative min-h-0 flex-1 overflow-hidden", UI_PANEL);
+const SHOWCASE_AREA = cn("relative min-h-0 flex-1 overflow-hidden", SHOWCASE_FRAME);
 
 const sizeClasses = {
   large: {
@@ -57,17 +59,20 @@ export default function FeatureBentoCard({
         </p>
         <a
           href="#waitlist"
-          className={cn(
-            BTN_PRIMARY_SOLID,
-            "mt-1 w-fit shrink-0 gap-1 px-3.5 leading-none",
-          )}
+          className={cn(FEATURE_PILL_CTA, "mt-1 w-fit")}
         >
           <span className="leading-none">{cta}</span>
-          <Icon name="ArrowUpRight" size={16} className="shrink-0" aria-hidden />
+          <Icon
+            name="ArrowUpRight"
+            size={14}
+            strokeWidth={2}
+            className="shrink-0 text-white"
+            aria-hidden
+          />
         </a>
       </div>
 
-      <div className={cn(SHOWCASE_FRAME, styles.showcase)}>{children}</div>
+      <div className={cn(SHOWCASE_AREA, styles.showcase)}>{children}</div>
     </article>
   );
 }

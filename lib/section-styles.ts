@@ -27,6 +27,14 @@ export const PAGE_GRID_ALIGNED_FRAME =
 export const SECTION_LABEL =
   "text-[13px] font-semibold uppercase tracking-wide text-[#727272]";
 
+/** Hero page title */
+export const HERO_HEADLINE =
+  "font-display text-5xl font-[550] leading-tight tracking-tight text-balance text-white sm:text-6xl lg:text-[4rem]";
+
+/** Section display headline : same typography, smaller scale */
+export const SECTION_HEADLINE =
+  "font-display text-2xl font-[550] leading-tight tracking-tight text-balance text-white sm:text-3xl lg:text-4xl";
+
 /** Equal vertical padding for every home page section : shared section rhythm. */
 export const SECTION_VERTICAL_PADDING =
   "py-16 sm:py-20 lg:py-28";

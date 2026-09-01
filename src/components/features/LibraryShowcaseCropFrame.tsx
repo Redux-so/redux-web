@@ -11,6 +11,8 @@ import {
   LIBRARY_SHOWCASE_DESIGN_HEIGHT,
   LIBRARY_SHOWCASE_DESIGN_WIDTH,
 } from "@/src/components/library-showcase/library-showcase-layout";
+import { SHOWCASE_INNER_CLIP } from "@/src/components/editor-showcase/showcase-layout";
+import { cn } from "@/lib/utils";
 
 type LibraryShowcaseCropFrameProps = {
   animationActive?: boolean;
@@ -54,7 +56,7 @@ export default function LibraryShowcaseCropFrame({
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 overflow-hidden bg-[#161616]"
+      className={cn("relative h-full w-full min-h-0", SHOWCASE_INNER_CLIP)}
       aria-label={ariaLabel}
     >
       <div className="pointer-events-none relative h-full w-full overflow-hidden">

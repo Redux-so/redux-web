@@ -12,7 +12,7 @@ export default function ConversationalEditingShowcaseCrop() {
 
   return (
     <motion.div
-      className="absolute inset-0"
+      className="h-full w-full min-h-0"
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"

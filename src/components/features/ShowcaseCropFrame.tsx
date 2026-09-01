@@ -13,7 +13,9 @@ import {
 import {
   SHOWCASE_DESIGN_HEIGHT,
   SHOWCASE_DESIGN_WIDTH,
+  SHOWCASE_INNER_CLIP,
 } from "@/src/components/editor-showcase/showcase-layout";
+import { cn } from "@/lib/utils";
 
 type ShowcaseCropFrameProps = {
   scenario?: EditorShowcaseScenario;
@@ -61,7 +63,7 @@ export default function ShowcaseCropFrame({
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 overflow-hidden bg-[#161616]"
+      className={cn("relative h-full w-full min-h-0", SHOWCASE_INNER_CLIP)}
       aria-label={ariaLabel}
     >
       <div className="pointer-events-none relative h-full w-full overflow-hidden">
