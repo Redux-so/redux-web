@@ -86,7 +86,7 @@ function HeroPhotoMarqueeTrack({
 }
 
 export type HeroPhotoMarqueeProps = {
-  /** Image URLs — pass `null` entries for placeholders until real photos are ready. */
+  /** Image URLs : pass `null` entries for placeholders until real photos are ready. */
   images?: readonly (string | null)[];
   placeholderAlt?: string;
   className?: string;

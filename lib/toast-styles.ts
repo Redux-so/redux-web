@@ -1,4 +1,4 @@
-/** User chat bubble — matches Redux TOAST_SHELL_CLASS */
+/** User chat bubble : matches Redux TOAST_SHELL_CLASS */
 export const TOAST_SHELL_CLASS = [
   "max-w-[320px] leading-relaxed whitespace-pre-wrap break-words",
   "rounded-xl border border-white/20 bg-[#794ADE] shadow-btn-primary",

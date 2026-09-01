@@ -1,4 +1,4 @@
-/** Primary brand purple — CTAs, toasts, links, accents. */
+/** Primary brand purple : CTAs, toasts, links, accents. */
 
 export const PRIMARY_BRAND_HEX = "#794ADE";
 export const PRIMARY_BRAND_HOVER_HEX = "#9168eb";

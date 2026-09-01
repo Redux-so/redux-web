@@ -1,7 +1,7 @@
 export const LIBRARY_SHOWCASE_DESIGN_WIDTH = 1400;
 export const LIBRARY_SHOWCASE_DESIGN_HEIGHT = 820;
 
-/** Library left sidebar width — matches redux-app `LIBRARY_SIDEBAR_WIDTH_PX`. */
+/** Library left sidebar width : matches redux-app `LIBRARY_SIDEBAR_WIDTH_PX`. */
 export const LIBRARY_SHOWCASE_SIDEBAR_WIDTH = 260;
 
 /**

@@ -95,7 +95,7 @@
   --brand-border: #2e2e2e;
   --brand-border-focus: #3a3a3a;
 
-  /* Charcoal surface — shared with hero-pill-cta--charcoal & feature cards */
+  /* Charcoal surface : shared with hero-pill-cta--charcoal & feature cards */
   --charcoal-bg-top: #242424;
   --charcoal-bg-bottom: #1a1a1a;
   --charcoal-border: rgba(255, 255, 255, 0.08);
@@ -103,7 +103,7 @@
   --charcoal-inset-bottom: rgba(0, 0, 0, 0.3);
   --charcoal-outer-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 
-  /* Feature card tokens — darker grey than charcoal CTA */
+  /* Feature card tokens : darker grey than charcoal CTA */
   --card-bg-top: #161616;
   --card-bg-bottom: #0f0f0f;
   --card-border: rgba(255, 255, 255, 0.07);
@@ -557,7 +557,7 @@ html {
   box-sizing: border-box;
 }
 
-/* Library search bar + greeting glow — matches redux-app library page. */
+/* Library search bar + greeting glow : matches redux-app library page. */
 .accent-glow-heading {
   position: relative;
   isolation: isolate;

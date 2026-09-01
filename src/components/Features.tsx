@@ -19,7 +19,7 @@ export default function Features() {
         className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2"
         stagger={0.1}
       >
-        {/* Row 1 — large hero card */}
+        {/* Row 1: large hero card */}
         <ScrollRevealItem className="min-w-0 md:col-span-2">
           <FeatureBentoCard
             size="large"
@@ -31,7 +31,7 @@ export default function Features() {
           </FeatureBentoCard>
         </ScrollRevealItem>
 
-        {/* Row 2 — medium cards */}
+        {/* Row 2: medium cards */}
         <ScrollRevealItem className="min-w-0">
           <FeatureBentoCard
             size="medium"
@@ -47,14 +47,14 @@ export default function Features() {
           <FeatureBentoCard
             size="medium"
             headline="Stop scrolling through 10,000 photos to find the one"
-            description="Search your library by describing what's in the image — keywords, scenes, subjects."
+            description="Search your library by describing what's in the image: keywords, scenes, subjects."
             cta="Search Now"
           >
             <SmartSearchShowcaseCrop />
           </FeatureBentoCard>
         </ScrollRevealItem>
 
-        {/* Row 3 — small pill cards */}
+        {/* Row 3: small pill cards */}
         <ScrollRevealItem className="min-w-0">
           <FeatureSmallCard
             headline="One click, balanced tones"

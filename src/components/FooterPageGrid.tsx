@@ -25,7 +25,7 @@ function getFooterBoundaryYs(bounds: HTMLElement): number[] {
   return boundaryYs;
 }
 
-/** Crop-guide grid for the footer — vertical rails plus a top seam line. */
+/** Crop-guide grid for the footer : vertical rails plus a top seam line. */
 export default function FooterPageGrid({ className }: FooterPageGridProps) {
   const { overlayRef, sentinelRef, geometry } = useGridOverlay({
     getBoundaryYs: getFooterBoundaryYs,

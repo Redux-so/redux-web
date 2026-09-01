@@ -129,7 +129,7 @@ export default function ShowcaseChatPanel({
     demoMode && autoScrollActive && !prefersReducedMotion && scrollDistance > 0;
 
   const trackHeight = Math.max(0, viewportHeight - 40);
-  /** Short decorative thumb — matches the original ~32% track height. */
+  /** Short decorative thumb : matches the original ~32% track height. */
   const thumbHeight = Math.max(24, trackHeight * 0.32);
   const maxThumbTop = Math.max(0, trackHeight - thumbHeight);
 

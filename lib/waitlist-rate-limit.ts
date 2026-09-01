@@ -1,5 +1,5 @@
 // Best-effort in-memory rate limit per serverless instance.
-// Not globally shared across Vercel isolates — upgrade to Redis/KV if stricter limits are needed.
+// Not globally shared across Vercel isolates : upgrade to Redis/KV if stricter limits are needed.
 
 const WINDOW_MS = 15 * 60 * 1000;
 const MAX_REQUESTS = 5;

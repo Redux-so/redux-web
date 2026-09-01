@@ -30,7 +30,7 @@ export const SHOWCASE_CHAT_MESSAGES = [
     id: "1",
     role: "user" as const,
     content:
-      "I want this to feel more like blue hour — cool tones on the lake and sky, with Mount Fuji silhouetted against the twilight gradient.",
+      "I want this to feel more like blue hour: cool tones on the lake and sky, with Mount Fuji silhouetted against the twilight gradient.",
     timestamp: new Date("2026-06-05T14:28:00"),
   },
   {
@@ -44,7 +44,7 @@ export const SHOWCASE_CHAT_MESSAGES = [
     id: "3",
     role: "user" as const,
     content:
-      "Deepen the foreground reeds and hills — they should feel like silhouettes against the water.",
+      "Deepen the foreground reeds and hills so they feel like silhouettes against the water.",
     timestamp: new Date("2026-06-05T14:30:00"),
   },
   {

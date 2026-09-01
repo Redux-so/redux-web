@@ -20,7 +20,7 @@ export const SURFACE_INPUT =
 /** Modals, popovers, dropdown panels. */
 export const SURFACE_POPOVER = "bg-[#121212] border border-[#2e2e2e]";
 
-/** Nav / list row — default + hover. */
+/** Nav / list row : default + hover. */
 export const SURFACE_BTN_ROW =
   "border transition-colors cursor-pointer outline-none focus:outline-none";
 
@@ -46,5 +46,5 @@ export const SURFACE_GHOST_BTN =
 export const SURFACE_SECONDARY_BTN =
   "border border-[#2e2e2e] bg-[#1d1d1d] text-white hover:bg-[#1d1d1d] hover:border-[#3a3a3a] transition-colors cursor-pointer";
 
-/** Decorative empty-state icons — primary CTA purple (matches `BTN_PRIMARY_*`). */
+/** Decorative empty-state icons : primary CTA purple (matches `BTN_PRIMARY_*`). */
 export { EMPTY_STATE_ICON_CLASS } from "@/lib/brand-colors";

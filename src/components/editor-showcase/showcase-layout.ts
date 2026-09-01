@@ -2,10 +2,10 @@
 export const SHOWCASE_DESIGN_WIDTH = 1400;
 export const SHOWCASE_DESIGN_HEIGHT = 820;
 
-/** Outer chrome for the full editor showcase — matches feature card border. */
+/** Outer chrome for the full editor showcase : matches feature card border. */
 export const SHOWCASE_OUTER_FRAME = "showcase-frame";
 
-/** Inner clip — keeps scaled editor UI contained within the rounded frame. */
+/** Inner clip : keeps scaled editor UI contained within the rounded frame. */
 export const SHOWCASE_INNER_CLIP =
   "overflow-hidden h-full w-full bg-[#161616] rounded-[calc(var(--card-radius)-var(--card-border-width))]";
 

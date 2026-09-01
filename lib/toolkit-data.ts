@@ -6,7 +6,7 @@ export type ToolkitItem = {
   icon: IconName;
 };
 
-/** Flat tool list — ordered by category adjacency, no visible category headers. */
+/** Flat tool list : ordered by category adjacency, no visible category headers. */
 export const TOOLKIT_ITEMS: ToolkitItem[] = [
   // Adjustments
   {

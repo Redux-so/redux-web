@@ -84,7 +84,7 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
         </div>
       </div>
 
-      {/* Screen-reader-only static list — marquee duplicate tracks are aria-hidden */}
+      {/* Screen-reader-only static list : marquee duplicate tracks are aria-hidden */}
       <div className="sr-only">
         <h3>Editing toolkit</h3>
         <ul>
