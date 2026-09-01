@@ -5,11 +5,17 @@ import Link from "next/link";
 
 import { Icon, type IconName } from "@/components/shared/Icon";
 import { DiscordIcon, GithubIcon } from "@/lib/brand-social-icons";
-import { SURFACE_BG_PANEL, SURFACE_BORDER } from "@/lib/surface-colors";
+import {
+  LIBRARY_PANEL_SURFACE,
+  LIBRARY_SIDEBAR_BTN_ACTIVE,
+  LIBRARY_SIDEBAR_BTN_IDLE,
+  LIBRARY_SIDEBAR_BTN_ROW,
+  LIBRARY_SIDEBAR_LINK_ROW,
+  LIBRARY_SIDEBAR_PROFILE_BTN,
+} from "@/lib/library-sidebar";
 
 import {
   SHOWCASE_LIBRARY_ALBUMS,
-  type LibraryShowcaseImage,
 } from "./library-showcase-data";
 import { LIBRARY_SHOWCASE_SIDEBAR_WIDTH } from "./library-showcase-layout";
 
@@ -22,13 +28,6 @@ const QUICK_FILTERS: { id: string; label: string; icon: IconName }[] = [
   { id: "favorites", label: "Favorites", icon: "Heart" },
 ];
 
-const SIDEBAR_BTN_ROW =
-  "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] font-medium border border-[#101010] transition-colors";
-const SIDEBAR_BTN_IDLE =
-  "text-[#888888] hover:bg-[#1a1a1a] hover:text-white";
-const SIDEBAR_BTN_ACTIVE =
-  "bg-[#1a1a1a] !border-[#2a2a2a] text-white";
-
 type LibraryShowcaseSidebarProps = {
   demoMode?: boolean;
 };
@@ -38,7 +37,7 @@ export default function LibraryShowcaseSidebar({
 }: LibraryShowcaseSidebarProps) {
   return (
     <aside
-      className={`flex h-full shrink-0 flex-col overflow-hidden rounded-r-2xl border-r ${SURFACE_BORDER} ${SURFACE_BG_PANEL}`}
+      className={`flex h-full shrink-0 flex-col overflow-hidden rounded-r-2xl border-r ${LIBRARY_PANEL_SURFACE}`}
       style={{ width: LIBRARY_SHOWCASE_SIDEBAR_WIDTH }}
     >
       <div className="shrink-0">
@@ -80,8 +79,8 @@ export default function LibraryShowcaseSidebar({
               <span
                 key={option.id}
                 className={[
-                  SIDEBAR_BTN_ROW,
-                  isActive ? SIDEBAR_BTN_ACTIVE : SIDEBAR_BTN_IDLE,
+                  LIBRARY_SIDEBAR_BTN_ROW,
+                  isActive ? LIBRARY_SIDEBAR_BTN_ACTIVE : LIBRARY_SIDEBAR_BTN_IDLE,
                 ].join(" ")}
               >
                 <Icon
@@ -101,7 +100,7 @@ export default function LibraryShowcaseSidebar({
           {SHOWCASE_LIBRARY_ALBUMS.map((album) => (
             <span
               key={album.id}
-              className={[SIDEBAR_BTN_ROW, SIDEBAR_BTN_IDLE].join(" ")}
+              className={[LIBRARY_SIDEBAR_BTN_ROW, LIBRARY_SIDEBAR_BTN_IDLE].join(" ")}
             >
               <Icon name="Folder" size={16} className="text-[#888888]" aria-hidden />
               {album.name}
@@ -110,23 +109,27 @@ export default function LibraryShowcaseSidebar({
         </div>
       </div>
 
-      <div className="mt-auto shrink-0 px-4 pb-4 pt-6">
-        <div className="flex flex-col gap-0.5">
-          <span className={[SIDEBAR_BTN_ROW, SIDEBAR_BTN_IDLE].join(" ")}>
-            <GithubIcon className="h-4 w-4 shrink-0" />
-            GitHub
+      <div className="mt-auto shrink-0 border-t border-[#2e2e2e] px-4 py-4">
+        <nav className="flex flex-col gap-0.5">
+          <span className={LIBRARY_SIDEBAR_LINK_ROW}>
+            <GithubIcon className="h-4 w-4 shrink-0 text-[#888888] group-hover:text-white" />
+            <span className="min-w-0 truncate">GitHub</span>
           </span>
-          <span className={[SIDEBAR_BTN_ROW, SIDEBAR_BTN_IDLE].join(" ")}>
-            <DiscordIcon className="h-4 w-4 shrink-0" />
-            Discord
+          <span className={LIBRARY_SIDEBAR_LINK_ROW}>
+            <DiscordIcon className="h-4 w-4 shrink-0 text-[#888888] group-hover:text-white" />
+            <span className="min-w-0 truncate">Discord</span>
           </span>
-        </div>
+        </nav>
 
-        <div className="mt-3 flex min-w-0 items-center gap-2.5 rounded-lg border border-[#101010] px-1.5 py-1.5">
-          <div className="h-8 w-8 shrink-0 rounded-md border border-[#2a2a2a] bg-[#1a1a1a]" />
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-[13px] font-medium text-white">Levi</p>
-            <p className="truncate text-[11px] text-[#888888]">levi@redux.so</p>
+        <div className={`mt-3 ${LIBRARY_SIDEBAR_PROFILE_BTN}`}>
+          <div className="h-[36px] w-[36px] shrink-0 rounded-lg bg-[#1d1d1d] border border-[#2e2e2e]" />
+          <div className="min-w-0 flex-1 text-left">
+            <p className="truncate text-[14px] font-medium leading-[1.3] text-white">
+              Levi
+            </p>
+            <p className="truncate text-[12px] leading-[1.3] text-[#888888]">
+              levi@redux.so
+            </p>
           </div>
         </div>
       </div>

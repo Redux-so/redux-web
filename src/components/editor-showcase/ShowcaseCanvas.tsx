@@ -6,7 +6,7 @@ type ShowcaseCanvasProps = {
 
 export default function ShowcaseCanvas({ imageFilter }: ShowcaseCanvasProps) {
   return (
-    <div className="relative flex min-h-0 min-w-0 flex-1 items-center justify-center overflow-hidden bg-brand-bg p-8">
+    <div className="relative flex min-h-0 min-w-0 flex-1 items-center justify-center overflow-hidden bg-[#161616] p-8">
       <Image
         src="/showcase/mount-fuji.jpg"
         alt="Mount Fuji at twilight reflected in a lake with silhouetted reeds in the foreground"

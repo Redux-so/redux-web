@@ -3,7 +3,7 @@
 import { useState, type ReactNode } from "react";
 
 import { Icon, type IconName } from "@/components/shared/Icon";
-import { BTN_PRIMARY_PANEL, BTN_PRIMARY_SOLID } from "@/lib/button-styles";
+import { BTN_PRIMARY_PANEL, BTN_PRIMARY_BLOCK, BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import { PANEL_HEADER, PANEL_TITLE } from "@/lib/panel-chrome";
 import {
   SURFACE_BTN_ACTIVE,
@@ -135,7 +135,7 @@ function RailLink({
       aria-label={title}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#101010] text-[#888888] transition-colors hover:bg-[#1a1a1a] hover:text-white"
+      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#121212] text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white"
     >
       {children}
     </a>
@@ -202,7 +202,7 @@ export default function ShowcaseAdjustmentPanel({
 
   return (
     <div className="flex h-full min-w-0 shrink-0">
-      <div className="flex h-full w-[72px] shrink-0 flex-col items-center border-r border-[#2a2a2a] bg-[#101010]">
+      <div className="flex h-full w-[72px] shrink-0 flex-col items-center border-r border-[#2e2e2e] bg-[#121212]">
         <div className="flex flex-col items-center gap-4 py-4">
           {TOOL_SECTIONS.map(({ id, title, iconName }) => (
             <RailBtn
@@ -233,18 +233,18 @@ export default function ShowcaseAdjustmentPanel({
           <button
             type="button"
             aria-label="Account menu"
-            className="flex h-12 w-12 shrink-0 cursor-default items-center justify-center rounded-xl border border-[#101010] text-white/40 transition-colors hover:bg-[#1a1a1a] hover:text-white"
+            className="flex h-12 w-12 shrink-0 cursor-default items-center justify-center rounded-xl border border-[#121212] text-white/40 transition-colors hover:bg-[#1d1d1d] hover:text-white"
           >
-            <div className="h-[36px] w-[36px] shrink-0 rounded-lg border border-[#2a2a2a] bg-[#1a1a1a]" />
+            <div className="h-[36px] w-[36px] shrink-0 rounded-lg bg-[#1d1d1d] border border-[#2e2e2e]" />
           </button>
         </div>
       </div>
 
       <div
         className={[
-          "flex h-full min-w-0 shrink-0 flex-col overflow-hidden bg-[#101010] transition-[width] duration-200 ease-out",
+          "flex h-full min-w-0 shrink-0 flex-col overflow-hidden bg-[#121212] transition-[width] duration-200 ease-out",
           activeSection
-            ? "w-[360px] rounded-r-2xl border-r border-[#2a2a2a]"
+            ? "w-[360px] rounded-r-2xl border-r border-[#2e2e2e]"
             : "w-0 border-r-0",
         ].join(" ")}
       >
@@ -342,7 +342,7 @@ export default function ShowcaseAdjustmentPanel({
                           <button
                             type="button"
                             onClick={() => setActiveTool(null)}
-                            className="h-[34px] flex-1 cursor-pointer rounded-md border border-[#2a2a2a] bg-[#1a1a1a] text-[13px] text-white transition-colors hover:border-[#363636]"
+                            className="h-[34px] flex-1 cursor-pointer rounded-md border border-[#2e2e2e] bg-[#1d1d1d] text-[13px] text-white transition-colors hover:border-[#3a3a3a]"
                           >
                             Cancel
                           </button>
@@ -395,7 +395,7 @@ export default function ShowcaseAdjustmentPanel({
                       onClick={() => setShowResize((v) => !v)}
                     />
                     {showResize && (
-                      <div className="flex flex-col gap-3 rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] p-3">
+                      <div className="flex flex-col gap-3 rounded-xl border border-[#2e2e2e] bg-[#1d1d1d] p-3">
                         <div className="flex items-center gap-2">
                           <div className="flex flex-1 flex-col gap-1">
                             <label className="text-[11px] font-medium text-[#555555]">
@@ -404,12 +404,16 @@ export default function ShowcaseAdjustmentPanel({
                             <input
                               readOnly
                               value={2788}
-                              className="h-[30px] w-full rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-2 text-[12px] text-white outline-none"
+                              className="h-[30px] w-full rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-2 text-[12px] text-white outline-none focus:border-[#794ADE]/60"
                             />
                           </div>
-                          <div className="mt-4 shrink-0 text-[#555555]">
+                          <button
+                            type="button"
+                            className="mt-4 shrink-0 text-[#555555] transition-colors hover:text-[#888888]"
+                            title="Lock aspect ratio"
+                          >
                             <Icon name="Lock01" size={16} aria-hidden />
-                          </div>
+                          </button>
                           <div className="flex flex-1 flex-col gap-1">
                             <label className="text-[11px] font-medium text-[#555555]">
                               Height
@@ -417,11 +421,11 @@ export default function ShowcaseAdjustmentPanel({
                             <input
                               readOnly
                               value={3717}
-                              className="h-[30px] w-full rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-2 text-[12px] text-white outline-none"
+                              className="h-[30px] w-full rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-2 text-[12px] text-white outline-none focus:border-[#794ADE]/60"
                             />
                           </div>
                         </div>
-                        <button type="button" className={`${BTN_PRIMARY_SOLID} w-full`}>
+                        <button type="button" className={BTN_PRIMARY_BLOCK}>
                           Apply
                         </button>
                       </div>

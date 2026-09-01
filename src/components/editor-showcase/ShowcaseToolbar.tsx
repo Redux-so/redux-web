@@ -28,7 +28,7 @@ function ToolbarBtn({
       className={[
         "flex shrink-0 items-center justify-center h-9 w-9 rounded-md transition-colors cursor-pointer",
         "disabled:opacity-30 disabled:cursor-not-allowed",
-        "text-white/40 hover:bg-[#1a1a1a] hover:text-white",
+        "text-white/40 hover:bg-[#1d1d1d] hover:text-white",
       ].join(" ")}
     >
       {children}
@@ -47,11 +47,11 @@ export default function ShowcaseToolbar() {
   const zoomPercent = `${Math.round(zoom * 100)}%`;
 
   return (
-    <div className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-[#2a2a2a] bg-[#101010] pl-3 pr-3">
+    <div className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-[#2e2e2e] bg-[#121212] pl-3 pr-3">
       <div className="flex min-w-0 shrink-0 items-center justify-self-start gap-3">
         <button
           type="button"
-          className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-2 py-1.5 text-[13px] text-[#888888] transition-colors hover:bg-[#1a1a1a] hover:text-white disabled:cursor-wait disabled:opacity-60"
+          className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-2 py-1.5 text-[13px] text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white disabled:cursor-wait disabled:opacity-60"
         >
           <Icon name="ChevronLeft" size={16} aria-hidden />
           Back to Library
@@ -70,7 +70,7 @@ export default function ShowcaseToolbar() {
           type="button"
           title="Reset zoom"
           onClick={() => setZoom(1)}
-          className="flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-md px-3 text-[14px] tabular-nums text-white transition-colors hover:bg-[#1a1a1a]"
+          className="flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-md px-3 text-[14px] tabular-nums text-white transition-colors hover:bg-[#1d1d1d]"
         >
           {zoomPercent}
         </button>

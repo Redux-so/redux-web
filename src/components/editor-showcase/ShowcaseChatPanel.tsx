@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useMotionValue, useTransform, animate } from "framer-motion";
 
 import { Icon } from "@/components/shared/Icon";
+import { CHAT_USER_BUBBLE_CLASS } from "@/lib/brand-colors";
 import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import { PANEL_HEADER, PANEL_TITLE } from "@/lib/panel-chrome";
 
@@ -24,8 +25,6 @@ const BTN_SECONDARY =
   "inline-flex items-center justify-center h-8 px-3.5 rounded-md border border-[#2e2e2e] bg-[#1d1d1d] text-[12px] font-semibold text-white/90 hover:border-[#3a3a3a] transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed";
 const ASSISTANT_BUBBLE =
   "rounded-lg px-3 py-2.5 text-[14px] bg-[#1d1d1d] text-[#e5e5e5]";
-const SHOWCASE_USER_BUBBLE =
-  "rounded-xl bg-[#3a2270] text-[13px] font-medium text-white py-2.5 px-4";
 
 const RING_RADIUS = 7.5;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
@@ -243,7 +242,7 @@ export default function ShowcaseChatPanel({
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
-                    className={`flex flex-col gap-1 ${msg.role === "user" ? "items-end" : "items-start"}`}
+                    className={`flex flex-col gap-[4px] ${msg.role === "user" ? "items-end" : "items-start"}`}
                   >
                     {msg.imagePreview ? (
                       <div className="mb-1">
@@ -260,7 +259,7 @@ export default function ShowcaseChatPanel({
                     <div
                       className={`max-w-[320px] whitespace-pre-wrap break-words leading-relaxed ${
                         msg.role === "user"
-                          ? SHOWCASE_USER_BUBBLE
+                          ? CHAT_USER_BUBBLE_CLASS
                           : ASSISTANT_BUBBLE
                       }`}
                     >

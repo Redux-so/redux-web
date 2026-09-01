@@ -54,7 +54,7 @@ export default function LibraryShowcaseCropFrame({
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 overflow-hidden bg-[#141414]"
+      className="absolute inset-0 overflow-hidden bg-[#161616]"
       aria-label={ariaLabel}
     >
       <div className="pointer-events-none relative h-full w-full overflow-hidden">

@@ -15,7 +15,7 @@ export default function LibraryShowcaseHeader({
 }: LibraryShowcaseHeaderProps) {
   return (
     <header className="flex shrink-0 flex-col gap-5 px-6 pt-8 pb-5">
-      <div className="text-center">
+      <div className="accent-glow-heading text-center">
         <h1 className="relative text-[32px] font-medium leading-tight tracking-tight text-white">
           {SHOWCASE_LIBRARY_GREETING}
         </h1>
@@ -23,7 +23,7 @@ export default function LibraryShowcaseHeader({
 
       <div className="relative w-full min-w-0">
         <form
-          className="relative flex h-[52px] w-full items-center rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] pl-12 pr-2 transition-colors focus-within:border-[#363636]"
+          className="accent-glow-surface relative flex h-[52px] w-full items-center rounded-xl border border-[#2e2e2e] bg-[#1d1d1d] pl-12 pr-2 transition-colors focus-within:border-[#3a3a3a]"
           onSubmit={(event) => event.preventDefault()}
         >
           <Icon
