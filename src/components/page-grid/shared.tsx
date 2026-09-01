@@ -15,6 +15,7 @@ export const GRID_PLUS_ARM_PX = 5;
 
 export const PAGE_GRID_LEFT_VAR = "--page-grid-left";
 export const PAGE_GRID_WIDTH_VAR = "--page-grid-width";
+export const PAGE_GRID_OVERLAY_FADE_CLASS = "page-grid-overlay-fade";
 
 export type GridColumns = {
   leftX: number;

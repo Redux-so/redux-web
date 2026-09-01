@@ -113,6 +113,9 @@
   --card-shadow-outer: 0 4px 10px rgba(0, 0, 0, 0.45);
   --card-radius: 1.125rem;
 
+  /* Vertical fade where page grid rails meet the top/bottom of the scroll sheet. */
+  --page-grid-edge-fade: 7.5rem;
+
   --panel-bg: #0a0a0a;
   --panel-border: rgba(255, 255, 255, 0.06);
   --panel-inset-highlight: rgba(255, 255, 255, 0.08);
@@ -549,6 +552,32 @@ html {
       var(--card-bg-bottom) 100%
     );
     padding: var(--card-border-width);
+  }
+
+  /* Fade page grid lines out at the top and bottom edges of the overlay. */
+  .page-grid-overlay-fade {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      #000 var(--page-grid-edge-fade),
+      #000 calc(100% - var(--page-grid-edge-fade)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      #000 var(--page-grid-edge-fade),
+      #000 calc(100% - var(--page-grid-edge-fade)),
+      transparent 100%
+    );
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  [data-page-grid-overlay="footer"] .page-grid-overlay-fade {
+    --page-grid-edge-fade: 4.5rem;
   }
 }
 

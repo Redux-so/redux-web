@@ -1,6 +1,6 @@
 "use client";
 
-import { GridOverlayLines } from "@/src/components/page-grid/shared";
+import { GridOverlayLines, PAGE_GRID_OVERLAY_FADE_CLASS } from "@/src/components/page-grid/shared";
 import { useGridOverlay } from "@/src/components/page-grid/useGridOverlay";
 import { PAGE_CONTAINER_MAX_WIDTH_CLASS } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
@@ -50,7 +50,7 @@ export default function FooterPageGrid({ className }: FooterPageGridProps) {
       />
 
       {geometry ? (
-        <div className="absolute inset-0">
+        <div className={cn("absolute inset-0", PAGE_GRID_OVERLAY_FADE_CLASS)}>
           <GridOverlayLines geometry={geometry} />
         </div>
       ) : null}
