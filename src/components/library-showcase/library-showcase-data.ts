@@ -5,7 +5,7 @@ export type LibraryShowcaseImage = {
   alt: string;
 };
 
-export const SHOWCASE_LIBRARY_GREETING = "Good afternoon, Levi";
+export const SHOWCASE_LIBRARY_GREETING = "Good afternoon, John";
 
 export type SmartSearchDemoScenario = {
   id: string;
