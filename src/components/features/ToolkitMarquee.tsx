@@ -2,6 +2,7 @@
 
 import { useReducedMotion } from "framer-motion";
 
+import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
 import ToolkitItemCard from "@/src/components/features/ToolkitItemCard";
 import { TOOLKIT_ITEMS } from "@/lib/toolkit-data";
 import { PAGE_CONTAINER, SECTION_BLEED } from "@/lib/section-styles";
@@ -46,23 +47,21 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
           "flex flex-col gap-10 sm:gap-12 lg:flex-row lg:items-center lg:gap-16 xl:gap-20",
         )}
       >
-        <div className="w-full shrink-0 text-left lg:max-w-[16rem] xl:max-w-[18rem]">
+        <div className="w-full shrink-0 text-left lg:max-w-fit">
           <h2
             id="toolkit-marquee-heading"
             className={cn(
-              "font-display m-0 text-3xl leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-[2.5rem]",
+              "font-display m-0 whitespace-nowrap text-3xl leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-[2.5rem]",
             )}
           >
-            The Full
-            <br />
-            Toolkit
+            The Full Toolkit
           </h2>
           <p className="mt-3 m-0 text-sm leading-relaxed text-white/55 sm:text-[15px]">
             Everything a full editor needs, plus AI when you want it.
           </p>
         </div>
 
-        <div className="group/toolkit-marquee min-w-0 flex-1 lg:overflow-hidden">
+        <div className="group/toolkit-marquee min-w-0 flex-1">
           {prefersReducedMotion ? (
             <ul className="m-0 flex list-none flex-wrap gap-x-6 gap-y-6 p-0 sm:gap-x-8 lg:gap-x-10">
               {TOOLKIT_ITEMS.map((item) => (
@@ -72,14 +71,17 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
               ))}
             </ul>
           ) : (
-            <div className={cn(SECTION_BLEED, "lg:relative lg:left-auto lg:w-auto lg:max-w-none lg:translate-x-0")}>
-              <div className="relative w-full overflow-hidden">
-                <div className="animate-toolkit-marquee flex w-max items-start">
-                  <ToolkitMarqueeTrack trackKey="a" />
-                  <ToolkitMarqueeTrack trackKey="b" aria-hidden />
-                </div>
+            <MarqueeEdgeFade
+              className={cn(
+                SECTION_BLEED,
+                "lg:relative lg:left-auto lg:w-auto lg:max-w-none lg:translate-x-0",
+              )}
+            >
+              <div className="animate-toolkit-marquee flex w-max items-start">
+                <ToolkitMarqueeTrack trackKey="a" />
+                <ToolkitMarqueeTrack trackKey="b" aria-hidden />
               </div>
-            </div>
+            </MarqueeEdgeFade>
           )}
         </div>
       </div>

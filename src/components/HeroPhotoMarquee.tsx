@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 
+import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
 import { Icon } from "@/components/shared/Icon";
 import { cn } from "@/lib/utils";
 
@@ -104,7 +105,7 @@ export default function HeroPhotoMarquee({
       className={cn("group/hero-photo-marquee w-full", className)}
       aria-label="Sample photo edits"
     >
-      <div className="hero-photo-marquee-mask relative w-full py-5 sm:py-6">
+      <MarqueeEdgeFade className="py-5 sm:py-6">
         {prefersReducedMotion ? (
           <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-3 py-2 sm:gap-4">
             {images.map((src, index) => (
@@ -118,23 +119,21 @@ export default function HeroPhotoMarquee({
             ))}
           </ul>
         ) : (
-          <div className="overflow-x-clip">
-            <div className="animate-hero-photo-marquee flex w-max items-center">
-              <HeroPhotoMarqueeTrack
-                items={images}
-                trackKey="a"
-                placeholderAlt={placeholderAlt}
-              />
-              <HeroPhotoMarqueeTrack
-                items={images}
-                trackKey="b"
-                placeholderAlt={placeholderAlt}
-                aria-hidden
-              />
-            </div>
+          <div className="animate-hero-photo-marquee flex w-max items-center">
+            <HeroPhotoMarqueeTrack
+              items={images}
+              trackKey="a"
+              placeholderAlt={placeholderAlt}
+            />
+            <HeroPhotoMarqueeTrack
+              items={images}
+              trackKey="b"
+              placeholderAlt={placeholderAlt}
+              aria-hidden
+            />
           </div>
         )}
-      </div>
+      </MarqueeEdgeFade>
     </div>
   );
 }

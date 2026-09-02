@@ -322,23 +322,6 @@ html {
   }
 }
 
-.hero-photo-marquee-mask {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    #000 10%,
-    #000 90%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    #000 10%,
-    #000 90%,
-    transparent 100%
-  );
-}
-
 @layer components {
   .hero-pill-cta {
     display: inline-flex;

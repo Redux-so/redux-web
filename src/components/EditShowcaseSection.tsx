@@ -140,7 +140,7 @@ export default function EditShowcaseSection() {
   return (
     <div className={SECTION_LAYOUT}>
       <div className={PAGE_CONTAINER}>
-        <SectionIntro>See how Redux can edit</SectionIntro>
+        <SectionIntro variant="headline">See how Redux can edit</SectionIntro>
       </div>
 
       <ScrollRevealGroup
