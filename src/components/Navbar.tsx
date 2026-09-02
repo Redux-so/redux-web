@@ -10,15 +10,19 @@ import { DiscordIcon } from "@/lib/brand-social-icons";
 import {
   BTN_OUTLINE_BLOCK,
 } from "@/lib/button-styles";
-import { PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
-const NAV_GRID_FRAME = cn(PAGE_GRID_ALIGNED_FRAME, "px-2 sm:px-3");
+const NAV_GRID_FRAME = cn(
+  "relative box-border min-w-0 overflow-x-clip",
+  "ml-[var(--page-grid-left,0px)] w-[min(var(--page-grid-width,100%),calc(100%-var(--page-grid-left,0px)))]",
+  "max-w-full px-3 sm:px-4",
+);
 
 const NAV_CONTAINER = cn(
   NAV_GRID_FRAME,
-  "grid h-[3.75rem] min-w-0 grid-cols-[1fr_auto] items-center gap-2 overflow-visible sm:h-16 sm:grid-cols-[1fr_auto_1fr] sm:gap-4",
+  "grid h-[3.75rem] min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:h-16",
+  "md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-3 lg:gap-4",
 );
 
 const navLinks = [
@@ -125,7 +129,7 @@ export default function Navbar() {
         <a
           href="#home"
           onClick={scrollToTop}
-          className="group relative z-10 inline-flex h-[34px] shrink-0 items-center justify-self-start rounded-md"
+          className="group relative z-10 inline-flex h-[34px] min-w-0 max-w-[7rem] items-center justify-self-start rounded-md sm:max-w-[9.5rem] md:max-w-full"
           aria-label="Back to top"
         >
           <Image
@@ -135,14 +139,14 @@ export default function Navbar() {
             height={NAV_LOGO_INTRINSIC_HEIGHT}
             className={cn(
               NAV_LOGO_HEIGHT_CLASS,
-              "w-auto shrink-0 origin-left object-contain object-left transition-[filter] duration-200 group-hover:brightness-75",
+              "w-auto max-w-full min-w-0 origin-left object-contain object-left transition-[filter] duration-200 group-hover:brightness-75",
             )}
             priority
           />
         </a>
 
         <nav
-          className="hidden items-center justify-self-center gap-6 md:flex"
+          className="hidden min-w-0 items-center justify-self-center gap-4 md:flex lg:gap-6"
           aria-label="Main navigation"
         >
           {navLinks.map((link) => (
@@ -156,7 +160,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center justify-self-end gap-4">
+        <div className="flex min-w-0 shrink-0 items-center justify-self-end gap-2 sm:gap-3 lg:gap-4">
           <a
             href="https://discord.gg/gzHrud9nee"
             target="_blank"
