@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useState } from "react";
 
 import SectionShell from "@/src/components/SectionShell";
-import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
 import {
   EASE_OUT,
   ScrollRevealGroup,
@@ -14,6 +13,10 @@ import { cn } from "@/lib/utils";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_LOADING_MS = 600;
+
+const WAITLIST_SUBMIT_CTA = cn(
+  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav shrink-0",
+);
 
 type FormState = "idle" | "loading" | "success";
 
@@ -99,7 +102,7 @@ export default function WaitlistSection() {
             onSubmit={handleSubmit}
             aria-hidden={formState !== "idle"}
             className={cn(
-              "flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-center",
+              "flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center",
               formState !== "idle" && "pointer-events-none invisible",
             )}
           >
@@ -131,7 +134,7 @@ export default function WaitlistSection() {
             <button
               type="submit"
               tabIndex={formState === "idle" ? 0 : -1}
-              className={`${BTN_PRIMARY_SOLID} shrink-0`}
+              className={WAITLIST_SUBMIT_CTA}
             >
               Join
             </button>
