@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useMotionValue, useTransform, animate } from "framer-motion";
 
 import { Icon } from "@/components/shared/Icon";
-import { BTN_BRAND_ICON, BTN_PRIMARY_COMPACT } from "@/lib/button-styles";
+import { BTN_PRIMARY_COMPACT } from "@/lib/button-styles";
 import { PANEL_HEADER, PANEL_TITLE } from "@/lib/panel-chrome";
 
 import {
@@ -23,6 +23,8 @@ const TOOLBAR_CHIP =
   "rounded-md border border-[#2e2e2e] bg-[#1d1d1d] shadow-[0_1px_2px_rgba(0,0,0,0.26),0_2px_5px_rgba(0,0,0,0.12)]";
 const BTN_SECONDARY =
   "inline-flex items-center justify-center h-8 px-3.5 rounded-md border border-[#2e2e2e] bg-[#1d1d1d] text-[12px] font-semibold text-white/90 hover:border-[#3a3a3a] transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed";
+const SEND_BTN_DISABLED =
+  "pointer-events-none shrink-0 flex items-center justify-center w-8 h-8 rounded-md bg-white/[0.08] text-[#666666] opacity-50 cursor-not-allowed";
 const ASSISTANT_BUBBLE =
   "rounded-lg px-3 py-2.5 text-[14px] bg-[#1d1d1d] text-[#e5e5e5]";
 const USER_MESSAGE_TEXT =
@@ -448,7 +450,7 @@ export default function ShowcaseChatPanel({
                   title="Send"
                   tabIndex={-1}
                   aria-disabled
-                  className={`${BTN_BRAND_ICON} pointer-events-none !h-8 !w-8 !rounded-md`}
+                  className={SEND_BTN_DISABLED}
                 >
                   <Icon name="Send01" size={16} aria-hidden />
                 </button>
