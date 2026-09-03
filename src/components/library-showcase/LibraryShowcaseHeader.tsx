@@ -16,7 +16,7 @@ export default function LibraryShowcaseHeader({
   return (
     <header className="flex shrink-0 flex-col gap-5 px-6 pt-8 pb-5">
       <div className="accent-glow-heading text-center">
-        <h1 className="relative text-[32px] font-medium leading-tight tracking-tight text-white">
+        <h1 className="relative text-[32px] font-medium leading-tight tracking-tight text-white sm:text-[36px]">
           {SHOWCASE_LIBRARY_GREETING}
         </h1>
       </div>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Icon } from "@/components/shared/Icon";
-import { BTN_SOFT_SOLID } from "@/lib/button-styles";
+import { BTN_BRAND_SOLID } from "@/lib/button-styles";
 import { SURFACE_BTN_ACTIVE, SURFACE_BTN_IDLE } from "@/lib/surface-colors";
 
 import { SHOWCASE_FILENAME } from "./showcase-data";
@@ -51,10 +51,11 @@ export default function ShowcaseToolbar() {
       <div className="flex min-w-0 shrink-0 items-center justify-self-start gap-3">
         <button
           type="button"
-          className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-2 py-1.5 text-[13px] text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white disabled:cursor-wait disabled:opacity-60"
+          aria-label="Back to Library"
+          title="Back to Library"
+          className="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white"
         >
-          <Icon name="ChevronLeft" size={16} aria-hidden />
-          Back to Library
+          <Icon name="ChevronLeft" size={28} aria-hidden />
         </button>
       </div>
 
@@ -127,7 +128,7 @@ export default function ShowcaseToolbar() {
         <button
           type="button"
           title="Export / share"
-          className={`${BTN_SOFT_SOLID} shrink-0`}
+          className={`${BTN_BRAND_SOLID} shrink-0`}
         >
           <Icon name="Download01" size={16} aria-hidden />
           Export

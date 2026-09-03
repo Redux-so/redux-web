@@ -122,7 +122,7 @@ export default function LibraryShowcaseSidebar({
         </nav>
 
         <div className={`mt-3 ${LIBRARY_SIDEBAR_PROFILE_BTN}`}>
-          <div className="h-[36px] w-[36px] shrink-0 rounded-lg bg-[#1d1d1d] border border-[#2e2e2e]" />
+          <div className="h-[40px] w-[40px] shrink-0 rounded-full border border-[#2e2e2e] bg-[#1d1d1d]" />
           <div className="min-w-0 flex-1 text-left">
             <p className="truncate text-[14px] font-medium leading-[1.3] text-white">
               John

@@ -35,8 +35,14 @@ export const BTN_PRIMARY_VISUAL = [
   "disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100",
 ].join(" ");
 
-/** Brand purple CTA shell : product mockup exceptions (chat send). */
-export const BTN_BRAND_VISUAL = BTN_PRIMARY_VISUAL;
+/** Brand purple CTA shell : product mockup exceptions (Export, chat send). */
+export const BTN_BRAND_VISUAL = [
+  "rounded-md border border-white/20 bg-[#794ADE] shadow-btn-primary",
+  "transition-[background-color,box-shadow,transform] duration-200",
+  "hover:bg-[#9168eb] hover:shadow-btn-primary-hover",
+  "active:scale-[0.98] active:shadow-btn-primary-active",
+  "disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100",
+].join(" ");
 
 export const CHAT_USER_BUBBLE_CLASS =
   "rounded-xl bg-[#5C38A8] text-[13px] font-medium text-white py-2.5 px-4";

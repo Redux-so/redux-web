@@ -57,6 +57,20 @@ export const BTN_BRAND_ICON = [
   BTN_BRAND_VISUAL,
 ].join(" ");
 
+/** Brand purple standalone CTA (showcase Export, etc.) */
+export const BTN_BRAND_SOLID = [
+  "inline-flex items-center justify-center gap-1.5 h-9 px-4 whitespace-nowrap cursor-pointer select-none",
+  BTN_BRAND_TYPE,
+  BTN_BRAND_VISUAL,
+].join(" ");
+
+/** Brand purple panel row CTA */
+export const BTN_BRAND_PANEL = [
+  "inline-flex flex-1 items-center justify-center gap-1.5 h-[34px] px-4 min-w-0 cursor-pointer select-none",
+  BTN_BRAND_TYPE,
+  BTN_BRAND_VISUAL,
+].join(" ");
+
 /** Shared outline CTA shell : pairs with primary buttons in nav/toolbars */
 const BTN_OUTLINE_VISUAL =
   "rounded-md border border-brand-border bg-transparent transition-colors hover:bg-white/5 hover:text-white";

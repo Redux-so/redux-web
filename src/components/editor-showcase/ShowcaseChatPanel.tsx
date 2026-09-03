@@ -29,9 +29,9 @@ const USER_MESSAGE_TEXT =
   "min-w-0 whitespace-pre-wrap break-words text-[14px] font-normal leading-snug text-white";
 const CHAT_PANEL_GUTTER_CLASS = "px-8";
 const CHAT_PANEL_GUTTER_MARGIN_CLASS = "mx-8";
-const CHAT_AVATAR_LOGO_PX = 38;
+const CHAT_AVATAR_LOGO_PX = 42;
 const CHAT_AVATAR_SHELL =
-  "flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-lg bg-[#1d1d1d] border border-[#2e2e2e]";
+  "flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-[#1d1d1d] border border-[#2e2e2e]";
 const CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX = 164;
 
 const RING_RADIUS = 7.5;
@@ -231,6 +231,7 @@ export default function ShowcaseChatPanel({
       <div
         className={[
           PANEL_HEADER,
+          "relative",
           collapsed ? "justify-center px-0" : CHAT_PANEL_GUTTER_CLASS,
         ].join(" ")}
       >
@@ -243,24 +244,28 @@ export default function ShowcaseChatPanel({
           >
             <Icon name="ChevronLeft" size={16} aria-hidden />
           </button>
-        ) : (
-          <div className="flex min-w-0 items-center gap-2">
-            {demoMode ? (
-              <span className="shrink-0 text-[#888888]" aria-hidden>
-                <Icon name="ChevronRight" size={16} />
-              </span>
-            ) : (
-              <button
-                type="button"
-                aria-label="Collapse chat panel"
-                onClick={onToggleCollapse}
-                className="shrink-0 cursor-pointer text-[#888888] transition-colors hover:text-white"
-              >
-                <Icon name="ChevronRight" size={16} aria-hidden />
-              </button>
-            )}
+        ) : demoMode ? (
+          <>
+            <span
+              className="absolute left-[18px] top-1/2 shrink-0 -translate-x-1/2 -translate-y-1/2 text-[#888888]"
+              aria-hidden
+            >
+              <Icon name="ChevronRight" size={16} />
+            </span>
             <span className={PANEL_TITLE}>Chat</span>
-          </div>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              aria-label="Collapse chat panel"
+              onClick={onToggleCollapse}
+              className="absolute left-[18px] top-1/2 shrink-0 -translate-x-1/2 -translate-y-1/2 cursor-pointer text-[#888888] transition-colors hover:text-white"
+            >
+              <Icon name="ChevronRight" size={16} aria-hidden />
+            </button>
+            <span className={PANEL_TITLE}>Chat</span>
+          </>
         )}
       </div>
 
