@@ -1,22 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Onest } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
+import { geistSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
-
-const onest = Onest({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-onest",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   title: "Redux - AI for Photo Editing",
@@ -77,12 +65,16 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        onest.variable,
-        inter.variable,
+        geistSans.variable,
         "h-full overflow-x-clip bg-brand-bg text-white antialiased",
       )}
     >
-      <body className="flex min-h-full flex-col overflow-x-clip">
+      <body
+        className={cn(
+          geistSans.className,
+          "flex min-h-full flex-col overflow-x-clip",
+        )}
+      >
         {children}
         <Analytics />
       </body>

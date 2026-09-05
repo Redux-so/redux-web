@@ -73,11 +73,11 @@
 }
 
 :root {
-  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-  --font-ui: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-ui: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --accent-glow-rgb: 121, 74, 222;
   --brand-purple: #794ade;
   --brand-purple-hover: #9168eb;
@@ -644,11 +644,5 @@ html {
   }
   html {
     @apply font-body;
-  }
-
-  /* Editor + library feature mockups keep Inter. */
-  .editor-showcase,
-  .library-showcase {
-    font-family: var(--font-ui);
   }
 }

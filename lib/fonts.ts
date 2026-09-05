@@ -1,7 +1,7 @@
-/** Onest : marketing site typography (via next/font in root layout). */
-export const SITE_FONT_STACK =
-  'var(--font-onest), ui-sans-serif, system-ui, sans-serif';
+import { GeistSans } from "geist/font/sans";
 
-/** Inter : preserved for in-product UI mockups (editor + feature showcases). */
-export const UI_FONT_STACK =
-  'var(--font-inter), ui-sans-serif, system-ui, sans-serif';
+export const geistSans = GeistSans;
+
+/** CSS font-family token — matches `--font-geist-sans` from next/font on `<html>`. */
+export const GEIST_SANS_FONT_FAMILY =
+  "var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif";
