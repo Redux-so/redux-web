@@ -297,7 +297,7 @@ export default function ShowcaseChatPanel({
                               width={CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX}
                               height={100}
                               unoptimized
-                              className="max-h-[100px] rounded-lg border border-white/[0.08] object-cover"
+                              className="max-h-[100px] rounded-lg border border-[#212121] object-cover"
                               style={{
                                 maxWidth: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
                               }}
@@ -333,7 +333,7 @@ export default function ShowcaseChatPanel({
           </div>
 
           <div
-            className={`${CHAT_PANEL_GUTTER_MARGIN_CLASS} mb-2 shrink-0 overflow-hidden rounded-md border border-white/[0.08] bg-white/[0.04] ${CHAT_SURFACE_SHADOW}`}
+            className={`${CHAT_PANEL_GUTTER_MARGIN_CLASS} mb-2 shrink-0 overflow-hidden rounded-md border ${SURFACE_BORDER} bg-white/[0.04] ${CHAT_SURFACE_SHADOW}`}
           >
             <div className="flex min-w-0 items-center gap-2 px-3 py-2">
               {demoMode ? (
@@ -385,7 +385,7 @@ export default function ShowcaseChatPanel({
             </div>
 
             {!demoMode && changesExpanded ? (
-              <div className="space-y-1.5 border-t border-white/[0.06] px-3 py-2">
+              <div className={`space-y-1.5 border-t ${SURFACE_BORDER} px-3 py-2`}>
                 {pendingChanges.map((change) => (
                   <div
                     key={change.key}
@@ -423,7 +423,7 @@ export default function ShowcaseChatPanel({
                 </div>
               </div>
 
-              <div className={`flex items-center justify-between gap-2 border-t border-[#262626] px-4 pb-3 pt-3`}>
+              <div className={`flex items-center justify-between gap-2 border-t ${SURFACE_BORDER} px-4 pb-3 pt-3`}>
                 <div className="flex min-w-0 shrink-0 items-center gap-1.5">
                   <div
                     className={`${CHAT_TOOLBAR_CHIP} flex ${TOOLBAR_CHIP_H} w-8 items-center justify-center opacity-50`}
@@ -450,7 +450,7 @@ export default function ShowcaseChatPanel({
                   aria-disabled
                   className={CHAT_SEND_BTN_DISABLED}
                 >
-                  <Icon name="Send01" size={16} aria-hidden />
+                  <Icon name="Send01" size={16} strokeWidth={2} aria-hidden />
                 </button>
               </div>
             </div>
