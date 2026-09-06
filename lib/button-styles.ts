@@ -1,4 +1,5 @@
 import { BTN_BRAND_VISUAL, BTN_PRIMARY_VISUAL } from "@/lib/brand-colors";
+import { SURFACE_SECONDARY_BTN } from "@/lib/surface-colors";
 
 export const BTN_PRIMARY_TYPE =
   "text-[13px] font-medium text-white leading-none";
@@ -46,25 +47,25 @@ export const BTN_SOFT_BLOCK = [
   BTN_SOFT_VISUAL,
 ].join(" ");
 
-/** Brand purple label : chat-send exceptions */
+/** Brand CTA label + icon weight — white on blue chrome (mockups). */
 export const BTN_BRAND_TYPE =
-  "text-[13px] font-medium text-white leading-none";
+  "text-[14px] font-semibold text-white leading-none [&_svg]:shrink-0 [&_svg]:!size-5 [&_svg]:stroke-[2]";
 
-/** Brand purple compact icon-only (chat send) */
+/** Brand blue compact icon-only (chat send when active) */
 export const BTN_BRAND_ICON = [
   "inline-flex shrink-0 items-center justify-center w-8 h-8 cursor-pointer select-none",
   BTN_BRAND_TYPE,
   BTN_BRAND_VISUAL,
 ].join(" ");
 
-/** Brand purple standalone CTA (showcase Export, etc.) */
+/** Brand blue standalone CTA (showcase Export, etc.) */
 export const BTN_BRAND_SOLID = [
   "inline-flex items-center justify-center gap-1.5 h-9 px-4 whitespace-nowrap cursor-pointer select-none",
   BTN_BRAND_TYPE,
   BTN_BRAND_VISUAL,
 ].join(" ");
 
-/** Brand purple panel row CTA */
+/** Brand blue panel row CTA */
 export const BTN_BRAND_PANEL = [
   "inline-flex flex-1 items-center justify-center gap-1.5 h-[34px] px-4 min-w-0 cursor-pointer select-none",
   BTN_BRAND_TYPE,
@@ -125,4 +126,4 @@ export const BTN_FORMAT_SELECTED = [
 ].join(" ");
 
 export const BTN_FORMAT_IDLE =
-  "flex flex-1 items-center justify-center h-9 px-3 rounded-md border border-brand-border bg-white/[0.05] text-[13px] font-medium text-white/80 hover:bg-white/[0.09] hover:border-brand-border-focus transition-colors cursor-pointer select-none";
+  `flex flex-1 items-center justify-center h-9 px-3 rounded-md text-[13px] font-medium text-white/80 ${SURFACE_SECONDARY_BTN} select-none`;

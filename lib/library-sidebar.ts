@@ -46,4 +46,4 @@ export const LIBRARY_SIDEBAR_LINK_ROW = [
 export const LIBRARY_SIDEBAR_PROFILE_BTN =
   "flex min-w-0 items-center gap-2.5 w-full rounded-lg px-1.5 py-1.5 -mx-1 border border-[#121212] transition-colors cursor-pointer hover:bg-[#1d1d1d]";
 
-export const LIBRARY_SIDEBAR_PROFILE_BTN_OPEN = "bg-[#1d1d1d] !border-[#2e2e2e]";
+export const LIBRARY_SIDEBAR_PROFILE_BTN_OPEN = "bg-[#1d1d1d] !border-[#262626]";

@@ -4,10 +4,14 @@ import { useState, type ReactNode } from "react";
 
 import { Icon, type IconName } from "@/components/shared/Icon";
 import { BTN_SOFT_BLOCK, BTN_SOFT_PANEL, BTN_SOFT_SOLID } from "@/lib/button-styles";
+import { PRODUCT_BRAND_ACCENT_CLASS, PRODUCT_BRAND_FOCUS_RING_CLASS } from "@/lib/brand-colors";
 import { PANEL_HEADER, PANEL_TITLE } from "@/lib/panel-chrome";
 import {
+  SURFACE_BG_PANEL,
+  SURFACE_BORDER,
   SURFACE_BTN_ACTIVE,
   SURFACE_BTN_IDLE,
+  SURFACE_GHOST_BTN,
   SURFACE_SECONDARY_BTN,
 } from "@/lib/surface-colors";
 import { DiscordIcon, GithubIcon } from "@/lib/brand-social-icons";
@@ -205,7 +209,7 @@ export default function ShowcaseAdjustmentPanel({
 
   return (
     <div className="flex h-full min-w-0 shrink-0">
-      <div className="flex h-full w-[72px] shrink-0 flex-col items-center border-r border-[#2e2e2e] bg-[#121212]">
+      <div className={`flex h-full w-[72px] shrink-0 flex-col items-center border-r ${SURFACE_BORDER} ${SURFACE_BG_PANEL}`}>
         <div className="flex flex-col items-center gap-4 py-4">
           {TOOL_SECTIONS.map(({ id, title, iconName }) => (
             <RailBtn
@@ -238,7 +242,7 @@ export default function ShowcaseAdjustmentPanel({
             aria-label="Account menu"
             className="flex h-12 w-12 shrink-0 cursor-default items-center justify-center rounded-xl border border-[#121212] text-white/40 transition-colors hover:bg-[#1d1d1d] hover:text-white"
           >
-            <div className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full border border-[#2e2e2e] bg-[#1d1d1d] text-[13px] font-medium uppercase text-white">
+            <div className={`flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full ${SURFACE_BORDER} bg-[#1d1d1d] text-[13px] font-medium uppercase text-white`}>
               JD
             </div>
           </button>
@@ -249,7 +253,7 @@ export default function ShowcaseAdjustmentPanel({
         className={[
           "flex h-full min-w-0 shrink-0 flex-col overflow-hidden bg-[#121212] transition-[width] duration-200 ease-out",
           activeSection
-            ? "w-[360px] rounded-r-2xl border-r border-[#2e2e2e]"
+            ? `w-[360px] rounded-r-2xl border-r ${SURFACE_BORDER}`
             : "w-0 border-r-0",
         ].join(" ")}
       >
@@ -337,7 +341,7 @@ export default function ShowcaseAdjustmentPanel({
                             step={1}
                             value={blurIntensity}
                             onChange={(e) => setBlurIntensity(Number(e.target.value))}
-                            className="h-[3px] flex-1 cursor-pointer accent-[#794ADE]"
+                            className={`h-[3px] flex-1 cursor-pointer ${PRODUCT_BRAND_ACCENT_CLASS}`}
                           />
                           <span className="w-[24px] shrink-0 text-right text-[11px] text-[#888888]">
                             {blurIntensity}
@@ -347,7 +351,7 @@ export default function ShowcaseAdjustmentPanel({
                           <button
                             type="button"
                             onClick={() => setActiveTool(null)}
-                            className="h-[34px] flex-1 cursor-pointer rounded-md border border-[#2e2e2e] bg-[#1d1d1d] text-[13px] text-white transition-colors hover:border-[#3a3a3a]"
+                            className={`h-[34px] flex-1 cursor-pointer rounded-md text-[13px] text-white ${SURFACE_GHOST_BTN}`}
                           >
                             Cancel
                           </button>
@@ -400,7 +404,7 @@ export default function ShowcaseAdjustmentPanel({
                       onClick={() => setShowResize((v) => !v)}
                     />
                     {showResize && (
-                      <div className="flex flex-col gap-3 rounded-xl border border-[#2e2e2e] bg-[#1d1d1d] p-3">
+                      <div className={`flex flex-col gap-3 rounded-xl border ${SURFACE_BORDER} bg-[#1d1d1d] p-3`}>
                         <div className="flex items-center gap-2">
                           <div className="flex flex-1 flex-col gap-1">
                             <label className="text-[11px] font-medium text-[#555555]">
@@ -409,7 +413,7 @@ export default function ShowcaseAdjustmentPanel({
                             <input
                               readOnly
                               value={2788}
-                              className="h-[30px] w-full rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-2 text-[12px] text-white outline-none focus:border-[#794ADE]/60"
+                              className={`h-[30px] w-full rounded-lg border bg-[#1d1d1d] px-2 text-[12px] text-white outline-none ${SURFACE_BORDER} ${PRODUCT_BRAND_FOCUS_RING_CLASS}`}
                             />
                           </div>
                           <button
@@ -426,7 +430,7 @@ export default function ShowcaseAdjustmentPanel({
                             <input
                               readOnly
                               value={3717}
-                              className="h-[30px] w-full rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-2 text-[12px] text-white outline-none focus:border-[#794ADE]/60"
+                              className={`h-[30px] w-full rounded-lg border bg-[#1d1d1d] px-2 text-[12px] text-white outline-none ${SURFACE_BORDER} ${PRODUCT_BRAND_FOCUS_RING_CLASS}`}
                             />
                           </div>
                         </div>

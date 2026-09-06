@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@/components/shared/Icon";
-import { SURFACE_SECONDARY_BTN } from "@/lib/surface-colors";
+import { SURFACE_BORDER, SURFACE_SECONDARY_BTN } from "@/lib/surface-colors";
 
 import { SHOWCASE_HISTORY_VERSIONS } from "./showcase-data";
 
@@ -28,7 +28,7 @@ export default function ShowcaseHistoryVersionList() {
       {versions.map((version, idx) => (
         <div
           key={version.id}
-          className="group flex items-center justify-between border-b border-[#2e2e2e] px-6 py-3.5 transition-colors hover:bg-[#1d1d1d]"
+          className={`group flex items-center justify-between border-b ${SURFACE_BORDER} px-6 py-3.5 transition-colors hover:bg-[#1d1d1d]`}
         >
           <div className="flex min-w-0 flex-col gap-[2px]">
             <span className="text-[14px] text-[#e5e5e5]">

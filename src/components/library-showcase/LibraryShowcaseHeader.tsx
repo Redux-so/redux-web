@@ -15,15 +15,15 @@ export default function LibraryShowcaseHeader({
 }: LibraryShowcaseHeaderProps) {
   return (
     <header className="flex shrink-0 flex-col gap-5 px-6 pt-8 pb-5">
-      <div className="accent-glow-heading text-center">
-        <h1 className="relative text-[32px] font-medium leading-tight tracking-tight text-white sm:text-[36px]">
+      <div className="accent-glow-heading-zone">
+        <h1 className="relative z-[1] text-center text-[32px] font-medium leading-tight tracking-tight text-white sm:text-[36px]">
           {SHOWCASE_LIBRARY_GREETING}
         </h1>
       </div>
 
       <div className="relative w-full min-w-0">
         <form
-          className="accent-glow-surface relative flex h-[52px] w-full items-center rounded-xl border border-[#2e2e2e] bg-[#1d1d1d] pl-12 pr-2 transition-colors focus-within:border-[#3a3a3a]"
+          className="relative flex h-[52px] w-full items-center rounded-xl border border-[#262626] bg-[#1d1d1d] pl-12 pr-2 transition-colors focus-within:border-[#2e2e2e]"
           onSubmit={(event) => event.preventDefault()}
         >
           <Icon

@@ -78,16 +78,16 @@
   --font-body: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-ui: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --accent-glow-rgb: 121, 74, 222;
-  --brand-purple: #794ade;
-  --brand-purple-hover: #9168eb;
-  --brand-link: #A688F0;
-  --brand-link-hover: #BBA0F5;
+  --accent-glow-rgb: 58, 111, 255;
+  --brand-purple: #3a6fff;
+  --brand-purple-hover: #5285ff;
+  --brand-link: #7ca8ff;
+  --brand-link-hover: #96bbff;
   --surface-chrome: #121212;
-  --accent-editor: #794ade;
-  --accent-end: #9168eb;
+  --accent-editor: #3a6fff;
+  --accent-end: #5285ff;
   --scrollbar-thumb: rgba(255, 255, 255, 0.12);
-  --scrollbar-thumb-hover: rgba(121, 74, 222, 0.38);
+  --scrollbar-thumb-hover: rgba(58, 111, 255, 0.38);
   --brand-bg: #0a0a0a;
   --brand-surface: #1d1d1d;
   --brand-surface-card: #121212;
@@ -387,21 +387,24 @@ html {
       var(--pill-outer);
   }
   .hero-pill-cta--purple {
-    --pill-border: rgba(255, 255, 255, 0.15);
-    --pill-inset-top: rgba(255, 255, 255, 0.22);
-    --pill-inset-bottom: rgba(0, 0, 0, 0.36);
-    background: linear-gradient(180deg, #7856d0, #6238b0);
+    --pill-border: rgba(255, 255, 255, 0.2);
+    --pill-inset-top: rgba(255, 255, 255, 0.1);
+    --pill-inset-bottom: rgba(0, 0, 0, 0.3);
+    background: #3a6fff;
+    box-shadow:
+      var(--shadow-btn-primary),
+      inset 0 1px 0 var(--pill-inset-top),
+      inset 0 -1px 0 var(--pill-inset-bottom);
   }
 
   .hero-pill-cta--purple:hover {
-    --pill-border: rgba(255, 255, 255, 0.18);
-    --pill-inset-top: rgba(255, 255, 255, 0.26);
-    --pill-outer: 0 4px 12px rgba(0, 0, 0, 0.4);
-    background: linear-gradient(180deg, #8a62e4, #7048c4);
+    --pill-border: rgba(255, 255, 255, 0.22);
+    --pill-inset-top: rgba(255, 255, 255, 0.12);
+    background: #5285ff;
     box-shadow:
-      inset 0 1px 1px var(--pill-inset-top),
-      inset 0 -1px 0 var(--pill-inset-bottom),
-      var(--pill-outer);
+      var(--shadow-btn-primary-hover),
+      inset 0 1px 0 var(--pill-inset-top),
+      inset 0 -1px 0 var(--pill-inset-bottom);
   }
 
   .hero-pill-cta--compact {
@@ -474,10 +477,10 @@ html {
 
   .ui-input:focus {
     outline: none;
-    border-color: rgba(121, 74, 222, 0.45);
+    border-color: rgba(58, 111, 255, 0.45);
     box-shadow:
       inset 0 1px 0 var(--panel-inset-highlight),
-      0 0 0 2px rgba(121, 74, 222, 0.22);
+      0 0 0 2px rgba(58, 111, 255, 0.22);
   }
 
   .ui-card {
@@ -563,67 +566,113 @@ html {
   box-sizing: border-box;
 }
 
-/* Library search bar + greeting glow : matches redux-app library page. */
-.accent-glow-heading {
-  position: relative;
-  isolation: isolate;
+/* Product mockup scope — blue accent + scrollbar (marketing purple unchanged in :root). */
+.editor-showcase,
+.library-showcase {
+  --accent-glow-rgb: 58, 111, 255;
+  --accent-glow-heading-opacity: 0.32;
+  --accent-glow-dropzone-opacity: 0.17;
+  --scrollbar-thumb-hover: rgba(58, 111, 255, 0.38);
 }
 
-.accent-glow-heading::before {
+/* Library dashboard — greeting ambient glow only (contained above search bar). */
+.library-showcase .accent-glow-heading-zone {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  padding-top: 3rem;
+  margin-top: -3rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: -1.25rem;
+}
+
+.library-showcase .accent-glow-heading-zone::before {
   content: "";
   position: absolute;
   left: 50%;
-  top: 50%;
-  z-index: -1;
-  width: min(110%, 52rem);
-  height: 10rem;
-  transform: translate(-50%, -50%);
+  top: 61%;
+  z-index: 0;
+  width: min(105%, 44rem);
+  height: 8rem;
+  transform: translate(-50%, -32%);
   background: radial-gradient(
-    ellipse 120% 80% at center,
-    rgba(var(--accent-glow-rgb), 0.28) 0%,
-    transparent 72%
+    ellipse 110% 75% at center,
+    rgba(var(--accent-glow-rgb), var(--accent-glow-heading-opacity)) 0%,
+    rgba(var(--accent-glow-rgb), calc(var(--accent-glow-heading-opacity) * 0.4)) 45%,
+    transparent 68%
   );
-  filter: blur(56px);
+  filter: blur(48px);
   pointer-events: none;
 }
 
-.accent-glow-surface {
-  box-shadow:
-    inset 0 0 44px rgba(var(--accent-glow-rgb), 0.19),
-    0 0 24px rgba(var(--accent-glow-rgb), 0.13);
-  transition:
-    box-shadow 0.3s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+/* Library upload dropzone — bottom-left interior glow (for future crop use). */
+.library-showcase .accent-glow-dropzone-left {
+  position: relative;
+  overflow: hidden;
 }
 
-.accent-glow-surface:hover,
-.accent-glow-surface:focus-within {
-  box-shadow:
-    inset 0 0 52px rgba(var(--accent-glow-rgb), 0.38),
-    0 0 32px rgba(var(--accent-glow-rgb), 0.23);
+.library-showcase .accent-glow-dropzone-left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 115% 120% at 0% 100%,
+    rgba(var(--accent-glow-rgb), var(--accent-glow-dropzone-opacity)) 0%,
+    rgba(
+        var(--accent-glow-rgb),
+        calc(var(--accent-glow-dropzone-opacity) * 0.4)
+      )
+      38%,
+    transparent 68%
+  );
+  transition: opacity 0.2s ease;
 }
 
-.editor-showcase * {
+.library-showcase .accent-glow-dropzone-left:hover::before {
+  background: radial-gradient(
+    ellipse 118% 125% at 0% 100%,
+    rgba(
+        var(--accent-glow-rgb),
+        calc(var(--accent-glow-dropzone-opacity) * 1.15)
+      )
+      0%,
+    rgba(
+        var(--accent-glow-rgb),
+        calc(var(--accent-glow-dropzone-opacity) * 0.48)
+      )
+      40%,
+    transparent 70%
+  );
+}
+
+.editor-showcase *,
+.library-showcase * {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
-.editor-showcase *::-webkit-scrollbar {
+.editor-showcase *::-webkit-scrollbar,
+.library-showcase *::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
-.editor-showcase *::-webkit-scrollbar-track {
+.editor-showcase *::-webkit-scrollbar-track,
+.library-showcase *::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.editor-showcase *::-webkit-scrollbar-thumb {
+.editor-showcase *::-webkit-scrollbar-thumb,
+.library-showcase *::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 9999px;
 }
 
-.editor-showcase *::-webkit-scrollbar-thumb:hover {
+.editor-showcase *::-webkit-scrollbar-thumb:hover,
+.library-showcase *::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-thumb-hover);
 }
 

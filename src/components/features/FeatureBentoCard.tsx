@@ -64,7 +64,7 @@ export default function FeatureBentoCard({
           <span className="leading-none">{cta}</span>
           <Icon
             name="ArrowUpRight"
-            size={14}
+            size={16}
             strokeWidth={2}
             className="shrink-0 text-white"
             aria-hidden

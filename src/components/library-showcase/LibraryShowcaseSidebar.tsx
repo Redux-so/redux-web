@@ -13,6 +13,7 @@ import {
   LIBRARY_SIDEBAR_LINK_ROW,
   LIBRARY_SIDEBAR_PROFILE_BTN,
 } from "@/lib/library-sidebar";
+import { SURFACE_BORDER } from "@/lib/surface-colors";
 
 import {
   SHOWCASE_LIBRARY_ALBUMS,
@@ -93,6 +94,10 @@ export default function LibraryShowcaseSidebar({
               </span>
             );
           })}
+          <span className={[LIBRARY_SIDEBAR_BTN_ROW, LIBRARY_SIDEBAR_BTN_IDLE].join(" ")}>
+            <Icon name="Trash04" size={16} className="text-[#888888]" aria-hidden />
+            Trash
+          </span>
         </nav>
 
         <p className={`mt-5 mb-2 px-5 ${SECTION_LABEL}`}>Albums</p>
@@ -109,7 +114,7 @@ export default function LibraryShowcaseSidebar({
         </div>
       </div>
 
-      <div className="mt-auto shrink-0 border-t border-[#2e2e2e] px-4 py-4">
+      <div className={`mt-auto shrink-0 border-t ${SURFACE_BORDER} px-4 py-4`}>
         <nav className="flex flex-col gap-0.5">
           <span className={LIBRARY_SIDEBAR_LINK_ROW}>
             <GithubIcon className="h-4 w-4 shrink-0 text-[#888888] group-hover:text-white" />
@@ -122,7 +127,7 @@ export default function LibraryShowcaseSidebar({
         </nav>
 
         <div className={`mt-3 ${LIBRARY_SIDEBAR_PROFILE_BTN}`}>
-          <div className="h-[40px] w-[40px] shrink-0 rounded-full border border-[#2e2e2e] bg-[#1d1d1d]" />
+          <div className={`h-[40px] w-[40px] shrink-0 rounded-full ${SURFACE_BORDER} bg-[#1d1d1d]`} />
           <div className="min-w-0 flex-1 text-left">
             <p className="truncate text-[14px] font-medium leading-[1.3] text-white">
               John
