@@ -9,8 +9,10 @@ import {
 } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
-const HERO_PILL_CTA =
-  "hero-pill-cta inline-flex h-11 min-h-11 max-h-11 items-center justify-center gap-2 w-full min-w-0 shrink-0 box-border px-6 sm:w-auto no-underline";
+const HERO_CTA =
+  "hero-pill-cta inline-flex h-11 min-h-11 max-h-11 items-center justify-center w-full min-w-0 shrink-0 box-border px-6 sm:w-auto no-underline leading-none";
+
+const HERO_CTA_WITH_ICON = cn(HERO_CTA, "gap-2");
 
 export default function Hero() {
   return (
@@ -34,20 +36,13 @@ export default function Hero() {
           <div className="flex w-full max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:justify-center">
             <a
               href="#waitlist"
-              className={cn(HERO_PILL_CTA, "hero-pill-cta--purple")}
+              className={cn(HERO_CTA, "hero-pill-cta--purple")}
             >
-              <span className="leading-none">Join Waitlist</span>
-              <Icon
-                name="LinkExternal01"
-                size={16}
-                strokeWidth={2}
-                className="shrink-0 text-white"
-                aria-hidden
-              />
+              Join Waitlist
             </a>
             <a
               href="#features"
-              className={cn(HERO_PILL_CTA, "hero-pill-cta--charcoal")}
+              className={cn(HERO_CTA_WITH_ICON, "hero-pill-cta--charcoal")}
             >
               <span className="leading-none">See how it works</span>
               <Icon

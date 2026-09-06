@@ -361,6 +361,12 @@ html {
     line-height: 1;
   }
 
+  /* Text-only hero CTAs: inset highlight reads low without icon offset */
+  .hero-pill-cta:not(:has(svg)):not(.hero-pill-cta--nav):not(.hero-pill-cta--compact) {
+    gap: 0;
+    padding: 0 24px 1px;
+  }
+
   .hero-pill-cta svg {
     display: block;
     flex-shrink: 0;
