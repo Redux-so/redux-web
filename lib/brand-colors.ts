@@ -7,6 +7,9 @@ export const PRIMARY_BRAND_HOVER_HEX = "#5285FF";
 export const PRIMARY_BRAND_LINK_HEX = "#7CA8FF";
 export const PRIMARY_BRAND_LINK_HOVER_HEX = "#96BBFF";
 
+/** Lighter #3A6FFF tint for section headline accents on dark backgrounds. */
+export const PRIMARY_BRAND_HEADLINE_ACCENT_HEX = "#6E9BFF";
+
 /** RGB tuple for rgba() shadows and glows. */
 export const PRIMARY_BRAND_RGB = "58, 111, 255";
 
@@ -20,6 +23,7 @@ export const BRAND_TEXT_CLASS = "text-[#3A6FFF]";
 export const BRAND_TEXT_HOVER_CLASS = "hover:text-[#5285FF]";
 export const BRAND_LINK_TEXT_CLASS = "text-[#7CA8FF]";
 export const BRAND_LINK_TEXT_HOVER_CLASS = "hover:text-[#96BBFF]";
+export const BRAND_HEADLINE_ACCENT_CLASS = "text-[#6E9BFF]";
 export const BRAND_BORDER_CLASS = "border-[#3A6FFF]";
 export const BRAND_FOCUS_RING_CLASS = "focus:border-[#3A6FFF]/60";
 export const BRAND_ACCENT_CLASS = "accent-[#3A6FFF]";

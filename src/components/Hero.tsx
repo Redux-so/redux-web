@@ -31,7 +31,7 @@ export default function Hero() {
         </ScrollRevealItem>
 
         <ScrollRevealItem>
-          <p className="mt-5 text-lg leading-relaxed text-white/40">
+          <p className="mt-5 text-lg leading-relaxed text-white/55">
             Agentic photo editing platform
           </p>
         </ScrollRevealItem>

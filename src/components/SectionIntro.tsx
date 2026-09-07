@@ -1,11 +1,13 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import { ScrollReveal } from "@/lib/scroll-motion";
 import { SECTION_HEADLINE, SECTION_LABEL } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 type SectionIntroProps = {
-  children: string;
+  children: ReactNode;
   className?: string;
   id?: string;
   variant?: "label" | "headline";

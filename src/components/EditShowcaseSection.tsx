@@ -17,6 +17,7 @@ import {
   GRID_LINE_WIDTH_PX,
 } from "@/src/components/page-grid/shared";
 import SectionIntro from "@/src/components/SectionIntro";
+import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
 import {
   PAGE_CONTAINER,
   PAGE_GRID_ALIGNED_FRAME,
@@ -158,7 +159,9 @@ export default function EditShowcaseSection() {
   return (
     <div className={SECTION_LAYOUT}>
       <div className={PAGE_CONTAINER}>
-        <SectionIntro variant="headline">See how Redux can edit</SectionIntro>
+        <SectionIntro variant="headline">
+          See how Redux can <span className={BRAND_HEADLINE_ACCENT_CLASS}>edit</span>
+        </SectionIntro>
       </div>
 
       <ScrollRevealGroup

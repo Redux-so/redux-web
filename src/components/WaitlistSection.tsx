@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useState } from "react";
 
 import SectionShell from "@/src/components/SectionShell";
+import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
 import {
   EASE_OUT,
   ScrollRevealGroup,
@@ -87,7 +88,7 @@ export default function WaitlistSection() {
       >
         <ScrollRevealItem>
           <h2 className={cn("m-0", SECTION_HEADLINE)}>
-            Join the Waitlist
+            Join the <span className={BRAND_HEADLINE_ACCENT_CLASS}>Waitlist</span>
           </h2>
         </ScrollRevealItem>
 

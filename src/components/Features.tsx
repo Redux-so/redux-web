@@ -7,6 +7,7 @@ import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowca
 import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcaseCrop";
 import SectionIntro from "@/src/components/SectionIntro";
 import SectionShell from "@/src/components/SectionShell";
+import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
 import {
   ScrollRevealGroup,
   ScrollRevealItem,
@@ -14,7 +15,13 @@ import {
 
 export default function Features() {
   return (
-    <SectionShell intro={<SectionIntro variant="headline">A Smarter Way to Edit</SectionIntro>}>
+    <SectionShell
+      intro={
+        <SectionIntro variant="headline">
+          A <span className={BRAND_HEADLINE_ACCENT_CLASS}>Smarter Way</span> to Edit
+        </SectionIntro>
+      }
+    >
       <ScrollRevealGroup
         className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2"
         stagger={0.1}
