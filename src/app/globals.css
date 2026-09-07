@@ -88,6 +88,12 @@
   --font-ui: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --accent-glow-rgb: 58, 111, 255;
+  --accent-glow-peak-opacity: 0.18;
+  --accent-glow-mid-opacity: 0.07;
+  --accent-glow-soft-opacity: 0.03;
+  --accent-contained-glow-peak-opacity: 0.26;
+  --accent-contained-glow-mid-opacity: 0.11;
+  --accent-contained-glow-soft-opacity: 0.05;
   --brand-purple: #3a6fff;
   --brand-purple-hover: #5285ff;
   --brand-link: #7ca8ff;
@@ -344,9 +350,9 @@ html {
 .contained-accent-glow::before {
   background: radial-gradient(
     ellipse 95% 75% at 50% 100%,
-    rgba(var(--accent-glow-rgb), 0.62) 0%,
-    rgba(var(--accent-glow-rgb), 0.34) 38%,
-    rgba(var(--accent-glow-rgb), 0.12) 58%,
+    rgba(var(--accent-glow-rgb), var(--accent-contained-glow-peak-opacity)) 0%,
+    rgba(var(--accent-glow-rgb), var(--accent-contained-glow-mid-opacity)) 38%,
+    rgba(var(--accent-glow-rgb), var(--accent-contained-glow-soft-opacity)) 58%,
     transparent 78%
   );
   filter: blur(34px);
@@ -355,8 +361,8 @@ html {
 .contained-accent-glow::after {
   background: linear-gradient(
     to top,
-    rgba(var(--accent-glow-rgb), 0.28) 0%,
-    rgba(var(--accent-glow-rgb), 0.1) 42%,
+    rgba(var(--accent-glow-rgb), var(--accent-contained-glow-mid-opacity)) 0%,
+    rgba(var(--accent-glow-rgb), var(--accent-contained-glow-soft-opacity)) 42%,
     transparent 72%
   );
 }
@@ -398,8 +404,8 @@ html {
   pointer-events: none;
   background: radial-gradient(
     ellipse 130% 110% at center,
-    rgba(var(--accent-glow-rgb), 0.14) 0%,
-    rgba(var(--accent-glow-rgb), 0.05) 46%,
+    rgba(var(--accent-glow-rgb), var(--accent-glow-peak-opacity)) 0%,
+    rgba(var(--accent-glow-rgb), var(--accent-glow-mid-opacity)) 46%,
     transparent 82%
   );
   filter: blur(88px);
@@ -472,19 +478,21 @@ html {
 }
 
 .marquee-logo-cell__image--luminar {
-  height: clamp(1.35rem, 4vw, 1.875rem);
-  max-width: 100%;
+  height: clamp(1.3rem, 3.9vw, 1.9rem);
+  max-width: min(100%, clamp(4.5rem, 24vw, 8rem));
 }
 
 @media (min-width: 640px) {
   .marquee-logo-cell__image--luminar {
     height: 2.625rem;
+    max-width: min(100%, 9.75rem);
   }
 }
 
 @media (min-width: 1024px) {
   .marquee-logo-cell__image--luminar {
     height: 2.875rem;
+    max-width: min(100%, 10.25rem);
   }
 }
 

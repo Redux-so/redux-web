@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils";
 const marqueeItems = [
   { src: "/marquee/photoshop.png", alt: "Adobe Photoshop", width: 152, height: 126 },
   { src: "/marquee/lightroom.png", alt: "Adobe Lightroom", width: 157, height: 142 },
-  { src: "/marquee/luminar-neo.png", alt: "Luminar Neo", width: 500, height: 88 },
   { src: "/marquee/canva.png", alt: "Canva", width: 354, height: 125 },
   { src: "/marquee/figma.png", alt: "Figma", width: 356, height: 106 },
+  { src: "/marquee/luminar-neo.png", alt: "Luminar Neo", width: 500, height: 88 },
 ] as const;
 
 const MARQUEE_LOGO_CLASS = "marquee-logo-cell__image";
