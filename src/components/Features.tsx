@@ -39,7 +39,7 @@ export default function Features() {
           <FeatureBentoCard
             size="large"
             headline="Conversational Editing"
-            description="Describe your edits in plain language and let AI apply professional changes instantly."
+            description="Describe edits in plain language and AI applies them instantly."
             cta="Ask AI"
           >
             <ConversationalEditingShowcaseCrop />
@@ -51,7 +51,7 @@ export default function Features() {
           <FeatureBentoCard
             size="medium"
             headline="Style Match"
-            description="Upload a reference image and Redux applies its look to your photo in one step."
+            description="Match your photo to a reference image instantly."
             cta="Match a Style"
           >
             <StyleMatchShowcaseCrop />
@@ -62,7 +62,7 @@ export default function Features() {
           <FeatureBentoCard
             size="medium"
             headline="Smart Search"
-            description="Search your library by describing what's in the image: keywords, scenes, subjects."
+            description="Find images by describing scenes, subjects, or keywords."
             cta="Search Now"
           >
             <SmartSearchShowcaseCrop />
@@ -73,7 +73,7 @@ export default function Features() {
         <ScrollRevealItem className="min-w-0">
           <FeatureSmallCard
             headline="Auto Photo Enhance"
-            description="One-click enhancement for balanced exposure, color, and detail."
+            description="Balance exposure, color, and detail in one click."
             trailing={
               <div className="relative flex shrink-0 items-center">
                 <div className="feature-collab-actions-glow" aria-hidden />
