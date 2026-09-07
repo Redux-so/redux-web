@@ -323,6 +323,127 @@ html {
   opacity: 1;
 }
 
+/* Workflows marquee — contained CTA-blue hover glow per logo cell. */
+.marquee-logo-cell {
+  background-image: none;
+}
+
+.marquee-logo-cell:hover,
+.marquee-logo-cell:focus-within {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.11) 0.65px,
+    transparent 0.65px
+  );
+  background-size: 9px 9px;
+  background-position: center;
+}
+
+.marquee-logo-cell::before,
+.marquee-logo-cell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.marquee-logo-cell::before {
+  background: radial-gradient(
+    ellipse 95% 75% at 50% 100%,
+    rgba(var(--accent-glow-rgb), 0.62) 0%,
+    rgba(var(--accent-glow-rgb), 0.34) 38%,
+    rgba(var(--accent-glow-rgb), 0.12) 58%,
+    transparent 78%
+  );
+  filter: blur(34px);
+}
+
+.marquee-logo-cell::after {
+  background: linear-gradient(
+    to top,
+    rgba(var(--accent-glow-rgb), 0.28) 0%,
+    rgba(var(--accent-glow-rgb), 0.1) 42%,
+    transparent 72%
+  );
+}
+
+.marquee-logo-cell:hover::before,
+.marquee-logo-cell:hover::after,
+.marquee-logo-cell:focus-within::before,
+.marquee-logo-cell:focus-within::after {
+  opacity: 1;
+}
+
+.marquee-logo-cell__image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-inline: auto;
+  height: auto;
+  width: auto;
+  max-height: clamp(1.125rem, 3.4vw, 1.625rem);
+  max-width: min(100%, clamp(2.5rem, 15vw, 4.25rem));
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.9;
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
+}
+
+.marquee-logo-cell__image--wide {
+  max-height: clamp(0.875rem, 2.6vw, 1.2rem);
+  max-width: min(100%, clamp(2rem, 12vw, 3.5rem));
+}
+
+@media (min-width: 640px) {
+  .marquee-logo-cell__image {
+    max-height: 2.25rem;
+    max-width: min(100%, 8rem);
+  }
+
+  .marquee-logo-cell__image--wide {
+    max-height: 1.75rem;
+    max-width: min(100%, 6.75rem);
+  }
+
+  .marquee-logo-cell__image--luminar {
+    max-height: 2rem;
+    max-width: min(100%, 7.75rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee-logo-cell__image {
+    max-height: 2.5rem;
+    max-width: min(100%, 8.75rem);
+  }
+
+  .marquee-logo-cell__image--wide {
+    max-height: 2rem;
+    max-width: min(100%, 7.5rem);
+  }
+
+  .marquee-logo-cell__image--luminar {
+    max-height: 2.375rem;
+    max-width: min(100%, 9.25rem);
+  }
+}
+
+.group\/marquee-logo:hover .marquee-logo-cell__image,
+.group\/marquee-logo:focus-within .marquee-logo-cell__image {
+  opacity: 1;
+  filter: brightness(1.1);
+}
+
+.marquee-logo-cell:focus-visible {
+  outline: 2px solid rgba(var(--accent-glow-rgb), 0.45);
+  outline-offset: -2px;
+}
+
 /* Dark focus pocket over orbit tiles behind hero copy. */
 .hero-orbit-center-vignette {
   width: 16rem;
