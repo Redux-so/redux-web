@@ -5,7 +5,11 @@ import { useReducedMotion } from "framer-motion";
 import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
 import ToolkitItemCard from "@/src/components/features/ToolkitItemCard";
 import { TOOLKIT_ITEMS } from "@/lib/toolkit-data";
-import { PAGE_CONTAINER, SECTION_BLEED } from "@/lib/section-styles";
+import {
+  PAGE_CONTAINER,
+  SECTION_BLEED,
+  SECTION_HEADLINE,
+} from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 type ToolkitMarqueeTrackProps = {
@@ -50,9 +54,7 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
         <div className="w-full shrink-0 text-left lg:max-w-fit">
           <h2
             id="toolkit-marquee-heading"
-            className={cn(
-              "font-display m-0 whitespace-nowrap text-3xl leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-[2.5rem]",
-            )}
+            className={cn("m-0 whitespace-nowrap", SECTION_HEADLINE)}
           >
             The Full Toolkit
           </h2>

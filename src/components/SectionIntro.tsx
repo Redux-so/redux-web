@@ -7,12 +7,14 @@ import { cn } from "@/lib/utils";
 type SectionIntroProps = {
   children: string;
   className?: string;
+  id?: string;
   variant?: "label" | "headline";
 };
 
 export default function SectionIntro({
   children,
   className,
+  id,
   variant = "label",
 }: SectionIntroProps) {
   const Tag = variant === "headline" ? "h2" : "p";
@@ -20,6 +22,7 @@ export default function SectionIntro({
   return (
     <ScrollReveal variant="fadeIn">
       <Tag
+        id={id}
         className={cn(
           "m-0",
           variant === "headline" ? SECTION_HEADLINE : SECTION_LABEL,

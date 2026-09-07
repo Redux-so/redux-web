@@ -9,6 +9,7 @@ import {
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
+import { SECTION_HEADLINE } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -85,7 +86,7 @@ export default function WaitlistSection() {
         stagger={0.12}
       >
         <ScrollRevealItem>
-          <h2 className="font-display text-3xl font-normal tracking-tight text-white sm:text-4xl">
+          <h2 className={cn("m-0", SECTION_HEADLINE)}>
             Join the Waitlist
           </h2>
         </ScrollRevealItem>

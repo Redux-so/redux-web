@@ -47,7 +47,13 @@ const faqs = [
 
 export default function FAQ() {
   return (
-    <SectionShell intro={<SectionIntro variant="headline">Frequently asked questions</SectionIntro>}>
+    <SectionShell
+      intro={
+        <SectionIntro id="faq-heading" variant="headline" className="text-center">
+          Frequently asked questions
+        </SectionIntro>
+      }
+    >
       <ScrollReveal>
         <div className="mx-auto w-full max-w-3xl">
           <Accordion type="single" collapsible className="w-full">

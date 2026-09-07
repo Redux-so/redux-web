@@ -31,9 +31,9 @@ export const SECTION_LABEL =
 export const HERO_HEADLINE =
   "font-display text-5xl font-[550] leading-tight tracking-tight text-balance text-white sm:text-6xl lg:text-[4rem]";
 
-/** Section display headline : same typography, smaller scale */
+/** Section display headline : shared scale for major section titles. */
 export const SECTION_HEADLINE =
-  "font-display text-2xl font-[550] leading-tight tracking-tight text-balance text-white sm:text-3xl lg:text-4xl";
+  "font-display text-3xl leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]";
 
 /** Equal vertical padding for every home page section : shared section rhythm. */
 export const SECTION_VERTICAL_PADDING =
