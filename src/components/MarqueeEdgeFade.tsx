@@ -16,24 +16,26 @@ export default function MarqueeEdgeFade({
   className,
 }: MarqueeEdgeFadeProps) {
   return (
-    <div className={cn("relative isolate w-full", className)}>
-      <div className="overflow-x-clip">{children}</div>
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-y-0 left-0 z-10 h-full",
-          EDGE_FADE_WIDTH,
-          "bg-gradient-to-r from-brand-bg to-transparent",
-        )}
-      />
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-y-0 right-0 z-10 h-full",
-          EDGE_FADE_WIDTH,
-          "bg-gradient-to-l from-brand-bg to-transparent",
-        )}
-      />
+    <div className={cn("relative w-full min-w-0", className)}>
+      <div className="relative overflow-x-clip">
+        {children}
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute -inset-y-px left-0 z-10",
+            EDGE_FADE_WIDTH,
+            "bg-gradient-to-r from-brand-bg to-transparent",
+          )}
+        />
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute -inset-y-px right-0 z-10",
+            EDGE_FADE_WIDTH,
+            "bg-gradient-to-l from-brand-bg to-transparent",
+          )}
+        />
+      </div>
     </div>
   );
 }

@@ -11,6 +11,11 @@ import {
   EDIT_SHOWCASE_TOP_ROW,
   type EditShowcasePhoto,
 } from "@/src/components/edit-showcase/edit-showcase-data";
+import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
+import {
+  GRID_LINE_COLOR,
+  GRID_LINE_WIDTH_PX,
+} from "@/src/components/page-grid/shared";
 import SectionIntro from "@/src/components/SectionIntro";
 import {
   PAGE_CONTAINER,
@@ -92,6 +97,19 @@ function PhotoMarqueeTrack({
   );
 }
 
+function PageGridLeftRail() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-y-0 left-0 z-20"
+      style={{
+        width: GRID_LINE_WIDTH_PX,
+        backgroundColor: GRID_LINE_COLOR,
+      }}
+    />
+  );
+}
+
 function PhotoMarqueeRow({
   photos,
   direction,
@@ -118,7 +136,7 @@ function PhotoMarqueeRow({
   }
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <MarqueeEdgeFade>
       <div className={cn("flex w-max items-center", animationClass)}>
         <PhotoMarqueeTrack
           photos={photos}
@@ -132,7 +150,7 @@ function PhotoMarqueeRow({
           aria-hidden
         />
       </div>
-    </div>
+    </MarqueeEdgeFade>
   );
 }
 
@@ -148,7 +166,8 @@ export default function EditShowcaseSection() {
         stagger={0.1}
       >
         <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
-          <div className={PAGE_GRID_ALIGNED_FRAME}>
+          <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-x-visible")}>
+            <PageGridLeftRail />
             <PhotoMarqueeRow
               photos={EDIT_SHOWCASE_TOP_ROW}
               direction="left"
@@ -159,7 +178,8 @@ export default function EditShowcaseSection() {
         </ScrollRevealItem>
 
         <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
-          <div className={PAGE_GRID_ALIGNED_FRAME}>
+          <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-x-visible")}>
+            <PageGridLeftRail />
             <PhotoMarqueeRow
               photos={EDIT_SHOWCASE_BOTTOM_ROW}
               direction="right"
