@@ -115,6 +115,9 @@
   --dot-grid-radius: 0.85px;
   --dot-grid-cell: 20px;
 
+  /* Footer bottom wash — softer than section spotlights */
+  --footer-glow-corner-opacity: 0.34;
+
   /* Charcoal surface : shared with hero-pill-cta--charcoal & feature cards */
   --charcoal-bg-top: #242424;
   --charcoal-bg-bottom: #1a1a1a;
@@ -463,6 +466,32 @@ html {
     transparent 72%
   );
   filter: blur(28px);
+}
+
+.footer-bottom-glow {
+  isolation: isolate;
+}
+
+.footer-bottom-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 85% 65% at 0% 100%,
+      rgba(var(--accent-glow-rgb), var(--footer-glow-corner-opacity)) 0%,
+      rgba(var(--accent-glow-rgb), calc(var(--footer-glow-corner-opacity) * 0.45)) 38%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 85% 65% at 100% 100%,
+      rgba(var(--accent-glow-rgb), var(--footer-glow-corner-opacity)) 0%,
+      rgba(var(--accent-glow-rgb), calc(var(--footer-glow-corner-opacity) * 0.45)) 38%,
+      transparent 70%
+    );
+  filter: blur(52px);
 }
 
 .faq-heading-glow {
