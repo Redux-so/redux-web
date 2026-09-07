@@ -115,8 +115,12 @@
   --dot-grid-radius: 0.85px;
   --dot-grid-cell: 20px;
 
-  /* Footer bottom wash — softer than section spotlights */
+  /* Footer edge wash */
   --footer-glow-corner-opacity: 0.34;
+
+  /* Hero top wash — lighter blue, softer than footer */
+  --hero-glow-rgb: 96, 138, 255;
+  --hero-glow-top-opacity: 0.17;
 
   /* Charcoal surface : shared with hero-pill-cta--charcoal & feature cards */
   --charcoal-bg-top: #242424;
@@ -492,6 +496,36 @@ html {
       transparent 70%
     );
   filter: blur(52px);
+}
+
+.hero-top-glow {
+  position: absolute;
+  inset-inline: 0;
+  top: -3.75rem;
+  z-index: 1;
+  height: calc(min(34rem, 62vh) + 3.75rem);
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 78% 88% at 50% -4%,
+    rgba(var(--hero-glow-rgb), calc(var(--hero-glow-top-opacity) * 1.4)) 0%,
+    rgba(var(--hero-glow-rgb), var(--hero-glow-top-opacity)) 24%,
+    rgba(var(--hero-glow-rgb), calc(var(--hero-glow-top-opacity) * 0.32)) 50%,
+    transparent 68%
+  );
+  filter: blur(36px);
+}
+
+@media (min-width: 640px) {
+  .hero-top-glow {
+    top: -4rem;
+    height: calc(min(34rem, 62vh) + 4rem);
+  }
+}
+
+/* Blur scrolling content behind the nav — no tint or border on the bar itself. */
+.nav-backdrop-blur {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .faq-heading-glow {

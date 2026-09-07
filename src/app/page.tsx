@@ -20,20 +20,21 @@ const SECTION_BASE = cn("relative z-[1]", SECTION_DIVIDE, SECTION_VERTICAL_PADDI
 
 export default function Home() {
   return (
-    <div className="min-h-full bg-[#040404]">
+    <div className="min-h-full bg-[#040404]" data-page-grid-shell>
       <EditShowcasePreload />
+      <Navbar />
 
       {/*
         Sticky footer reveal: this layer scrolls over the footer (z-10 + solid bg).
         Footer is a sibling with sticky bottom-0 z-0 so it is uncovered at scroll end.
         Rounded bottom corners clip this sheet as it slides up; overflow-hidden is
         safe here because the footer is outside this wrapper (sticky is unaffected).
+        Navbar sits on the shell (outside overflow-hidden) so backdrop-filter works.
       */}
       <div
         data-page-grid-root
         className="relative z-10 overflow-x-clip overflow-hidden rounded-b-[2.5rem] bg-brand-bg text-white sm:rounded-b-[3.25rem] lg:rounded-b-[4rem] xl:rounded-b-[5rem]"
       >
-        <Navbar />
         <div aria-hidden className={NAV_SPACER_CLASS} />
 
         <main className="relative flex min-w-0 flex-col overflow-x-clip">
@@ -43,9 +44,10 @@ export default function Home() {
             data-page-grid-hide-verticals
             className={cn(
               NAV_SCROLL_OFFSET_CLASS,
-              "relative z-[1] overflow-x-clip",
+              "relative z-[1] isolate overflow-x-clip",
             )}
           >
+            <div aria-hidden className="hero-top-glow" />
             <Hero />
           </section>
 

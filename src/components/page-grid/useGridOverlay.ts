@@ -116,6 +116,11 @@ export function useGridOverlay({
       if (gridRoot instanceof HTMLElement && gridRoot !== bounds) {
         publishGridColumnVars(gridRoot, columns);
       }
+
+      const shell = gridRoot?.parentElement;
+      if (shell instanceof HTMLElement) {
+        publishGridColumnVars(shell, columns);
+      }
     }
 
     const boundaryYs = getBoundaryYsRef.current?.(bounds) ?? [];
