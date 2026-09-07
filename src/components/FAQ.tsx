@@ -92,7 +92,7 @@ export default function FAQ() {
         />
 
         <ScrollReveal className="min-w-0 w-full lg:col-start-3 lg:row-start-1 lg:self-stretch">
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible defaultValue="faq-0" className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={faq.question} value={`faq-${index}`} className={FAQ_ITEM_CLASS}>
                 <AccordionTrigger
