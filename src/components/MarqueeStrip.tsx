@@ -18,13 +18,9 @@ const marqueeItems = [
   { src: "/marquee/figma.png", alt: "Figma", width: 356, height: 106 },
 ] as const;
 
-function isWideMarqueeLogo(item: (typeof marqueeItems)[number]): boolean {
-  return item.width / item.height > 2.75;
-}
-
 const MARQUEE_LOGO_CLASS = "marquee-logo-cell__image";
 const MARQUEE_LOGO_CELL_CLASS =
-  "marquee-logo-cell contained-accent-glow group/marquee-logo relative flex h-full w-full min-h-[3.75rem] items-center justify-center overflow-hidden px-0.5 outline-none sm:min-h-[5.5rem] lg:min-h-[6.5rem]";
+  "marquee-logo-cell contained-accent-glow group/marquee-logo relative flex h-full w-full min-h-[3.75rem] items-center justify-center overflow-hidden px-0.5 sm:min-h-[5.5rem] lg:min-h-[6.5rem]";
 
 /** Internal dividers only — outer edges come from PageGrid. */
 const internalColumnBoundaries = getColumnBoundaryPercents(marqueeItems.length).filter(
@@ -72,11 +68,7 @@ export default function MarqueeStrip() {
               <ul className="relative z-[1] m-0 grid min-w-0 list-none grid-cols-5 items-stretch p-0">
                 {marqueeItems.map((item) => (
                   <li key={item.src} className="min-w-0">
-                    <div
-                      className={MARQUEE_LOGO_CELL_CLASS}
-                      tabIndex={0}
-                      aria-label={item.alt}
-                    >
+                    <div className={MARQUEE_LOGO_CELL_CLASS} aria-label={item.alt}>
                       <Image
                         src={item.src}
                         alt=""
@@ -85,7 +77,6 @@ export default function MarqueeStrip() {
                         unoptimized
                         className={cn(
                           MARQUEE_LOGO_CLASS,
-                          isWideMarqueeLogo(item) && "marquee-logo-cell__image--wide",
                           item.src.includes("luminar-neo") &&
                             "marquee-logo-cell__image--luminar",
                         )}

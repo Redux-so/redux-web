@@ -363,7 +363,6 @@ html {
 
 .contained-accent-glow--highlighted,
 .marquee-logo-cell:hover,
-.marquee-logo-cell:focus-within,
 .faq-accordion-cell[data-state="open"] {
   background-image: radial-gradient(
     circle,
@@ -378,8 +377,6 @@ html {
 .contained-accent-glow--highlighted::after,
 .marquee-logo-cell:hover::before,
 .marquee-logo-cell:hover::after,
-.marquee-logo-cell:focus-within::before,
-.marquee-logo-cell:focus-within::after,
 .faq-accordion-cell[data-state="open"]::before,
 .faq-accordion-cell[data-state="open"]::after {
   opacity: 1;
@@ -449,9 +446,8 @@ html {
   z-index: 1;
   display: block;
   margin-inline: auto;
-  height: auto;
+  height: clamp(1.125rem, 3.4vw, 1.625rem);
   width: auto;
-  max-height: clamp(1.125rem, 3.4vw, 1.625rem);
   max-width: min(100%, clamp(2.5rem, 15vw, 4.25rem));
   object-fit: contain;
   object-position: center;
@@ -461,54 +457,44 @@ html {
     filter 0.3s ease;
 }
 
-.marquee-logo-cell__image--wide {
-  max-height: clamp(0.875rem, 2.6vw, 1.2rem);
-  max-width: min(100%, clamp(2rem, 12vw, 3.5rem));
-}
-
 @media (min-width: 640px) {
   .marquee-logo-cell__image {
-    max-height: 2.25rem;
+    height: 2.25rem;
     max-width: min(100%, 8rem);
-  }
-
-  .marquee-logo-cell__image--wide {
-    max-height: 1.75rem;
-    max-width: min(100%, 6.75rem);
-  }
-
-  .marquee-logo-cell__image--luminar {
-    max-height: 2rem;
-    max-width: min(100%, 7.75rem);
   }
 }
 
 @media (min-width: 1024px) {
   .marquee-logo-cell__image {
-    max-height: 2.5rem;
+    height: 2.5rem;
     max-width: min(100%, 8.75rem);
-  }
-
-  .marquee-logo-cell__image--wide {
-    max-height: 2rem;
-    max-width: min(100%, 7.5rem);
-  }
-
-  .marquee-logo-cell__image--luminar {
-    max-height: 2.375rem;
-    max-width: min(100%, 9.25rem);
   }
 }
 
-.group\/marquee-logo:hover .marquee-logo-cell__image,
-.group\/marquee-logo:focus-within .marquee-logo-cell__image {
+.marquee-logo-cell__image--luminar {
+  height: clamp(1.35rem, 4vw, 1.875rem);
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .marquee-logo-cell__image--luminar {
+    height: 2.625rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee-logo-cell__image--luminar {
+    height: 2.875rem;
+  }
+}
+
+.group\/marquee-logo:hover .marquee-logo-cell__image {
   opacity: 1;
   filter: brightness(1.1);
 }
 
 .marquee-logo-cell:focus-visible {
-  outline: 2px solid rgba(var(--accent-glow-rgb), 0.45);
-  outline-offset: -2px;
+  outline: none;
 }
 
 /* Dark focus pocket over orbit tiles behind hero copy. */
