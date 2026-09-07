@@ -474,6 +474,7 @@ html {
 
 .footer-bottom-glow {
   isolation: isolate;
+  overflow: hidden;
 }
 
 .footer-bottom-glow::before {

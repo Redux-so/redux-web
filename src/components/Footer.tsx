@@ -24,7 +24,7 @@ const footerWordmarkFont = Alata({
 
 export default function Footer() {
   return (
-    <footer className="footer-bottom-glow relative sticky bottom-0 z-0 overflow-visible bg-[#040404] text-white">
+    <footer className="footer-bottom-glow relative sticky bottom-0 z-0 bg-[#040404] text-white">
       <FooterPageGrid />
       <div className="relative z-[1]">
         <div className={PAGE_CONTAINER}>

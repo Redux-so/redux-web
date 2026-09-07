@@ -10,8 +10,8 @@ export const LIBRARY_SHOWCASE_SIDEBAR_WIDTH = 260;
  */
 export const LIBRARY_SEARCH_CROP_WIDTH = 980;
 
-/** Skip the greeting headline so the crop favors the search bar and result grid. */
-export const LIBRARY_SEARCH_CROP_TOP_OFFSET = 120;
+/** Trim the greeting headline while keeping the search bar fully in frame. */
+export const LIBRARY_SEARCH_CROP_TOP_OFFSET = 48;
 
 /** Left edge of the library crop region in design coordinates. */
 export const LIBRARY_SEARCH_CROP_LEFT = 0;
