@@ -322,6 +322,21 @@ html {
   }
 }
 
+@keyframes hero-cta-shimmer {
+  0% {
+    background-position: 150% center;
+  }
+
+  25% {
+    background-position: -50% center;
+  }
+
+  25.01%,
+  100% {
+    background-position: -50% center;
+  }
+}
+
 @layer components {
   .hero-pill-cta {
     display: inline-flex;
@@ -411,6 +426,48 @@ html {
       var(--shadow-btn-primary-hover),
       inset 0 1px 0 var(--pill-inset-top),
       inset 0 -1px 0 var(--pill-inset-bottom);
+  }
+
+  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text {
+    display: inline-grid;
+    line-height: 1;
+  }
+
+  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-base,
+  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
+    grid-area: 1 / 1;
+    line-height: 1;
+  }
+
+  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-base {
+    color: #fff;
+  }
+
+  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 34%,
+      rgba(255, 255, 255, 1) 44%,
+      #ffffff 50%,
+      rgba(255, 255, 255, 1) 56%,
+      transparent 66%,
+      transparent 100%
+    );
+    background-size: 260% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    mix-blend-mode: screen;
+    animation: hero-cta-shimmer 7s ease-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
+      animation: none;
+      background: none;
+    }
   }
 
   .hero-pill-cta--compact {

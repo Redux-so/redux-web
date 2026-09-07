@@ -36,9 +36,14 @@ export default function Hero() {
           <div className="flex w-full max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:justify-center">
             <a
               href="#waitlist"
-              className={cn(HERO_CTA, "hero-pill-cta--purple")}
+              className={cn(HERO_CTA, "hero-pill-cta--purple hero-pill-cta--shimmer")}
             >
-              Join Waitlist
+              <span className="hero-pill-cta__shimmer-text">
+                <span className="hero-pill-cta__shimmer-text-base">Join Waitlist</span>
+                <span className="hero-pill-cta__shimmer-text-shine" aria-hidden>
+                  Join Waitlist
+                </span>
+              </span>
             </a>
             <a
               href="#features"
