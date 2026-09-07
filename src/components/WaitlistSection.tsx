@@ -3,14 +3,16 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useState } from "react";
 
+import DotGridBackground from "@/src/components/DotGridBackground";
 import SectionShell from "@/src/components/SectionShell";
+import { Icon } from "@/components/shared/Icon";
 import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
 import {
   EASE_OUT,
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
-import { SECTION_HEADLINE } from "@/lib/section-styles";
+import { PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -81,99 +83,120 @@ export default function WaitlistSection() {
   };
 
   return (
-    <SectionShell className="relative z-[1]">
-      <ScrollRevealGroup
-        className="mx-auto w-full max-w-lg text-center"
-        stagger={0.12}
-      >
-        <ScrollRevealItem>
-          <h2 className={cn("m-0", SECTION_HEADLINE)}>
-            Join the <span className={BRAND_HEADLINE_ACCENT_CLASS}>Waitlist</span>
-          </h2>
-        </ScrollRevealItem>
+    <SectionShell container={false} className="relative z-[1]">
+      <div className={cn(PAGE_GRID_ALIGNED_FRAME, "px-4 sm:px-6 lg:px-8")}>
+        <div className="relative w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#0d0d0d] px-6 py-20 sm:py-24">
+        <DotGridBackground className="absolute inset-0 z-0" />
+        <div aria-hidden className="waitlist-card-spotlight absolute inset-0 z-10" />
 
-        <ScrollRevealItem>
-          <p className="mt-4 text-base leading-relaxed text-white/55">
-            Get early access when we launch, plus join our founding community
-            today.
-          </p>
-        </ScrollRevealItem>
+        <ScrollRevealGroup
+          className="relative z-20 mx-auto w-full max-w-xl text-center"
+          stagger={0.12}
+        >
+          <ScrollRevealItem>
+            <h2
+              className={cn(
+                "m-0 font-display text-5xl font-semibold leading-[1.12] tracking-tight text-white sm:text-6xl lg:text-[3.75rem]",
+              )}
+            >
+              Join the <span className={BRAND_HEADLINE_ACCENT_CLASS}>Waitlist</span>
+            </h2>
+          </ScrollRevealItem>
 
-        <div className="relative mx-auto mt-8 w-full max-w-md">
-          <form
-            onSubmit={handleSubmit}
-            aria-hidden={formState !== "idle"}
-            className={cn(
-              "flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center",
-              formState !== "idle" && "pointer-events-none invisible",
-            )}
-          >
-            <input
-              type="text"
-              name="website"
-              value={website}
-              onChange={(event) => setWebsite(event.target.value)}
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden="true"
-              className="sr-only"
-            />
-            <div className="flex-1">
+          <ScrollRevealItem>
+            <p className="mt-5 text-base leading-relaxed whitespace-nowrap text-white/55 sm:text-lg">
+              Get early access when we launch, plus join our founding community today.
+            </p>
+          </ScrollRevealItem>
+
+          <div className="relative mx-auto mt-10 w-full max-w-lg">
+            <form
+              onSubmit={handleSubmit}
+              aria-hidden={formState !== "idle"}
+              className={cn(
+                "flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center",
+                formState !== "idle" && "pointer-events-none invisible",
+              )}
+            >
               <input
-                type="email"
-                name="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder="you@example.com"
-                required
-                tabIndex={formState === "idle" ? 0 : -1}
-                className="h-10 w-full rounded-md border border-brand-border bg-brand-surface px-4 text-sm text-white placeholder:text-white/28 outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/30"
-              />
-              {error ? (
-                <p className="mt-2 text-left text-sm text-red-400">{error}</p>
-              ) : null}
-            </div>
-            <button
-              type="submit"
-              tabIndex={formState === "idle" ? 0 : -1}
-              className={WAITLIST_SUBMIT_CTA}
-            >
-              <span className="hero-pill-cta__shimmer-text">
-                <span className="hero-pill-cta__shimmer-text-base">Join</span>
-                <span className="hero-pill-cta__shimmer-text-shine" aria-hidden>
-                  Join
-                </span>
-              </span>
-            </button>
-          </form>
-
-          {formState === "loading" ? (
-            <div
-              className="absolute inset-0 flex items-center justify-center"
-              role="status"
-              aria-label="Joining waitlist"
-            >
-              <span
-                className="size-8 animate-spin rounded-full border-2 border-white/20 border-t-brand-purple-hover"
+                type="text"
+                name="website"
+                value={website}
+                onChange={(event) => setWebsite(event.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
                 aria-hidden="true"
+                className="sr-only"
               />
-            </div>
-          ) : null}
+              <div className="mx-auto w-full max-w-[15rem] sm:mx-0 sm:w-[15rem] sm:shrink-0">
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  tabIndex={formState === "idle" ? 0 : -1}
+                  className="h-11 w-full rounded-md border border-brand-border bg-brand-surface px-4 text-sm text-white placeholder:text-white/28 outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/30 sm:text-base"
+                />
+                {error ? (
+                  <p className="mt-2 text-left text-base text-red-400">{error}</p>
+                ) : null}
+              </div>
+              <button
+                type="submit"
+                tabIndex={formState === "idle" ? 0 : -1}
+                className={cn(
+                  WAITLIST_SUBMIT_CTA,
+                  "inline-flex items-center gap-1.5",
+                  "!h-11 !min-h-11 !max-h-none px-6 !text-sm sm:!text-base",
+                )}
+              >
+                <span className="hero-pill-cta__shimmer-text">
+                  <span className="hero-pill-cta__shimmer-text-base">Join</span>
+                  <span className="hero-pill-cta__shimmer-text-shine" aria-hidden>
+                    Join
+                  </span>
+                </span>
+                <Icon
+                  name="ArrowNarrowRight"
+                  size={16}
+                  strokeWidth={2}
+                  className="shrink-0 text-white"
+                  aria-hidden
+                />
+              </button>
+            </form>
 
-          {formState === "success" ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={overlayTransition}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <p className="text-xl font-medium text-white">
-                You&apos;re on the list!
-              </p>
-            </motion.div>
-          ) : null}
+            {formState === "loading" ? (
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                role="status"
+                aria-label="Joining waitlist"
+              >
+                <span
+                  className="size-8 animate-spin rounded-full border-2 border-white/20 border-t-brand-purple-hover"
+                  aria-hidden="true"
+                />
+              </div>
+            ) : null}
+
+            {formState === "success" ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={overlayTransition}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <p className="text-2xl font-medium text-white">
+                  You&apos;re on the list!
+                </p>
+              </motion.div>
+            ) : null}
+          </div>
+        </ScrollRevealGroup>
         </div>
-      </ScrollRevealGroup>
+      </div>
     </SectionShell>
   );
 }

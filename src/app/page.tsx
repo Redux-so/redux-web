@@ -88,7 +88,12 @@ export default function Home() {
 
           <section
             id="waitlist"
-            className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}
+            className={cn(
+              NAV_SCROLL_OFFSET_CLASS,
+              "relative z-[1]",
+              SECTION_DIVIDE,
+              "py-10 sm:py-12 lg:py-16",
+            )}
           >
             <WaitlistSection />
           </section>
