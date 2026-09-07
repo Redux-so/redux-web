@@ -248,6 +248,48 @@ html {
   will-change: transform;
 }
 
+.edit-showcase-marquee-row--active .animate-marquee-left,
+.edit-showcase-marquee-row--active .animate-marquee-right {
+  animation-play-state: paused;
+}
+
+.edit-showcase-photo-card {
+  position: relative;
+  z-index: 0;
+  flex-shrink: 0;
+}
+
+.edit-showcase-photo-card--active {
+  z-index: 20;
+}
+
+.edit-showcase-photo-card__inner {
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center center;
+}
+
+.edit-showcase-photo-card--active .edit-showcase-photo-card__inner {
+  transform: scale(1.05);
+}
+
+.edit-showcase-photo-card__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.edit-showcase-marquee-row--active
+  .edit-showcase-photo-card--dimmed
+  .edit-showcase-photo-card__inner::after {
+  opacity: 1;
+}
+
 @keyframes toolkit-marquee {
   from {
     transform: translateX(0);

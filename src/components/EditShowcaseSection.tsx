@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
+import { useState } from "react";
 
 import {
   EDIT_SHOWCASE_BOTTOM_ROW,
@@ -37,30 +38,71 @@ function PhotoCard({
   photo,
   priority = false,
   className,
+  interactive = true,
+  cardKey,
+  isActive = false,
+  isDimmed = false,
+  onActivate,
 }: {
   photo: EditShowcasePhoto;
   priority?: boolean;
   className?: string;
+  interactive?: boolean;
+  cardKey?: string;
+  isActive?: boolean;
+  isDimmed?: boolean;
+  onActivate?: (cardKey: string) => void;
 }) {
+  const image = (
+    <Image
+      src={photo.src}
+      alt={photo.alt}
+      fill
+      loading="eager"
+      priority={priority}
+      sizes="(max-width: 640px) 260px, (max-width: 1920px) 480px, 600px"
+      className="object-cover"
+      draggable={false}
+    />
+  );
+
+  if (!interactive) {
+    return (
+      <div
+        className={cn(
+          EDIT_SHOWCASE_PHOTO_FRAME,
+          EDIT_SHOWCASE_PHOTO_ASPECT,
+          "relative overflow-hidden rounded-2xl bg-brand-bg",
+          className,
+        )}
+      >
+        {image}
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
+        "edit-showcase-photo-card",
         EDIT_SHOWCASE_PHOTO_FRAME,
-        EDIT_SHOWCASE_PHOTO_ASPECT,
-        "relative overflow-hidden rounded-2xl bg-brand-bg",
-        className,
+        isActive && "edit-showcase-photo-card--active",
+        isDimmed && "edit-showcase-photo-card--dimmed",
       )}
+      onMouseEnter={() => {
+        if (cardKey) onActivate?.(cardKey);
+      }}
     >
-      <Image
-        src={photo.src}
-        alt={photo.alt}
-        fill
-        loading="eager"
-        priority={priority}
-        sizes="(max-width: 640px) 260px, (max-width: 1920px) 480px, 600px"
-        className="object-cover"
-        draggable={false}
-      />
+      <div
+        className={cn(
+          "edit-showcase-photo-card__inner",
+          EDIT_SHOWCASE_PHOTO_ASPECT,
+          "relative overflow-hidden rounded-2xl bg-brand-bg",
+          className,
+        )}
+      >
+        {image}
+      </div>
     </div>
   );
 }
@@ -70,6 +112,8 @@ type PhotoMarqueeTrackProps = {
   trackKey: string;
   priorityCount?: number;
   repeats?: number;
+  activeCardKey?: string | null;
+  onActivate?: (cardKey: string) => void;
   "aria-hidden"?: boolean;
 };
 
@@ -78,22 +122,32 @@ function PhotoMarqueeTrack({
   trackKey,
   priorityCount = 0,
   repeats = 2,
+  activeCardKey = null,
+  onActivate,
   "aria-hidden": ariaHidden,
 }: PhotoMarqueeTrackProps) {
   const items = Array.from({ length: repeats }, () => photos).flat();
 
   return (
     <div
-      className="flex shrink-0 items-center gap-3 pr-3 sm:gap-4 sm:pr-4"
+      className="flex shrink-0 items-center gap-3 py-3 pr-3 sm:gap-4 sm:py-4 sm:pr-4"
       aria-hidden={ariaHidden}
     >
-      {items.map((photo, index) => (
-        <PhotoCard
-          key={`${trackKey}-${photo.id}-${index}`}
-          photo={photo}
-          priority={!ariaHidden && index < priorityCount}
-        />
-      ))}
+      {items.map((photo, index) => {
+        const cardKey = `${trackKey}-${photo.id}-${index}`;
+
+        return (
+          <PhotoCard
+            key={cardKey}
+            cardKey={cardKey}
+            photo={photo}
+            priority={!ariaHidden && index < priorityCount}
+            isActive={activeCardKey === cardKey}
+            isDimmed={activeCardKey !== null && activeCardKey !== cardKey}
+            onActivate={onActivate}
+          />
+        );
+      })}
     </div>
   );
 }
@@ -118,8 +172,10 @@ function PhotoMarqueeRow({
   priorityCount = 0,
 }: PhotoMarqueeRowProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [activeCardKey, setActiveCardKey] = useState<string | null>(null);
   const animationClass =
     direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
+  const isSpotlightActive = activeCardKey !== null;
 
   if (prefersReducedMotion) {
     return (
@@ -129,6 +185,7 @@ function PhotoMarqueeRow({
             key={photo.id}
             photo={photo}
             priority={index < priorityCount}
+            interactive={false}
             className="!w-full !max-w-full"
           />
         ))}
@@ -137,21 +194,33 @@ function PhotoMarqueeRow({
   }
 
   return (
-    <MarqueeEdgeFade>
-      <div className={cn("flex w-max items-center", animationClass)}>
-        <PhotoMarqueeTrack
-          photos={photos}
-          trackKey={`${trackKey}-a`}
-          priorityCount={priorityCount}
-        />
-        <PhotoMarqueeTrack
-          photos={photos}
-          trackKey={`${trackKey}-b`}
-          priorityCount={0}
-          aria-hidden
-        />
-      </div>
-    </MarqueeEdgeFade>
+    <div
+      className={cn(
+        "edit-showcase-marquee-row w-full min-w-0",
+        isSpotlightActive && "edit-showcase-marquee-row--active",
+      )}
+      onMouseLeave={() => setActiveCardKey(null)}
+    >
+      <MarqueeEdgeFade>
+        <div className={cn("flex w-max items-center", animationClass)}>
+          <PhotoMarqueeTrack
+            photos={photos}
+            trackKey={`${trackKey}-a`}
+            priorityCount={priorityCount}
+            activeCardKey={activeCardKey}
+            onActivate={setActiveCardKey}
+          />
+          <PhotoMarqueeTrack
+            photos={photos}
+            trackKey={`${trackKey}-b`}
+            priorityCount={0}
+            activeCardKey={activeCardKey}
+            onActivate={setActiveCardKey}
+            aria-hidden
+          />
+        </div>
+      </MarqueeEdgeFade>
+    </div>
   );
 }
 
