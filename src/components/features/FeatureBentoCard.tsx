@@ -31,6 +31,7 @@ type FeatureBentoCardProps = {
   cta: string;
   children: ReactNode;
   className?: string;
+  showcaseAccentGlow?: "right";
 };
 
 export default function FeatureBentoCard({
@@ -40,11 +41,19 @@ export default function FeatureBentoCard({
   cta,
   children,
   className,
+  showcaseAccentGlow,
 }: FeatureBentoCardProps) {
   const styles = sizeClasses[size];
 
   return (
-    <article className={cn(BENTO_CARD_BASE, styles.card, className)}>
+    <article
+      className={cn(
+        BENTO_CARD_BASE,
+        styles.card,
+        className,
+        showcaseAccentGlow === "right" && "feature-convo-card-glow",
+      )}
+    >
       <div className="flex min-w-0 flex-col gap-2">
         <h3
           className={cn(

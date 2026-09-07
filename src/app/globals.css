@@ -594,6 +594,65 @@ html {
   -webkit-mask-size: 100% 100%;
 }
 
+/* FAQ-style accent glow + dots for conversational editing bento card (right origin). */
+.feature-convo-card-glow::before,
+.feature-convo-card-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.feature-convo-card-glow::before {
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 72% 88% at 100% 50%,
+    rgba(var(--accent-glow-rgb), var(--accent-glow-peak-opacity)) 0%,
+    rgba(var(--accent-glow-rgb), var(--accent-glow-mid-opacity)) 46%,
+    transparent 82%
+  );
+  filter: blur(56px);
+}
+
+.feature-convo-card-glow::after {
+  z-index: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--dot-grid-color) var(--dot-grid-radius),
+    transparent var(--dot-grid-radius)
+  );
+  background-size: var(--dot-grid-cell) var(--dot-grid-cell);
+  background-position: center;
+  mask-image: radial-gradient(
+    ellipse 78% 95% at 100% 50%,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.85) 36%,
+    rgb(0 0 0 / 0.35) 56%,
+    transparent 82%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 78% 95% at 100% 50%,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.85) 36%,
+    rgb(0 0 0 / 0.35) 56%,
+    transparent 82%
+  );
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+}
+
+.feature-convo-card-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+.feature-convo-card-glow .showcase-frame {
+  background: transparent;
+}
+
 /* Circular glow behind collaborative editing card actions. */
 .feature-collab-actions-glow {
   position: absolute;

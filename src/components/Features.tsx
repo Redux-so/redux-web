@@ -41,6 +41,7 @@ export default function Features() {
             headline="Conversational Editing"
             description="Describe edits in plain language and AI applies them instantly."
             cta="Ask AI"
+            showcaseAccentGlow="right"
           >
             <ConversationalEditingShowcaseCrop />
           </FeatureBentoCard>
