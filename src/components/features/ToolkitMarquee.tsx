@@ -63,7 +63,7 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
           </p>
         </div>
 
-        <div className="group/toolkit-marquee min-w-0 flex-1">
+        <div className="min-w-0 flex-1">
           {prefersReducedMotion ? (
             <ul className="m-0 flex list-none flex-wrap gap-x-6 gap-y-6 p-0 sm:gap-x-8 lg:gap-x-10">
               {TOOLKIT_ITEMS.map((item) => (

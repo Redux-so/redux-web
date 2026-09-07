@@ -262,11 +262,6 @@ html {
   will-change: transform;
 }
 
-.group\/toolkit-marquee:hover .animate-toolkit-marquee,
-.group\/toolkit-marquee:focus-within .animate-toolkit-marquee {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .animate-toolkit-marquee {
     animation: none;
