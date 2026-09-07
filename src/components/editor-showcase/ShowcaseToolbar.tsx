@@ -3,10 +3,14 @@
 import { useState } from "react";
 
 import { Icon } from "@/components/shared/Icon";
-import { BTN_BRAND_SOLID } from "@/lib/button-styles";
 import { SURFACE_BTN_ACTIVE, SURFACE_BTN_IDLE, SURFACE_BORDER } from "@/lib/surface-colors";
+import { cn } from "@/lib/utils";
 
 import { SHOWCASE_FILENAME } from "./showcase-data";
+
+const SHOWCASE_EXPORT_CTA = cn(
+  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav inline-flex shrink-0 items-center justify-center",
+);
 
 function ToolbarBtn({
   onClick,
@@ -128,9 +132,9 @@ export default function ShowcaseToolbar() {
         <button
           type="button"
           title="Export / share"
-          className={`${BTN_BRAND_SOLID} shrink-0`}
+          className={SHOWCASE_EXPORT_CTA}
         >
-          <Icon name="Download01" size={20} strokeWidth={2} aria-hidden />
+          <Icon name="Download01" size={16} strokeWidth={2} aria-hidden />
           Export
         </button>
       </div>
