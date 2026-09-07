@@ -1,6 +1,7 @@
 "use client";
 
 import ConversationalEditingShowcaseCrop from "@/src/components/features/ConversationalEditingShowcaseCrop";
+import { BeforeAfterSlider } from "@/src/components/features/BeforeAfterSlider";
 import FeatureBentoCard from "@/src/components/features/FeatureBentoCard";
 import FeatureSmallCard from "@/src/components/features/FeatureSmallCard";
 import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowcaseCrop";
@@ -71,9 +72,16 @@ export default function Features() {
         {/* Row 3: small pill cards */}
         <ScrollRevealItem className="min-w-0">
           <FeatureSmallCard
-            headline="Auto Tone Balance"
-            description="Auto balance exposure, contrast, and color across your whole image."
-            icon="Contrast01"
+            headline="Auto Photo Enhance"
+            description="One-click enhancement for balanced exposure, color, and detail."
+            trailing={
+              <div className="relative flex shrink-0 items-center">
+                <div className="feature-collab-actions-glow" aria-hidden />
+                <div className="relative z-[1] w-full sm:min-w-[9.5rem] sm:max-w-[11.5rem]">
+                  <BeforeAfterSlider className="h-20 w-full" />
+                </div>
+              </div>
+            }
           />
         </ScrollRevealItem>
 
