@@ -108,10 +108,7 @@ export default function Footer() {
         </div>
         </div>
 
-        <div
-          aria-hidden
-          className="-mt-2 max-h-[8rem] overflow-hidden sm:-mt-3 sm:max-h-[10rem] lg:max-h-[12.5rem] xl:max-h-[15.5rem]"
-        >
+        <div aria-hidden className="pb-6 sm:pb-8 lg:pb-10">
           <p
             className={cn(
               footerWordmarkFont.className,
