@@ -70,7 +70,10 @@ export default function FAQ() {
         >
           <ScrollReveal variant="fadeIn" className="w-full">
             <div className="faq-heading-glow relative w-fit lg:translate-x-10 xl:translate-x-12">
-              <div className="faq-heading-dots" aria-hidden />
+              <div
+                className="faq-heading-dots dot-grid-texture dot-grid-texture--spotlight"
+                aria-hidden
+              />
               <h2
                 id="faq-heading"
                 className={cn(

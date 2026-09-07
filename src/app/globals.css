@@ -110,6 +110,11 @@
   --brand-border: #2e2e2e;
   --brand-border-focus: #3a3a3a;
 
+  /* Dot grid texture — shared across waitlist, FAQ, hover accents, etc. */
+  --dot-grid-color: rgba(255, 255, 255, 0.045);
+  --dot-grid-radius: 0.85px;
+  --dot-grid-cell: 20px;
+
   /* Charcoal surface : shared with hero-pill-cta--charcoal & feature cards */
   --charcoal-bg-top: #242424;
   --charcoal-bg-bottom: #1a1a1a;
@@ -409,10 +414,10 @@ html {
 .faq-accordion-cell[data-state="open"] {
   background-image: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.11) 0.65px,
-    transparent 0.65px
+    var(--dot-grid-color) var(--dot-grid-radius),
+    transparent var(--dot-grid-radius)
   );
-  background-size: 9px 9px;
+  background-size: var(--dot-grid-cell) var(--dot-grid-cell);
   background-position: center;
 }
 
@@ -492,41 +497,16 @@ html {
   height: max(16rem, 300%);
   transform: translate(-50%, -50%);
   pointer-events: none;
-  background-image: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.11) 0.65px,
-    transparent 0.65px
-  );
-  background-size: 9px 9px;
-  background-position: center;
-  mask-image: radial-gradient(
-    ellipse 130% 110% at center,
-    rgb(0 0 0 / 1) 0%,
-    rgb(0 0 0 / 0.85) 36%,
-    rgb(0 0 0 / 0.35) 56%,
-    transparent 82%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse 130% 110% at center,
-    rgb(0 0 0 / 1) 0%,
-    rgb(0 0 0 / 0.85) 36%,
-    rgb(0 0 0 / 0.35) 56%,
-    transparent 82%
-  );
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
-  mask-size: 100% 100%;
-  -webkit-mask-size: 100% 100%;
 }
 
 /* Reusable dotted texture (waitlist card, etc.). */
 .dot-grid-texture {
   background-image: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.11) 0.65px,
-    transparent 0.65px
+    var(--dot-grid-color) var(--dot-grid-radius),
+    transparent var(--dot-grid-radius)
   );
-  background-size: 9px 9px;
+  background-size: var(--dot-grid-cell) var(--dot-grid-cell);
   background-position: center;
 }
 
@@ -587,10 +567,10 @@ html {
 .feature-collab-actions-glow::after {
   background-image: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.11) 0.65px,
-    transparent 0.65px
+    var(--dot-grid-color) var(--dot-grid-radius),
+    transparent var(--dot-grid-radius)
   );
-  background-size: 9px 9px;
+  background-size: var(--dot-grid-cell) var(--dot-grid-cell);
   background-position: center;
   mask-image: radial-gradient(
     circle at center,
