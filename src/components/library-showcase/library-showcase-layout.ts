@@ -6,9 +6,12 @@ export const LIBRARY_SHOWCASE_SIDEBAR_WIDTH = 260;
 
 /**
  * Feature-row crop: sidebar + greeting, search bar, and top grid rows.
- * Left-aligned to match Smart Search `imageCrop: "left"`.
+ * Left-aligned to match Semantic Search `imageCrop: "left"`.
  */
 export const LIBRARY_SEARCH_CROP_WIDTH = 980;
+
+/** Skip the greeting headline so the crop favors the search bar and result grid. */
+export const LIBRARY_SEARCH_CROP_TOP_OFFSET = 120;
 
 /** Left edge of the library crop region in design coordinates. */
 export const LIBRARY_SEARCH_CROP_LEFT = 0;

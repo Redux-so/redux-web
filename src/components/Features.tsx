@@ -38,12 +38,11 @@ export default function Features() {
         <ScrollRevealItem className="min-w-0 md:col-span-2">
           <FeatureBentoCard
             size="large"
-            headline="Conversational Editing"
-            description="Describe edits in plain language and AI applies them instantly."
-            cta="Ask AI"
-            showcaseAccentGlow="right"
+            headline="Semantic Search"
+            description="Find images by describing scenes, subjects, or keywords."
+            cta="Search Now"
           >
-            <ConversationalEditingShowcaseCrop />
+            <SmartSearchShowcaseCrop />
           </FeatureBentoCard>
         </ScrollRevealItem>
 
@@ -62,11 +61,11 @@ export default function Features() {
         <ScrollRevealItem className="min-w-0">
           <FeatureBentoCard
             size="medium"
-            headline="Smart Search"
-            description="Find images by describing scenes, subjects, or keywords."
-            cta="Search Now"
+            headline="Conversational Editing"
+            description="Describe edits in plain language and AI applies them instantly."
+            cta="Ask AI"
           >
-            <SmartSearchShowcaseCrop />
+            <ConversationalEditingShowcaseCrop />
           </FeatureBentoCard>
         </ScrollRevealItem>
 

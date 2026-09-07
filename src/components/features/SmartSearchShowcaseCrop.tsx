@@ -21,7 +21,7 @@ export default function SmartSearchShowcaseCrop() {
     >
       <LibraryShowcaseCropFrame
         animationActive={animationActive}
-        ariaLabel="Redux library Smart Search preview"
+        ariaLabel="Redux library Semantic Search preview"
       />
     </motion.div>
   );
