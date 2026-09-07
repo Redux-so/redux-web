@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Alata } from "next/font/google";
 
 import FooterPageGrid from "@/src/components/FooterPageGrid";
+import FooterWatermark from "@/src/components/FooterWatermark";
 import {
   legalLinks,
   navigationLinks,
@@ -108,16 +109,7 @@ export default function Footer() {
         </div>
         </div>
 
-        <div aria-hidden className="pb-6 sm:pb-8 lg:pb-10">
-          <p
-            className={cn(
-              footerWordmarkFont.className,
-              "text-center text-[9rem] leading-none text-white/28 sm:text-[12rem] lg:text-[16rem] xl:text-[20rem]",
-            )}
-          >
-            redux
-          </p>
-        </div>
+        <FooterWatermark fontClassName={footerWordmarkFont.className} />
       </div>
     </footer>
   );

@@ -565,6 +565,44 @@ html {
   [data-page-grid-overlay="footer"] .page-grid-overlay-fade {
     --page-grid-edge-fade: 4.5rem;
   }
+
+  .watermark-container {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .watermark-text {
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    color: transparent;
+    white-space: nowrap;
+  }
+
+  .watermark-base {
+    -webkit-text-stroke: 2.5px rgba(255, 255, 255, 0.15);
+  }
+
+  .watermark-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-text-stroke: 2.5px #3a6fff;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(
+      120px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+      black 0%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      120px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+      black 0%,
+      transparent 100%
+    );
+  }
 }
 
 .editor-showcase,
