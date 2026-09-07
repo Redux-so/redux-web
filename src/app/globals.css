@@ -385,6 +385,65 @@ html {
   opacity: 1;
 }
 
+.faq-heading-glow {
+  isolation: isolate;
+}
+
+.faq-heading-glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  width: max(20rem, 240%);
+  height: max(16rem, 300%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 130% 110% at center,
+    rgba(var(--accent-glow-rgb), 0.14) 0%,
+    rgba(var(--accent-glow-rgb), 0.05) 46%,
+    transparent 82%
+  );
+  filter: blur(88px);
+}
+
+.faq-heading-dots {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: max(20rem, 240%);
+  height: max(16rem, 300%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.11) 0.65px,
+    transparent 0.65px
+  );
+  background-size: 9px 9px;
+  background-position: center;
+  mask-image: radial-gradient(
+    ellipse 130% 110% at center,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.85) 36%,
+    rgb(0 0 0 / 0.35) 56%,
+    transparent 82%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 130% 110% at center,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.85) 36%,
+    rgb(0 0 0 / 0.35) 56%,
+    transparent 82%
+  );
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+}
+
 .marquee-logo-cell__image {
   position: relative;
   z-index: 1;

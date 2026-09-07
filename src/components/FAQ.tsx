@@ -65,21 +65,24 @@ export default function FAQ() {
       >
         <div
           className={cn(
-            "w-full lg:col-start-1 lg:row-start-1 lg:flex lg:min-h-0 lg:items-center lg:self-stretch lg:pr-12 xl:pr-16",
+            "relative w-full min-w-0 overflow-hidden lg:col-start-1 lg:row-start-1 lg:flex lg:min-h-0 lg:items-center lg:self-stretch lg:pr-12 xl:pr-16",
           )}
         >
           <ScrollReveal variant="fadeIn" className="w-full">
-            <h2
-              id="faq-heading"
-              className={cn(
-                "m-0 flex flex-col leading-[1.08] lg:translate-x-10 xl:translate-x-12",
-                SECTION_HEADLINE,
-              )}
-            >
-              <span className="block">Frequently</span>
-              <span className="block">asked</span>
-              <span className="block">questions</span>
-            </h2>
+            <div className="faq-heading-glow relative w-fit lg:translate-x-10 xl:translate-x-12">
+              <div className="faq-heading-dots" aria-hidden />
+              <h2
+                id="faq-heading"
+                className={cn(
+                  "relative z-[2] m-0 flex flex-col leading-[1.08]",
+                  SECTION_HEADLINE,
+                )}
+              >
+                <span className="block">Frequently</span>
+                <span className="block">asked</span>
+                <span className="block">questions</span>
+              </h2>
+            </div>
           </ScrollReveal>
         </div>
 
