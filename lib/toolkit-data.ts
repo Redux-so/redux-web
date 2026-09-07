@@ -40,11 +40,6 @@ export const TOOLKIT_ITEMS: ToolkitItem[] = [
     icon: "Moon02",
   },
   {
-    name: "Auto Photo Enhance",
-    description: "One-click AI-powered improvement.",
-    icon: "MagicWand01",
-  },
-  {
     name: "Auto Tone Balance",
     description: "Let AI balance exposure and contrast for you.",
     icon: "Sliders02",
@@ -79,11 +74,6 @@ export const TOOLKIT_ITEMS: ToolkitItem[] = [
     name: "Smart Color Balance",
     description: "AI corrects unwanted color casts.",
     icon: "Sliders03",
-  },
-  {
-    name: "Style Match",
-    description: "Apply the look of any reference photo.",
-    icon: "MagicWand02",
   },
   // Effects
   {
