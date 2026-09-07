@@ -562,11 +562,11 @@ html {
     background-position: 150% center;
   }
 
-  25% {
+  42% {
     background-position: -50% center;
   }
 
-  25.01%,
+  42.01%,
   100% {
     background-position: -50% center;
   }
@@ -685,17 +685,21 @@ html {
       90deg,
       transparent 0%,
       transparent 34%,
-      rgba(255, 255, 255, 1) 44%,
+      rgba(255, 255, 255, 0.55) 41%,
+      rgba(255, 255, 255, 0.95) 47%,
       #ffffff 50%,
-      rgba(255, 255, 255, 1) 56%,
+      rgba(255, 255, 255, 0.95) 53%,
+      rgba(255, 255, 255, 0.55) 59%,
       transparent 66%,
       transparent 100%
     );
-    background-size: 260% 100%;
+    background-size: 210% 100%;
     -webkit-background-clip: text;
     background-clip: text;
-    mix-blend-mode: screen;
-    animation: hero-cta-shimmer 7s ease-out infinite;
+    mix-blend-mode: plus-lighter;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85))
+      drop-shadow(0 0 14px rgba(255, 255, 255, 0.5));
+    animation: hero-cta-shimmer 6s ease-out infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -16,7 +16,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_LOADING_MS = 600;
 
 const WAITLIST_SUBMIT_CTA = cn(
-  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav shrink-0",
+  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav hero-pill-cta--shimmer shrink-0",
 );
 
 type FormState = "idle" | "loading" | "success";
@@ -137,7 +137,12 @@ export default function WaitlistSection() {
               tabIndex={formState === "idle" ? 0 : -1}
               className={WAITLIST_SUBMIT_CTA}
             >
-              Join
+              <span className="hero-pill-cta__shimmer-text">
+                <span className="hero-pill-cta__shimmer-text-base">Join</span>
+                <span className="hero-pill-cta__shimmer-text-shine" aria-hidden>
+                  Join
+                </span>
+              </span>
             </button>
           </form>
 
