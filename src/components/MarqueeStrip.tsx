@@ -24,7 +24,7 @@ function isWideMarqueeLogo(item: (typeof marqueeItems)[number]): boolean {
 
 const MARQUEE_LOGO_CLASS = "marquee-logo-cell__image";
 const MARQUEE_LOGO_CELL_CLASS =
-  "marquee-logo-cell group/marquee-logo relative flex h-full w-full min-h-[3.75rem] items-center justify-center overflow-hidden px-0.5 outline-none sm:min-h-[5.5rem] lg:min-h-[6.5rem]";
+  "marquee-logo-cell contained-accent-glow group/marquee-logo relative flex h-full w-full min-h-[3.75rem] items-center justify-center overflow-hidden px-0.5 outline-none sm:min-h-[5.5rem] lg:min-h-[6.5rem]";
 
 /** Internal dividers only — outer edges come from PageGrid. */
 const internalColumnBoundaries = getColumnBoundaryPercents(marqueeItems.length).filter(

@@ -323,24 +323,15 @@ html {
   opacity: 1;
 }
 
-/* Workflows marquee — contained CTA-blue hover glow per logo cell. */
-.marquee-logo-cell {
+/* Shared contained CTA-blue glow + dot texture (workflows marquee, FAQ accordion). */
+.contained-accent-glow {
+  position: relative;
+  overflow: hidden;
   background-image: none;
 }
 
-.marquee-logo-cell:hover,
-.marquee-logo-cell:focus-within {
-  background-image: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.11) 0.65px,
-    transparent 0.65px
-  );
-  background-size: 9px 9px;
-  background-position: center;
-}
-
-.marquee-logo-cell::before,
-.marquee-logo-cell::after {
+.contained-accent-glow::before,
+.contained-accent-glow::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -350,7 +341,7 @@ html {
   transition: opacity 0.3s ease;
 }
 
-.marquee-logo-cell::before {
+.contained-accent-glow::before {
   background: radial-gradient(
     ellipse 95% 75% at 50% 100%,
     rgba(var(--accent-glow-rgb), 0.62) 0%,
@@ -361,7 +352,7 @@ html {
   filter: blur(34px);
 }
 
-.marquee-logo-cell::after {
+.contained-accent-glow::after {
   background: linear-gradient(
     to top,
     rgba(var(--accent-glow-rgb), 0.28) 0%,
@@ -370,10 +361,27 @@ html {
   );
 }
 
+.contained-accent-glow--highlighted,
+.marquee-logo-cell:hover,
+.marquee-logo-cell:focus-within,
+.faq-accordion-cell[data-state="open"] {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.11) 0.65px,
+    transparent 0.65px
+  );
+  background-size: 9px 9px;
+  background-position: center;
+}
+
+.contained-accent-glow--highlighted::before,
+.contained-accent-glow--highlighted::after,
 .marquee-logo-cell:hover::before,
 .marquee-logo-cell:hover::after,
 .marquee-logo-cell:focus-within::before,
-.marquee-logo-cell:focus-within::after {
+.marquee-logo-cell:focus-within::after,
+.faq-accordion-cell[data-state="open"]::before,
+.faq-accordion-cell[data-state="open"]::after {
   opacity: 1;
 }
 

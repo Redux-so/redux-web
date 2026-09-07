@@ -81,7 +81,7 @@ export default function Home() {
 
           <section
             id="faq"
-            className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}
+            className={cn(NAV_SCROLL_OFFSET_CLASS, "relative z-[1]", SECTION_DIVIDE)}
           >
             <FAQ />
           </section>

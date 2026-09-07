@@ -8,9 +8,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
-import SectionIntro from "@/src/components/SectionIntro";
-import SectionShell from "@/src/components/SectionShell";
 import { ScrollReveal } from "@/lib/scroll-motion";
+import {
+  PAGE_GRID_ALIGNED_FRAME,
+  SECTION_HEADLINE,
+} from "@/lib/section-styles";
+import { cn } from "@/lib/utils";
 
 const faqs = [
   {
@@ -45,27 +48,64 @@ const faqs = [
   },
 ] as const;
 
+const FAQ_ITEM_CLASS = cn(
+  "faq-accordion-cell contained-accent-glow relative overflow-hidden",
+);
+
+const FAQ_SECTION_PADDING = "py-0";
+
 export default function FAQ() {
   return (
-    <SectionShell
-      intro={
-        <SectionIntro id="faq-heading" variant="headline" className="text-center">
-          Frequently asked questions
-        </SectionIntro>
-      }
-    >
-      <ScrollReveal>
-        <div className="mx-auto w-full max-w-3xl">
+    <div className={cn(PAGE_GRID_ALIGNED_FRAME, FAQ_SECTION_PADDING)}>
+      <div
+        className={cn(
+          "relative grid w-full min-w-0 grid-cols-1",
+          "lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] lg:items-stretch",
+        )}
+      >
+        <div
+          className={cn(
+            "w-full lg:col-start-1 lg:row-start-1 lg:flex lg:min-h-0 lg:items-center lg:self-stretch lg:pr-12 xl:pr-16",
+          )}
+        >
+          <ScrollReveal variant="fadeIn" className="w-full">
+            <h2
+              id="faq-heading"
+              className={cn(
+                "m-0 flex flex-col leading-[1.08] lg:translate-x-10 xl:translate-x-12",
+                SECTION_HEADLINE,
+              )}
+            >
+              <span className="block">Frequently</span>
+              <span className="block">asked</span>
+              <span className="block">questions</span>
+            </h2>
+          </ScrollReveal>
+        </div>
+
+        <div
+          aria-hidden
+          className="hidden w-px shrink-0 self-stretch bg-[rgba(255,255,255,0.08)] lg:col-start-2 lg:row-start-1 lg:block lg:justify-self-center"
+        />
+
+        <ScrollReveal className="min-w-0 w-full lg:col-start-3 lg:row-start-1 lg:self-stretch">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={faq.question} value={`faq-${index}`}>
-                <AccordionTrigger icon={Plus}>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
+              <AccordionItem key={faq.question} value={`faq-${index}`} className={FAQ_ITEM_CLASS}>
+                <AccordionTrigger
+                  icon={Plus}
+                  className="relative z-[1] px-6 py-5 text-base sm:px-8 sm:py-6 sm:text-lg lg:px-10 xl:px-12"
+                >
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="relative z-[1] px-6 sm:px-8 lg:px-10 xl:px-12">
+                  {faq.answer}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
-      </ScrollReveal>
-    </SectionShell>
+        </ScrollReveal>
+      </div>
+    </div>
   );
 }
