@@ -40,7 +40,11 @@ export default function Home() {
           <PageGrid />
           <section
             id="home"
-            className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}
+            data-page-grid-hide-verticals
+            className={cn(
+              NAV_SCROLL_OFFSET_CLASS,
+              "relative z-[1] overflow-x-clip",
+            )}
           >
             <Hero />
           </section>

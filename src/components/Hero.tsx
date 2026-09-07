@@ -1,8 +1,7 @@
 "use client";
 
 import { Icon } from "@/components/shared/Icon";
-import HeroPhotoMarquee from "@/src/components/HeroPhotoMarquee";
-import SectionShell from "@/src/components/SectionShell";
+import HeroOrbitingPhotos from "@/src/components/HeroOrbitingPhotos";
 import {
   ScrollRevealGroup,
   ScrollRevealItem,
@@ -16,8 +15,13 @@ const HERO_CTA_WITH_ICON = cn(HERO_CTA, "gap-2");
 
 export default function Hero() {
   return (
-    <SectionShell className="relative z-[1]">
-      <ScrollRevealGroup className="mx-auto max-w-3xl text-center" stagger={0.12}>
+    <div className="relative flex min-h-[calc(100svh-3.75rem)] w-full flex-col items-center justify-center overflow-x-clip overflow-y-hidden sm:min-h-[calc(100svh-4rem)]">
+      <HeroOrbitingPhotos />
+
+      <ScrollRevealGroup
+        className="relative z-10 mx-auto max-w-3xl px-6 text-center"
+        stagger={0.12}
+      >
         <ScrollRevealItem>
           <h1 className="font-display text-5xl font-[550] leading-tight tracking-tight text-balance text-white sm:text-6xl lg:text-[4rem]">
             From Raw Photo to
@@ -28,7 +32,7 @@ export default function Hero() {
 
         <ScrollRevealItem>
           <p className="mt-5 text-lg leading-relaxed text-white/40">
-                Agentic photo editing platform
+            Agentic photo editing platform
           </p>
         </ScrollRevealItem>
 
@@ -61,8 +65,6 @@ export default function Hero() {
           </div>
         </ScrollRevealItem>
       </ScrollRevealGroup>
-
-      <HeroPhotoMarquee className="mt-3 sm:mt-3.5 lg:mt-4" />
-    </SectionShell>
+    </div>
   );
 }

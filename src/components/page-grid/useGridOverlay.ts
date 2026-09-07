@@ -9,6 +9,7 @@ import {
 
 import {
   type GridGeometry,
+  type VerticalSkipRange,
   isValidGeometry,
   measureGridColumns,
   PAGE_GRID_LEFT_VAR,
@@ -21,6 +22,8 @@ type UseGridOverlayOptions = {
   publishColumnVars?: boolean;
   /** Return horizontal guide Y positions relative to the bounds element. */
   getBoundaryYs?: (bounds: HTMLElement) => number[];
+  /** Omit vertical grid rails within these Y ranges (relative to bounds). */
+  getVerticalSkipRanges?: (bounds: HTMLElement) => VerticalSkipRange[];
 };
 
 function geometriesEqual(a: GridGeometry, b: GridGeometry): boolean {
@@ -36,7 +39,21 @@ function geometriesEqual(a: GridGeometry, b: GridGeometry): boolean {
     return false;
   }
 
-  return a.boundaryYs.every((y, index) => y === b.boundaryYs[index]);
+  if (!a.boundaryYs.every((y, index) => y === b.boundaryYs[index])) {
+    return false;
+  }
+
+  const aSkips = a.verticalSkipRanges ?? [];
+  const bSkips = b.verticalSkipRanges ?? [];
+
+  if (aSkips.length !== bSkips.length) {
+    return false;
+  }
+
+  return aSkips.every(
+    (range, index) =>
+      range.top === bSkips[index]?.top && range.bottom === bSkips[index]?.bottom,
+  );
 }
 
 function columnsVarsChanged(
@@ -55,6 +72,7 @@ function columnsVarsChanged(
 export function useGridOverlay({
   publishColumnVars = false,
   getBoundaryYs,
+  getVerticalSkipRanges,
 }: UseGridOverlayOptions = {}) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -62,9 +80,11 @@ export function useGridOverlay({
 
   const publishColumnVarsRef = useRef(publishColumnVars);
   const getBoundaryYsRef = useRef(getBoundaryYs);
+  const getVerticalSkipRangesRef = useRef(getVerticalSkipRanges);
 
   publishColumnVarsRef.current = publishColumnVars;
   getBoundaryYsRef.current = getBoundaryYs;
+  getVerticalSkipRangesRef.current = getVerticalSkipRanges;
 
   const measure = useCallback(() => {
     const overlay = overlayRef.current;
@@ -99,12 +119,14 @@ export function useGridOverlay({
     }
 
     const boundaryYs = getBoundaryYsRef.current?.(bounds) ?? [];
+    const verticalSkipRanges = getVerticalSkipRangesRef.current?.(bounds) ?? [];
     const boundsHeight = bounds.getBoundingClientRect().height;
 
     const nextGeometry: GridGeometry = {
       ...columns,
       boundaryYs,
       boundsHeight,
+      verticalSkipRanges,
     };
 
     if (!isValidGeometry(nextGeometry)) {

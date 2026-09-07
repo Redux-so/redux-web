@@ -70,6 +70,15 @@
   --shadow-btn-primary-active:
     0 0 0 1px rgba(255, 255, 255, 0.06),
     inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  --animate-orbit: orbit calc(var(--duration)*1s) linear infinite;
+  @keyframes orbit {
+  0% {
+    transform: translate(-50%, -50%) rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+    }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
+    }
+  }
 }
 
 :root {
@@ -316,6 +325,10 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-hero-photo-marquee {
+    animation: none;
+  }
+
+  .animate-orbit {
     animation: none;
   }
 

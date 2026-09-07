@@ -19,9 +19,15 @@ export type GridColumns = {
   rightX: number;
 };
 
+export type VerticalSkipRange = {
+  bottom: number;
+  top: number;
+};
+
 export type GridGeometry = GridColumns & {
   boundaryYs: number[];
   boundsHeight: number;
+  verticalSkipRanges?: VerticalSkipRange[];
 };
 
 export function getGridOffsetPx(): number {
@@ -91,30 +97,70 @@ type GridOverlayLinesProps = {
   showVerticals?: boolean;
 };
 
+function getVerticalLineSegments(
+  boundsHeight: number,
+  skipRanges: VerticalSkipRange[],
+): Array<{ height: number; top: number }> {
+  if (skipRanges.length === 0) {
+    return [{ top: 0, height: boundsHeight }];
+  }
+
+  const segments: Array<{ height: number; top: number }> = [];
+  let cursor = 0;
+
+  for (const skip of [...skipRanges].sort((a, b) => a.top - b.top)) {
+    if (skip.top > cursor) {
+      segments.push({ top: cursor, height: skip.top - cursor });
+    }
+    cursor = Math.max(cursor, skip.bottom);
+  }
+
+  if (cursor < boundsHeight) {
+    segments.push({ top: cursor, height: boundsHeight - cursor });
+  }
+
+  return segments;
+}
+
 export function GridOverlayLines({
   geometry,
   showVerticals = true,
 }: GridOverlayLinesProps) {
+  const verticalSegments = getVerticalLineSegments(
+    geometry.boundsHeight,
+    geometry.verticalSkipRanges ?? [],
+  );
+
   return (
     <>
       {showVerticals ? (
         <>
-          <div
-            className="absolute inset-y-0"
-            style={{
-              left: geometry.leftX,
-              width: GRID_LINE_WIDTH_PX,
-              backgroundColor: GRID_LINE_COLOR,
-            }}
-          />
-          <div
-            className="absolute inset-y-0"
-            style={{
-              left: geometry.rightX,
-              width: GRID_LINE_WIDTH_PX,
-              backgroundColor: GRID_LINE_COLOR,
-            }}
-          />
+          {verticalSegments.map((segment, index) => (
+            <div
+              key={`left-${index}`}
+              className="absolute"
+              style={{
+                top: segment.top,
+                left: geometry.leftX,
+                height: segment.height,
+                width: GRID_LINE_WIDTH_PX,
+                backgroundColor: GRID_LINE_COLOR,
+              }}
+            />
+          ))}
+          {verticalSegments.map((segment, index) => (
+            <div
+              key={`right-${index}`}
+              className="absolute"
+              style={{
+                top: segment.top,
+                left: geometry.rightX,
+                height: segment.height,
+                width: GRID_LINE_WIDTH_PX,
+                backgroundColor: GRID_LINE_COLOR,
+              }}
+            />
+          ))}
         </>
       ) : null}
 

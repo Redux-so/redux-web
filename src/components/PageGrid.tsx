@@ -39,9 +39,25 @@ export default function PageGrid({ className }: PageGridProps) {
     return boundaryYs;
   }, []);
 
+  const getVerticalSkipRanges = useCallback((bounds: HTMLElement) => {
+    const boundsRect = bounds.getBoundingClientRect();
+
+    return Array.from(
+      bounds.querySelectorAll<HTMLElement>("[data-page-grid-hide-verticals]"),
+    ).map((section) => {
+      const sectionRect = section.getBoundingClientRect();
+
+      return {
+        top: sectionRect.top - boundsRect.top,
+        bottom: sectionRect.bottom - boundsRect.top,
+      };
+    });
+  }, []);
+
   const { overlayRef, sentinelRef, geometry } = useGridOverlay({
     publishColumnVars: true,
     getBoundaryYs,
+    getVerticalSkipRanges,
   });
 
   return (
