@@ -83,7 +83,7 @@ export default function Footer() {
         <div data-footer-grid-divider className="relative">
           <div className="flex flex-col gap-4 pt-6 pb-3 sm:flex-row sm:items-center sm:justify-between sm:pb-4">
             <p className="text-sm text-white/36">
-              © Redux 2026. All rights reserved.
+              © 2026 Redux
             </p>
             <div className="flex shrink-0 items-center gap-4 sm:gap-5">
               {socialLinks.map((social) => (
