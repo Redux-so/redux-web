@@ -178,7 +178,7 @@ export default function Navbar() {
           </a>
           <button
             type="button"
-            className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-lg text-white md:hidden"
+            className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-md text-white md:hidden"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((open) => !open)}
@@ -263,7 +263,7 @@ export default function Navbar() {
                   <motion.div key={link.href} variants={itemVariants}>
                     <a
                       href={link.href}
-                      className="block rounded-lg px-3 py-2.5 text-[15px] font-medium text-white/55 transition-colors hover:bg-white/5 hover:text-white"
+                      className="block rounded-md px-3 py-2.5 text-[15px] font-medium text-white/55 transition-colors hover:bg-white/5 hover:text-white"
                       onClick={closeMobileMenu}
                     >
                       {link.label}

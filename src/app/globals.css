@@ -103,6 +103,8 @@
   --charcoal-inset-bottom: rgba(0, 0, 0, 0.3);
   --charcoal-outer-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 
+  --cta-radius: 0.375rem;
+
   /* Feature card tokens : darker grey than charcoal CTA */
   --card-bg-top: #161616;
   --card-bg-bottom: #0f0f0f;
@@ -111,7 +113,7 @@
   --card-inset-highlight: rgba(255, 255, 255, 0.1);
   --card-inset-shadow: rgba(0, 0, 0, 0.4);
   --card-shadow-outer: 0 4px 10px rgba(0, 0, 0, 0.45);
-  --card-radius: 1.125rem;
+  --card-radius: var(--cta-radius);
 
   /* Vertical fade where page grid rails meet the top/bottom of the scroll sheet. */
   --page-grid-edge-fade: 7.5rem;
@@ -120,7 +122,7 @@
   --panel-border: rgba(255, 255, 255, 0.06);
   --panel-inset-highlight: rgba(255, 255, 255, 0.08);
   --panel-inset-shadow: rgba(0, 0, 0, 0.45);
-  --panel-radius: 0.75rem;
+  --panel-radius: var(--cta-radius);
 
   --chip-bg-top: #161616;
   --chip-bg-bottom: #0f0f0f;
@@ -128,7 +130,7 @@
   --chip-inset-highlight: rgba(255, 255, 255, 0.1);
   --chip-inset-shadow: rgba(0, 0, 0, 0.4);
   --chip-shadow-outer: 0 4px 10px rgba(0, 0, 0, 0.45);
-  --chip-radius: 0.75rem;
+  --chip-radius: var(--cta-radius);
 
   --chip-active-border: rgba(255, 255, 255, 0.6);
   --chip-active-glow: 0 0 0 1px rgba(255, 255, 255, 0.15);
@@ -348,7 +350,7 @@ html {
     min-height: 2.75rem;
     max-height: 2.75rem;
     padding: 0 24px;
-    border-radius: 0.375rem;
+    border-radius: var(--cta-radius);
     color: #fff;
     font-size: 16px;
     font-weight: 500;

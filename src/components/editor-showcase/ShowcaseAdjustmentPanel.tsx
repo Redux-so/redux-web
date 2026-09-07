@@ -114,7 +114,7 @@ function RailBtn({
       title={title}
       aria-pressed={active}
       className={[
-        "flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-xl border transition-colors",
+        "flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-md border transition-colors",
         active ? `${SURFACE_BTN_ACTIVE} !text-white` : SURFACE_BTN_IDLE,
       ].join(" ")}
     >
@@ -139,7 +139,7 @@ function RailLink({
       aria-label={title}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#121212] text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white"
+      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-[#121212] text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white"
     >
       {children}
     </a>
@@ -240,7 +240,7 @@ export default function ShowcaseAdjustmentPanel({
           <button
             type="button"
             aria-label="Account menu"
-            className="flex h-12 w-12 shrink-0 cursor-default items-center justify-center rounded-xl border border-[#121212] text-white/40 transition-colors hover:bg-[#1d1d1d] hover:text-white"
+            className="flex h-12 w-12 shrink-0 cursor-default items-center justify-center rounded-md border border-[#121212] text-white/40 transition-colors hover:bg-[#1d1d1d] hover:text-white"
           >
             <div className={`flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full ${SURFACE_BORDER} bg-[#1d1d1d] text-[13px] font-medium uppercase text-white`}>
               JD
@@ -253,7 +253,7 @@ export default function ShowcaseAdjustmentPanel({
         className={[
           "flex h-full min-w-0 shrink-0 flex-col overflow-hidden bg-[#121212] transition-[width] duration-200 ease-out",
           activeSection
-            ? `w-[360px] rounded-r-2xl border-r ${SURFACE_BORDER}`
+            ? `w-[360px] rounded-r-md border-r ${SURFACE_BORDER}`
             : "w-0 border-r-0",
         ].join(" ")}
       >
@@ -404,7 +404,7 @@ export default function ShowcaseAdjustmentPanel({
                       onClick={() => setShowResize((v) => !v)}
                     />
                     {showResize && (
-                      <div className={`flex flex-col gap-3 rounded-xl border ${SURFACE_BORDER} bg-[#1d1d1d] p-3`}>
+                      <div className={`flex flex-col gap-3 rounded-md border ${SURFACE_BORDER} bg-[#1d1d1d] p-3`}>
                         <div className="flex items-center gap-2">
                           <div className="flex flex-1 flex-col gap-1">
                             <label className="text-[11px] font-medium text-[#555555]">
@@ -413,7 +413,7 @@ export default function ShowcaseAdjustmentPanel({
                             <input
                               readOnly
                               value={2788}
-                              className={`h-[30px] w-full rounded-lg border bg-[#1d1d1d] px-2 text-[12px] text-white outline-none ${SURFACE_BORDER} ${PRODUCT_BRAND_FOCUS_RING_CLASS}`}
+                              className={`h-[30px] w-full rounded-md border bg-[#1d1d1d] px-2 text-[12px] text-white outline-none ${SURFACE_BORDER} ${PRODUCT_BRAND_FOCUS_RING_CLASS}`}
                             />
                           </div>
                           <button
@@ -430,7 +430,7 @@ export default function ShowcaseAdjustmentPanel({
                             <input
                               readOnly
                               value={3717}
-                              className={`h-[30px] w-full rounded-lg border bg-[#1d1d1d] px-2 text-[12px] text-white outline-none ${SURFACE_BORDER} ${PRODUCT_BRAND_FOCUS_RING_CLASS}`}
+                              className={`h-[30px] w-full rounded-md border bg-[#1d1d1d] px-2 text-[12px] text-white outline-none ${SURFACE_BORDER} ${PRODUCT_BRAND_FOCUS_RING_CLASS}`}
                             />
                           </div>
                         </div>

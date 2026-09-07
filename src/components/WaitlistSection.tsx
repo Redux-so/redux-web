@@ -126,7 +126,7 @@ export default function WaitlistSection() {
                 placeholder="you@example.com"
                 required
                 tabIndex={formState === "idle" ? 0 : -1}
-                className="h-10 w-full rounded-lg border border-brand-border bg-brand-surface px-4 text-sm text-white placeholder:text-white/28 outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/30"
+                className="h-10 w-full rounded-md border border-brand-border bg-brand-surface px-4 text-sm text-white placeholder:text-white/28 outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/30"
               />
               {error ? (
                 <p className="mt-2 text-left text-sm text-red-400">{error}</p>

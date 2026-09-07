@@ -38,7 +38,7 @@ export default function LibraryShowcaseSidebar({
 }: LibraryShowcaseSidebarProps) {
   return (
     <aside
-      className={`flex h-full shrink-0 flex-col overflow-hidden rounded-r-2xl border-r ${LIBRARY_PANEL_SURFACE}`}
+      className={`flex h-full shrink-0 flex-col overflow-hidden rounded-r-md border-r ${LIBRARY_PANEL_SURFACE}`}
       style={{ width: LIBRARY_SHOWCASE_SIDEBAR_WIDTH }}
     >
       <div className="shrink-0">

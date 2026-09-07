@@ -222,7 +222,7 @@ export default function ShowcaseChatPanel({
     <div
       className={[
         "flex h-full min-w-0 shrink-0 flex-col overflow-hidden transition-[width] duration-200 ease-out",
-        `rounded-l-2xl border-l ${SURFACE_BORDER} ${SURFACE_BG_PANEL}`,
+        `rounded-l-md border-l ${SURFACE_BORDER} ${SURFACE_BG_PANEL}`,
       ].join(" ")}
       style={{
         width: collapsed ? 44 : SHOWCASE_CHAT_PANEL_WIDTH,
@@ -297,7 +297,7 @@ export default function ShowcaseChatPanel({
                               width={CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX}
                               height={100}
                               unoptimized
-                              className="max-h-[100px] rounded-lg border border-[#212121] object-cover"
+                              className="max-h-[100px] rounded-md border border-[#212121] object-cover"
                               style={{
                                 maxWidth: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
                               }}
@@ -400,7 +400,7 @@ export default function ShowcaseChatPanel({
 
           <div className={`shrink-0 pb-4 pt-2 ${CHAT_PANEL_GUTTER_CLASS}`}>
             <div
-              className={`overflow-hidden rounded-xl border-2 bg-[#1d1d1d] transition-colors ${inputFocused ? PRODUCT_BRAND_BORDER_FOCUS_CLASS : "border-[#262626]"} ${CHAT_SURFACE_SHADOW}`}
+              className={`overflow-hidden rounded-md border-2 bg-[#1d1d1d] transition-colors ${inputFocused ? PRODUCT_BRAND_BORDER_FOCUS_CLASS : "border-[#262626]"} ${CHAT_SURFACE_SHADOW}`}
             >
               <div className="flex min-h-[76px] items-start px-4 pb-3 pt-3">
                 <div className="flex w-full items-center gap-3.5">

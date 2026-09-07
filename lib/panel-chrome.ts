@@ -25,7 +25,7 @@ export const CHAT_SURFACE_SHADOW =
 
 /** Assistant message bubble. */
 export const CHAT_ASSISTANT_BUBBLE =
-  "rounded-lg px-3 py-2.5 text-[14px] bg-[#1d1d1d] text-[#e5e5e5]";
+  "rounded-md px-3 py-2.5 text-[14px] bg-[#1d1d1d] text-[#e5e5e5]";
 
 /** User message plain text (no bubble). */
 export const CHAT_USER_MESSAGE_TEXT =
