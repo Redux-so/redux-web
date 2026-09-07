@@ -10,9 +10,12 @@ import {
   SHOWCASE_OUTER_FRAME,
 } from "./showcase-layout";
 
+/** Render the editor window slightly narrower than the page column — centered via mx-auto. */
+const SHOWCASE_WIDTH_RATIO = 0.97;
+
 function computeScale(containerWidth: number) {
   if (containerWidth === 0) return 1;
-  return containerWidth / SHOWCASE_DESIGN_WIDTH;
+  return (containerWidth / SHOWCASE_DESIGN_WIDTH) * SHOWCASE_WIDTH_RATIO;
 }
 
 export default function EditorShowcaseScaler() {
