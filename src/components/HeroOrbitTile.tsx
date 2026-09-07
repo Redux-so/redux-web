@@ -32,7 +32,7 @@ export default function HeroOrbitTile({
           unoptimized
           className="object-cover"
           style={{ borderRadius: TILE_RADIUS_PX }}
-          sizes="96px"
+          sizes="(max-width: 640px) 96px, 120px"
           draggable={false}
         />
       ) : (

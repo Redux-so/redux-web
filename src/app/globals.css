@@ -323,6 +323,38 @@ html {
   opacity: 1;
 }
 
+/* Dark focus pocket over orbit tiles behind hero copy. */
+.hero-orbit-center-vignette {
+  width: 16rem;
+  height: 12rem;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    rgb(10 10 10 / 1) 0%,
+    rgb(10 10 10 / 0.92) 42%,
+    rgb(10 10 10 / 0.58) 68%,
+    transparent 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-orbit-center-vignette {
+    width: 20rem;
+    height: 14rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-orbit-center-vignette {
+    width: 24rem;
+    height: 17rem;
+  }
+}
+
+.hero-orbit-parallax {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-hero-photo-marquee {
     animation: none;
