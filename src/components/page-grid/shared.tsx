@@ -13,6 +13,7 @@ export const GRID_HORIZONTAL_FULL_BLEED_CLASS =
 export const PAGE_GRID_LEFT_VAR = "--page-grid-left";
 export const PAGE_GRID_WIDTH_VAR = "--page-grid-width";
 export const PAGE_GRID_OVERLAY_FADE_CLASS = "page-grid-overlay-fade";
+export const PAGE_GRID_OVERLAY_LINE_CLASS = "page-grid-overlay-line";
 
 export type GridColumns = {
   leftX: number;
@@ -138,7 +139,7 @@ export function GridOverlayLines({
           {verticalSegments.map((segment, index) => (
             <div
               key={`left-${index}`}
-              className="absolute"
+              className={cn("absolute", PAGE_GRID_OVERLAY_LINE_CLASS)}
               style={{
                 top: segment.top,
                 left: geometry.leftX,
@@ -151,7 +152,7 @@ export function GridOverlayLines({
           {verticalSegments.map((segment, index) => (
             <div
               key={`right-${index}`}
-              className="absolute"
+              className={cn("absolute", PAGE_GRID_OVERLAY_LINE_CLASS)}
               style={{
                 top: segment.top,
                 left: geometry.rightX,
@@ -167,7 +168,7 @@ export function GridOverlayLines({
       {geometry.boundaryYs.map((y, index) => (
         <div
           key={`boundary-${index}`}
-          className={cn(GRID_HORIZONTAL_FULL_BLEED_CLASS)}
+          className={cn(GRID_HORIZONTAL_FULL_BLEED_CLASS, PAGE_GRID_OVERLAY_LINE_CLASS)}
           style={{
             top: y,
             height: GRID_LINE_WIDTH_PX,

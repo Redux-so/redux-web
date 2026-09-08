@@ -20,7 +20,10 @@ const SECTION_BASE = cn("relative z-[1]", SECTION_DIVIDE, SECTION_VERTICAL_PADDI
 
 export default function Home() {
   return (
-    <div className="min-h-full bg-[#040404]" data-page-grid-shell>
+    <div
+      className="marketing-resize-smooth min-h-full bg-[#040404]"
+      data-page-grid-shell
+    >
       <EditShowcasePreload />
       <Navbar />
 

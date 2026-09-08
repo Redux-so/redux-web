@@ -59,7 +59,7 @@ export default function LibraryShowcaseCropFrame({
     >
       <div className="pointer-events-none relative h-full w-full overflow-hidden">
         <div
-          className="absolute overflow-hidden"
+          className="showcase-crop-layout absolute overflow-hidden"
           style={{
             width: layout.scaledWidth,
             height: layout.scaledHeight,
@@ -68,7 +68,7 @@ export default function LibraryShowcaseCropFrame({
           }}
         >
           <div
-            className="origin-top-left will-change-transform"
+            className="showcase-resize-smooth-scale origin-top-left will-change-transform"
             style={{
               width: LIBRARY_SHOWCASE_DESIGN_WIDTH,
               height: LIBRARY_SHOWCASE_DESIGN_HEIGHT,

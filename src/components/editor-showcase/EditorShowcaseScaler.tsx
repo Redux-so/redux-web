@@ -71,7 +71,7 @@ export default function EditorShowcaseScaler({
       >
         <div className={SHOWCASE_INNER_CLIP}>
           <div
-            className="origin-top-left will-change-transform"
+            className="showcase-resize-smooth-scale origin-top-left will-change-transform"
             style={{
               width: SHOWCASE_DESIGN_WIDTH,
               height: SHOWCASE_DESIGN_HEIGHT,

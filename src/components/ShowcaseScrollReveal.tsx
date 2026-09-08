@@ -265,6 +265,7 @@ export default function ShowcaseScrollReveal({
     <div ref={contentRef} className="relative flex w-full min-w-0 justify-center">
       <motion.div
         className="relative w-full min-w-0 max-w-full origin-center will-change-transform"
+        data-scroll-motion=""
         style={{ scale, y, opacity }}
       >
         {children}

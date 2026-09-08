@@ -63,7 +63,7 @@ function FaqHeading({ className }: { className?: string }) {
         id="faq-heading"
         className={cn(
           "relative z-[2] m-0 font-display tracking-tight text-white",
-          "text-center text-2xl leading-[1.08] sm:text-3xl max-lg:whitespace-nowrap",
+          "text-center text-3xl leading-[1.08] sm:text-4xl max-lg:whitespace-nowrap",
           "lg:flex lg:flex-col lg:text-left lg:text-[2.75rem] lg:leading-[1.15]",
         )}
       >

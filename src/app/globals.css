@@ -196,6 +196,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Smooth layout reflow when crossing responsive breakpoints or resizing. */
+  --layout-resize-duration: 280ms;
+  --layout-resize-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .dark {
@@ -1431,6 +1435,78 @@ html {
 
 .editor-showcase .showcase-chat-messages::-webkit-scrollbar {
   display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-page-grid-shell].marketing-resize-smooth [data-page-grid-root] {
+    transition-property: border-radius;
+    transition-duration: var(--layout-resize-duration);
+    transition-timing-function: var(--layout-resize-ease);
+  }
+
+  [data-page-grid-shell].marketing-resize-smooth
+    :where(
+      nav,
+      nav a,
+      nav button,
+      footer,
+      main,
+      main section,
+      main section div,
+      main :where(h1, h2, h3, h4, p, a, button, label, input, textarea),
+      .ui-card,
+      .showcase-frame,
+      .hero-pill-cta,
+      .faq-heading-glow,
+      .page-grid-overlay-line
+    ):not(
+      :is(
+        [data-scroll-motion],
+        [data-scroll-motion] *,
+        .editor-showcase,
+        .editor-showcase *,
+        .library-showcase,
+        .library-showcase *,
+        [data-slot="accordion-content"],
+        [data-slot="accordion-content"] *,
+        [class*="animate-marquee"],
+        [class*="animate-marquee"] *,
+        .animate-orbit,
+        .animate-orbit *
+      )
+    ) {
+    transition-property:
+      font-size,
+      line-height,
+      letter-spacing,
+      padding,
+      margin,
+      gap,
+      row-gap,
+      column-gap,
+      width,
+      max-width,
+      min-width,
+      height,
+      max-height,
+      min-height,
+      flex-basis,
+      border-radius,
+      top,
+      left,
+      right,
+      bottom;
+    transition-duration: var(--layout-resize-duration);
+    transition-timing-function: var(--layout-resize-ease);
+  }
+
+  [data-showcase-scaler-frame],
+  .showcase-crop-layout,
+  .showcase-resize-smooth-scale {
+    transition-property: width, height, transform, left, top;
+    transition-duration: var(--layout-resize-duration);
+    transition-timing-function: var(--layout-resize-ease);
+  }
 }
 
 @layer base {

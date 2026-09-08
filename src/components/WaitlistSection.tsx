@@ -93,28 +93,28 @@ export default function WaitlistSection() {
           className="relative z-20 mx-auto w-full max-w-xl text-center"
           stagger={0.12}
         >
-          <ScrollRevealItem>
+          <ScrollRevealItem className="w-full">
             <h2
               className={cn(
-                "m-0 font-display text-5xl font-[550] leading-[1.12] tracking-tight text-white sm:text-6xl lg:text-[3.75rem]",
+                "m-0 text-balance font-display text-5xl font-[550] leading-[1.12] tracking-tight text-white sm:text-6xl lg:text-[3.75rem]",
               )}
             >
               Join the <span className={BRAND_HEADLINE_ACCENT_CLASS}>Waitlist</span>
             </h2>
           </ScrollRevealItem>
 
-          <ScrollRevealItem>
-            <p className="mt-5 text-base leading-relaxed whitespace-nowrap text-white/55 sm:text-lg">
+          <ScrollRevealItem className="w-full">
+            <p className="mt-5 text-pretty text-base leading-relaxed text-white/55 sm:text-lg lg:whitespace-nowrap">
               Get early access when we launch, plus join our founding community today.
             </p>
           </ScrollRevealItem>
 
-          <div className="relative mx-auto mt-10 w-full max-w-lg">
+          <ScrollRevealItem className="relative mt-10 flex w-full flex-col items-center">
             <form
               onSubmit={handleSubmit}
               aria-hidden={formState !== "idle"}
               className={cn(
-                "flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center",
+                "mx-auto flex w-fit max-w-full flex-row flex-nowrap items-center justify-center gap-2 sm:gap-4",
                 formState !== "idle" && "pointer-events-none invisible",
               )}
             >
@@ -128,7 +128,7 @@ export default function WaitlistSection() {
                 aria-hidden="true"
                 className="sr-only"
               />
-              <div className="mx-auto w-full max-w-[15rem] sm:mx-0 sm:w-[15rem] sm:shrink-0">
+              <div className="w-[min(100%,13rem)] shrink-0 sm:w-[15rem]">
                 <input
                   type="email"
                   name="email"
@@ -140,7 +140,7 @@ export default function WaitlistSection() {
                   className="hero-pill-input w-full"
                 />
                 {error ? (
-                  <p className="mt-2 text-left text-base text-red-400">{error}</p>
+                  <p className="mt-2 text-center text-base text-red-400">{error}</p>
                 ) : null}
               </div>
               <button
@@ -189,7 +189,7 @@ export default function WaitlistSection() {
                 </p>
               </motion.div>
             ) : null}
-          </div>
+          </ScrollRevealItem>
         </ScrollRevealGroup>
         </div>
       </div>

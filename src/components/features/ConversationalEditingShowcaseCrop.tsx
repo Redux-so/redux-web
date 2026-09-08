@@ -14,6 +14,7 @@ export default function ConversationalEditingShowcaseCrop() {
   return (
     <motion.div
       className="flex w-full flex-col items-center"
+      data-scroll-motion=""
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"
