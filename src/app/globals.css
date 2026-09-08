@@ -543,17 +543,17 @@ html {
   left: 50%;
   top: 50%;
   z-index: 0;
-  width: max(20rem, 240%);
-  height: max(16rem, 300%);
+  width: max(18rem, 210%);
+  height: max(14.5rem, 265%);
   transform: translate(-50%, -50%);
   pointer-events: none;
   background: radial-gradient(
-    ellipse 130% 110% at center,
+    ellipse 112% 96% at center,
     rgba(var(--accent-glow-rgb), var(--accent-glow-peak-opacity)) 0%,
-    rgba(var(--accent-glow-rgb), var(--accent-glow-mid-opacity)) 46%,
-    transparent 82%
+    rgba(var(--accent-glow-rgb), var(--accent-glow-mid-opacity)) 42%,
+    transparent 74%
   );
-  filter: blur(88px);
+  filter: blur(70px);
 }
 
 .faq-heading-dots {
@@ -561,10 +561,27 @@ html {
   left: 50%;
   top: 50%;
   z-index: 1;
-  width: max(20rem, 240%);
-  height: max(16rem, 300%);
+  width: max(18rem, 210%);
+  height: max(14.5rem, 265%);
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+.faq-heading-dots.dot-grid-texture--spotlight {
+  mask-image: radial-gradient(
+    ellipse 112% 96% at center,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.85) 34%,
+    rgb(0 0 0 / 0.35) 50%,
+    transparent 74%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 112% 96% at center,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.85) 34%,
+    rgb(0 0 0 / 0.35) 50%,
+    transparent 74%
+  );
 }
 
 /* Reusable dotted texture (waitlist card, etc.). */
