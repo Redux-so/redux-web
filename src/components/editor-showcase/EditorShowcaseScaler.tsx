@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import EditorShowcase from "./EditorShowcase";
 import {
@@ -10,8 +10,8 @@ import {
   SHOWCASE_OUTER_FRAME,
 } from "./showcase-layout";
 
-/** Render the editor window slightly narrower than the page column — centered via mx-auto. */
-const SHOWCASE_WIDTH_RATIO = 0.97;
+/** Fill the page column at full reveal — matches feature bento card width. */
+const SHOWCASE_WIDTH_RATIO = 1;
 
 function computeScale(containerWidth: number) {
   if (containerWidth === 0) return 1;
@@ -22,7 +22,7 @@ export default function EditorShowcaseScaler() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 

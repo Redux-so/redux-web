@@ -13,13 +13,15 @@ const REVEAL_START_Y_PX = 72;
 const REVEAL_START_OPACITY = 0.75;
 const REVEAL_START_SCALE_MOBILE = 0.48;
 const REVEAL_START_Y_PX_MOBILE = 56;
-/** Fully revealed scale — 1× matches the scaler frame size below. */
+/** Fully revealed scale — 1× fills the page column (same width as feature bentos). */
 const REVEAL_END_SCALE = 1;
 const REVEAL_END_SCALE_MOBILE = 1;
 /** Viewport ratio where reveal begins (showcase rising from hero). */
 const REVEAL_ENTER_VIEWPORT_RATIO = 0.92;
 /** Extra space below nav when the window counts as fully revealed. */
 const REVEAL_REST_TOP_GAP_PX = 24;
+/** Ignore layout measurements until the showcase has a stable height. */
+const MIN_MEASURE_HEIGHT_PX = 80;
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
@@ -44,6 +46,27 @@ function getRevealStartValues(): { endScale: number; scale: number; y: number } 
     endScale: isMobile ? REVEAL_END_SCALE_MOBILE : REVEAL_END_SCALE,
     y: isMobile ? REVEAL_START_Y_PX_MOBILE : REVEAL_START_Y_PX,
   };
+}
+
+function computeRevealProgress(
+  rectTop: number,
+  rectHeight: number,
+  viewportHeight: number,
+): number | null {
+  if (rectHeight < MIN_MEASURE_HEIGHT_PX) {
+    return null;
+  }
+
+  const navOffset = getNavOffsetPx();
+  const revealStartTop = viewportHeight * REVEAL_ENTER_VIEWPORT_RATIO;
+  const revealEndTop = Math.max(
+    navOffset + REVEAL_REST_TOP_GAP_PX,
+    viewportHeight - rectHeight - REVEAL_REST_TOP_GAP_PX,
+  );
+
+  const range = Math.max(revealStartTop - revealEndTop, 1);
+  const next = 1 - (rectTop - revealEndTop) / range;
+  return clamp(next, 0, 1);
 }
 
 type ShowcaseScrollRevealProps = {
@@ -79,37 +102,38 @@ export default function ShowcaseScrollReveal({
 
     const updateProgress = () => {
       const rect = content.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const navOffset = getNavOffsetPx();
-
-      const revealStartTop = viewportHeight * REVEAL_ENTER_VIEWPORT_RATIO;
-      const revealEndTop = Math.max(
-        navOffset + REVEAL_REST_TOP_GAP_PX,
-        viewportHeight - rect.height - REVEAL_REST_TOP_GAP_PX,
+      const next = computeRevealProgress(
+        rect.top,
+        rect.height,
+        window.innerHeight,
       );
 
-      if (revealStartTop <= revealEndTop) {
-        progress.set(rect.top <= revealEndTop ? 1 : 0);
-        return;
+      if (next !== null) {
+        progress.set(next);
       }
-
-      const next = 1 - (rect.top - revealEndTop) / (revealStartTop - revealEndTop);
-      progress.set(clamp(next, 0, 1));
     };
 
-    const onScrollOrResize = () => {
+    const scheduleUpdate = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(updateProgress);
     };
 
-    updateProgress();
-    window.addEventListener("scroll", onScrollOrResize, { passive: true });
-    window.addEventListener("resize", onScrollOrResize);
+    scheduleUpdate();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(updateProgress);
+    });
+
+    const resizeObserver = new ResizeObserver(scheduleUpdate);
+    resizeObserver.observe(content);
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 
     return () => {
       cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScrollOrResize);
-      window.removeEventListener("resize", onScrollOrResize);
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, [prefersReducedMotion, progress, startScale, endScale, startY]);
 
