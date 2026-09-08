@@ -29,12 +29,12 @@ export default function FeatureSmallCard({
   return (
     <article
       className={cn(
-        "flex h-full min-w-0 flex-col items-start justify-between gap-4 overflow-hidden p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6",
+        "flex h-full min-w-0 flex-row items-center justify-between gap-3 overflow-hidden p-5 sm:gap-6 sm:p-6",
         UI_CARD,
         className,
       )}
     >
-      <div className="flex min-w-0 flex-col gap-1.5">
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
           <h3 className="m-0 font-display text-base font-semibold tracking-tight text-balance text-white sm:text-lg">
             {headline}

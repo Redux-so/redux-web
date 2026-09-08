@@ -81,8 +81,8 @@ export default function Features() {
             trailing={
               <div className="relative flex shrink-0 items-center">
                 <div className="feature-collab-actions-glow" aria-hidden />
-                <div className="relative z-[1] w-full sm:min-w-[9.5rem] sm:max-w-[11.5rem]">
-                  <BeforeAfterSlider className="h-20 w-full" />
+                <div className="relative z-[1] w-[8.75rem] max-w-[10.5rem] shrink-0">
+                  <BeforeAfterSlider className="h-[4.5rem] w-full" />
                 </div>
               </div>
             }
