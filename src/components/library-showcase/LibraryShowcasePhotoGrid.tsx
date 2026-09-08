@@ -13,7 +13,18 @@ type LibraryShowcasePhotoGridProps = {
   scenarioKey: string;
   fillerImages: readonly LibraryShowcaseImage[];
   resultImages: readonly LibraryShowcaseImage[];
+  animated?: boolean;
 };
+
+function StaticGrid({ images }: { images: readonly LibraryShowcaseImage[] }) {
+  return (
+    <div className="grid grid-cols-5 gap-3">
+      {images.map((image) => (
+        <LibraryShowcasePhotoCard key={image.id} image={image} />
+      ))}
+    </div>
+  );
+}
 
 function AnimatedGrid({ images }: { images: readonly LibraryShowcaseImage[] }) {
   const prefersReducedMotion = useReducedMotion();
@@ -57,9 +68,11 @@ export default function LibraryShowcasePhotoGrid({
   scenarioKey,
   fillerImages,
   resultImages,
+  animated = false,
 }: LibraryShowcasePhotoGridProps) {
   const images = phase === "results" ? resultImages : fillerImages;
   const gridKey = phase === "results" ? `results-${scenarioKey}` : "filler";
+  const Grid = animated ? AnimatedGrid : StaticGrid;
 
   return (
     <div className="px-6 py-5">
@@ -70,7 +83,7 @@ export default function LibraryShowcasePhotoGrid({
       ) : (
         <p className="mb-3 text-[12px] font-semibold text-[#888888]">RECENT</p>
       )}
-      <AnimatedGrid images={images} key={gridKey} />
+      <Grid images={images} key={gridKey} />
     </div>
   );
 }

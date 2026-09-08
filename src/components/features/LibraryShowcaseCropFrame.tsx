@@ -15,12 +15,10 @@ import { SHOWCASE_INNER_CLIP } from "@/src/components/editor-showcase/showcase-l
 import { cn } from "@/lib/utils";
 
 type LibraryShowcaseCropFrameProps = {
-  animationActive?: boolean;
   ariaLabel: string;
 };
 
 export default function LibraryShowcaseCropFrame({
-  animationActive = false,
   ariaLabel,
 }: LibraryShowcaseCropFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -77,7 +75,7 @@ export default function LibraryShowcaseCropFrame({
               transform: `scale(${layout.scale})`,
             }}
           >
-            <LibraryShowcase demoMode animationActive={animationActive} />
+            <LibraryShowcase demoMode />
           </div>
         </div>
       </div>

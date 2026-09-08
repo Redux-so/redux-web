@@ -138,6 +138,7 @@ export default function LibraryShowcase({
             scenarioKey={scenarioKey}
             fillerImages={SHOWCASE_LIBRARY_FILLER}
             resultImages={resultImages}
+            animated={animationActive}
           />
         </div>
       </div>

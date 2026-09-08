@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
 import EditorShowcase from "./EditorShowcase";
+import ShowcaseScrollReveal from "@/src/components/ShowcaseScrollReveal";
 import {
   SHOWCASE_DESIGN_HEIGHT,
   SHOWCASE_DESIGN_WIDTH,
@@ -22,7 +23,14 @@ function readContainerScale(container: HTMLElement): number {
   return computeScale(container.getBoundingClientRect().width);
 }
 
-export default function EditorShowcaseScaler() {
+type EditorShowcaseScalerProps = {
+  /** Scroll-driven scale reveal — only for the main website showcase panel. */
+  scrollReveal?: boolean;
+};
+
+export default function EditorShowcaseScaler({
+  scrollReveal = false,
+}: EditorShowcaseScalerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -54,7 +62,7 @@ export default function EditorShowcaseScaler() {
   const scaledWidth = SHOWCASE_DESIGN_WIDTH * scale;
   const scaledHeight = SHOWCASE_DESIGN_HEIGHT * scale;
 
-  return (
+  const showcase = (
     <div ref={containerRef} className="min-w-0 w-full py-2">
       <div
         data-showcase-scaler-frame
@@ -76,4 +84,10 @@ export default function EditorShowcaseScaler() {
       </div>
     </div>
   );
+
+  if (scrollReveal) {
+    return <ShowcaseScrollReveal>{showcase}</ShowcaseScrollReveal>;
+  }
+
+  return showcase;
 }
