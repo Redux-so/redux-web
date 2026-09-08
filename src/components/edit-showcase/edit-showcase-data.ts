@@ -1,3 +1,5 @@
+import { BLANK_IMAGE_SRC } from "@/lib/blank-image";
+
 export type EditShowcasePhoto = {
   id: string;
   src: string;
@@ -7,56 +9,56 @@ export type EditShowcasePhoto = {
 export const EDIT_SHOWCASE_TOP_ROW: EditShowcasePhoto[] = [
   {
     id: "top-1",
-    src: "/edit-showcase/top/top-1.webp",
-    alt: "Edited coastal cliff landscape at golden hour",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "top-2",
-    src: "/edit-showcase/top/top-2.webp",
-    alt: "Edited mountain valley with moody sky",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "top-3",
-    src: "/edit-showcase/top/top-3.webp",
-    alt: "Edited forest landscape with warm light",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "top-4",
-    src: "/edit-showcase/top/top-4.webp",
-    alt: "Edited desert dunes at sunset",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "top-5",
-    src: "/edit-showcase/top/top-5.webp",
-    alt: "Edited lake reflection with mountain backdrop",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
 ];
 
 export const EDIT_SHOWCASE_BOTTOM_ROW: EditShowcasePhoto[] = [
   {
     id: "bottom-1",
-    src: "/edit-showcase/bottom/bottom-1.webp",
-    alt: "Edited urban skyline at dusk",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "bottom-2",
-    src: "/edit-showcase/bottom/bottom-2.webp",
-    alt: "Edited rolling hills under dramatic clouds",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "bottom-3",
-    src: "/edit-showcase/bottom/bottom-3.webp",
-    alt: "Edited tropical beach with turquoise water",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "bottom-4",
-    src: "/edit-showcase/bottom/bottom-4.webp",
-    alt: "Edited canyon landscape with layered rock formations",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "bottom-5",
-    src: "/edit-showcase/bottom/bottom-5.webp",
-    alt: "Edited snowy peak above cloud inversion",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
 ];
 

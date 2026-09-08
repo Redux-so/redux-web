@@ -5,7 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useMotionValue, useTransform, animate } from "framer-motion";
 
 import { Icon } from "@/components/shared/Icon";
+import BlankImagePlaceholder from "@/components/shared/BlankImagePlaceholder";
 import { BTN_PRIMARY_COMPACT } from "@/lib/button-styles";
+import { isBlankImageSrc } from "@/lib/blank-image";
 import {
   CHAT_ASSISTANT_BUBBLE,
   CHAT_AVATAR_SHELL,
@@ -214,17 +216,29 @@ export default function ShowcaseChatPanel({
                       <div className="flex min-w-0 flex-1 flex-col gap-1">
                         {msg.imagePreview ? (
                           <div>
-                            <Image
-                              src={msg.imagePreview}
-                              alt=""
-                              width={CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX}
-                              height={100}
-                              unoptimized
-                              className="max-h-[100px] rounded-lg border border-[#212121] object-cover"
-                              style={{
-                                maxWidth: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
-                              }}
-                            />
+                            {isBlankImageSrc(msg.imagePreview) ? (
+                              <BlankImagePlaceholder
+                                className="rounded-lg"
+                                iconSize={20}
+                                style={{
+                                  width: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
+                                  height: 100,
+                                  maxWidth: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
+                                }}
+                              />
+                            ) : (
+                              <Image
+                                src={msg.imagePreview}
+                                alt=""
+                                width={CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX}
+                                height={100}
+                                unoptimized
+                                className="max-h-[100px] rounded-lg border border-[#212121] object-cover"
+                                style={{
+                                  maxWidth: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
+                                }}
+                              />
+                            )}
                           </div>
                         ) : null}
                         <div

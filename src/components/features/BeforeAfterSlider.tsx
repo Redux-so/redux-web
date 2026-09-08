@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { Icon } from "@/components/shared/Icon";
 import { cn } from "@/lib/utils";
 
 type BeforeAfterSliderProps = {
@@ -90,7 +92,15 @@ export function BeforeAfterSlider({
         {afterSrc ? (
           <img src={afterSrc} alt="Enhanced" className="h-full w-full object-cover" />
         ) : (
-          <div className="h-full w-full bg-gradient-to-br from-neutral-700 to-neutral-800" />
+          <div className="flex h-full w-full items-center justify-center border border-white/[0.08] bg-[#2a2a2a]">
+            <Icon
+              name="Image01"
+              size={16}
+              strokeWidth={1.5}
+              className="text-white/35"
+              aria-hidden
+            />
+          </div>
         )}
       </div>
 
@@ -111,9 +121,17 @@ export function BeforeAfterSlider({
             />
           ) : (
             <div
-              className="h-full bg-neutral-900 grayscale contrast-75 brightness-75"
+              className="flex h-full items-center justify-center border border-white/[0.08] bg-[#2a2a2a] grayscale contrast-75 brightness-75"
               style={{ width: layerWidth }}
-            />
+            >
+              <Icon
+                name="Image01"
+                size={16}
+                strokeWidth={1.5}
+                className="text-white/35"
+                aria-hidden
+              />
+            </div>
           )}
         </div>
       </div>

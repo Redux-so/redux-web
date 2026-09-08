@@ -1,4 +1,6 @@
-export const SHOWCASE_FILENAME = "mount-fuji.jpg";
+import { BLANK_IMAGE_SRC } from "@/lib/blank-image";
+
+export const SHOWCASE_FILENAME = "placeholder-blank.svg";
 
 export const SHOWCASE_ADJUSTMENTS = {
   exposure: -12,
@@ -127,7 +129,7 @@ export const SHOWCASE_STYLE_MATCH_CHAT_MESSAGES: ShowcaseChatMessage[] = [
     role: "user",
     content:
       "Match the style of this reference and apply it to my photo on the canvas.",
-    imagePreview: "/features/style-match-reference.jpg",
+    imagePreview: BLANK_IMAGE_SRC,
   },
   {
     id: "sm-2",

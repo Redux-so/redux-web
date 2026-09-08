@@ -10,19 +10,6 @@ import HeroOrbitTile from "@/src/components/HeroOrbitTile";
 const INNER_TILE_COUNT = 7;
 const OUTER_TILE_COUNT = 8;
 
-const HERO_ORBIT_FILLER_IMAGES = [
-  "/hero-orbit/golden-gate.jpg",
-  "/hero-orbit/city-skyline.jpg",
-  "/hero-orbit/living-room.jpg",
-  "/hero-orbit/mount-fuji.jpg",
-  "/hero-orbit/mountain-sunset.jpg",
-  "/hero-orbit/temple-snow.jpg",
-  "/hero-orbit/sports-car.jpg",
-  "/hero-orbit/stadium.jpg",
-  "/hero-orbit/watch.jpg",
-  "/hero-orbit/product-tubes.jpg",
-] as const;
-
 const HERO_ORBIT_CLIP = "absolute inset-0 overflow-hidden";
 
 /** Extends into the nav spacer so tiles pass behind the translucent navbar. */
@@ -328,11 +315,7 @@ export default function HeroOrbitingPhotos() {
               style={{ borderRadius: ORBIT_TILE_RADIUS }}
             >
               {Array.from({ length: INNER_TILE_COUNT }, (_, index) => (
-                <HeroOrbitTile
-                  key={`hero-orbit-inner-${index}`}
-                  alt=""
-                  src={HERO_ORBIT_FILLER_IMAGES[index % HERO_ORBIT_FILLER_IMAGES.length]}
-                />
+                <HeroOrbitTile key={`hero-orbit-inner-${index}`} alt="" />
               ))}
             </OrbitingCircles>
 
@@ -345,16 +328,7 @@ export default function HeroOrbitingPhotos() {
               style={{ borderRadius: ORBIT_TILE_RADIUS }}
             >
               {Array.from({ length: OUTER_TILE_COUNT }, (_, index) => (
-                <HeroOrbitTile
-                  key={`hero-orbit-outer-${index}`}
-                  alt=""
-                  src={
-                    HERO_ORBIT_FILLER_IMAGES[
-                      (index + Math.ceil(HERO_ORBIT_FILLER_IMAGES.length / 2)) %
-                        HERO_ORBIT_FILLER_IMAGES.length
-                    ]
-                  }
-                />
+                <HeroOrbitTile key={`hero-orbit-outer-${index}`} alt="" />
               ))}
             </OrbitingCircles>
           </div>

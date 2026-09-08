@@ -1,3 +1,5 @@
+import { BLANK_IMAGE_SRC } from "@/lib/blank-image";
+
 export type LibraryShowcaseImage = {
   id: string;
   filename: string;
@@ -16,69 +18,69 @@ export type SmartSearchDemoScenario = {
 export const SHOWCASE_SKYLINE_RESULTS: LibraryShowcaseImage[] = [
   {
     id: "s1",
-    filename: "skyline-1.jpg",
-    src: "/features/smart-search/skyline-1.jpg",
-    alt: "Manhattan skyline with Empire State Building at golden hour",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "s2",
-    filename: "skyline-2.jpg",
-    src: "/features/smart-search/skyline-2.jpg",
-    alt: "Manhattan Bridge framed by brick buildings in Dumbo, Brooklyn",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "s3",
-    filename: "skyline-3.jpg",
-    src: "/features/smart-search/skyline-3.jpg",
-    alt: "Neon-lit Shibuya crossing at night, Tokyo",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "s4",
-    filename: "skyline-4.jpg",
-    src: "/features/smart-search/skyline-4.jpg",
-    alt: "Tokyo Tower illuminated above the city at dusk",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "s5",
-    filename: "skyline-5.jpg",
-    src: "/features/smart-search/skyline-5.jpg",
-    alt: "Motion-blurred pedestrians crossing an urban street at night",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
 ];
 
 export const SHOWCASE_MOUNTAIN_RESULTS: LibraryShowcaseImage[] = [
   {
     id: "m1",
-    filename: "filler-3.jpg",
-    src: "/features/smart-search/filler-3.jpg",
-    alt: "Snow-capped mountain peaks above a sea of clouds",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "m2",
-    filename: "filler-4.jpg",
-    src: "/features/smart-search/filler-4.jpg",
-    alt: "Mount Fuji reflected in a lake at twilight",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "m3",
-    filename: "filler-7.jpg",
-    src: "/features/smart-search/filler-7.jpg",
-    alt: "Scottish highlands valley with mist and sunset light",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "m4",
-    filename: "filler-2.jpg",
-    src: "/features/smart-search/filler-2.jpg",
-    alt: "Desert canyon with sandstone cliffs",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
 ];
 
 export const SHOWCASE_F1_RESULTS: LibraryShowcaseImage[] = [
   {
     id: "car1",
-    filename: "filler-6.jpg",
-    src: "/features/smart-search/filler-6.jpg",
-    alt: "Aston Martin Formula 1 racing car close-up",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
 ];
 
@@ -91,63 +93,63 @@ export const SHOWCASE_SEARCH_SCENARIOS: SmartSearchDemoScenario[] = [
 export const SHOWCASE_LIBRARY_FILLER: LibraryShowcaseImage[] = [
   {
     id: "f1",
-    filename: "filler-1.jpg",
-    src: "/features/smart-search/filler-1.jpg",
-    alt: "Full moon against a black sky",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f2",
-    filename: "filler-2.jpg",
-    src: "/features/smart-search/filler-2.jpg",
-    alt: "Desert canyon with sandstone cliffs",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f3",
-    filename: "filler-3.jpg",
-    src: "/features/smart-search/filler-3.jpg",
-    alt: "Snow-capped mountain peaks above a sea of clouds",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f4",
-    filename: "filler-4.jpg",
-    src: "/features/smart-search/filler-4.jpg",
-    alt: "Mount Fuji reflected in a lake at twilight",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f5",
-    filename: "filler-5.jpg",
-    src: "/features/smart-search/filler-5.jpg",
-    alt: "Coastal scene with concrete blocks at golden hour",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f6",
-    filename: "filler-6.jpg",
-    src: "/features/smart-search/filler-6.jpg",
-    alt: "Aston Martin Formula 1 racing car close-up",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f7",
-    filename: "filler-7.jpg",
-    src: "/features/smart-search/filler-7.jpg",
-    alt: "Scottish highlands valley with mist and sunset light",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f8",
-    filename: "filler-8.jpg",
-    src: "/features/smart-search/filler-8.jpg",
-    alt: "Secluded beach with cliffs and turquoise water",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f9",
-    filename: "filler-9.jpg",
-    src: "/features/smart-search/filler-9.jpg",
-    alt: "Minimal interior with open door and monstera plant",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
   {
     id: "f10",
-    filename: "filler-10.jpg",
-    src: "/features/smart-search/filler-10.jpg",
-    alt: "Cozy bedroom with neutral tones and soft natural light",
+    filename: "placeholder.svg",
+    src: BLANK_IMAGE_SRC,
+    alt: "",
   },
 ];
 

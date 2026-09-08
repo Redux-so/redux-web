@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Icon } from "@/components/shared/Icon";
+import BlankImagePlaceholder from "@/components/shared/BlankImagePlaceholder";
 import { cn } from "@/lib/utils";
 
 const TILE_RADIUS_PX = 6;
@@ -36,15 +36,11 @@ export default function HeroOrbitTile({
           draggable={false}
         />
       ) : (
-        <div className="flex size-full items-center justify-center">
-          <Icon
-            name="Image01"
-            size={16}
-            strokeWidth={1.5}
-            className="size-3 text-white/30"
-            aria-hidden
-          />
-        </div>
+        <BlankImagePlaceholder
+          className="size-full"
+          iconSize={16}
+          style={{ borderRadius: TILE_RADIUS_PX }}
+        />
       )}
     </div>
   );

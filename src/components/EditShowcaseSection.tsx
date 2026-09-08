@@ -13,10 +13,12 @@ import {
   type EditShowcasePhoto,
 } from "@/src/components/edit-showcase/edit-showcase-data";
 import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
+import BlankImagePlaceholder from "@/components/shared/BlankImagePlaceholder";
 import {
   GRID_LINE_COLOR,
   GRID_LINE_WIDTH_PX,
 } from "@/src/components/page-grid/shared";
+import { isBlankImageSrc } from "@/lib/blank-image";
 import SectionIntro from "@/src/components/SectionIntro";
 import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
 import {
@@ -53,7 +55,9 @@ function PhotoCard({
   isDimmed?: boolean;
   onActivate?: (cardKey: string) => void;
 }) {
-  const image = (
+  const image = isBlankImageSrc(photo.src) ? (
+    <BlankImagePlaceholder className="absolute inset-0 rounded-2xl" iconSize={24} />
+  ) : (
     <Image
       src={photo.src}
       alt={photo.alt}
