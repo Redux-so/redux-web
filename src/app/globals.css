@@ -532,11 +532,6 @@ html {
   backdrop-filter: blur(12px);
 }
 
-/* Orbit tiles may extend above the hero; only clip at the hero bottom edge. */
-.hero-orbit-clip {
-  clip-path: inset(-100vh 0 0 0);
-}
-
 .faq-heading-glow {
   isolation: isolate;
 }
