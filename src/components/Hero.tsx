@@ -9,7 +9,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const HERO_CTA =
-  "hero-pill-cta inline-flex h-11 min-h-11 max-h-11 items-center justify-center w-full min-w-0 shrink-0 box-border px-6 sm:w-auto no-underline leading-none";
+  "hero-pill-cta inline-flex h-11 min-h-11 max-h-11 items-center justify-center w-auto min-w-0 shrink-0 box-border px-4 sm:px-6 no-underline leading-none";
 
 const HERO_CTA_WITH_ICON = cn(HERO_CTA, "gap-2");
 
@@ -38,7 +38,7 @@ export default function Hero() {
           </ScrollRevealItem>
 
           <ScrollRevealItem className="mt-8 flex w-full justify-center px-0">
-            <div className="flex w-full max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-stretch sm:justify-center">
+            <div className="flex flex-row flex-nowrap items-center justify-center gap-2 sm:gap-3">
               <a
                 href="#waitlist"
                 className={cn(HERO_CTA, "hero-pill-cta--purple hero-pill-cta--shimmer")}
