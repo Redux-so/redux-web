@@ -45,9 +45,7 @@ const faqs = [
   },
 ] as const;
 
-const FAQ_ITEM_CLASS = cn(
-  "faq-accordion-cell contained-accent-glow relative overflow-hidden",
-);
+const FAQ_ITEM_CLASS = "faq-accordion-cell relative";
 
 /** Equal inset below the section seam and above the accordion on mobile/tablet. */
 const FAQ_MOBILE_HEADING_PAD = "pt-10 pb-10 sm:pt-12 sm:pb-12";
@@ -90,6 +88,7 @@ export default function FAQ() {
           className={cn(
             "flex w-full justify-center",
             FAQ_MOBILE_HEADING_PAD,
+            "max-lg:overflow-hidden",
             "lg:col-start-1 lg:row-start-1 lg:flex lg:min-h-0 lg:items-center lg:justify-start lg:self-stretch lg:overflow-hidden lg:py-0 lg:pr-12 xl:pr-16",
           )}
         >
@@ -106,17 +105,24 @@ export default function FAQ() {
             type="single"
             collapsible
             defaultValue="faq-0"
-            className="w-full border-t border-white/10"
+            className="w-full max-lg:border-t max-lg:border-white/10"
           >
             {faqs.map((faq, index) => (
-              <AccordionItem key={faq.question} value={`faq-${index}`} className={FAQ_ITEM_CLASS}>
+              <AccordionItem
+                key={faq.question}
+                value={`faq-${index}`}
+                className={FAQ_ITEM_CLASS}
+              >
                 <AccordionTrigger
                   icon={Plus}
                   className="relative z-[1] px-6 py-5 text-base sm:px-8 sm:py-6 sm:text-lg lg:px-10 xl:px-12"
                 >
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="relative z-[1] px-6 sm:px-8 lg:px-10 xl:px-12">
+                <AccordionContent
+                  outerClassName="faq-accordion-glow contained-accent-glow relative overflow-hidden"
+                  className="faq-accordion-content-surface relative z-[1] px-6 sm:px-8 lg:px-10 xl:px-12"
+                >
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

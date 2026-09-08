@@ -424,7 +424,7 @@ html {
 
 .contained-accent-glow--highlighted,
 .marquee-logo-cell:hover,
-.faq-accordion-cell[data-state="open"] {
+[data-slot="accordion-content"][data-state="open"] .faq-accordion-content-surface {
   background-image: radial-gradient(
     circle,
     var(--dot-grid-color) var(--dot-grid-radius),
@@ -438,8 +438,8 @@ html {
 .contained-accent-glow--highlighted::after,
 .marquee-logo-cell:hover::before,
 .marquee-logo-cell:hover::after,
-.faq-accordion-cell[data-state="open"]::before,
-.faq-accordion-cell[data-state="open"]::after {
+[data-slot="accordion-content"][data-state="open"].faq-accordion-glow::before,
+[data-slot="accordion-content"][data-state="open"].faq-accordion-glow::after {
   opacity: 1;
 }
 
