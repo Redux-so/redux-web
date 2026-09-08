@@ -19,7 +19,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_LOADING_MS = 600;
 
 const WAITLIST_SUBMIT_CTA = cn(
-  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav hero-pill-cta--shimmer shrink-0",
+  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--shimmer shrink-0",
 );
 
 type FormState = "idle" | "loading" | "success";
@@ -137,7 +137,7 @@ export default function WaitlistSection() {
                   placeholder="you@example.com"
                   required
                   tabIndex={formState === "idle" ? 0 : -1}
-                  className="h-11 w-full rounded-md border border-brand-border bg-brand-surface px-4 text-sm text-white placeholder:text-white/28 outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/30 sm:text-base"
+                  className="hero-pill-input w-full"
                 />
                 {error ? (
                   <p className="mt-2 text-left text-base text-red-400">{error}</p>
@@ -146,11 +146,7 @@ export default function WaitlistSection() {
               <button
                 type="submit"
                 tabIndex={formState === "idle" ? 0 : -1}
-                className={cn(
-                  WAITLIST_SUBMIT_CTA,
-                  "inline-flex items-center gap-1.5",
-                  "!h-11 !min-h-11 !max-h-none px-6 !text-sm sm:!text-base",
-                )}
+                className={cn(WAITLIST_SUBMIT_CTA, "inline-flex items-center gap-1.5 px-6")}
               >
                 <span className="hero-pill-cta__shimmer-text">
                   <span className="hero-pill-cta__shimmer-text-base">Join</span>

@@ -937,7 +937,9 @@ html {
   }
 
   /* Text-only hero CTAs: inset highlight reads low without icon offset */
-  .hero-pill-cta:not(:has(svg)):not(.hero-pill-cta--nav):not(.hero-pill-cta--compact) {
+  .hero-pill-cta:not(:has(svg)):not(.hero-pill-cta--nav):not(.hero-pill-cta--compact):not(
+      .hero-pill-cta--shimmer
+    ) {
     gap: 0;
     padding: 0 24px 1px;
   }
@@ -967,6 +969,49 @@ html {
       inset 0 -1px 0 var(--pill-inset-bottom),
       var(--pill-outer);
   }
+
+  .hero-pill-input {
+    box-sizing: border-box;
+    height: 2.75rem;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: var(--cta-radius);
+    border: 1px solid var(--charcoal-border);
+    background: linear-gradient(
+      180deg,
+      var(--charcoal-bg-top),
+      var(--charcoal-bg-bottom)
+    );
+    box-shadow:
+      inset 0 1px 0 var(--charcoal-inset-top),
+      inset 0 -1px 0 var(--charcoal-inset-bottom),
+      var(--charcoal-outer-shadow);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    outline: none;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .hero-pill-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .hero-pill-input:focus-visible {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: linear-gradient(180deg, #2a2a2a, #212121);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 var(--charcoal-inset-bottom),
+      0 4px 12px rgba(0, 0, 0, 0.4);
+    outline: 2px solid rgba(255, 255, 255, 0.35);
+    outline-offset: 2px;
+  }
+
   .hero-pill-cta--purple {
     --pill-border: rgba(255, 255, 255, 0.2);
     --pill-inset-top: rgba(255, 255, 255, 0.1);
@@ -991,6 +1036,11 @@ html {
   .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text {
     display: inline-grid;
     line-height: 1;
+  }
+
+  .hero-pill-cta--shimmer:not(.hero-pill-cta--nav) {
+    gap: 8px;
+    padding: 0 24px;
   }
 
   .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-base,
