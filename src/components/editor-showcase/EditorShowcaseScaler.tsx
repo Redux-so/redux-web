@@ -18,6 +18,10 @@ function computeScale(containerWidth: number) {
   return (containerWidth / SHOWCASE_DESIGN_WIDTH) * SHOWCASE_WIDTH_RATIO;
 }
 
+function readContainerScale(container: HTMLElement): number {
+  return computeScale(container.getBoundingClientRect().width);
+}
+
 export default function EditorShowcaseScaler() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -29,9 +33,10 @@ export default function EditorShowcaseScaler() {
     let frame = 0;
 
     const updateScale = () => {
-      const width = container.getBoundingClientRect().width;
-      setScale(computeScale(width));
+      setScale(readContainerScale(container));
     };
+
+    updateScale();
 
     const observer = new ResizeObserver(() => {
       cancelAnimationFrame(frame);
@@ -39,7 +44,6 @@ export default function EditorShowcaseScaler() {
     });
 
     observer.observe(container);
-    updateScale();
 
     return () => {
       cancelAnimationFrame(frame);
@@ -53,6 +57,7 @@ export default function EditorShowcaseScaler() {
   return (
     <div ref={containerRef} className="min-w-0 w-full py-2">
       <div
+        data-showcase-scaler-frame
         className={`relative mx-auto ${SHOWCASE_PANEL_OUTER_FRAME}`}
         style={{ width: scaledWidth, height: scaledHeight }}
       >
