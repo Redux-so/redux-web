@@ -5,9 +5,16 @@ export const SHOWCASE_DESIGN_HEIGHT = 820;
 /** Outer chrome for the full editor showcase : matches feature card border. */
 export const SHOWCASE_OUTER_FRAME = "showcase-frame";
 
+/** Larger corner radius for the main page editor showcase panel only. */
+export const SHOWCASE_PANEL_OUTER_FRAME = "showcase-frame showcase-panel-frame";
+
 /** Inner clip : keeps scaled editor UI contained within the rounded frame. */
 export const SHOWCASE_INNER_CLIP =
   "overflow-hidden h-full w-full bg-[#161616] rounded-[calc(var(--card-radius)-var(--card-border-width))]";
+
+/** Inner clip for the main editor showcase — follows the larger panel radius. */
+export const SHOWCASE_PANEL_INNER_CLIP =
+  "overflow-hidden h-full w-full bg-[#161616] rounded-[calc(var(--showcase-panel-radius)-var(--card-border-width))]";
 
 /** Main editor toolbar height in the showcase layout. */
 export const SHOWCASE_TOOLBAR_HEIGHT = 64;
