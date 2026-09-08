@@ -38,7 +38,7 @@ export default function LibraryShowcaseSidebar({
 }: LibraryShowcaseSidebarProps) {
   return (
     <aside
-      className={`flex h-full shrink-0 flex-col overflow-hidden rounded-r-md border-r ${LIBRARY_PANEL_SURFACE}`}
+      className={`flex h-full shrink-0 flex-col overflow-hidden rounded-r-2xl border-r ${LIBRARY_PANEL_SURFACE}`}
       style={{ width: LIBRARY_SHOWCASE_SIDEBAR_WIDTH }}
     >
       <div className="shrink-0">
@@ -100,7 +100,7 @@ export default function LibraryShowcaseSidebar({
           </span>
         </nav>
 
-        <p className={`mt-5 mb-2 px-5 ${SECTION_LABEL}`}>Albums</p>
+        <p className={`mt-4 mb-3 px-5 ${SECTION_LABEL}`}>Albums</p>
         <div className="flex flex-col gap-0.5 px-3">
           {SHOWCASE_LIBRARY_ALBUMS.map((album) => (
             <span
@@ -127,7 +127,7 @@ export default function LibraryShowcaseSidebar({
         </nav>
 
         <div className={`mt-3 ${LIBRARY_SIDEBAR_PROFILE_BTN}`}>
-          <div className={`h-[40px] w-[40px] shrink-0 rounded-full ${SURFACE_BORDER} bg-[#1d1d1d]`} />
+          <div className="h-[40px] w-[40px] shrink-0 rounded-full border border-[#262626] bg-[#1d1d1d]" />
           <div className="min-w-0 flex-1 text-left">
             <p className="truncate text-[14px] font-medium leading-[1.3] text-white">
               John

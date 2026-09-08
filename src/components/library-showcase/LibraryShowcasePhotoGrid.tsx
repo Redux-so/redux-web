@@ -62,13 +62,13 @@ export default function LibraryShowcasePhotoGrid({
   const gridKey = phase === "results" ? `results-${scenarioKey}` : "filler";
 
   return (
-    <div className="flex flex-col gap-5 px-6 py-5">
+    <div className="px-6 py-5">
       {phase === "results" ? (
-        <p className="mb-0 text-[12px] font-semibold text-[#888888]">
+        <p className="mb-3 text-[12px] font-semibold text-[#888888]">
           SEARCH RESULTS
         </p>
       ) : (
-        <p className="mb-0 text-[12px] font-semibold text-[#888888]">RECENT</p>
+        <p className="mb-3 text-[12px] font-semibold text-[#888888]">RECENT</p>
       )}
       <AnimatedGrid images={images} key={gridKey} />
     </div>

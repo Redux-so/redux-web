@@ -29,7 +29,7 @@ export const LIBRARY_PROFILE_POPOVER_WIDTH_PX =
 
 /** Shared hover/active treatment for library sidebar controls. */
 export const LIBRARY_SIDEBAR_BTN_ROW = [
-  "flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-[13px] font-medium",
+  "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] font-medium",
   SURFACE_NAV_ROW,
 ].join(" ");
 
@@ -44,6 +44,6 @@ export const LIBRARY_SIDEBAR_LINK_ROW = [
 ].join(" ");
 
 export const LIBRARY_SIDEBAR_PROFILE_BTN =
-  "flex min-w-0 items-center gap-2.5 w-full rounded-md px-1.5 py-1.5 -mx-1 border border-[#121212] transition-colors cursor-pointer hover:bg-[#1d1d1d]";
+  "flex min-w-0 items-center gap-2.5 w-full rounded-lg px-1.5 py-1.5 -mx-1 border border-[#121212] transition-colors cursor-pointer hover:bg-[#1d1d1d]";
 
 export const LIBRARY_SIDEBAR_PROFILE_BTN_OPEN = "bg-[#1d1d1d] !border-[#262626]";

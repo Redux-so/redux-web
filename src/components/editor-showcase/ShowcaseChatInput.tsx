@@ -16,7 +16,7 @@ import { UI_CARD_BORDER } from "@/lib/ui-surface-styles";
 import { cn } from "@/lib/utils";
 
 const TOOLBAR_CHIP_H = "h-8";
-const CHAT_INPUT_LOGO_PX = 42;
+const CHAT_INPUT_LOGO_PX = 46;
 
 type ShowcaseChatInputBorderVariant = "editor" | "bento";
 
@@ -50,7 +50,7 @@ export default function ShowcaseChatInput({
           focused && PRODUCT_BRAND_BORDER_FOCUS_CLASS,
         )
       : cn(
-          "overflow-hidden rounded-md border-2 bg-[#1d1d1d] transition-colors",
+          "overflow-hidden rounded-xl border-2 bg-[#1d1d1d] transition-colors",
           CHAT_SURFACE_SHADOW,
           focused ? PRODUCT_BRAND_BORDER_FOCUS_CLASS : "border-[#262626]",
         );
@@ -69,7 +69,7 @@ export default function ShowcaseChatInput({
             alt=""
             width={CHAT_INPUT_LOGO_PX}
             height={CHAT_INPUT_LOGO_PX}
-            className="shrink-0 rounded"
+            className="shrink-0 -translate-y-1 rounded"
             aria-hidden
           />
           <textarea

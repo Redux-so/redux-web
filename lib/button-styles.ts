@@ -49,18 +49,18 @@ export const BTN_SOFT_BLOCK = [
 
 /** Brand CTA label + icon weight — white on blue chrome (mockups). */
 export const BTN_BRAND_TYPE =
-  "text-[14px] font-semibold text-white leading-none [&_svg]:shrink-0 [&_svg]:!size-5 [&_svg]:stroke-[2]";
+  "text-[13px] font-medium text-white leading-none [&_svg]:shrink-0 [&_svg]:!size-4 [&_svg]:stroke-[2]";
 
 /** Brand blue compact icon-only (chat send when active) */
 export const BTN_BRAND_ICON = [
-  "inline-flex shrink-0 items-center justify-center w-8 h-8 cursor-pointer select-none",
+  "inline-flex shrink-0 items-center justify-center w-7 h-7 cursor-pointer select-none",
   BTN_BRAND_TYPE,
   BTN_BRAND_VISUAL,
 ].join(" ");
 
 /** Brand blue standalone CTA (showcase Export, etc.) */
 export const BTN_BRAND_SOLID = [
-  "inline-flex items-center justify-center gap-1.5 h-9 px-4 whitespace-nowrap cursor-pointer select-none",
+  "inline-flex items-center justify-center gap-1.5 h-8 px-3.5 whitespace-nowrap cursor-pointer select-none",
   BTN_BRAND_TYPE,
   BTN_BRAND_VISUAL,
 ].join(" ");

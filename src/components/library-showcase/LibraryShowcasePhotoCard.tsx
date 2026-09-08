@@ -10,7 +10,7 @@ export default function LibraryShowcasePhotoCard({
   image,
 }: LibraryShowcasePhotoCardProps) {
   return (
-    <div className="relative aspect-square w-full min-w-0 overflow-hidden rounded-md bg-white/[0.03]">
+    <div className="relative aspect-square w-full min-w-0 overflow-hidden rounded-xl bg-white/[0.03]">
       <Image
         src={image.src}
         alt={image.alt}

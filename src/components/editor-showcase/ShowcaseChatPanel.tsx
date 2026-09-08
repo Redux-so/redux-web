@@ -28,7 +28,7 @@ import { SHOWCASE_CHAT_PANEL_WIDTH } from "./showcase-layout";
 
 const CHAT_PANEL_GUTTER_CLASS = "px-8";
 const CHAT_PANEL_GUTTER_MARGIN_CLASS = "mx-8";
-const CHAT_AVATAR_LOGO_PX = 42;
+const CHAT_AVATAR_LOGO_PX = 38;
 const CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX = 164;
 
 function ShowcaseChatAvatar({ role }: { role: "user" | "assistant" }) {
@@ -145,7 +145,7 @@ export default function ShowcaseChatPanel({
     <div
       className={[
         "flex h-full min-w-0 shrink-0 flex-col overflow-hidden transition-[width] duration-200 ease-out",
-        `rounded-l-md border-l ${SURFACE_BORDER} ${SURFACE_BG_PANEL}`,
+        `rounded-l-2xl border-l ${SURFACE_BORDER} ${SURFACE_BG_PANEL}`,
       ].join(" ")}
       style={{
         width: collapsed ? 44 : SHOWCASE_CHAT_PANEL_WIDTH,
@@ -220,7 +220,7 @@ export default function ShowcaseChatPanel({
                               width={CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX}
                               height={100}
                               unoptimized
-                              className="max-h-[100px] rounded-md border border-[#212121] object-cover"
+                              className="max-h-[100px] rounded-lg border border-[#212121] object-cover"
                               style={{
                                 maxWidth: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
                               }}
