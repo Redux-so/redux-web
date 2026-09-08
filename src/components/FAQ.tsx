@@ -9,10 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion-1";
 import { ScrollReveal } from "@/lib/scroll-motion";
-import {
-  PAGE_GRID_ALIGNED_FRAME,
-  SECTION_HEADLINE,
-} from "@/lib/section-styles";
+import { PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const faqs = [
@@ -52,42 +49,52 @@ const FAQ_ITEM_CLASS = cn(
   "faq-accordion-cell contained-accent-glow relative overflow-hidden",
 );
 
-const FAQ_SECTION_PADDING = "py-0";
+/** Equal inset below the section seam and above the accordion on mobile/tablet. */
+const FAQ_MOBILE_HEADING_PAD = "pt-10 pb-10 sm:pt-12 sm:pb-12";
+
+function FaqHeading({ className }: { className?: string }) {
+  return (
+    <div className={cn("faq-heading-glow relative w-fit max-w-full", className)}>
+      <div
+        className="faq-heading-dots dot-grid-texture dot-grid-texture--spotlight"
+        aria-hidden
+      />
+      <h2
+        id="faq-heading"
+        className={cn(
+          "relative z-[2] m-0 font-display tracking-tight text-white",
+          "text-center text-2xl leading-[1.08] sm:text-3xl max-lg:whitespace-nowrap",
+          "lg:flex lg:flex-col lg:text-left lg:text-[2.75rem] lg:leading-[1.15]",
+        )}
+      >
+        <span className="lg:hidden">Frequently asked questions</span>
+        <span className="hidden lg:block">Frequently</span>
+        <span className="hidden lg:block">asked</span>
+        <span className="hidden lg:block">questions</span>
+      </h2>
+    </div>
+  );
+}
 
 export default function FAQ() {
   return (
-    <div className={cn(PAGE_GRID_ALIGNED_FRAME, FAQ_SECTION_PADDING)}>
+    <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-visible")}>
       <div
         className={cn(
           "relative grid w-full min-w-0 grid-cols-1",
           "lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] lg:items-stretch",
         )}
       >
-        <div
+        <ScrollReveal
+          variant="fadeIn"
           className={cn(
-            "relative w-full min-w-0 overflow-hidden lg:col-start-1 lg:row-start-1 lg:flex lg:min-h-0 lg:items-center lg:self-stretch lg:pr-12 xl:pr-16",
+            "flex w-full justify-center",
+            FAQ_MOBILE_HEADING_PAD,
+            "lg:col-start-1 lg:row-start-1 lg:flex lg:min-h-0 lg:items-center lg:justify-start lg:self-stretch lg:overflow-hidden lg:py-0 lg:pr-12 xl:pr-16",
           )}
         >
-          <ScrollReveal variant="fadeIn" className="w-full">
-            <div className="faq-heading-glow relative w-fit lg:translate-x-10 xl:translate-x-12">
-              <div
-                className="faq-heading-dots dot-grid-texture dot-grid-texture--spotlight"
-                aria-hidden
-              />
-              <h2
-                id="faq-heading"
-                className={cn(
-                  "relative z-[2] m-0 flex flex-col leading-[1.08]",
-                  SECTION_HEADLINE,
-                )}
-              >
-                <span className="block">Frequently</span>
-                <span className="block">asked</span>
-                <span className="block">questions</span>
-              </h2>
-            </div>
-          </ScrollReveal>
-        </div>
+          <FaqHeading className="mx-auto lg:mx-0 lg:translate-x-10 xl:translate-x-12" />
+        </ScrollReveal>
 
         <div
           aria-hidden
@@ -95,7 +102,12 @@ export default function FAQ() {
         />
 
         <ScrollReveal className="min-w-0 w-full lg:col-start-3 lg:row-start-1 lg:self-stretch">
-          <Accordion type="single" collapsible defaultValue="faq-0" className="w-full">
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue="faq-0"
+            className="w-full border-t border-white/10"
+          >
             {faqs.map((faq, index) => (
               <AccordionItem key={faq.question} value={`faq-${index}`} className={FAQ_ITEM_CLASS}>
                 <AccordionTrigger

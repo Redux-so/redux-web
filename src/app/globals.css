@@ -583,6 +583,18 @@ html {
   );
 }
 
+@media (max-width: 1023px) {
+  .faq-heading-glow::before,
+  .faq-heading-dots {
+    width: 16rem;
+    height: 10rem;
+  }
+
+  .faq-heading-glow::before {
+    filter: blur(52px);
+  }
+}
+
 /* Reusable dotted texture (waitlist card, etc.). */
 .dot-grid-texture {
   background-image: radial-gradient(
