@@ -44,7 +44,7 @@ export default function Home() {
             data-page-grid-hide-verticals
             className={cn(
               NAV_SCROLL_OFFSET_CLASS,
-              "relative z-[1] isolate overflow-x-clip",
+              "relative z-[1] -mt-[3.75rem] overflow-x-clip pt-[3.75rem] sm:-mt-16 sm:pt-16",
             )}
           >
             <div aria-hidden className="hero-top-glow" />

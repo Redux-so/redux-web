@@ -23,9 +23,9 @@ const HERO_ORBIT_FILLER_IMAGES = [
   "/hero-orbit/product-tubes.jpg",
 ] as const;
 
-/** Extends into the nav spacer so tiles pass behind the translucent navbar. */
+/** Extends into the nav spacer; clip-path keeps the hero bottom edge without clipping the top. */
 const HERO_ORBIT_CLIP = cn(
-  "absolute inset-x-0 bottom-0 overflow-x-clip overflow-y-hidden",
+  "hero-orbit-clip absolute inset-x-0 bottom-0 overflow-x-clip",
   "top-[-3.75rem] h-[calc(100%+3.75rem)] sm:top-[-4rem] sm:h-[calc(100%+4rem)]",
 );
 

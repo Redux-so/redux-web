@@ -15,7 +15,7 @@ const HERO_CTA_WITH_ICON = cn(HERO_CTA, "gap-2");
 
 export default function Hero() {
   return (
-    <div className="relative flex min-h-[calc(100svh-3.75rem)] w-full flex-col items-center justify-center overflow-x-clip overflow-y-hidden sm:min-h-[calc(100svh-4rem)]">
+    <div className="relative flex min-h-[calc(100svh-3.75rem)] w-full flex-col items-center justify-center overflow-x-clip sm:min-h-[calc(100svh-4rem)]">
       <HeroOrbitingPhotos />
 
       <ScrollRevealGroup
