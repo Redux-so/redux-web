@@ -526,10 +526,11 @@ html {
   }
 }
 
-/* Blur scrolling content behind the nav — no tint or border on the bar itself. */
+/* Blur scrolling content behind the nav; bottom hairline matches page grid rails. */
 .nav-backdrop-blur {
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .faq-heading-glow {
