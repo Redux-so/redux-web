@@ -143,7 +143,6 @@
   --card-inset-shadow: rgba(0, 0, 0, 0.4);
   --card-shadow-outer: 0 4px 10px rgba(0, 0, 0, 0.45);
   --card-radius: var(--cta-radius);
-  --showcase-panel-radius: 1.75rem;
 
   /* Vertical fade where page grid rails meet the top/bottom of the scroll sheet. */
   --page-grid-edge-fade: 7.5rem;
@@ -1232,10 +1231,6 @@ html {
       var(--card-bg-bottom) 100%
     );
     padding: var(--card-border-width);
-  }
-
-  .showcase-panel-frame {
-    border-radius: var(--showcase-panel-radius);
   }
 
   /* Fade page grid lines out at the top and bottom edges of the overlay. */

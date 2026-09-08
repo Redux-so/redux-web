@@ -6,8 +6,8 @@ import EditorShowcase from "./EditorShowcase";
 import {
   SHOWCASE_DESIGN_HEIGHT,
   SHOWCASE_DESIGN_WIDTH,
-  SHOWCASE_PANEL_INNER_CLIP,
-  SHOWCASE_PANEL_OUTER_FRAME,
+  SHOWCASE_INNER_CLIP,
+  SHOWCASE_OUTER_FRAME,
 } from "./showcase-layout";
 
 /** Fill the page column at full reveal — matches feature bento card width. */
@@ -58,10 +58,10 @@ export default function EditorShowcaseScaler() {
     <div ref={containerRef} className="min-w-0 w-full py-2">
       <div
         data-showcase-scaler-frame
-        className={`relative mx-auto ${SHOWCASE_PANEL_OUTER_FRAME}`}
+        className={`relative mx-auto ${SHOWCASE_OUTER_FRAME}`}
         style={{ width: scaledWidth, height: scaledHeight }}
       >
-        <div className={SHOWCASE_PANEL_INNER_CLIP}>
+        <div className={SHOWCASE_INNER_CLIP}>
           <div
             className="origin-top-left will-change-transform"
             style={{
