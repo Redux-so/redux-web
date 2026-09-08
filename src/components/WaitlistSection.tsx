@@ -96,7 +96,7 @@ export default function WaitlistSection() {
           <ScrollRevealItem>
             <h2
               className={cn(
-                "m-0 font-display text-5xl font-semibold leading-[1.12] tracking-tight text-white sm:text-6xl lg:text-[3.75rem]",
+                "m-0 font-display text-5xl font-[550] leading-[1.12] tracking-tight text-white sm:text-6xl lg:text-[3.75rem]",
               )}
             >
               Join the <span className={BRAND_HEADLINE_ACCENT_CLASS}>Waitlist</span>
