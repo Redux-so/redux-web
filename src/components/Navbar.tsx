@@ -128,7 +128,7 @@ export default function Navbar() {
         <a
           href="#home"
           onClick={scrollToTop}
-          className="group relative z-10 inline-flex h-[34px] min-w-0 max-w-[7rem] items-center justify-self-start rounded-md sm:max-w-[9.5rem] md:max-w-full"
+          className="group relative z-10 inline-flex h-[34px] min-w-0 max-w-[7rem] items-center justify-self-start rounded-md max-md:ml-2 sm:max-w-[9.5rem] md:max-w-full"
           aria-label="Back to top"
         >
           <Image
@@ -171,7 +171,7 @@ export default function Navbar() {
           </a>
           <a
             href="#waitlist"
-            className={NAV_WAITLIST_CTA}
+            className={cn(NAV_WAITLIST_CTA, "hidden md:inline-flex")}
           >
             Join Waitlist
           </a>
@@ -204,7 +204,7 @@ export default function Navbar() {
                   }
                   transition={ICON_TRANSITION}
                 >
-                  <XClose className="size-[18px]" />
+                  <XClose className="size-5" />
                 </motion.span>
               ) : (
                 <motion.span
@@ -227,7 +227,7 @@ export default function Navbar() {
                   }
                   transition={ICON_TRANSITION}
                 >
-                  <Menu01 className="size-[18px]" />
+                  <Menu01 className="size-5" />
                 </motion.span>
               )}
             </AnimatePresence>
@@ -271,7 +271,7 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              <div className="mt-3">
+              <div className="mt-3 flex flex-col gap-2">
                 <motion.div variants={itemVariants}>
                   <a
                     href="https://discord.gg/gzHrud9nee"
@@ -282,6 +282,15 @@ export default function Navbar() {
                   >
                     <DiscordIcon className="size-4 shrink-0" />
                     Discord
+                  </a>
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                  <a
+                    href="#waitlist"
+                    onClick={closeMobileMenu}
+                    className={cn(NAV_WAITLIST_CTA, "flex w-full")}
+                  >
+                    Join Waitlist
                   </a>
                 </motion.div>
               </div>
