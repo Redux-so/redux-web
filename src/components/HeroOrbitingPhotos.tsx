@@ -25,9 +25,18 @@ const HERO_ORBIT_FILLER_IMAGES = [
 
 const HERO_ORBIT_CLIP = "absolute inset-0 overflow-hidden";
 
+/** Extends into the nav spacer so tiles pass behind the translucent navbar. */
+const HERO_ORBIT_ROOT = cn(
+  "pointer-events-none absolute inset-x-0 bottom-0 z-0",
+  "top-[-3.75rem] h-[calc(100%+3.75rem)] sm:top-[-4rem] sm:h-[calc(100%+4rem)]",
+);
+
+/** Keeps the orbit stage centered on hero copy, not the extended root box. */
+const HERO_ORBIT_CENTER_OFFSET = "translate-y-[1.875rem] sm:translate-y-8";
+
 const ORBIT_DURATION = 78;
-const DESKTOP_INNER_RADIUS = 500;
-const DESKTOP_OUTER_RADIUS = 720;
+const DESKTOP_INNER_RADIUS = 390;
+const DESKTOP_OUTER_RADIUS = 540;
 const DESKTOP_INNER_ICON = 104;
 const DESKTOP_OUTER_ICON = 120;
 const REFERENCE_WIDTH = 1280;
@@ -85,10 +94,10 @@ function getOrbitConfig(width: number, height: number): OrbitConfig {
   let outerRadius = Math.round(DESKTOP_OUTER_RADIUS * widthScale);
 
   innerRadius = Math.round(
-    Math.max(innerRadius, width * 0.58, height * 0.26),
+    Math.max(innerRadius, width * 0.46, height * 0.2),
   );
   outerRadius = Math.round(
-    Math.max(outerRadius, width * 0.82, innerRadius + minRingSeparation),
+    Math.max(outerRadius, width * 0.65, innerRadius + minRingSeparation),
   );
 
   if (outerRadius - innerRadius < minRingSeparation) {
@@ -111,7 +120,7 @@ function getOrbitStageSize(config: OrbitConfig): number {
   return config.outerRadius * 2 + config.outerIconSize;
 }
 
-/** Blur zone extends through the outer ring — tiles orbit at 400–780px from center. */
+/** Blur zone extends through the outer ring. */
 function getCenterBlurRadius(config: OrbitConfig): number {
   return config.outerRadius + config.outerIconSize / 2 + 48;
 }
@@ -297,13 +306,14 @@ export default function HeroOrbitingPhotos() {
   const stageSize = getOrbitStageSize(config);
 
   return (
-    <div
-      ref={rootRef}
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
-    >
+    <div ref={rootRef} aria-hidden className={HERO_ORBIT_ROOT}>
       <div className={cn(HERO_ORBIT_CLIP)}>
-        <div className="hero-orbit-parallax flex h-full w-full items-center justify-center">
+        <div
+          className={cn(
+            "hero-orbit-parallax flex h-full w-full items-center justify-center",
+            HERO_ORBIT_CENTER_OFFSET,
+          )}
+        >
           <div
             ref={stageRef}
             className="relative shrink-0 will-change-transform"
@@ -351,7 +361,10 @@ export default function HeroOrbitingPhotos() {
         </div>
         <div
           aria-hidden
-          className="hero-orbit-center-vignette pointer-events-none absolute left-1/2 top-1/2 z-[5] -translate-x-1/2 -translate-y-1/2"
+          className={cn(
+            "hero-orbit-center-vignette pointer-events-none absolute left-1/2 top-1/2 z-[5] -translate-x-1/2 -translate-y-1/2",
+            HERO_ORBIT_CENTER_OFFSET,
+          )}
         />
       </div>
     </div>
