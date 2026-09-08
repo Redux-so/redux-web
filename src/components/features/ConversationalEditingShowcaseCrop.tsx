@@ -1,30 +1,35 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 
-import ShowcaseCropFrame from "@/src/components/features/ShowcaseCropFrame";
+import ShowcaseChatInput from "@/src/components/editor-showcase/ShowcaseChatInput";
+import { useConversationalEditingPromptDemo } from "@/src/components/features/useConversationalEditingPromptDemo";
 import { fadeIn, SCROLL_VIEWPORT } from "@/lib/scroll-motion";
 
 export default function ConversationalEditingShowcaseCrop() {
-  const [autoScrollActive, setAutoScrollActive] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const [animationActive, setAnimationActive] = useState(false);
+  const { promptValue } = useConversationalEditingPromptDemo(animationActive);
 
   return (
     <motion.div
-      className="h-full w-full min-h-0"
+      className="flex w-full flex-col items-center"
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"
       viewport={SCROLL_VIEWPORT}
-      onViewportEnter={() => setAutoScrollActive(true)}
-      onViewportLeave={() => setAutoScrollActive(false)}
+      onViewportEnter={() => setAnimationActive(true)}
+      onViewportLeave={() => setAnimationActive(false)}
     >
-      <ShowcaseCropFrame
-        scenario="default"
-        chatAutoScrollActive={autoScrollActive && !prefersReducedMotion}
-        ariaLabel="Redux editor chat panel preview"
-      />
+      <div className="relative w-full max-w-[27rem] sm:max-w-[29rem]">
+        <div className="feature-convo-chat-glow" aria-hidden />
+        <ShowcaseChatInput
+          value={promptValue}
+          demoMode
+          borderVariant="bento"
+          className="relative z-[1] w-full"
+        />
+      </div>
     </motion.div>
   );
 }

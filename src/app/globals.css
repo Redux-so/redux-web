@@ -94,6 +94,8 @@
   --accent-contained-glow-peak-opacity: 0.26;
   --accent-contained-glow-mid-opacity: 0.11;
   --accent-contained-glow-soft-opacity: 0.05;
+  --accent-panel-glow-peak-opacity: 0.32;
+  --accent-panel-glow-mid-opacity: 0.14;
   --brand-purple: #3a6fff;
   --brand-purple-hover: #5285ff;
   --brand-link: #7ca8ff;
@@ -715,6 +717,66 @@ html {
   -webkit-mask-size: 100% 100%;
 }
 
+/* Accent glow + dots radiating behind conversational editing chat input. */
+.feature-convo-chat-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  width: 122%;
+  height: 195%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.feature-convo-chat-glow::before,
+.feature-convo-chat-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.feature-convo-chat-glow::before {
+  background: radial-gradient(
+    ellipse 92% 85% at 50% 50%,
+    rgba(var(--accent-glow-rgb), 0.44) 0%,
+    rgba(var(--accent-glow-rgb), 0.24) 26%,
+    rgba(var(--accent-glow-rgb), 0.12) 44%,
+    rgba(var(--accent-glow-rgb), 0.05) 58%,
+    transparent 72%
+  );
+  filter: blur(48px);
+}
+
+.feature-convo-chat-glow::after {
+  background-image: radial-gradient(
+    circle,
+    var(--dot-grid-color) var(--dot-grid-radius),
+    transparent var(--dot-grid-radius)
+  );
+  background-size: var(--dot-grid-cell) var(--dot-grid-cell);
+  background-position: center;
+  mask-image: radial-gradient(
+    ellipse 92% 85% at 50% 50%,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.82) 32%,
+    rgb(0 0 0 / 0.38) 52%,
+    transparent 70%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 92% 85% at 50% 50%,
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 0.82) 32%,
+    rgb(0 0 0 / 0.38) 52%,
+    transparent 70%
+  );
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+}
+
 .marquee-logo-cell__image {
   position: relative;
   z-index: 1;
@@ -1015,7 +1077,8 @@ html {
   .ui-card,
   .ui-panel,
   .ui-chip,
-  .showcase-frame {
+  .showcase-frame,
+  .ui-card-border {
     position: relative;
     isolation: isolate;
     border: var(--card-border-width) solid var(--card-border);
@@ -1054,6 +1117,10 @@ html {
       var(--card-bg-top) 0%,
       var(--card-bg-bottom) 100%
     );
+  }
+
+  .ui-card-border {
+    border-radius: var(--card-radius);
   }
 
   .ui-panel {

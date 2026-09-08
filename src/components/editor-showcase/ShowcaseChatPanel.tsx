@@ -6,14 +6,11 @@ import { motion, useReducedMotion, useMotionValue, useTransform, animate } from 
 
 import { Icon } from "@/components/shared/Icon";
 import { BTN_PRIMARY_COMPACT } from "@/lib/button-styles";
-import { PRODUCT_BRAND_BORDER_FOCUS_CLASS } from "@/lib/brand-colors";
 import {
   CHAT_ASSISTANT_BUBBLE,
   CHAT_AVATAR_SHELL,
   CHAT_BTN_SECONDARY,
-  CHAT_SEND_BTN_DISABLED,
   CHAT_SURFACE_SHADOW,
-  CHAT_TOOLBAR_CHIP,
   CHAT_USER_MESSAGE_TEXT,
   PANEL_HEADER,
   PANEL_TITLE,
@@ -26,18 +23,13 @@ import {
   type ShowcaseChatMessage,
   type ShowcasePendingChange,
 } from "./showcase-data";
+import ShowcaseChatInput from "./ShowcaseChatInput";
 import { SHOWCASE_CHAT_PANEL_WIDTH } from "./showcase-layout";
 
-const TOOLBAR_CHIP_H = "h-8";
 const CHAT_PANEL_GUTTER_CLASS = "px-8";
 const CHAT_PANEL_GUTTER_MARGIN_CLASS = "mx-8";
 const CHAT_AVATAR_LOGO_PX = 42;
 const CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX = 164;
-
-const RING_RADIUS = 7.5;
-const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
-/** Demo: 12 of 20 free messages remaining */
-const SHOWCASE_USAGE_PROGRESS = 12 / 20;
 
 function ShowcaseChatAvatar({ role }: { role: "user" | "assistant" }) {
   if (role === "assistant") {
@@ -65,74 +57,6 @@ function ShowcaseChatAvatar({ role }: { role: "user" | "assistant" }) {
   );
 }
 
-function ringOffsetForProgress(progress: number): number {
-  const clamped = Math.max(0, Math.min(1, progress));
-  return RING_CIRCUMFERENCE * (1 - clamped);
-}
-
-function ShowcaseUsageRing() {
-  const targetOffset = ringOffsetForProgress(SHOWCASE_USAGE_PROGRESS);
-  const [displayOffset, setDisplayOffset] = useState<number | null>(null);
-  const [transitionEnabled, setTransitionEnabled] = useState(false);
-  const hasInitializedRef = useRef(false);
-
-  useEffect(() => {
-    if (!hasInitializedRef.current) {
-      hasInitializedRef.current = true;
-      setDisplayOffset(RING_CIRCUMFERENCE);
-      const frame = requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTransitionEnabled(true);
-          setDisplayOffset(targetOffset);
-        });
-      });
-      return () => cancelAnimationFrame(frame);
-    }
-
-    setDisplayOffset(targetOffset);
-  }, [targetOffset]);
-
-  const strokeTransition = transitionEnabled
-    ? "stroke-dashoffset 600ms ease-out"
-    : "none";
-
-  return (
-    <button
-      type="button"
-      aria-label="12 free messages remaining"
-      className="relative inline-flex shrink-0 items-center justify-center rounded-md p-0.5 text-[#888888] transition-colors cursor-default focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20"
-    >
-      <svg viewBox="0 0 20 20" className="h-5 w-5 shrink-0" aria-hidden>
-        <g transform="rotate(-90 10 10)">
-          <circle
-            cx="10"
-            cy="10"
-            r={RING_RADIUS}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-[#444444]"
-          />
-          <circle
-            cx="10"
-            cy="10"
-            r={RING_RADIUS}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeDasharray={RING_CIRCUMFERENCE}
-            strokeDashoffset={displayOffset ?? RING_CIRCUMFERENCE}
-            style={{ transition: strokeTransition }}
-            className="text-[#888888]"
-          />
-        </g>
-      </svg>
-    </button>
-  );
-}
-
-
 type ShowcaseChatPanelProps = {
   collapsed: boolean;
   onToggleCollapse: () => void;
@@ -151,7 +75,6 @@ export default function ShowcaseChatPanel({
   pendingChanges = SHOWCASE_PENDING_CHANGES,
 }: ShowcaseChatPanelProps) {
   const [changesExpanded, setChangesExpanded] = useState(false);
-  const [inputFocused, setInputFocused] = useState(false);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const messagesViewportRef = useRef<HTMLDivElement>(null);
   const messagesListRef = useRef<HTMLDivElement>(null);
@@ -399,61 +322,7 @@ export default function ShowcaseChatPanel({
           </div>
 
           <div className={`shrink-0 pb-4 pt-2 ${CHAT_PANEL_GUTTER_CLASS}`}>
-            <div
-              className={`overflow-hidden rounded-md border-2 bg-[#1d1d1d] transition-colors ${inputFocused ? PRODUCT_BRAND_BORDER_FOCUS_CLASS : "border-[#262626]"} ${CHAT_SURFACE_SHADOW}`}
-            >
-              <div className="flex min-h-[76px] items-start px-4 pb-3 pt-3">
-                <div className="flex w-full items-center gap-3.5">
-                  <Image
-                    src="/r-logo.png"
-                    alt=""
-                    width={42}
-                    height={42}
-                    className="shrink-0 rounded"
-                    aria-hidden
-                  />
-                  <textarea
-                    readOnly
-                    rows={1}
-                    placeholder="Describe the edit you want..."
-                    onFocus={() => setInputFocused(true)}
-                    onBlur={() => setInputFocused(false)}
-                    className="min-h-[24px] w-full resize-none bg-transparent pt-0 text-[15px] font-normal leading-snug text-white outline-none placeholder:text-[#666666]"
-                  />
-                </div>
-              </div>
-
-              <div className={`flex items-center justify-between gap-2 border-t ${SURFACE_BORDER} px-4 pb-3 pt-3`}>
-                <div className="flex min-w-0 shrink-0 items-center gap-1.5">
-                  <div
-                    className={`${CHAT_TOOLBAR_CHIP} flex ${TOOLBAR_CHIP_H} w-8 items-center justify-center opacity-50`}
-                  >
-                    <Icon name="Paperclip" size={16} aria-hidden />
-                  </div>
-
-                  <div
-                    className={`${CHAT_TOOLBAR_CHIP} flex ${TOOLBAR_CHIP_H} cursor-default items-center gap-0.5 px-1.5`}
-                  >
-                    <span className="truncate whitespace-nowrap text-[12px] font-semibold text-[#888888]">
-                      Claude Sonnet 4.5
-                    </span>
-                    <Icon name="ChevronDown" size={16} className="text-[#888888]" aria-hidden />
-                  </div>
-
-                  <ShowcaseUsageRing />
-                </div>
-
-                <button
-                  type="button"
-                  title="Send"
-                  tabIndex={-1}
-                  aria-disabled
-                  className={CHAT_SEND_BTN_DISABLED}
-                >
-                  <Icon name="Send01" size={16} strokeWidth={2} aria-hidden />
-                </button>
-              </div>
-            </div>
+            <ShowcaseChatInput value="" demoMode={demoMode} />
           </div>
         </div>
       ) : null}

@@ -64,6 +64,10 @@ export default function Features() {
             headline="Conversational Editing"
             description="Describe edits in plain language and AI applies them instantly."
             cta="Ask AI"
+            className="h-full gap-3"
+            showcaseBare
+            showcaseCentered
+            showcaseClassName="overflow-visible"
           >
             <ConversationalEditingShowcaseCrop />
           </FeatureBentoCard>

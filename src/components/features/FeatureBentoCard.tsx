@@ -32,6 +32,13 @@ type FeatureBentoCardProps = {
   children: ReactNode;
   className?: string;
   showcaseAccentGlow?: "right";
+  /** Omit the nested showcase-frame chrome — children provide the visual directly. */
+  showcaseBare?: boolean;
+  showcaseClassName?: string;
+  /** Size showcase to its content instead of filling leftover card space. */
+  showcaseShrinkWrap?: boolean;
+  /** Center showcase content with equal vertical inset in the remaining card space. */
+  showcaseCentered?: boolean;
 };
 
 export default function FeatureBentoCard({
@@ -42,6 +49,10 @@ export default function FeatureBentoCard({
   children,
   className,
   showcaseAccentGlow,
+  showcaseBare = false,
+  showcaseClassName,
+  showcaseShrinkWrap = false,
+  showcaseCentered = false,
 }: FeatureBentoCardProps) {
   const styles = sizeClasses[size];
 
@@ -81,7 +92,21 @@ export default function FeatureBentoCard({
         </a>
       </div>
 
-      <div className={cn(SHOWCASE_AREA, styles.showcase)}>{children}</div>
+      <div
+        className={cn(
+          "relative min-h-0 overflow-hidden",
+          showcaseCentered && "flex flex-1 flex-col items-center justify-center py-1 sm:py-2",
+          showcaseShrinkWrap &&
+            !showcaseCentered &&
+            "mt-auto shrink-0 flex-none",
+          !showcaseCentered && !showcaseShrinkWrap && "flex-1",
+          !showcaseBare && SHOWCASE_AREA,
+          !showcaseShrinkWrap && !showcaseCentered && styles.showcase,
+          showcaseClassName,
+        )}
+      >
+        {children}
+      </div>
     </article>
   );
 }
