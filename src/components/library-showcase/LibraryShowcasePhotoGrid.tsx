@@ -11,7 +11,6 @@ import LibraryShowcasePhotoCard from "./LibraryShowcasePhotoCard";
 type LibraryShowcasePhotoGridProps = {
   phase: LibrarySearchDemoPhase;
   scenarioKey: string;
-  fillerKey: number;
   fillerImages: readonly LibraryShowcaseImage[];
   resultImages: readonly LibraryShowcaseImage[];
   animated?: boolean;
@@ -67,14 +66,12 @@ function AnimatedGrid({ images }: { images: readonly LibraryShowcaseImage[] }) {
 export default function LibraryShowcasePhotoGrid({
   phase,
   scenarioKey,
-  fillerKey,
   fillerImages,
   resultImages,
   animated = false,
 }: LibraryShowcasePhotoGridProps) {
   const images = phase === "results" ? resultImages : fillerImages;
-  const gridKey =
-    phase === "results" ? `results-${scenarioKey}` : `filler-${fillerKey}`;
+  const gridKey = phase === "results" ? `results-${scenarioKey}` : "filler";
   const Grid = animated ? AnimatedGrid : StaticGrid;
 
   return (

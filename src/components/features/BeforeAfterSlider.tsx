@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Icon } from "@/components/shared/Icon";
@@ -45,18 +44,25 @@ export function BeforeAfterSlider({
   }, []);
 
   useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      if (!isDragging.current) return;
+      updatePosition(event.clientX);
+    };
+
     const stopDragging = () => {
       isDragging.current = false;
     };
 
+    window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", stopDragging);
     window.addEventListener("touchend", stopDragging);
 
     return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", stopDragging);
       window.removeEventListener("touchend", stopDragging);
     };
-  }, []);
+  }, [updatePosition]);
 
   const layerWidth = containerWidth > 0 ? containerWidth : undefined;
 
@@ -64,33 +70,33 @@ export function BeforeAfterSlider({
     <div
       ref={containerRef}
       className={cn(
-        "relative h-full w-full cursor-ew-resize overflow-hidden rounded-lg select-none",
+        "relative h-full w-full cursor-ew-resize touch-none overflow-hidden rounded-lg select-none",
         className,
       )}
+      onDragStart={(event) => event.preventDefault()}
       onMouseDown={(event) => {
+        event.preventDefault();
         isDragging.current = true;
         updatePosition(event.clientX);
-      }}
-      onMouseMove={(event) => {
-        if (isDragging.current) updatePosition(event.clientX);
-      }}
-      onMouseUp={() => {
-        isDragging.current = false;
-      }}
-      onMouseLeave={() => {
-        isDragging.current = false;
       }}
       onTouchStart={(event) => {
         isDragging.current = true;
         updatePosition(event.touches[0].clientX);
       }}
       onTouchMove={(event) => {
-        if (isDragging.current) updatePosition(event.touches[0].clientX);
+        if (!isDragging.current) return;
+        event.preventDefault();
+        updatePosition(event.touches[0].clientX);
       }}
     >
       <div className="absolute inset-0 flex items-center justify-center bg-neutral-800">
         {afterSrc ? (
-          <img src={afterSrc} alt="Enhanced" className="h-full w-full object-cover" />
+          <img
+            src={afterSrc}
+            alt="Enhanced"
+            draggable={false}
+            className="pointer-events-none h-full w-full object-cover select-none"
+          />
         ) : (
           <div className="flex h-full w-full items-center justify-center border border-white/[0.08] bg-[#2a2a2a]">
             <Icon
@@ -116,7 +122,8 @@ export function BeforeAfterSlider({
             <img
               src={beforeSrc}
               alt="Original"
-              className="h-full object-cover grayscale contrast-75 brightness-75"
+              draggable={false}
+              className="pointer-events-none h-full w-full object-cover select-none"
               style={{ width: layerWidth }}
             />
           ) : (
@@ -137,7 +144,7 @@ export function BeforeAfterSlider({
       </div>
 
       <div
-        className="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white"
+        className="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_4px_rgba(0,0,0,0.35),0_0_10px_rgba(0,0,0,0.15)]"
         style={{ left: `${position}%` }}
       />
     </div>
