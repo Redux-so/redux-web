@@ -20,7 +20,6 @@ export default function ConversationalEditingShowcaseCrop() {
       whileInView="visible"
       viewport={SCROLL_VIEWPORT}
       onViewportEnter={() => setAnimationActive(true)}
-      onViewportLeave={() => setAnimationActive(false)}
     >
       <div className="relative w-full max-w-[27rem] sm:max-w-[29rem]">
         <div className="feature-convo-chat-glow" aria-hidden />

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Icon } from "@/components/shared/Icon";
 import ShowcaseUsageRing from "@/src/components/editor-showcase/ShowcaseUsageRing";
@@ -38,9 +38,19 @@ export default function ShowcaseChatInput({
   className,
 }: ShowcaseChatInputProps) {
   const [focusedInternal, setFocusedInternal] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const focused = focusedProp ?? focusedInternal;
   const showPlaceholder = value.length === 0 && !focused;
   const isBentoShell = borderVariant === "bento";
+  const isBentoDemo = isBentoShell && demoMode;
+
+  useEffect(() => {
+    if (!isBentoDemo) return;
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+    textarea.scrollTop = 0;
+    textarea.scrollLeft = 0;
+  }, [isBentoDemo, value]);
 
   const shellClassName =
     borderVariant === "bento"
@@ -63,24 +73,33 @@ export default function ShowcaseChatInput({
           isBentoShell ? "min-h-[92px]" : "min-h-[76px]",
         )}
       >
-        <div className="flex w-full items-center gap-3.5">
+        <div className="flex w-full min-w-0 items-center gap-3.5 overflow-hidden">
           <Image
             src="/r-logo.png"
             alt=""
             width={CHAT_INPUT_LOGO_PX}
             height={CHAT_INPUT_LOGO_PX}
-            className="shrink-0 -translate-y-1 rounded"
+            className={cn(
+              "shrink-0 rounded",
+              isBentoShell ? "-translate-y-0.5" : "-translate-y-1",
+            )}
             aria-hidden
           />
           <textarea
+            ref={textareaRef}
             readOnly
             rows={1}
+            wrap={isBentoDemo ? "off" : "soft"}
             value={value}
             placeholder={showPlaceholder ? placeholder : undefined}
             tabIndex={demoMode ? -1 : undefined}
             onFocus={() => setFocusedInternal(true)}
             onBlur={() => setFocusedInternal(false)}
-            className="min-h-[24px] w-full resize-none bg-transparent pt-0 text-[15px] font-normal leading-snug text-white outline-none placeholder:text-[#666666]"
+            className={cn(
+              "min-h-[24px] w-full min-w-0 resize-none bg-transparent pt-0 text-[15px] font-normal leading-snug text-white outline-none placeholder:text-[#666666]",
+              isBentoDemo &&
+                "overflow-hidden whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+            )}
           />
         </div>
       </div>
