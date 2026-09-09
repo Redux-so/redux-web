@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { cn } from "@/lib/utils";
 
+import { getHeroOrbitPhoto } from "@/src/components/hero-orbit-photos";
 import HeroOrbitTile from "@/src/components/HeroOrbitTile";
 
 const INNER_TILE_COUNT = 7;
@@ -23,7 +24,7 @@ const HERO_ORBIT_CENTER_OFFSET = "translate-y-[1.875rem] sm:translate-y-8";
 
 const ORBIT_DURATION = 78;
 const DESKTOP_INNER_RADIUS = 390;
-const DESKTOP_OUTER_RADIUS = 540;
+const DESKTOP_OUTER_RADIUS = 585;
 const DESKTOP_INNER_ICON = 104;
 const DESKTOP_OUTER_ICON = 120;
 const REFERENCE_WIDTH = 1280;
@@ -84,11 +85,12 @@ function getOrbitConfig(width: number, height: number): OrbitConfig {
     Math.max(innerRadius, width * 0.46, height * 0.2),
   );
   outerRadius = Math.round(
-    Math.max(outerRadius, width * 0.65, innerRadius + minRingSeparation),
+    Math.max(outerRadius, width * 0.68, innerRadius + minRingSeparation),
   );
 
-  if (outerRadius - innerRadius < minRingSeparation) {
-    outerRadius = innerRadius + Math.ceil(minRingSeparation);
+  const outerRingExtra = 32;
+  if (outerRadius - innerRadius < minRingSeparation + outerRingExtra) {
+    outerRadius = innerRadius + Math.ceil(minRingSeparation + outerRingExtra);
   }
 
   return {
@@ -314,9 +316,16 @@ export default function HeroOrbitingPhotos() {
               radius={config.innerRadius}
               style={{ borderRadius: ORBIT_TILE_RADIUS }}
             >
-              {Array.from({ length: INNER_TILE_COUNT }, (_, index) => (
-                <HeroOrbitTile key={`hero-orbit-inner-${index}`} alt="" />
-              ))}
+              {Array.from({ length: INNER_TILE_COUNT }, (_, index) => {
+                const photo = getHeroOrbitPhoto(index);
+                return (
+                  <HeroOrbitTile
+                    key={`hero-orbit-inner-${index}`}
+                    src={photo.src}
+                    alt={photo.alt}
+                  />
+                );
+              })}
             </OrbitingCircles>
 
             <OrbitingCircles
@@ -327,9 +336,16 @@ export default function HeroOrbitingPhotos() {
               radius={config.outerRadius}
               style={{ borderRadius: ORBIT_TILE_RADIUS }}
             >
-              {Array.from({ length: OUTER_TILE_COUNT }, (_, index) => (
-                <HeroOrbitTile key={`hero-orbit-outer-${index}`} alt="" />
-              ))}
+              {Array.from({ length: OUTER_TILE_COUNT }, (_, index) => {
+                const photo = getHeroOrbitPhoto(index + INNER_TILE_COUNT);
+                return (
+                  <HeroOrbitTile
+                    key={`hero-orbit-outer-${index}`}
+                    src={photo.src}
+                    alt={photo.alt}
+                  />
+                );
+              })}
             </OrbitingCircles>
           </div>
         </div>
