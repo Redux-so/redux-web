@@ -12,7 +12,7 @@ import {
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
-import { PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
+import { HERO_HEADLINE, PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -94,11 +94,7 @@ export default function WaitlistSection() {
           stagger={0.12}
         >
           <ScrollRevealItem className="w-full">
-            <h2
-              className={cn(
-                "m-0 text-balance font-display text-5xl font-[550] leading-[1.12] tracking-tight text-white sm:text-6xl lg:text-[3.75rem]",
-              )}
-            >
+            <h2 className={cn("m-0", HERO_HEADLINE)}>
               Join the <span className={BRAND_HEADLINE_ACCENT_CLASS}>Waitlist</span>
             </h2>
           </ScrollRevealItem>

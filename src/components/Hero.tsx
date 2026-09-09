@@ -6,6 +6,7 @@ import {
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
+import { HERO_HEADLINE } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const HERO_CTA =
@@ -24,7 +25,7 @@ export default function Hero() {
           stagger={0.12}
         >
           <ScrollRevealItem>
-            <h1 className="font-display text-5xl font-[550] leading-tight tracking-tight text-balance text-white sm:text-6xl lg:text-[4rem]">
+            <h1 className={HERO_HEADLINE}>
               From Raw Photo to
               <br />
               Finished Edit in Minutes
