@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
 import {
-  SHOWCASE_LIBRARY_FILLER,
+  createMixedFillerGrid,
   SHOWCASE_SEARCH_ERASE_MS,
   SHOWCASE_SEARCH_HOLD_MS,
   SHOWCASE_SEARCH_IDLE_DELAY_MS,
@@ -13,6 +13,7 @@ import {
   SHOWCASE_SEARCH_START_DELAY_MS,
   SHOWCASE_SEARCH_TYPE_MS,
   type LibrarySearchDemoPhase,
+  type LibraryShowcaseImage,
 } from "./library-showcase-data";
 import LibraryShowcaseHeader from "./LibraryShowcaseHeader";
 import LibraryShowcasePhotoGrid from "./LibraryShowcasePhotoGrid";
@@ -28,7 +29,11 @@ function useSmartSearchDemo(active: boolean) {
   const [searchValue, setSearchValue] = useState("");
   const [phase, setPhase] = useState<LibrarySearchDemoPhase>("idle");
   const [scenarioIndex, setScenarioIndex] = useState(0);
+  const [fillerImages, setFillerImages] = useState<LibraryShowcaseImage[]>(() =>
+    createMixedFillerGrid(),
+  );
   const scenarioIndexRef = useRef(0);
+  const fillerInitializedRef = useRef(false);
   const timeoutsRef = useRef<number[]>([]);
 
   useEffect(() => {
@@ -49,7 +54,14 @@ function useSmartSearchDemo(active: boolean) {
       setPhase("idle");
       setScenarioIndex(0);
       scenarioIndexRef.current = 0;
+      fillerInitializedRef.current = false;
+      setFillerImages(createMixedFillerGrid());
       return clearAll;
+    }
+
+    if (!fillerInitializedRef.current) {
+      setFillerImages(createMixedFillerGrid());
+      fillerInitializedRef.current = true;
     }
 
     if (prefersReducedMotion) {
@@ -117,6 +129,7 @@ function useSmartSearchDemo(active: boolean) {
     phase,
     resultImages: activeScenario.results,
     scenarioKey: activeScenario.id,
+    fillerImages,
   };
 }
 
@@ -124,7 +137,7 @@ export default function LibraryShowcase({
   demoMode = false,
   animationActive = false,
 }: LibraryShowcaseProps) {
-  const { searchValue, phase, resultImages, scenarioKey } =
+  const { searchValue, phase, resultImages, scenarioKey, fillerImages } =
     useSmartSearchDemo(animationActive);
 
   return (
@@ -136,7 +149,7 @@ export default function LibraryShowcase({
           <LibraryShowcasePhotoGrid
             phase={phase}
             scenarioKey={scenarioKey}
-            fillerImages={SHOWCASE_LIBRARY_FILLER}
+            fillerImages={fillerImages}
             resultImages={resultImages}
             animated={animationActive}
           />

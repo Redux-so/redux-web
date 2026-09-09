@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 import LibraryShowcase from "@/src/components/library-showcase/LibraryShowcase";
+import { fadeIn, SCROLL_VIEWPORT } from "@/lib/scroll-motion";
 import {
   computeLibrarySearchCropLayout,
   type LibraryCropLayout,
@@ -22,6 +24,7 @@ export default function LibraryShowcaseCropFrame({
   ariaLabel,
 }: LibraryShowcaseCropFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [animationActive, setAnimationActive] = useState(false);
   const [layout, setLayout] = useState<LibraryCropLayout>(() =>
     computeLibrarySearchCropLayout(0, 0),
   );
@@ -52,10 +55,17 @@ export default function LibraryShowcaseCropFrame({
   }, []);
 
   return (
-    <div
+    <motion.div
       ref={containerRef}
       className={cn("relative h-full w-full min-h-0", SHOWCASE_INNER_CLIP)}
       aria-label={ariaLabel}
+      data-scroll-motion=""
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={SCROLL_VIEWPORT}
+      onViewportEnter={() => setAnimationActive(true)}
+      onViewportLeave={() => setAnimationActive(false)}
     >
       <div className="pointer-events-none relative h-full w-full overflow-hidden">
         <div
@@ -75,10 +85,10 @@ export default function LibraryShowcaseCropFrame({
               transform: `scale(${layout.scale})`,
             }}
           >
-            <LibraryShowcase demoMode />
+            <LibraryShowcase demoMode animationActive={animationActive} />
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

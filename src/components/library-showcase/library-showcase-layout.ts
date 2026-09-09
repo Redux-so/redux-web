@@ -11,7 +11,7 @@ export const LIBRARY_SHOWCASE_SIDEBAR_WIDTH = 260;
 export const LIBRARY_SEARCH_CROP_WIDTH = 980;
 
 /** Trim the greeting headline while keeping the search bar fully in frame. */
-export const LIBRARY_SEARCH_CROP_TOP_OFFSET = 48;
+export const LIBRARY_SEARCH_CROP_TOP_OFFSET = 54;
 
 /** Left edge of the library crop region in design coordinates. */
 export const LIBRARY_SEARCH_CROP_LEFT = 0;
