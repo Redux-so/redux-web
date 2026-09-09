@@ -84,7 +84,7 @@ export default function WaitlistSection() {
 
   return (
     <SectionShell container={false} className="relative z-[1]">
-      <div className={cn(PAGE_GRID_ALIGNED_FRAME, "px-4 sm:px-6 lg:px-8")}>
+      <div className={cn(PAGE_GRID_ALIGNED_FRAME, "px-10 sm:px-12 lg:px-16")}>
         <div className="relative w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#0d0d0d] px-6 py-20 sm:py-24">
         <DotGridBackground className="absolute inset-0 z-0" />
         <div aria-hidden className="waitlist-card-spotlight absolute inset-0 z-10" />
