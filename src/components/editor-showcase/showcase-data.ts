@@ -1,24 +1,29 @@
 import { BLANK_IMAGE_SRC } from "@/lib/blank-image";
 
-export const SHOWCASE_FILENAME = "placeholder-blank.svg";
+export const SHOWCASE_FILENAME = "mount-fuji.jpg";
+export const SHOWCASE_CANVAS_IMAGE = "/showcase/mount-fuji.jpg";
+export const SHOWCASE_CANVAS_ALT =
+  "Mount Fuji and Chureito Pagoda in winter";
+export const SHOWCASE_CANVAS_WIDTH = 682;
+export const SHOWCASE_CANVAS_HEIGHT = 1024;
 
 export const SHOWCASE_ADJUSTMENTS = {
-  exposure: -12,
-  contrast: 24,
-  blacks: -28,
-  whites: -8,
-  highlights: -16,
-  shadows: -12,
-  vibrance: 14,
-  saturation: 8,
-  temperature: -22,
-  tint: 12,
-  hue: 3,
-  sharpen: 16,
-  noiseReduction: 12,
-  vignette: 14,
-  grain: 3,
-  clarity: 20,
+  exposure: -8,
+  contrast: 20,
+  blacks: -20,
+  whites: -6,
+  highlights: -14,
+  shadows: -10,
+  vibrance: 22,
+  saturation: 10,
+  temperature: -18,
+  tint: 6,
+  hue: 0,
+  sharpen: 14,
+  noiseReduction: 10,
+  vignette: 12,
+  grain: 0,
+  clarity: 18,
 } as const;
 
 export type ShowcaseAdjustments = {
@@ -32,56 +37,56 @@ export const SHOWCASE_CHAT_MESSAGES = [
     id: "1",
     role: "user" as const,
     content:
-      "I want this to feel more like blue hour: cool tones on the lake and sky, with Mount Fuji silhouetted against the twilight gradient.",
+      "Make the pagoda red pop against the snow and sky without making Mount Fuji look unnatural.",
     timestamp: new Date("2026-06-05T14:28:00"),
   },
   {
     id: "2",
     role: "assistant" as const,
     content:
-      "Got it. I've cooled temperature to -22 and pushed tint to +12 to bring out the purple and pink in the sky and its reflection in the water.",
+      "Pushed vibrance to +22 and saturation to +10 so the pagoda reads richer. Contrast is at +20 to separate the red structure from the valley below.",
     timestamp: new Date("2026-06-05T14:28:00"),
   },
   {
     id: "3",
     role: "user" as const,
     content:
-      "Deepen the foreground reeds and hills so they feel like silhouettes against the water.",
+      "Cool down the sky and valley a touch, but keep that crisp winter feeling.",
     timestamp: new Date("2026-06-05T14:30:00"),
   },
   {
     id: "4",
     role: "assistant" as const,
     content:
-      "Blacks dropped to -28 and shadows to -12. The reeds along the lake shore and the forested hill should read much darker now.",
+      "Temperature is at -18 with tint +6 for a clean blue-gray sky while preserving the warm light hitting the left side of Fuji.",
     timestamp: new Date("2026-06-05T14:30:00"),
   },
   {
     id: "5",
     role: "user" as const,
     content:
-      "Add more separation between the mountain and the sky, but don't blow out the snow on the peak.",
+      "Bring out detail in the snow on Fuji but don't clip the bright peak.",
     timestamp: new Date("2026-06-05T14:32:00"),
   },
   {
     id: "6",
     role: "assistant" as const,
     content:
-      "Contrast is at +24, highlights pulled to -16, and whites at -8. The snow stays bright without losing detail.",
+      "Highlights pulled to -14, whites to -6, and clarity to +18. The ridgelines and snow texture should look sharper without blowing the summit.",
     timestamp: new Date("2026-06-05T14:32:00"),
   },
   {
     id: "7",
     role: "user" as const,
     content:
-      "The blues in the sky could use a little more life. Smooth out any noise too.",
+      "Deepen the city and tree line at the bottom so the mountain feels more dramatic.",
     timestamp: new Date("2026-06-05T14:34:00"),
   },
   {
     id: "8",
     role: "assistant" as const,
     content:
-      "Vibrance +14, saturation +8, noise reduction +12. I also added clarity +20, sharpen +16, and a light vignette at +14 to frame Mount Fuji and the reflection. Exposure is at -12 for the twilight mood.",
+      "Blacks are at -20 and shadows at -10 to anchor the foreground. Exposure is at -8 for a moodier finish, with noise reduction +10, sharpen +14, and a light vignette at +12 to draw the eye to Fuji and the pagoda.",
     timestamp: new Date("2026-06-05T14:35:00"),
   },
 ] as const;
@@ -148,20 +153,28 @@ export const SHOWCASE_STYLE_MATCH_PENDING_CHANGES: ShowcasePendingChange[] = [
 ];
 
 export const SHOWCASE_PENDING_CHANGES: ShowcasePendingChange[] = [
-  { key: "temperature", label: "Temperature", from: 0, to: -22 },
-  { key: "tint", label: "Tint", from: 0, to: 12 },
-  { key: "blacks", label: "Blacks", from: 0, to: -28 },
-  { key: "shadows", label: "Shadows", from: 0, to: -12 },
-  { key: "contrast", label: "Contrast", from: 0, to: 24 },
-  { key: "highlights", label: "Highlights", from: 0, to: -16 },
-  { key: "whites", label: "Whites", from: 0, to: -8 },
-  { key: "vibrance", label: "Vibrance", from: 0, to: 14 },
-  { key: "saturation", label: "Saturation", from: 0, to: 8 },
-  { key: "exposure", label: "Exposure", from: 0, to: -12 },
+  { key: "vibrance", label: "Vibrance", from: 0, to: 22 },
+  { key: "saturation", label: "Saturation", from: 0, to: 10 },
+  { key: "contrast", label: "Contrast", from: 0, to: 20 },
+  { key: "temperature", label: "Temperature", from: 0, to: -18 },
+  { key: "tint", label: "Tint", from: 0, to: 6 },
+  { key: "highlights", label: "Highlights", from: 0, to: -14 },
+  { key: "whites", label: "Whites", from: 0, to: -6 },
+  { key: "clarity", label: "Clarity", from: 0, to: 18 },
+  { key: "blacks", label: "Blacks", from: 0, to: -20 },
+  { key: "shadows", label: "Shadows", from: 0, to: -10 },
+  { key: "exposure", label: "Exposure", from: 0, to: -8 },
+  { key: "noiseReduction", label: "Noise Reduction", from: 0, to: 10 },
+  { key: "sharpen", label: "Sharpen", from: 0, to: 14 },
+  { key: "vignette", label: "Vignette", from: 0, to: 12 },
 ];
 
 export const SHOWCASE_HISTORY_VERSIONS = [
-  { id: "v3", label: "Blue hour finish", createdAt: "2026-06-05T14:33:00Z" },
+  {
+    id: "v3",
+    label: "Winter pagoda finish",
+    createdAt: "2026-06-05T14:33:00Z",
+  },
   { id: "v2", label: "Auto-saved", createdAt: "2026-06-05T14:17:00Z" },
   { id: "v1", label: "Original import", createdAt: "2026-06-05T13:35:00Z" },
 ] as const;

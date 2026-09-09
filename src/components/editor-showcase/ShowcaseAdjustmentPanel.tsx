@@ -22,6 +22,8 @@ import ShowcaseHistoryVersionList from "./ShowcaseHistoryVersionList";
 import {
   REDUX_DOCS_URL,
   REDUX_HELP_FEEDBACK_URL,
+  SHOWCASE_CANVAS_HEIGHT,
+  SHOWCASE_CANVAS_WIDTH,
   type AdjustmentKey,
   type ShowcaseAdjustments,
 } from "./showcase-data";
@@ -413,7 +415,7 @@ export default function ShowcaseAdjustmentPanel({
                             </label>
                             <input
                               readOnly
-                              value={2788}
+                              value={SHOWCASE_CANVAS_WIDTH}
                               className={`h-[30px] w-full rounded-md border bg-[#1d1d1d] px-2 text-[12px] text-white outline-none ${SURFACE_BORDER_RAISED} ${PRODUCT_BRAND_FOCUS_RING_CLASS}`}
                             />
                           </div>
@@ -430,7 +432,7 @@ export default function ShowcaseAdjustmentPanel({
                             </label>
                             <input
                               readOnly
-                              value={3717}
+                              value={SHOWCASE_CANVAS_HEIGHT}
                               className={`h-[30px] w-full rounded-md border bg-[#1d1d1d] px-2 text-[12px] text-white outline-none ${SURFACE_BORDER_RAISED} ${PRODUCT_BRAND_FOCUS_RING_CLASS}`}
                             />
                           </div>
