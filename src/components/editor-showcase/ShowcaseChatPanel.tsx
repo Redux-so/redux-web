@@ -213,7 +213,7 @@ export default function ShowcaseChatPanel({
                   >
                     <div className="flex w-full items-start gap-5">
                       <ShowcaseChatAvatar role={msg.role} />
-                      <div className="flex min-w-0 flex-1 flex-col gap-1">
+                      <div className="flex min-w-0 flex-1 flex-col gap-2.5">
                         {msg.imagePreview ? (
                           <div>
                             {isBlankImageSrc(msg.imagePreview) ? (

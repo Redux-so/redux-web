@@ -1,9 +1,11 @@
-import { BLANK_IMAGE_SRC } from "@/lib/blank-image";
-
 export const SHOWCASE_FILENAME = "mount-fuji.jpg";
 export const SHOWCASE_CANVAS_IMAGE = "/showcase/mount-fuji.jpg";
 export const SHOWCASE_CANVAS_ALT =
   "Mount Fuji and Chureito Pagoda in winter";
+export const SHOWCASE_STYLE_MATCH_REFERENCE_IMAGE =
+  "/features/style-match-reference.jpg";
+export const SHOWCASE_STYLE_MATCH_REFERENCE_ALT =
+  "Mountain range at sunrise above a sea of clouds";
 export const SHOWCASE_CANVAS_WIDTH = 682;
 export const SHOWCASE_CANVAS_HEIGHT = 1024;
 
@@ -134,7 +136,7 @@ export const SHOWCASE_STYLE_MATCH_CHAT_MESSAGES: ShowcaseChatMessage[] = [
     role: "user",
     content:
       "Match the style of this reference and apply it to my photo on the canvas.",
-    imagePreview: BLANK_IMAGE_SRC,
+    imagePreview: SHOWCASE_STYLE_MATCH_REFERENCE_IMAGE,
   },
   {
     id: "sm-2",
