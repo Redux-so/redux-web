@@ -1,64 +1,65 @@
-import { BLANK_IMAGE_SRC } from "@/lib/blank-image";
-
 export type EditShowcasePhoto = {
   id: string;
   src: string;
   alt: string;
 };
 
+const EDIT_SHOWCASE_TOP_BASE = "/edit-showcase/top";
+const EDIT_SHOWCASE_BOTTOM_BASE = "/edit-showcase/bottom";
+
 export const EDIT_SHOWCASE_TOP_ROW: EditShowcasePhoto[] = [
   {
     id: "top-1",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_TOP_BASE}/top-1.webp`,
+    alt: "Cherry blossom street in Japan with cyclist and traffic",
   },
   {
     id: "top-2",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_TOP_BASE}/top-2.webp`,
+    alt: "Palm trees and beachfront hotels on a sunny day",
   },
   {
     id: "top-3",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_TOP_BASE}/top-3.webp`,
+    alt: "Snowy shrine with glowing orange lanterns at night",
   },
   {
     id: "top-4",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_TOP_BASE}/top-4.webp`,
+    alt: "Golden Gate Bridge above rolling fog",
   },
   {
     id: "top-5",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_TOP_BASE}/top-5.webp`,
+    alt: "Soccer stadium at night during a match",
   },
 ];
 
 export const EDIT_SHOWCASE_BOTTOM_ROW: EditShowcasePhoto[] = [
   {
     id: "bottom-1",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-1.webp`,
+    alt: "Minimal product photo of hand sanitizer bottles on linen",
   },
   {
     id: "bottom-2",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-2.webp`,
+    alt: "Mercedes E-Class at sunset in the hills",
   },
   {
     id: "bottom-3",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-3.webp`,
+    alt: "Rolex Datejust watch close-up on a dark surface",
   },
   {
     id: "bottom-4",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-4.webp`,
+    alt: "Modern open-concept living and dining room",
   },
   {
     id: "bottom-5",
-    src: BLANK_IMAGE_SRC,
-    alt: "",
+    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-5.webp`,
+    alt: "Close-up of monstera leaves with natural light",
   },
 ];
 
