@@ -42,13 +42,13 @@ export const socialLinks = [
 ] as const;
 
 export const navigationLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Features", href: "#features" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Home", href: "/#home" },
+  { label: "Features", href: "/#features" },
+  { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "mailto:admin@redux.so" },
 ] as const;
 
 export const legalLinks = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
 ] as const;

@@ -2,6 +2,8 @@
 
 import { Menu01, XClose } from "@untitledui/icons";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 
@@ -13,10 +15,11 @@ import {
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
+/** Matches crop-guide column geometry without async CSS vars (see measureGridColumns). */
 const NAV_GRID_FRAME = cn(
   "relative box-border min-w-0 overflow-x-clip",
-  "ml-[var(--page-grid-left,0px)] w-[min(var(--page-grid-width,100%),calc(100%-var(--page-grid-left,0px)))]",
-  "max-w-full px-3 sm:px-4",
+  "mx-auto w-full max-w-[min(100%,calc(80rem+3rem))] md:max-w-[min(100%,calc(80rem+4rem))]",
+  "px-3 sm:px-4",
 );
 
 const NAV_CONTAINER = cn(
@@ -26,9 +29,9 @@ const NAV_CONTAINER = cn(
 );
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Features", href: "#features" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Home", href: "/#home" },
+  { label: "Features", href: "/#features" },
+  { label: "FAQ", href: "/#faq" },
 ] as const;
 
 /** Scroll margin for in-page anchor targets below the fixed nav bar. */
@@ -96,8 +99,13 @@ const menuItemReducedVariants: Variants = {
   },
 };
 
+const navLinkClassName =
+  "whitespace-nowrap text-sm font-medium text-white/55 transition-colors hover:text-white";
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const prefersReducedMotion = useReducedMotion();
 
   const closeMobileMenu = () => setMobileOpen(false);
@@ -108,7 +116,7 @@ export default function Navbar() {
       top: 0,
       behavior: prefersReducedMotion ? "auto" : "smooth",
     });
-    window.history.replaceState(null, "", "#home");
+    window.history.replaceState(null, "", "/#home");
     closeMobileMenu();
   };
 
@@ -125,9 +133,9 @@ export default function Navbar() {
   return (
     <header className={NAV_FIXED}>
       <div className={cn(NAV_CONTAINER)}>
-        <a
-          href="#home"
-          onClick={scrollToTop}
+        <Link
+          href="/#home"
+          onClick={isHome ? scrollToTop : undefined}
           className="group relative z-10 inline-flex h-[34px] min-w-0 max-w-[7rem] items-center justify-self-start rounded-md max-md:ml-2 sm:max-w-[9.5rem] md:max-w-full"
           aria-label="Back to top"
         >
@@ -142,20 +150,16 @@ export default function Navbar() {
             )}
             priority
           />
-        </a>
+        </Link>
 
         <nav
           className="hidden min-w-0 items-center justify-self-center gap-4 md:flex lg:gap-6"
           aria-label="Main navigation"
         >
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="whitespace-nowrap text-sm font-medium text-white/55 transition-colors hover:text-white"
-            >
+            <Link key={link.href} href={link.href} className={navLinkClassName}>
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -169,12 +173,12 @@ export default function Navbar() {
           >
             <DiscordIcon className="size-5 shrink-0" />
           </a>
-          <a
-            href="#waitlist"
+          <Link
+            href="/#waitlist"
             className={cn(NAV_WAITLIST_CTA, "hidden md:inline-flex")}
           >
             Join Waitlist
-          </a>
+          </Link>
           <button
             type="button"
             className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-md text-white md:hidden"
@@ -260,13 +264,13 @@ export default function Navbar() {
               >
                 {navLinks.map((link) => (
                   <motion.div key={link.href} variants={itemVariants}>
-                    <a
+                    <Link
                       href={link.href}
                       className="block rounded-md px-3 py-2.5 text-[15px] font-medium text-white/55 transition-colors hover:bg-white/5 hover:text-white"
                       onClick={closeMobileMenu}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </motion.div>
                 ))}
               </nav>
@@ -285,13 +289,13 @@ export default function Navbar() {
                   </a>
                 </motion.div>
                 <motion.div variants={itemVariants}>
-                  <a
-                    href="#waitlist"
+                  <Link
+                    href="/#waitlist"
                     onClick={closeMobileMenu}
                     className={cn(NAV_WAITLIST_CTA, "flex w-full")}
                   >
                     Join Waitlist
-                  </a>
+                  </Link>
                 </motion.div>
               </div>
             </motion.div>

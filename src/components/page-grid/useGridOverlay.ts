@@ -2,7 +2,7 @@
 
 import {
   useCallback,
-  useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -145,7 +145,7 @@ export function useGridOverlay({
     );
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const overlay = overlayRef.current;
     const bounds = overlay?.parentElement;
 
@@ -160,6 +160,7 @@ export function useGridOverlay({
       frame = requestAnimationFrame(measure);
     };
 
+    measure();
     scheduleMeasure();
 
     const resizeObserver = new ResizeObserver(scheduleMeasure);

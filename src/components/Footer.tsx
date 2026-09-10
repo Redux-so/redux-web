@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Alata } from "next/font/google";
 
 import FooterPageGrid from "@/src/components/FooterPageGrid";
@@ -21,6 +22,31 @@ const footerWordmarkFont = Alata({
   subsets: ["latin"],
   display: "swap",
 });
+
+const footerLinkClassName =
+  "text-sm text-white/45 transition-colors hover:text-white";
+
+function FooterLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} className={footerLinkClassName}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} className={footerLinkClassName}>
+      {children}
+    </a>
+  );
+}
 
 export default function Footer() {
   return (
@@ -51,12 +77,7 @@ export default function Footer() {
               <ul className="mt-4 space-y-3">
                 {navigationLinks.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-white/45 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
+                    <FooterLink href={link.href}>{link.label}</FooterLink>
                   </li>
                 ))}
               </ul>
@@ -67,12 +88,7 @@ export default function Footer() {
               <ul className="mt-4 space-y-3">
                 {legalLinks.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-white/45 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </a>
+                    <FooterLink href={link.href}>{link.label}</FooterLink>
                   </li>
                 ))}
               </ul>
