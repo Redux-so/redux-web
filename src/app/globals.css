@@ -1463,6 +1463,8 @@ html {
       :is(
         [data-scroll-motion],
         [data-scroll-motion] *,
+        [data-showcase-scaler-frame],
+        [data-showcase-scaler-frame] *,
         .editor-showcase,
         .editor-showcase *,
         .library-showcase,
@@ -1501,8 +1503,9 @@ html {
   }
 
   [data-showcase-scaler-frame],
+  [data-showcase-scaler-frame] .showcase-resize-smooth-scale,
   .showcase-crop-layout,
-  .showcase-resize-smooth-scale {
+  .showcase-crop-layout .showcase-resize-smooth-scale {
     transition-property: width, height, transform, left, top;
     transition-duration: var(--layout-resize-duration);
     transition-timing-function: var(--layout-resize-ease);

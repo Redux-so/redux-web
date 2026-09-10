@@ -39,6 +39,9 @@ export const SECTION_HEADLINE =
 export const SECTION_VERTICAL_PADDING =
   "py-16 sm:py-20 lg:py-28";
 
+/** Horizontal inset matching {@link SECTION_VERTICAL_PADDING} — equal side whitespace. */
+export const SECTION_MATCHING_INSET_X = "px-16 sm:px-20 lg:px-28";
+
 /** Gap between a section intro label and its body content. */
 export const SECTION_STACK_GAP = "gap-8 sm:gap-10";
 

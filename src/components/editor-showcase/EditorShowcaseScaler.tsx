@@ -1,57 +1,76 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import EditorShowcase from "./EditorShowcase";
-import ShowcaseScrollReveal from "@/src/components/ShowcaseScrollReveal";
 import {
   SHOWCASE_DESIGN_HEIGHT,
   SHOWCASE_DESIGN_WIDTH,
   SHOWCASE_INNER_CLIP,
   SHOWCASE_OUTER_FRAME,
 } from "./showcase-layout";
+import {
+  computeShowcaseScale,
+  readContainerScale,
+  readLayoutWidth,
+} from "./showcase-scaler-utils";
 
-/** Fill the page column at full reveal — matches feature bento card width. */
+/** Fill PAGE_CONTAINER — same width as a full-row (md:col-span-2) feature bento card. */
 const SHOWCASE_WIDTH_RATIO = 1;
 
 function computeScale(containerWidth: number) {
-  if (containerWidth === 0) return 1;
-  return (containerWidth / SHOWCASE_DESIGN_WIDTH) * SHOWCASE_WIDTH_RATIO;
+  return computeShowcaseScale(containerWidth) * SHOWCASE_WIDTH_RATIO;
 }
 
-function readContainerScale(container: HTMLElement): number {
-  return computeScale(container.getBoundingClientRect().width);
+function readInitialLayout(containerWidth: number) {
+  if (containerWidth <= 0) {
+    return {
+      scale: 1,
+      scaledWidth: SHOWCASE_DESIGN_WIDTH,
+      scaledHeight: SHOWCASE_DESIGN_HEIGHT,
+    };
+  }
+
+  const scale = computeScale(containerWidth);
+  return {
+    scale,
+    scaledWidth: SHOWCASE_DESIGN_WIDTH * scale,
+    scaledHeight: SHOWCASE_DESIGN_HEIGHT * scale,
+  };
 }
 
-type EditorShowcaseScalerProps = {
-  /** Scroll-driven scale reveal — only for the main website showcase panel. */
-  scrollReveal?: boolean;
-};
-
-export default function EditorShowcaseScaler({
-  scrollReveal = false,
-}: EditorShowcaseScalerProps) {
+export default function EditorShowcaseScaler() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
+  const [layout, setLayout] = useState(() => readInitialLayout(0));
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     let frame = 0;
 
-    const updateScale = () => {
-      setScale(readContainerScale(container));
-    };
+    const updateLayout = () => {
+      const width = readLayoutWidth(container);
+      if (width > 0) {
+        const scale = readContainerScale(container) * SHOWCASE_WIDTH_RATIO;
+        setLayout({
+          scale,
+          scaledWidth: SHOWCASE_DESIGN_WIDTH * scale,
+          scaledHeight: SHOWCASE_DESIGN_HEIGHT * scale,
+        });
+        return;
+      }
 
-    updateScale();
+      setLayout(readInitialLayout(0));
+    };
 
     const observer = new ResizeObserver(() => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(updateScale);
+      frame = requestAnimationFrame(updateLayout);
     });
 
     observer.observe(container);
+    updateLayout();
 
     return () => {
       cancelAnimationFrame(frame);
@@ -59,15 +78,19 @@ export default function EditorShowcaseScaler({
     };
   }, []);
 
-  const scaledWidth = SHOWCASE_DESIGN_WIDTH * scale;
-  const scaledHeight = SHOWCASE_DESIGN_HEIGHT * scale;
-
-  const showcase = (
-    <div ref={containerRef} className="min-w-0 w-full py-2">
+  return (
+    <div
+      ref={containerRef}
+      data-showcase-scaler-container
+      className="flex min-w-0 w-full justify-center"
+    >
       <div
         data-showcase-scaler-frame
-        className={`relative mx-auto ${SHOWCASE_OUTER_FRAME}`}
-        style={{ width: scaledWidth, height: scaledHeight }}
+        className={`relative max-w-full ${SHOWCASE_OUTER_FRAME}`}
+        style={{
+          width: layout.scaledWidth,
+          height: layout.scaledHeight,
+        }}
       >
         <div className={SHOWCASE_INNER_CLIP}>
           <div
@@ -75,7 +98,7 @@ export default function EditorShowcaseScaler({
             style={{
               width: SHOWCASE_DESIGN_WIDTH,
               height: SHOWCASE_DESIGN_HEIGHT,
-              transform: `scale(${scale})`,
+              transform: `scale(${layout.scale})`,
             }}
           >
             <EditorShowcase />
@@ -84,10 +107,4 @@ export default function EditorShowcaseScaler({
       </div>
     </div>
   );
-
-  if (scrollReveal) {
-    return <ShowcaseScrollReveal>{showcase}</ShowcaseScrollReveal>;
-  }
-
-  return showcase;
 }
