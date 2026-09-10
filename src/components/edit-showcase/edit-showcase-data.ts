@@ -10,8 +10,8 @@ const EDIT_SHOWCASE_BOTTOM_BASE = "/edit-showcase/bottom";
 export const EDIT_SHOWCASE_TOP_ROW: EditShowcasePhoto[] = [
   {
     id: "top-1",
-    src: `${EDIT_SHOWCASE_TOP_BASE}/top-1.webp`,
-    alt: "Cherry blossom street in Japan with cyclist and traffic",
+    src: `${EDIT_SHOWCASE_TOP_BASE}/shibuya-crossing.webp`,
+    alt: "Shibuya Crossing at dusk with neon billboards and pedestrians",
   },
   {
     id: "top-2",
@@ -20,8 +20,8 @@ export const EDIT_SHOWCASE_TOP_ROW: EditShowcasePhoto[] = [
   },
   {
     id: "top-3",
-    src: `${EDIT_SHOWCASE_TOP_BASE}/top-3.webp`,
-    alt: "Snowy shrine with glowing orange lanterns at night",
+    src: `${EDIT_SHOWCASE_TOP_BASE}/snowy-shrine-lanterns.webp`,
+    alt: "Snow-covered shrine gate with glowing paper lanterns at night",
   },
   {
     id: "top-4",
@@ -30,8 +30,8 @@ export const EDIT_SHOWCASE_TOP_ROW: EditShowcasePhoto[] = [
   },
   {
     id: "top-5",
-    src: `${EDIT_SHOWCASE_TOP_BASE}/top-5.webp`,
-    alt: "Soccer stadium at night during a match",
+    src: `${EDIT_SHOWCASE_TOP_BASE}/stadium-night.webp`,
+    alt: "Soccer stadium at night during a match under floodlights",
   },
 ];
 
