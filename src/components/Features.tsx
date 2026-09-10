@@ -83,8 +83,8 @@ export default function Features() {
                 <div className="feature-collab-actions-glow" aria-hidden />
                 <div className="relative z-[1] w-[9.25rem] shrink-0 sm:w-[10rem] md:w-[10.5rem]">
                   <BeforeAfterSlider
-                    beforeSrc="/features/auto-enhance/before.jpg"
-                    afterSrc="/features/auto-enhance/after.jpg"
+                    beforeSrc="/features/auto-enhance/after.jpg"
+                    afterSrc="/features/auto-enhance/before.jpg"
                     className="h-[5.75rem] w-full sm:h-[6rem]"
                   />
                 </div>
