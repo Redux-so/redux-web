@@ -1,3 +1,5 @@
+import { redactEmailForLogs } from "@/lib/waitlist-validation";
+
 const LOOPS_UPDATE_CONTACT_URL = "https://app.loops.so/api/v1/contacts/update";
 
 type LoopsResponse = {
@@ -30,5 +32,26 @@ export async function addToWaitlist(email: string): Promise<LoopsResponse> {
     }),
   });
 
-  return (await response.json()) as LoopsResponse;
+  const data = (await response.json()) as LoopsResponse;
+
+  if (data.success) {
+    return data;
+  }
+
+  const message = data.message?.toLowerCase() ?? "";
+  if (
+    response.status === 409 ||
+    message.includes("already") ||
+    message.includes("exist")
+  ) {
+    return { success: true, id: data.id };
+  }
+
+  console.error(
+    "Waitlist: Loops API error for",
+    redactEmailForLogs(email),
+    data.message,
+  );
+
+  return data;
 }

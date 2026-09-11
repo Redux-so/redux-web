@@ -1,7 +1,8 @@
 "use client";
 
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { motion, useReducedMotion } from "framer-motion";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 import DotGridBackground from "@/src/components/DotGridBackground";
 import SectionShell from "@/src/components/SectionShell";
@@ -13,10 +14,11 @@ import {
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
 import { HERO_HEADLINE, PAGE_GRID_ALIGNED_FRAME } from "@/lib/section-styles";
+import { WAITLIST_EMAIL_REGEX } from "@/lib/waitlist-validation";
 import { cn } from "@/lib/utils";
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_LOADING_MS = 600;
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const WAITLIST_SUBMIT_CTA = cn(
   "hero-pill-cta hero-pill-cta--purple hero-pill-cta--shimmer shrink-0",
@@ -35,21 +37,23 @@ export default function WaitlistSection() {
   const [website, setWebsite] = useState("");
   const [formState, setFormState] = useState<FormState>("idle");
   const [error, setError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
   const prefersReducedMotion = useReducedMotion();
+
+  const formLoadedAtRef = useRef(Date.now());
+  const turnstileRef = useRef<TurnstileInstance>(null);
+  const pendingSubmitRef = useRef(false);
 
   const overlayTransition = prefersReducedMotion
     ? { duration: 0.15 }
     : { duration: 0.25, ease: EASE_OUT };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setError("");
+  const resetTurnstile = () => {
+    setTurnstileToken("");
+    turnstileRef.current?.reset();
+  };
 
-    if (!EMAIL_REGEX.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
+  const performSubmit = async (token: string) => {
     setFormState("loading");
 
     const startedAt = Date.now();
@@ -58,7 +62,12 @@ export default function WaitlistSection() {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, website }),
+        body: JSON.stringify({
+          email,
+          website,
+          formLoadedAt: formLoadedAtRef.current,
+          turnstileToken: token || undefined,
+        }),
       });
 
       const elapsed = Date.now() - startedAt;
@@ -68,17 +77,57 @@ export default function WaitlistSection() {
 
       if (!response.ok) {
         const data = (await response.json()) as { error?: string };
+        if (response.status === 429) {
+          throw new Error("Too many attempts. Please try again later.");
+        }
         throw new Error(data.error ?? "Something went wrong. Please try again.");
       }
 
       setFormState("success");
     } catch (submitError) {
       setFormState("idle");
+      resetTurnstile();
       setError(
         submitError instanceof Error
           ? submitError.message
           : "Something went wrong. Please try again.",
       );
+    }
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError("");
+
+    if (!WAITLIST_EMAIL_REGEX.test(email.trim())) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (TURNSTILE_SITE_KEY) {
+      if (turnstileToken) {
+        void performSubmit(turnstileToken);
+        return;
+      }
+
+      pendingSubmitRef.current = true;
+      turnstileRef.current?.execute();
+      return;
+    }
+
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Waitlist: Turnstile site key not configured — skipping CAPTCHA");
+    }
+
+    void performSubmit("");
+  };
+
+  const handleTurnstileSuccess = (token: string) => {
+    setTurnstileToken(token);
+
+    if (pendingSubmitRef.current) {
+      pendingSubmitRef.current = false;
+      void performSubmit(token);
     }
   };
 
@@ -124,7 +173,23 @@ export default function WaitlistSection() {
                 aria-hidden="true"
                 className="sr-only"
               />
-              <div className="w-[min(100%,13rem)] shrink-0 sm:w-[15rem]">
+              {TURNSTILE_SITE_KEY ? (
+                <div className="sr-only" aria-hidden>
+                  <Turnstile
+                    ref={turnstileRef}
+                    siteKey={TURNSTILE_SITE_KEY}
+                    options={{ size: "invisible" }}
+                    onSuccess={handleTurnstileSuccess}
+                    onExpire={resetTurnstile}
+                    onError={() => {
+                      pendingSubmitRef.current = false;
+                      resetTurnstile();
+                      setError("Unable to verify submission. Please try again.");
+                    }}
+                  />
+                </div>
+              ) : null}
+              <div className="relative w-[min(100%,13rem)] shrink-0 sm:w-[15rem]">
                 <input
                   type="email"
                   name="email"
@@ -133,10 +198,18 @@ export default function WaitlistSection() {
                   placeholder="you@example.com"
                   required
                   tabIndex={formState === "idle" ? 0 : -1}
+                  aria-invalid={error ? true : undefined}
+                  aria-describedby={error ? "waitlist-error" : undefined}
                   className="hero-pill-input w-full"
                 />
                 {error ? (
-                  <p className="mt-2 text-center text-base text-red-400">{error}</p>
+                  <p
+                    id="waitlist-error"
+                    role="alert"
+                    className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 w-max max-w-[min(100vw-3rem,18rem)] -translate-x-1/2 text-center text-sm leading-snug text-red-400"
+                  >
+                    {error}
+                  </p>
                 ) : null}
               </div>
               <button
