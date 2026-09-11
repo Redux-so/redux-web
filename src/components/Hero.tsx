@@ -6,13 +6,11 @@ import {
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
+import { HERO_PILL_CTA_BASE } from "@/lib/button-styles";
 import { HERO_HEADLINE } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
-const HERO_CTA =
-  "hero-pill-cta inline-flex h-11 min-h-11 max-h-11 items-center justify-center w-auto min-w-0 shrink-0 box-border px-4 sm:px-6 no-underline leading-none";
-
-const HERO_CTA_WITH_ICON = cn(HERO_CTA, "gap-2");
+const HERO_CTA_WITH_ICON = cn(HERO_PILL_CTA_BASE, "gap-2");
 
 export default function Hero() {
   return (
@@ -42,7 +40,7 @@ export default function Hero() {
             <div className="flex flex-row flex-nowrap items-center justify-center gap-2 sm:gap-3">
               <a
                 href="#waitlist"
-                className={cn(HERO_CTA, "hero-pill-cta--purple hero-pill-cta--shimmer")}
+                className={cn(HERO_PILL_CTA_BASE, "hero-pill-cta--purple hero-pill-cta--shimmer")}
               >
                 <span className="hero-pill-cta__shimmer-text">
                   <span className="hero-pill-cta__shimmer-text-base">Join Waitlist</span>

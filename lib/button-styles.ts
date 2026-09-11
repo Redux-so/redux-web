@@ -18,6 +18,17 @@ export const BTN_SOFT_PRIMARY_TYPE =
 export const BTN_SOFT_VISUAL =
   "rounded-md border border-[#ffffff]/10 bg-[#ededed] shadow-none transition-[background-color,transform] duration-200 hover:bg-[#e0e0e0] active:scale-[0.98] active:bg-[#d4d4d4] disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100";
 
+/** Fixed height for marketing hero pills (CTAs, waitlist input + submit). */
+export const HERO_PILL_CONTROL_HEIGHT =
+  "h-11 min-h-11 max-h-11 box-border leading-none";
+
+/** Shell classes shared by homepage hero CTAs and waitlist submit button. */
+export const HERO_PILL_CTA_BASE = [
+  "hero-pill-cta inline-flex items-center justify-center w-auto min-w-0 shrink-0 no-underline",
+  HERO_PILL_CONTROL_HEIGHT,
+  "px-4 sm:px-6",
+].join(" ");
+
 /** Standalone product CTA : toolbar Export (does not affect marketing waitlist) */
 export const BTN_SOFT_SOLID = [
   "inline-flex items-center justify-center gap-1.5 h-9 px-4 whitespace-nowrap cursor-pointer select-none",

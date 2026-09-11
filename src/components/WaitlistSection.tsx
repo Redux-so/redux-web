@@ -9,6 +9,10 @@ import SectionShell from "@/src/components/SectionShell";
 import { Icon } from "@/components/shared/Icon";
 import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
 import {
+  HERO_PILL_CONTROL_HEIGHT,
+  HERO_PILL_CTA_BASE,
+} from "@/lib/button-styles";
+import {
   EASE_OUT,
   ScrollRevealGroup,
   ScrollRevealItem,
@@ -21,7 +25,8 @@ const MIN_LOADING_MS = 600;
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const WAITLIST_SUBMIT_CTA = cn(
-  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--shimmer shrink-0",
+  HERO_PILL_CTA_BASE,
+  "hero-pill-cta--purple hero-pill-cta--shimmer gap-2",
 );
 
 type FormState = "idle" | "loading" | "success";
@@ -201,13 +206,13 @@ export default function WaitlistSection() {
                   tabIndex={formState === "idle" ? 0 : -1}
                   aria-invalid={error ? true : undefined}
                   aria-describedby={error ? "waitlist-error" : undefined}
-                  className="hero-pill-input w-full"
+                  className={cn("hero-pill-input w-full", HERO_PILL_CONTROL_HEIGHT)}
                 />
               </div>
               <button
                 type="submit"
                 tabIndex={formState === "idle" ? 0 : -1}
-                className={cn(WAITLIST_SUBMIT_CTA, "inline-flex items-center gap-1.5 px-6")}
+                className={WAITLIST_SUBMIT_CTA}
               >
                 <span className="hero-pill-cta__shimmer-text">
                   <span className="hero-pill-cta__shimmer-text-base">Join</span>
