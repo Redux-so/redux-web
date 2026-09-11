@@ -155,11 +155,12 @@ export default function WaitlistSection() {
           </ScrollRevealItem>
 
           <ScrollRevealItem className="relative mt-10 flex w-full flex-col items-center">
+            <div className="relative mx-auto w-fit max-w-full">
             <form
               onSubmit={handleSubmit}
               aria-hidden={formState !== "idle"}
               className={cn(
-                "mx-auto flex w-fit max-w-full flex-row flex-nowrap items-center justify-center gap-2 sm:gap-4",
+                "flex w-fit max-w-full flex-row flex-nowrap items-center justify-center gap-2 sm:gap-4",
                 formState !== "idle" && "pointer-events-none invisible",
               )}
             >
@@ -189,7 +190,7 @@ export default function WaitlistSection() {
                   />
                 </div>
               ) : null}
-              <div className="relative w-[min(100%,13rem)] shrink-0 sm:w-[15rem]">
+              <div className="w-[min(100%,13rem)] shrink-0 sm:w-[15rem]">
                 <input
                   type="email"
                   name="email"
@@ -202,15 +203,6 @@ export default function WaitlistSection() {
                   aria-describedby={error ? "waitlist-error" : undefined}
                   className="hero-pill-input w-full"
                 />
-                {error ? (
-                  <p
-                    id="waitlist-error"
-                    role="alert"
-                    className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 w-max max-w-[min(100vw-3rem,18rem)] -translate-x-1/2 text-center text-sm leading-snug text-red-400"
-                  >
-                    {error}
-                  </p>
-                ) : null}
               </div>
               <button
                 type="submit"
@@ -232,6 +224,16 @@ export default function WaitlistSection() {
                 />
               </button>
             </form>
+            {error ? (
+              <p
+                id="waitlist-error"
+                role="alert"
+                className="pointer-events-none absolute inset-x-0 top-full z-10 mt-2 text-center text-sm leading-snug text-red-400"
+              >
+                {error}
+              </p>
+            ) : null}
+            </div>
 
             {formState === "loading" ? (
               <div
