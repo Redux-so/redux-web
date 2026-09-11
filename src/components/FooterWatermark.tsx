@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -16,36 +16,48 @@ type FooterWatermarkProps = {
 export default function FooterWatermark({ fontClassName }: FooterWatermarkProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      const container = containerRef.current;
-      if (!container) return;
-
-      const rect = container.getBoundingClientRect();
-      container.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
-      container.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
-    },
-    [],
-  );
-
-  const handleMouseLeave = useCallback(() => {
+  useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    container.style.setProperty("--mouse-x", "-9999px");
-    container.style.setProperty("--mouse-y", "-9999px");
+    const footer = container.closest("footer");
+    if (!footer) return;
+
+    const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (!finePointerQuery.matches) return;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      container.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
+      container.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
+    };
+
+    const handleMouseLeave = () => {
+      container.style.setProperty("--mouse-x", "-9999px");
+      container.style.setProperty("--mouse-y", "-9999px");
+    };
+
+    footer.addEventListener("mousemove", handleMouseMove);
+    footer.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      footer.removeEventListener("mousemove", handleMouseMove);
+      footer.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, []);
 
   return (
     <div
       aria-hidden
-      className="flex justify-center pb-6 sm:pb-8 lg:pb-10"
+      className="pointer-events-none flex justify-center pb-6 sm:pb-8 lg:pb-10"
     >
       <div
         ref={containerRef}
-        className={cn("watermark-container", fontClassName, WATERMARK_SIZE_CLASS)}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        className={cn(
+          "watermark-container pointer-events-none",
+          fontClassName,
+          WATERMARK_SIZE_CLASS,
+        )}
         style={
           {
             "--mouse-x": "-9999px",

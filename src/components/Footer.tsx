@@ -53,7 +53,7 @@ export default function Footer() {
     <footer className="footer-bottom-glow relative sticky bottom-0 z-0 bg-[#040404] text-white">
       <FooterPageGrid />
       <div className="relative z-[1]">
-        <div className={PAGE_CONTAINER}>
+        <div className={cn(PAGE_CONTAINER, "relative z-10")}>
         <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16 lg:py-16">
           <div className="flex flex-col items-start gap-5">
             <Image
