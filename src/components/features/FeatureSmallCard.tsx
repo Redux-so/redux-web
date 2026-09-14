@@ -43,7 +43,7 @@ export default function FeatureSmallCard({
             <span className="shrink-0 text-xs text-neutral-500">{topRightLabel}</span>
           ) : null}
         </div>
-        <p className="m-0 text-sm leading-relaxed text-white/55">
+        <p className="m-0 text-sm leading-relaxed text-marketing-muted">
           {description}
         </p>
         {cta ? (

@@ -100,7 +100,7 @@ const menuItemReducedVariants: Variants = {
 };
 
 const navLinkClassName =
-  "whitespace-nowrap text-sm font-medium text-white/55 transition-colors hover:text-white";
+  "whitespace-nowrap text-sm font-medium text-marketing-muted transition-colors hover:text-white";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -266,7 +266,7 @@ export default function Navbar() {
                   <motion.div key={link.href} variants={itemVariants}>
                     <Link
                       href={link.href}
-                      className="block rounded-md px-3 py-2.5 text-[15px] font-medium text-white/55 transition-colors hover:bg-white/5 hover:text-white"
+                      className="block rounded-md px-3 py-2.5 text-[15px] font-medium text-marketing-muted transition-colors hover:bg-white/5 hover:text-white"
                       onClick={closeMobileMenu}
                     >
                       {link.label}

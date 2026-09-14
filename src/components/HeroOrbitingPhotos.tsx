@@ -349,13 +349,6 @@ export default function HeroOrbitingPhotos() {
             </OrbitingCircles>
           </div>
         </div>
-        <div
-          aria-hidden
-          className={cn(
-            "hero-orbit-center-vignette pointer-events-none absolute left-1/2 top-1/2 z-[5] -translate-x-1/2 -translate-y-1/2",
-            HERO_ORBIT_CENTER_OFFSET,
-          )}
-        />
       </div>
     </div>
   );

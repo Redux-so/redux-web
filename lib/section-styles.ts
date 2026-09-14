@@ -25,7 +25,7 @@ export const PAGE_GRID_ALIGNED_FRAME =
 
 /** Uppercase section label : Features, FAQ, Edit showcase intros. */
 export const SECTION_LABEL =
-  "text-[13px] font-semibold uppercase tracking-wide text-[#727272]";
+  "text-[13px] font-semibold uppercase tracking-wide text-marketing-section-label";
 
 /** Hero page title */
 export const HERO_HEADLINE =

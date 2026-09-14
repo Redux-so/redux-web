@@ -139,7 +139,7 @@ export default function WaitlistSection() {
   return (
     <SectionShell container={false} className="relative z-[1]">
       <div className={cn(PAGE_GRID_ALIGNED_FRAME, "px-10 sm:px-12 lg:px-16")}>
-        <div className="relative w-full overflow-hidden rounded-2xl border border-neutral-800 bg-[#0d0d0d] px-6 py-20 sm:py-24">
+        <div className="relative w-full overflow-hidden rounded-2xl border border-marketing-strong bg-[#04060E] px-6 py-20 sm:py-24">
         <DotGridBackground className="absolute inset-0 z-0" />
         <div aria-hidden className="waitlist-card-spotlight absolute inset-0 z-10" />
 
@@ -154,7 +154,7 @@ export default function WaitlistSection() {
           </ScrollRevealItem>
 
           <ScrollRevealItem className="w-full">
-            <p className="mt-5 text-pretty text-base leading-relaxed text-white/55 sm:text-lg lg:whitespace-nowrap">
+            <p className="mt-5 text-pretty text-base leading-relaxed text-marketing-muted sm:text-lg lg:whitespace-nowrap">
               Get early access when we launch, plus join our founding community today.
             </p>
           </ScrollRevealItem>

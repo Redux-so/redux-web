@@ -3,7 +3,7 @@
 import { PAGE_GRID_OFFSET_PX } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
-export const GRID_LINE_COLOR = "rgba(255, 255, 255, 0.08)";
+export const GRID_LINE_COLOR = "rgba(255, 255, 255, 0.07)";
 export const GRID_LINE_WIDTH_PX = 1;
 
 /** Full-viewport horizontal hairline (breaks out of max-width columns). */

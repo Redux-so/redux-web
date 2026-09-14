@@ -58,7 +58,7 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
           >
             The Full Toolkit
           </h2>
-          <p className="mt-3 m-0 text-sm leading-relaxed text-white/55 sm:text-[15px]">
+          <p className="mt-3 m-0 text-sm leading-relaxed text-marketing-muted sm:text-[15px]">
             Everything a full editor needs, plus AI when you want it.
           </p>
         </div>

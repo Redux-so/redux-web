@@ -25,7 +25,7 @@ export default function ToolkitItemCard({ item, className }: ToolkitItemCardProp
       <h3 className="m-0 text-sm font-semibold leading-snug text-white sm:text-[15px]">
         {item.name}
       </h3>
-      <p className="m-0 text-sm leading-snug text-white/55">{item.description}</p>
+      <p className="m-0 text-sm leading-snug text-marketing-muted">{item.description}</p>
     </article>
   );
 }

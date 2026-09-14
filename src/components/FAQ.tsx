@@ -97,7 +97,7 @@ export default function FAQ() {
 
         <div
           aria-hidden
-          className="hidden w-px shrink-0 self-stretch bg-[rgba(255,255,255,0.08)] lg:col-start-2 lg:row-start-1 lg:block lg:justify-self-center"
+          className="hidden w-px shrink-0 self-stretch bg-[rgba(255,255,255,0.07)] lg:col-start-2 lg:row-start-1 lg:block lg:justify-self-center"
         />
 
         <ScrollReveal className="min-w-0 w-full lg:col-start-3 lg:row-start-1 lg:self-stretch">

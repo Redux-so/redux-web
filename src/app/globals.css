@@ -50,6 +50,10 @@
   --color-brand-surface2: var(--brand-surface2);
   --color-brand-border: var(--brand-border);
   --color-brand-border-focus: var(--brand-border-focus);
+  --color-marketing-muted: var(--marketing-text-muted);
+  --color-marketing-subtle: var(--marketing-text-subtle);
+  --color-marketing-section-label: var(--marketing-section-label);
+  --color-marketing-strong: var(--marketing-border-strong);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -105,15 +109,26 @@
   --accent-end: #5285ff;
   --scrollbar-thumb: rgba(255, 255, 255, 0.12);
   --scrollbar-thumb-hover: rgba(58, 111, 255, 0.38);
-  --brand-bg: #0a0a0a;
-  --brand-surface: #1d1d1d;
-  --brand-surface-card: #121212;
-  --brand-surface2: #1d1d1d;
-  --brand-border: #2e2e2e;
-  --brand-border-focus: #3a3a3a;
+  --brand-bg: #04060e;
+  --brand-surface: #191919;
+  --brand-surface-card: #101010;
+  --brand-surface2: #191919;
+  --brand-border: #2a2a2a;
+  --brand-border-focus: #363636;
+
+  /* Marketing site muted greys (showcase UIs keep hardcoded editor tokens). */
+  --marketing-text-muted: rgb(255 255 255 / 0.52);
+  --marketing-text-subtle: rgb(255 255 255 / 0.42);
+  --marketing-section-label: #666666;
+  --marketing-card-bg-top: #131313;
+  --marketing-card-bg-bottom: #0c0c0c;
+  --marketing-card-border: rgba(255, 255, 255, 0.065);
+  --marketing-card-inset-highlight: rgba(255, 255, 255, 0.09);
+  --marketing-card-inset-shadow: rgba(0, 0, 0, 0.42);
+  --marketing-border-strong: rgb(255 255 255 / 0.1);
 
   /* Dot grid texture — shared across waitlist, FAQ, hover accents, etc. */
-  --dot-grid-color: rgba(255, 255, 255, 0.045);
+  --dot-grid-color: rgba(255, 255, 255, 0.038);
   --dot-grid-radius: 0.85px;
   --dot-grid-cell: 20px;
 
@@ -125,10 +140,10 @@
   --hero-glow-top-opacity: 0.17;
 
   /* Charcoal surface : shared with hero-pill-cta--charcoal & feature cards */
-  --charcoal-bg-top: #242424;
-  --charcoal-bg-bottom: #1a1a1a;
-  --charcoal-border: rgba(255, 255, 255, 0.08);
-  --charcoal-inset-top: rgba(255, 255, 255, 0.15);
+  --charcoal-bg-top: #212121;
+  --charcoal-bg-bottom: #171717;
+  --charcoal-border: rgba(255, 255, 255, 0.075);
+  --charcoal-inset-top: rgba(255, 255, 255, 0.14);
   --charcoal-inset-bottom: rgba(0, 0, 0, 0.3);
   --charcoal-outer-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 
@@ -153,10 +168,10 @@
   --panel-inset-shadow: rgba(0, 0, 0, 0.45);
   --panel-radius: var(--cta-radius);
 
-  --chip-bg-top: #161616;
-  --chip-bg-bottom: #0f0f0f;
-  --chip-border: rgba(255, 255, 255, 0.07);
-  --chip-inset-highlight: rgba(255, 255, 255, 0.1);
+  --chip-bg-top: #131313;
+  --chip-bg-bottom: #0c0c0c;
+  --chip-border: rgba(255, 255, 255, 0.065);
+  --chip-inset-highlight: rgba(255, 255, 255, 0.09);
   --chip-inset-shadow: rgba(0, 0, 0, 0.4);
   --chip-shadow-outer: 0 4px 10px rgba(0, 0, 0, 0.45);
   --chip-radius: var(--cta-radius);
@@ -533,7 +548,7 @@ html {
 .nav-backdrop-blur {
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .faq-heading-glow {
@@ -869,33 +884,6 @@ html {
   outline: none;
 }
 
-/* Dark focus pocket over orbit tiles behind hero copy. */
-.hero-orbit-center-vignette {
-  width: 16rem;
-  height: 12rem;
-  background: radial-gradient(
-    ellipse 100% 100% at 50% 50%,
-    rgb(10 10 10 / 1) 0%,
-    rgb(10 10 10 / 0.92) 42%,
-    rgb(10 10 10 / 0.58) 68%,
-    transparent 100%
-  );
-}
-
-@media (min-width: 768px) {
-  .hero-orbit-center-vignette {
-    width: 20rem;
-    height: 14rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-orbit-center-vignette {
-    width: 24rem;
-    height: 17rem;
-  }
-}
-
 .hero-orbit-parallax {
   perspective: 1200px;
   transform-style: preserve-3d;
@@ -1161,8 +1149,17 @@ html {
   .ui-card,
   .ui-panel,
   .ui-chip,
-  .showcase-frame,
   .ui-card-border {
+    position: relative;
+    isolation: isolate;
+    border: var(--card-border-width) solid var(--marketing-card-border);
+    box-shadow:
+      inset 0 1px 0 var(--marketing-card-inset-highlight),
+      inset 0 -1px 0 var(--marketing-card-inset-shadow),
+      var(--card-shadow-outer);
+  }
+
+  .showcase-frame {
     position: relative;
     isolation: isolate;
     border: var(--card-border-width) solid var(--card-border);
@@ -1198,8 +1195,8 @@ html {
     border-radius: var(--card-radius);
     background: linear-gradient(
       180deg,
-      var(--card-bg-top) 0%,
-      var(--card-bg-bottom) 100%
+      var(--marketing-card-bg-top) 0%,
+      var(--marketing-card-bg-bottom) 100%
     );
   }
 
@@ -1292,7 +1289,7 @@ html {
   }
 
   .watermark-base {
-    -webkit-text-stroke: 2.5px rgba(255, 255, 255, 0.15);
+    -webkit-text-stroke: 2.5px rgba(255, 255, 255, 0.13);
   }
 
   .watermark-glow {

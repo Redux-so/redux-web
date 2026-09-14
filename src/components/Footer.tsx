@@ -24,7 +24,7 @@ const footerWordmarkFont = Alata({
 });
 
 const footerLinkClassName =
-  "text-sm text-white/45 transition-colors hover:text-white";
+  "text-sm text-marketing-subtle transition-colors hover:text-white";
 
 function FooterLink({
   href,
@@ -50,7 +50,7 @@ function FooterLink({
 
 export default function Footer() {
   return (
-    <footer className="footer-bottom-glow relative sticky bottom-0 z-0 bg-[#040404] text-white">
+    <footer className="footer-bottom-glow relative sticky bottom-0 z-0 bg-[#02040A] text-white">
       <FooterPageGrid />
       <div className="relative z-[1]">
         <div className={cn(PAGE_CONTAINER, "relative z-10")}>
@@ -66,7 +66,7 @@ export default function Footer() {
                 "block w-auto object-contain object-left",
               )}
             />
-            <p className="max-w-xs text-sm leading-snug text-white/45">
+            <p className="max-w-xs text-sm leading-snug text-marketing-subtle">
               {SITE_MOTTO}
             </p>
           </div>

@@ -74,7 +74,7 @@ export default function FeatureBentoCard({
         >
           {headline}
         </h3>
-        <p className="m-0 text-sm leading-relaxed text-white/55 sm:text-[15px]">
+        <p className="m-0 text-sm leading-relaxed text-marketing-muted sm:text-[15px]">
           {description}
         </p>
         <a
