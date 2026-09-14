@@ -5,6 +5,7 @@ import { useReducedMotion } from "framer-motion";
 
 import {
   createMixedFillerGrid,
+  getDefaultFillerGrid,
   SHOWCASE_SEARCH_ERASE_MS,
   SHOWCASE_SEARCH_HOLD_MS,
   SHOWCASE_SEARCH_IDLE_DELAY_MS,
@@ -29,8 +30,8 @@ function useSmartSearchDemo(active: boolean) {
   const [searchValue, setSearchValue] = useState("");
   const [phase, setPhase] = useState<LibrarySearchDemoPhase>("idle");
   const [scenarioIndex, setScenarioIndex] = useState(0);
-  const [fillerImages, setFillerImages] = useState<LibraryShowcaseImage[]>(() =>
-    createMixedFillerGrid(),
+  const [fillerImages, setFillerImages] = useState<LibraryShowcaseImage[]>(
+    getDefaultFillerGrid,
   );
   const scenarioIndexRef = useRef(0);
   const fillerInitializedRef = useRef(false);
@@ -55,7 +56,7 @@ function useSmartSearchDemo(active: boolean) {
       setScenarioIndex(0);
       scenarioIndexRef.current = 0;
       fillerInitializedRef.current = false;
-      setFillerImages(createMixedFillerGrid());
+      setFillerImages(getDefaultFillerGrid());
       return clearAll;
     }
 

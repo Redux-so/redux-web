@@ -102,15 +102,6 @@ const RECENT_BLOCKED_FIRST_IDS = new Set([
   "urban-1",
 ]);
 
-function shuffleArray<T>(items: readonly T[]): T[] {
-  const copy = [...items];
-  for (let index = copy.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
-  }
-  return copy;
-}
-
 function ensureValidRecentLeadImage(
   images: LibraryShowcaseImage[],
 ): LibraryShowcaseImage[] {
@@ -133,22 +124,44 @@ function ensureValidRecentLeadImage(
   return reordered;
 }
 
-/** One random pick per group, interleaved — Big Ben, F1, and Mount Fuji never lead. */
-export function createMixedFillerGrid(): LibraryShowcaseImage[] {
+function buildMixedFillerGrid(
+  pickPoolIndex: (availablePoolIndices: number[]) => number,
+): LibraryShowcaseImage[] {
   const pools = [
-    shuffleArray(SHOWCASE_F1_RESULTS),
-    shuffleArray(SHOWCASE_MOUNTAIN_RESULTS),
-    shuffleArray(SHOWCASE_URBAN_RESULTS),
+    [...SHOWCASE_F1_RESULTS],
+    [...SHOWCASE_MOUNTAIN_RESULTS],
+    [...SHOWCASE_URBAN_RESULTS],
   ];
   const mixed: LibraryShowcaseImage[] = [];
 
   while (mixed.length < SHOWCASE_LIBRARY_FILLER.length) {
-    const available = pools.filter((pool) => pool.length > 0);
-    const pool = available[Math.floor(Math.random() * available.length)];
-    mixed.push(pool.shift()!);
+    const availablePoolIndices = pools
+      .map((pool, index) => (pool.length > 0 ? index : -1))
+      .filter((index) => index >= 0);
+    const poolIndex = pickPoolIndex(availablePoolIndices);
+    mixed.push(pools[poolIndex].shift()!);
   }
 
   return ensureValidRecentLeadImage(mixed);
+}
+
+/** Stable grid for SSR + hydration — round-robin across category pools. */
+export function getDefaultFillerGrid(): LibraryShowcaseImage[] {
+  let roundRobinCursor = 0;
+  return buildMixedFillerGrid((availablePoolIndices) => {
+    const pick =
+      availablePoolIndices[roundRobinCursor % availablePoolIndices.length];
+    roundRobinCursor += 1;
+    return pick;
+  });
+}
+
+/** One random pick per group, interleaved — Big Ben, F1, and Mount Fuji never lead. */
+export function createMixedFillerGrid(): LibraryShowcaseImage[] {
+  return buildMixedFillerGrid((availablePoolIndices) => {
+    const randomIndex = Math.floor(Math.random() * availablePoolIndices.length);
+    return availablePoolIndices[randomIndex];
+  });
 }
 
 export const SHOWCASE_LIBRARY_ALBUMS = [
