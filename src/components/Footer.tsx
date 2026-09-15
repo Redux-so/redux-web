@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Alata } from "next/font/google";
 
 import FooterPageGrid from "@/src/components/FooterPageGrid";
+import MarketingNavLink from "@/src/components/MarketingNavLink";
 import FooterWatermark from "@/src/components/FooterWatermark";
 import {
   legalLinks,
@@ -35,9 +35,9 @@ function FooterLink({
 }) {
   if (href.startsWith("/")) {
     return (
-      <Link href={href} className={footerLinkClassName}>
+      <MarketingNavLink href={href} className={footerLinkClassName}>
         {children}
-      </Link>
+      </MarketingNavLink>
     );
   }
 

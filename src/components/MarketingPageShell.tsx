@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import Footer from "@/src/components/Footer";
+import MarketingScrollManager from "@/src/components/MarketingScrollManager";
 import Navbar, {
   NAV_SCROLL_OFFSET_CLASS,
   NAV_SPACER_CLASS,
@@ -25,6 +26,7 @@ export default function MarketingPageShell({
       className="marketing-resize-smooth min-h-full bg-[#02040A]"
       data-page-grid-shell
     >
+      <MarketingScrollManager />
       <Navbar />
 
       {/*

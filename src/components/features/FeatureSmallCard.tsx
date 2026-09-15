@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import MarketingNavLink from "@/src/components/MarketingNavLink";
 import { Icon, type IconName } from "@/components/shared/Icon";
 import { UI_CARD, UI_CHIP_ACCENT } from "@/lib/ui-surface-styles";
 import { cn } from "@/lib/utils";
@@ -47,7 +48,10 @@ export default function FeatureSmallCard({
           {description}
         </p>
         {cta ? (
-          <a href="#waitlist" className={cn(FEATURE_PILL_CTA, "mt-1 w-fit")}>
+          <MarketingNavLink
+            href="#waitlist"
+            className={cn(FEATURE_PILL_CTA, "mt-1 w-fit")}
+          >
             <span className="leading-none">{cta}</span>
             <Icon
               name="ArrowUpRight"
@@ -56,7 +60,7 @@ export default function FeatureSmallCard({
               className="shrink-0 text-white"
               aria-hidden
             />
-          </a>
+          </MarketingNavLink>
         ) : null}
       </div>
 

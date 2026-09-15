@@ -2,6 +2,7 @@
 
 import { Icon } from "@/components/shared/Icon";
 import HeroOrbitingPhotos from "@/src/components/HeroOrbitingPhotos";
+import MarketingNavLink from "@/src/components/MarketingNavLink";
 import {
   ScrollRevealGroup,
   ScrollRevealItem,
@@ -39,13 +40,13 @@ export default function Hero() {
 
           <ScrollRevealItem className="mt-8 flex w-full justify-center px-0">
             <div className="flex flex-row flex-nowrap items-center justify-center gap-2 sm:gap-3">
-              <a
+              <MarketingNavLink
                 href="#waitlist"
                 className={cn(HERO_PILL_CTA_BASE, "hero-pill-cta--purple")}
               >
                 <span className="leading-none">Join Waitlist</span>
-              </a>
-              <a
+              </MarketingNavLink>
+              <MarketingNavLink
                 href="#features"
                 className={cn(HERO_CTA_WITH_ICON, "hero-pill-cta--charcoal")}
               >
@@ -57,7 +58,7 @@ export default function Hero() {
                   className="shrink-0 text-white"
                   aria-hidden
                 />
-              </a>
+              </MarketingNavLink>
             </div>
           </ScrollRevealItem>
         </ScrollRevealGroup>

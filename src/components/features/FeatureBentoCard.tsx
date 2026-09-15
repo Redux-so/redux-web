@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import MarketingNavLink from "@/src/components/MarketingNavLink";
 import { Icon } from "@/components/shared/Icon";
 import { UI_CARD, SHOWCASE_FRAME } from "@/lib/ui-surface-styles";
 import { cn } from "@/lib/utils";
@@ -77,7 +78,7 @@ export default function FeatureBentoCard({
         <p className="m-0 text-sm leading-relaxed text-marketing-muted sm:text-[15px]">
           {description}
         </p>
-        <a
+        <MarketingNavLink
           href="#waitlist"
           className={cn(FEATURE_PILL_CTA, "mt-1 w-fit")}
         >
@@ -89,7 +90,7 @@ export default function FeatureBentoCard({
             className="shrink-0 text-white"
             aria-hidden
           />
-        </a>
+        </MarketingNavLink>
       </div>
 
       <div

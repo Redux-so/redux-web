@@ -2,11 +2,10 @@
 
 import { Menu01, XClose } from "@untitledui/icons";
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 
+import MarketingNavLink from "@/src/components/MarketingNavLink";
 import { DiscordIcon } from "@/lib/brand-social-icons";
 
 import {
@@ -104,21 +103,9 @@ const navLinkClassName =
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
-  const isHome = pathname === "/";
   const prefersReducedMotion = useReducedMotion();
 
   const closeMobileMenu = () => setMobileOpen(false);
-
-  const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-    });
-    window.history.replaceState(null, "", "/#home");
-    closeMobileMenu();
-  };
 
   const panelVariants = prefersReducedMotion
     ? menuPanelReducedVariants
@@ -133,11 +120,11 @@ export default function Navbar() {
   return (
     <header className={NAV_FIXED}>
       <div className={cn(NAV_CONTAINER)}>
-        <Link
+        <MarketingNavLink
           href="/#home"
-          onClick={isHome ? scrollToTop : undefined}
-          className="group relative z-10 inline-flex h-[34px] min-w-0 max-w-[7rem] items-center justify-self-start rounded-md max-md:ml-2 sm:max-w-[9.5rem] md:max-w-full"
+          onNavigate={closeMobileMenu}
           aria-label="Back to top"
+          className="group relative z-10 inline-flex h-[34px] min-w-0 max-w-[7rem] items-center justify-self-start rounded-md max-md:ml-2 sm:max-w-[9.5rem] md:max-w-full"
         >
           <Image
             src="/redux-logo-text.png"
@@ -150,16 +137,20 @@ export default function Navbar() {
             )}
             priority
           />
-        </Link>
+        </MarketingNavLink>
 
         <nav
           className="hidden min-w-0 items-center justify-self-center gap-4 md:flex lg:gap-6"
           aria-label="Main navigation"
         >
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={navLinkClassName}>
+            <MarketingNavLink
+              key={link.href}
+              href={link.href}
+              className={navLinkClassName}
+            >
               {link.label}
-            </Link>
+            </MarketingNavLink>
           ))}
         </nav>
 
@@ -173,12 +164,12 @@ export default function Navbar() {
           >
             <DiscordIcon className="size-5 shrink-0" />
           </a>
-          <Link
+          <MarketingNavLink
             href="/#waitlist"
             className={cn(NAV_WAITLIST_CTA, "hidden md:inline-flex")}
           >
             Join Waitlist
-          </Link>
+          </MarketingNavLink>
           <button
             type="button"
             className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-md text-white md:hidden"
@@ -264,13 +255,13 @@ export default function Navbar() {
               >
                 {navLinks.map((link) => (
                   <motion.div key={link.href} variants={itemVariants}>
-                    <Link
+                    <MarketingNavLink
                       href={link.href}
+                      onNavigate={closeMobileMenu}
                       className="block rounded-md px-3 py-2.5 text-[15px] font-medium text-marketing-muted transition-colors hover:bg-white/5 hover:text-white"
-                      onClick={closeMobileMenu}
                     >
                       {link.label}
-                    </Link>
+                    </MarketingNavLink>
                   </motion.div>
                 ))}
               </nav>
@@ -289,13 +280,13 @@ export default function Navbar() {
                   </a>
                 </motion.div>
                 <motion.div variants={itemVariants}>
-                  <Link
+                  <MarketingNavLink
                     href="/#waitlist"
-                    onClick={closeMobileMenu}
+                    onNavigate={closeMobileMenu}
                     className={cn(NAV_WAITLIST_CTA, "flex w-full")}
                   >
                     Join Waitlist
-                  </Link>
+                  </MarketingNavLink>
                 </motion.div>
               </div>
             </motion.div>
