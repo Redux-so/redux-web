@@ -19,6 +19,7 @@ export default function Hero() {
         <HeroOrbitingPhotos />
 
         <ScrollRevealGroup
+          data-hero-orbit-copy=""
           className="relative z-10 mx-auto max-w-3xl px-6 text-center"
           stagger={0.12}
         >

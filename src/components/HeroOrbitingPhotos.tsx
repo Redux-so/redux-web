@@ -19,8 +19,7 @@ const HERO_ORBIT_ROOT = cn(
   "top-[-3.75rem] h-[calc(100%+3.75rem)] sm:top-[-4rem] sm:h-[calc(100%+4rem)]",
 );
 
-/** Keeps the orbit stage centered on hero copy, not the extended root box. */
-const HERO_ORBIT_CENTER_OFFSET = "translate-y-[1.875rem] sm:translate-y-8";
+const ORBIT_COPY_CLEAR_PADDING = 36;
 
 const ORBIT_DURATION = 78;
 const DESKTOP_INNER_RADIUS = 390;
@@ -63,13 +62,82 @@ const ORBIT_TILE_RADIUS = 6;
 /** Cap layout width so tablet portrait doesn't inflate orbit vs phone. */
 const COMPACT_LAYOUT_MAX_WIDTH = 430;
 
-function getOrbitConfig(width: number, height: number): OrbitConfig {
+type CopyBounds = {
+  width: number;
+  height: number;
+};
+
+function getMinInnerRadiusForCopy(
+  copy: CopyBounds,
+  innerIconSize: number,
+): number {
+  if (copy.width <= 0 || copy.height <= 0) {
+    return 0;
+  }
+
+  const clearRadius =
+    Math.max(copy.width / 2, copy.height / 2) + ORBIT_COPY_CLEAR_PADDING;
+
+  return Math.ceil(clearRadius + innerIconSize / 2);
+}
+
+function finalizeOrbitRadii(
+  innerRadius: number,
+  outerRadius: number,
+  innerIconSize: number,
+  outerIconSize: number,
+  minInnerRadius: number,
+  maxOuterRadius?: number,
+): { innerRadius: number; outerRadius: number } {
+  const minRingSeparation = getMinRingSeparation(innerIconSize, outerIconSize);
+
+  innerRadius = Math.max(innerRadius, minInnerRadius);
+  innerRadius = Math.max(innerRadius, Math.round(minRingSeparation * 0.85));
+
+  if (
+    maxOuterRadius !== undefined &&
+    maxOuterRadius > innerRadius + minRingSeparation
+  ) {
+    outerRadius = Math.min(outerRadius, maxOuterRadius);
+  }
+
+  if (outerRadius - innerRadius < minRingSeparation) {
+    outerRadius = innerRadius + minRingSeparation;
+  }
+
+  const outerRingExtra = 32;
+  if (outerRadius - innerRadius < minRingSeparation + outerRingExtra) {
+    outerRadius = innerRadius + Math.ceil(minRingSeparation + outerRingExtra);
+  }
+
+  return { innerRadius, outerRadius };
+}
+
+function getOrbitConfig(
+  width: number,
+  height: number,
+  copy: CopyBounds,
+): OrbitConfig {
+  const minInnerDesktop = getMinInnerRadiusForCopy(copy, DESKTOP_INNER_ICON);
+  const maxOuterRadius = Math.round(
+    Math.min(width, height) * 0.48 - DESKTOP_OUTER_ICON / 2,
+  );
+
   if (width >= REFERENCE_WIDTH) {
+    const radii = finalizeOrbitRadii(
+      DESKTOP_INNER_RADIUS,
+      DESKTOP_OUTER_RADIUS,
+      DESKTOP_INNER_ICON,
+      DESKTOP_OUTER_ICON,
+      minInnerDesktop,
+      maxOuterRadius,
+    );
+
     return {
-      innerRadius: DESKTOP_INNER_RADIUS,
+      innerRadius: radii.innerRadius,
       innerIconSize: DESKTOP_INNER_ICON,
       innerDuration: ORBIT_DURATION,
-      outerRadius: DESKTOP_OUTER_RADIUS,
+      outerRadius: radii.outerRadius,
       outerIconSize: DESKTOP_OUTER_ICON,
       outerDuration: ORBIT_DURATION,
     };
@@ -80,48 +148,72 @@ function getOrbitConfig(width: number, height: number): OrbitConfig {
 
   const innerIconSize = 96;
   const outerIconSize = 104;
-  const minRingSeparation = getMinRingSeparation(innerIconSize, outerIconSize);
+  const minInnerCompact = getMinInnerRadiusForCopy(copy, innerIconSize);
 
   let innerRadius = Math.round(DESKTOP_INNER_RADIUS * widthScale);
   let outerRadius = Math.round(DESKTOP_OUTER_RADIUS * widthScale);
 
-  const maxOuterRadius = Math.round(
+  const compactMaxOuter = Math.round(
     Math.min(width, height) * 0.44 - outerIconSize / 2,
   );
-  if (Number.isFinite(maxOuterRadius) && maxOuterRadius > minRingSeparation) {
-    outerRadius = Math.min(outerRadius, maxOuterRadius);
-  }
 
-  if (outerRadius - innerRadius < minRingSeparation) {
-    innerRadius = outerRadius - minRingSeparation;
-  }
-
-  innerRadius = Math.max(innerRadius, Math.round(minRingSeparation * 0.85));
-
-  const outerRingExtra = 32;
-  if (outerRadius - innerRadius < minRingSeparation + outerRingExtra) {
-    outerRadius = innerRadius + Math.ceil(minRingSeparation + outerRingExtra);
-  }
+  const radii = finalizeOrbitRadii(
+    innerRadius,
+    outerRadius,
+    innerIconSize,
+    outerIconSize,
+    minInnerCompact,
+    Number.isFinite(compactMaxOuter) && compactMaxOuter > 0
+      ? compactMaxOuter
+      : undefined,
+  );
 
   return {
-    innerRadius,
+    innerRadius: radii.innerRadius,
     innerIconSize,
     innerDuration: ORBIT_DURATION,
-    outerRadius,
+    outerRadius: radii.outerRadius,
     outerIconSize,
     outerDuration: ORBIT_DURATION,
   };
 }
 
-const DEFAULT_CONFIG = getOrbitConfig(1280, 800);
+const DEFAULT_CONFIG = getOrbitConfig(1280, 800, { width: 720, height: 320 });
 
 function getOrbitStageSize(config: OrbitConfig): number {
   return config.outerRadius * 2 + config.outerIconSize;
 }
 
-/** Blur zone extends through the outer ring. */
+/** Dim/blur zone covers the hero copy and inner ring approach paths. */
 function getCenterBlurRadius(config: OrbitConfig): number {
-  return config.outerRadius + config.outerIconSize / 2 + 48;
+  const innerClear =
+    config.innerRadius + config.innerIconSize / 2 + ORBIT_COPY_CLEAR_PADDING;
+  const outerReach =
+    config.outerRadius + config.outerIconSize / 2 + 48;
+
+  return Math.max(innerClear, outerReach);
+}
+
+function getHeroCopyElement(hero: HTMLElement): HTMLElement | null {
+  const copy = hero.querySelector<HTMLElement>("[data-hero-orbit-copy]");
+  return copy instanceof HTMLElement ? copy : null;
+}
+
+function getOrbitFocusCenter(hero: HTMLElement): { x: number; y: number } {
+  const copy = getHeroCopyElement(hero);
+  if (copy) {
+    const rect = copy.getBoundingClientRect();
+    return {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    };
+  }
+
+  const heroRect = hero.getBoundingClientRect();
+  return {
+    x: heroRect.left + heroRect.width / 2,
+    y: heroRect.top + heroRect.height / 2,
+  };
 }
 
 function applyOrbitTileDepth(
@@ -129,9 +221,7 @@ function applyOrbitTileDepth(
   hero: HTMLElement,
   config: OrbitConfig,
 ): void {
-  const heroRect = hero.getBoundingClientRect();
-  const centerX = heroRect.left + heroRect.width / 2;
-  const centerY = heroRect.top + heroRect.height / 2;
+  const { x: centerX, y: centerY } = getOrbitFocusCenter(hero);
   const blurRadius = getCenterBlurRadius(config);
 
   root.querySelectorAll<HTMLElement>(".animate-orbit").forEach((tile) => {
@@ -185,9 +275,30 @@ function resetOrbitParallax(stage: HTMLElement): void {
   stage.style.transform = "";
 }
 
+type OrbitStageOffset = {
+  x: number;
+  y: number;
+};
+
+function measureOrbitStageOffset(hero: HTMLElement): OrbitStageOffset {
+  const heroRect = hero.getBoundingClientRect();
+  const focus = getOrbitFocusCenter(hero);
+
+  return {
+    x: focus.x - (heroRect.left + heroRect.width / 2),
+    y: focus.y - (heroRect.top + heroRect.height / 2),
+  };
+}
+
+function measureCopyBounds(copy: HTMLElement): CopyBounds {
+  const rect = copy.getBoundingClientRect();
+  return { width: rect.width, height: rect.height };
+}
+
 export default function HeroOrbitingPhotos() {
   const [config, setConfig] = useState<OrbitConfig>(DEFAULT_CONFIG);
   const rootRef = useRef<HTMLDivElement>(null);
+  const stageOffsetRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const configRef = useRef(config);
   const parallaxTargetRef = useRef<ParallaxOffset>({ x: 0, y: 0 });
@@ -201,17 +312,29 @@ export default function HeroOrbitingPhotos() {
       return;
     }
 
+    const copy = getHeroCopyElement(hero);
+
     const update = () => {
       const { width, height } = hero.getBoundingClientRect();
-      if (width > 0 && height > 0) {
-        setConfig(getOrbitConfig(width, height));
+      if (width <= 0 || height <= 0) {
+        return;
       }
+
+      const copyEl = getHeroCopyElement(hero);
+      const copyBounds = copyEl
+        ? measureCopyBounds(copyEl)
+        : { width: 0, height: 0 };
+
+      setConfig(getOrbitConfig(width, height, copyBounds));
     };
 
     update();
 
     const resizeObserver = new ResizeObserver(update);
     resizeObserver.observe(hero);
+    if (copy) {
+      resizeObserver.observe(copy);
+    }
     window.addEventListener("resize", update);
 
     return () => {
@@ -235,9 +358,8 @@ export default function HeroOrbitingPhotos() {
         return;
       }
 
+      const { x: centerX, y: centerY } = getOrbitFocusCenter(hero);
       const rect = hero.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
 
       parallaxTargetRef.current = {
         x: clamp((event.clientX - centerX) / (rect.width / 2), -1, 1),
@@ -270,6 +392,12 @@ export default function HeroOrbitingPhotos() {
 
     const tick = () => {
       applyOrbitTileDepth(root, hero, configRef.current);
+
+      const offsetWrapper = stageOffsetRef.current;
+      if (offsetWrapper) {
+        const offset = measureOrbitStageOffset(hero);
+        offsetWrapper.style.transform = `translate3d(${offset.x.toFixed(2)}px, ${offset.y.toFixed(2)}px, 0)`;
+      }
 
       if (stage instanceof HTMLElement && parallaxEnabledRef.current) {
         const target = parallaxTargetRef.current;
@@ -308,10 +436,8 @@ export default function HeroOrbitingPhotos() {
     <div ref={rootRef} aria-hidden className={HERO_ORBIT_ROOT}>
       <div className={cn(HERO_ORBIT_CLIP)}>
         <div
-          className={cn(
-            "hero-orbit-parallax flex h-full w-full items-center justify-center",
-            HERO_ORBIT_CENTER_OFFSET,
-          )}
+          ref={stageOffsetRef}
+          className="hero-orbit-parallax flex h-full w-full items-center justify-center"
         >
           <div
             ref={stageRef}
