@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useRef, useState } from "react";
 
 import DotGridBackground from "@/src/components/DotGridBackground";
-import HeroShimmerText from "@/src/components/HeroShimmerText";
 import SectionShell from "@/src/components/SectionShell";
 import { Icon } from "@/components/shared/Icon";
 import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
@@ -25,7 +24,7 @@ const MIN_LOADING_MS = 600;
 
 const WAITLIST_SUBMIT_CTA = cn(
   HERO_PILL_CTA_BASE,
-  "hero-pill-cta--purple hero-pill-cta--shimmer gap-2",
+  "hero-pill-cta--purple gap-2",
 );
 
 type FormState = "idle" | "loading" | "success";
@@ -159,7 +158,7 @@ export default function WaitlistSection() {
                 tabIndex={formState === "idle" ? 0 : -1}
                 className={WAITLIST_SUBMIT_CTA}
               >
-                <HeroShimmerText>Join</HeroShimmerText>
+                <span className="leading-none">Join</span>
                 <Icon
                   name="ArrowNarrowRight"
                   size={16}

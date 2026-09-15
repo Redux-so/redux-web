@@ -2,7 +2,6 @@
 
 import { Icon } from "@/components/shared/Icon";
 import HeroOrbitingPhotos from "@/src/components/HeroOrbitingPhotos";
-import HeroShimmerText from "@/src/components/HeroShimmerText";
 import {
   ScrollRevealGroup,
   ScrollRevealItem,
@@ -42,9 +41,9 @@ export default function Hero() {
             <div className="flex flex-row flex-nowrap items-center justify-center gap-2 sm:gap-3">
               <a
                 href="#waitlist"
-                className={cn(HERO_PILL_CTA_BASE, "hero-pill-cta--purple hero-pill-cta--shimmer")}
+                className={cn(HERO_PILL_CTA_BASE, "hero-pill-cta--purple")}
               >
-                <HeroShimmerText>Join Waitlist</HeroShimmerText>
+                <span className="leading-none">Join Waitlist</span>
               </a>
               <a
                 href="#features"
