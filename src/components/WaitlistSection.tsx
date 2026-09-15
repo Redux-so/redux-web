@@ -120,7 +120,7 @@ export default function WaitlistSection() {
           </ScrollRevealItem>
 
           <ScrollRevealItem className="relative mt-10 flex w-full flex-col items-center">
-            <div className="relative mx-auto w-full max-w-[16.75rem] sm:max-w-none sm:w-fit">
+            <div className="relative mx-auto w-full max-w-[min(100%,21rem)] sm:max-w-none sm:w-fit">
             <form
               onSubmit={handleSubmit}
               aria-hidden={formState !== "idle"}
@@ -139,7 +139,7 @@ export default function WaitlistSection() {
                 aria-hidden="true"
                 className="sr-only"
               />
-              <div className="min-w-0 flex-1 sm:w-[15rem] sm:flex-none sm:shrink-0">
+              <div className="min-w-[9.75rem] flex-1 sm:w-[15rem] sm:flex-none sm:shrink-0">
                 <input
                   type="email"
                   name="email"
@@ -150,7 +150,11 @@ export default function WaitlistSection() {
                   tabIndex={formState === "idle" ? 0 : -1}
                   aria-invalid={error ? true : undefined}
                   aria-describedby={error ? "waitlist-error" : undefined}
-                  className={cn("hero-pill-input w-full", HERO_PILL_CONTROL_HEIGHT)}
+                  className={cn(
+                    "hero-pill-input w-full",
+                    HERO_PILL_CONTROL_HEIGHT,
+                    "!leading-normal",
+                  )}
                 />
               </div>
               <button

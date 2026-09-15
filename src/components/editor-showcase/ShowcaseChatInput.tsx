@@ -69,11 +69,18 @@ export default function ShowcaseChatInput({
     <div className={cn(shellClassName, className)}>
       <div
         className={cn(
-          "flex items-start px-4 pb-3 pt-3",
-          isBentoShell ? "min-h-[92px]" : "min-h-[76px]",
+          "flex items-start px-3 pb-3 pt-3 sm:px-4",
+          isBentoShell ? "min-h-[6.5rem] sm:min-h-[92px]" : "min-h-[76px]",
         )}
       >
-        <div className="flex w-full min-w-0 items-center gap-3.5 overflow-hidden">
+        <div
+          className={cn(
+            "flex w-full min-w-0 gap-2.5 sm:gap-3.5",
+            isBentoDemo
+              ? "items-start overflow-visible sm:items-center sm:overflow-hidden"
+              : "items-center overflow-hidden",
+          )}
+        >
           <Image
             src="/r-logo.png"
             alt=""
@@ -81,6 +88,7 @@ export default function ShowcaseChatInput({
             height={CHAT_INPUT_LOGO_PX}
             className={cn(
               "shrink-0 rounded",
+              isBentoDemo ? "size-10 sm:size-[46px]" : "size-[46px]",
               isBentoShell ? "-translate-y-0.5" : "-translate-y-1",
             )}
             aria-hidden
@@ -89,7 +97,7 @@ export default function ShowcaseChatInput({
             ref={textareaRef}
             readOnly
             rows={1}
-            wrap={isBentoDemo ? "off" : "soft"}
+            wrap="soft"
             value={value}
             placeholder={showPlaceholder ? placeholder : undefined}
             tabIndex={demoMode ? -1 : undefined}
@@ -97,8 +105,9 @@ export default function ShowcaseChatInput({
             onBlur={() => setFocusedInternal(false)}
             className={cn(
               "min-h-[24px] w-full min-w-0 resize-none bg-transparent pt-0 text-[15px] font-normal leading-snug text-white outline-none placeholder:text-[#666666]",
-              isBentoDemo &&
-                "overflow-hidden whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+              isBentoDemo
+                ? "max-sm:min-h-[3.25rem] max-sm:break-words max-sm:overflow-visible max-sm:text-[13px] max-sm:leading-[1.35] max-sm:whitespace-normal sm:overflow-hidden sm:whitespace-nowrap sm:[scrollbar-width:none] sm:[&::-webkit-scrollbar]:hidden"
+                : undefined,
             )}
           />
         </div>

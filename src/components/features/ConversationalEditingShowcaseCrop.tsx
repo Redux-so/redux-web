@@ -21,7 +21,7 @@ export default function ConversationalEditingShowcaseCrop() {
       viewport={SCROLL_VIEWPORT}
       onViewportEnter={() => setAnimationActive(true)}
     >
-      <div className="relative w-full max-w-[27rem] sm:max-w-[29rem]">
+      <div className="relative w-full min-w-0 max-w-[min(100%,29rem)]">
         <div className="feature-convo-chat-glow" aria-hidden />
         <ShowcaseChatInput
           value={promptValue}

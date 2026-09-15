@@ -985,7 +985,7 @@ html {
     box-sizing: border-box;
     height: 2.75rem;
     width: 100%;
-    padding: 0 16px;
+    padding: 0 12px;
     border-radius: var(--cta-radius);
     border: 1px solid var(--charcoal-border);
     background: linear-gradient(
@@ -1000,7 +1000,7 @@ html {
     color: #fff;
     font-size: 16px;
     font-weight: 500;
-    line-height: 1;
+    line-height: normal;
     outline: none;
     transition:
       background 0.2s ease,
@@ -1010,6 +1010,14 @@ html {
 
   .hero-pill-input::placeholder {
     color: rgba(255, 255, 255, 0.35);
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  @media (min-width: 640px) {
+    .hero-pill-input {
+      padding: 0 16px;
+    }
   }
 
   .hero-pill-input:focus-visible {
