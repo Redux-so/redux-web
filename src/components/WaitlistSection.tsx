@@ -21,7 +21,7 @@ const MIN_LOADING_MS = 600;
 
 const WAITLIST_SUBMIT_CTA = cn(
   HERO_PILL_CTA_BASE,
-  "hero-pill-cta--purple gap-2 max-sm:gap-1.5 max-sm:px-3",
+  "hero-pill-cta--purple shrink-0 gap-2 max-sm:gap-1.5 max-sm:px-2.5",
 );
 
 type FormState = "idle" | "loading" | "success";
@@ -136,7 +136,7 @@ export default function WaitlistSection() {
                 aria-hidden="true"
                 className="sr-only"
               />
-              <div className="min-w-0 flex-1 sm:w-[15rem] sm:flex-none sm:shrink-0">
+              <div className="min-w-[13.25rem] flex-[1.35_1_13.25rem] sm:w-[15rem] sm:min-w-0 sm:flex-none sm:shrink-0">
                 <div className="hero-pill-input">
                   <input
                     type="email"

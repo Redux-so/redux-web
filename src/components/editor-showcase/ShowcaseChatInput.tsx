@@ -121,7 +121,7 @@ export default function ShowcaseChatInput({
               "shrink-0 rounded",
               isBentoDemo ? "size-10 sm:size-[46px]" : "size-[46px]",
               isBentoShell
-                ? "max-sm:translate-y-0 sm:-translate-y-0.5"
+                ? "max-sm:-translate-y-1 sm:-translate-y-0.5"
                 : "-translate-y-1",
             )}
             aria-hidden
