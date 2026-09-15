@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { Icon } from "@/components/shared/Icon";
 import ShowcaseUsageRing from "@/src/components/editor-showcase/ShowcaseUsageRing";
@@ -45,19 +45,47 @@ export default function ShowcaseChatInput({
   const isBentoShell = borderVariant === "bento";
   const isBentoDemo = isBentoShell && demoMode;
 
-  useEffect(() => {
-    if (!isBentoDemo || value.length === 0) return;
+  useLayoutEffect(() => {
     const textarea = textareaRef.current;
-    if (!textarea) return;
+    if (!textarea || !isBentoDemo) return;
+
+    const mobile = window.matchMedia("(max-width: 639px)").matches;
+    if (mobile) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+      return;
+    }
+
+    textarea.style.height = "";
+    if (value.length === 0) return;
     textarea.scrollTop = 0;
     textarea.scrollLeft = 0;
   }, [isBentoDemo, value]);
+
+  useEffect(() => {
+    if (!isBentoDemo) return;
+
+    const syncHeight = () => {
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+      if (!window.matchMedia("(max-width: 639px)").matches) {
+        textarea.style.height = "";
+        return;
+      }
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    };
+
+    const mq = window.matchMedia("(max-width: 639px)");
+    mq.addEventListener("change", syncHeight);
+    return () => mq.removeEventListener("change", syncHeight);
+  }, [isBentoDemo]);
 
   const shellClassName =
     borderVariant === "bento"
       ? cn(
           UI_CARD_BORDER,
-          "overflow-hidden bg-[#1d1d1d] transition-[border-color,box-shadow] duration-200",
+          "bg-[#1d1d1d] transition-[border-color,box-shadow] duration-200 max-sm:overflow-visible sm:overflow-hidden",
           focused && PRODUCT_BRAND_BORDER_FOCUS_CLASS,
         )
       : cn(
@@ -71,14 +99,14 @@ export default function ShowcaseChatInput({
       <div
         className={cn(
           "flex items-start px-3 pb-3 pt-3 sm:px-4",
-          isBentoShell ? "min-h-[6.5rem] sm:min-h-[92px]" : "min-h-[76px]",
+          isBentoShell ? "min-h-0 py-3 sm:min-h-[92px]" : "min-h-[76px]",
         )}
       >
         <div
           className={cn(
             "flex w-full min-w-0 gap-2.5 sm:gap-3.5",
             isBentoDemo
-              ? "items-center overflow-visible sm:overflow-hidden"
+              ? "items-start overflow-visible sm:items-center sm:overflow-hidden"
               : "items-center overflow-hidden",
           )}
         >
@@ -90,7 +118,9 @@ export default function ShowcaseChatInput({
             className={cn(
               "shrink-0 rounded",
               isBentoDemo ? "size-10 sm:size-[46px]" : "size-[46px]",
-              isBentoShell ? "-translate-y-0.5" : "-translate-y-1",
+              isBentoShell
+                ? "max-sm:translate-y-0 sm:-translate-y-0.5"
+                : "-translate-y-1",
             )}
             aria-hidden
           />
@@ -107,7 +137,7 @@ export default function ShowcaseChatInput({
             className={cn(
               "min-h-[24px] w-full min-w-0 resize-none bg-transparent pt-0 text-[15px] font-normal leading-snug text-white outline-none placeholder:text-[#666666]",
               isBentoDemo
-                ? "max-sm:translate-y-px max-sm:break-words max-sm:overflow-visible max-sm:text-[13px] max-sm:leading-[1.35] max-sm:whitespace-normal sm:overflow-hidden sm:whitespace-nowrap sm:translate-y-0 sm:[scrollbar-width:none] sm:[&::-webkit-scrollbar]:hidden"
+                ? "max-sm:h-auto max-sm:overflow-hidden max-sm:break-words max-sm:text-[13px] max-sm:leading-[1.35] max-sm:whitespace-normal sm:h-auto sm:overflow-hidden sm:whitespace-nowrap sm:[scrollbar-width:none] sm:[&::-webkit-scrollbar]:hidden"
                 : undefined,
             )}
           />
