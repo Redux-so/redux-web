@@ -1000,7 +1000,7 @@ html {
     color: #fff;
     font-size: 16px;
     font-weight: 500;
-    line-height: normal;
+    line-height: 2.75rem;
     outline: none;
     transition:
       background 0.2s ease,
@@ -1010,6 +1010,7 @@ html {
 
   .hero-pill-input::placeholder {
     color: rgba(255, 255, 255, 0.35);
+    line-height: 2.75rem;
     overflow: visible;
     text-overflow: clip;
   }

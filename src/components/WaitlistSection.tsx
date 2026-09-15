@@ -7,10 +7,7 @@ import DotGridBackground from "@/src/components/DotGridBackground";
 import SectionShell from "@/src/components/SectionShell";
 import { Icon } from "@/components/shared/Icon";
 import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
-import {
-  HERO_PILL_CONTROL_HEIGHT,
-  HERO_PILL_CTA_BASE,
-} from "@/lib/button-styles";
+import { HERO_PILL_CTA_BASE } from "@/lib/button-styles";
 import {
   EASE_OUT,
   ScrollRevealGroup,
@@ -152,8 +149,7 @@ export default function WaitlistSection() {
                   aria-describedby={error ? "waitlist-error" : undefined}
                   className={cn(
                     "hero-pill-input w-full",
-                    HERO_PILL_CONTROL_HEIGHT,
-                    "!leading-normal",
+                    "h-11 min-h-11 max-h-11 box-border",
                   )}
                 />
               </div>

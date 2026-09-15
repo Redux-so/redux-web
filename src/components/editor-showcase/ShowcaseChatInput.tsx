@@ -40,12 +40,13 @@ export default function ShowcaseChatInput({
   const [focusedInternal, setFocusedInternal] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const focused = focusedProp ?? focusedInternal;
-  const showPlaceholder = value.length === 0 && !focused;
+  const showPlaceholder =
+    value.length === 0 && (demoMode || !focused);
   const isBentoShell = borderVariant === "bento";
   const isBentoDemo = isBentoShell && demoMode;
 
   useEffect(() => {
-    if (!isBentoDemo) return;
+    if (!isBentoDemo || value.length === 0) return;
     const textarea = textareaRef.current;
     if (!textarea) return;
     textarea.scrollTop = 0;
@@ -77,7 +78,7 @@ export default function ShowcaseChatInput({
           className={cn(
             "flex w-full min-w-0 gap-2.5 sm:gap-3.5",
             isBentoDemo
-              ? "items-start overflow-visible sm:items-center sm:overflow-hidden"
+              ? "items-center overflow-visible sm:overflow-hidden"
               : "items-center overflow-hidden",
           )}
         >
@@ -106,7 +107,7 @@ export default function ShowcaseChatInput({
             className={cn(
               "min-h-[24px] w-full min-w-0 resize-none bg-transparent pt-0 text-[15px] font-normal leading-snug text-white outline-none placeholder:text-[#666666]",
               isBentoDemo
-                ? "max-sm:min-h-[3.25rem] max-sm:break-words max-sm:overflow-visible max-sm:text-[13px] max-sm:leading-[1.35] max-sm:whitespace-normal sm:overflow-hidden sm:whitespace-nowrap sm:[scrollbar-width:none] sm:[&::-webkit-scrollbar]:hidden"
+                ? "max-sm:translate-y-px max-sm:break-words max-sm:overflow-visible max-sm:text-[13px] max-sm:leading-[1.35] max-sm:whitespace-normal sm:overflow-hidden sm:whitespace-nowrap sm:translate-y-0 sm:[scrollbar-width:none] sm:[&::-webkit-scrollbar]:hidden"
                 : undefined,
             )}
           />
