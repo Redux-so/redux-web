@@ -136,7 +136,7 @@ export default function WaitlistSection() {
                 aria-hidden="true"
                 className="sr-only"
               />
-              <div className="min-w-[13.25rem] flex-[1.35_1_13.25rem] sm:w-[15rem] sm:min-w-0 sm:flex-none sm:shrink-0">
+              <div className="min-w-[12.5rem] flex-[1.2_1_12.5rem] sm:w-[15rem] sm:min-w-0 sm:flex-none sm:shrink-0">
                 <div className="hero-pill-input">
                   <input
                     type="email"
