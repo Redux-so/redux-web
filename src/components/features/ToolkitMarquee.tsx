@@ -1,5 +1,6 @@
 "use client";
 
+import InfiniteScrollMarquee from "@/src/components/InfiniteScrollMarquee";
 import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
 import ToolkitItemCard from "@/src/components/features/ToolkitItemCard";
 import { TOOLKIT_ITEMS } from "@/lib/toolkit-data";
@@ -66,10 +67,16 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
               "lg:relative lg:left-auto lg:w-auto lg:max-w-none lg:translate-x-0",
             )}
           >
-            <div className="animate-toolkit-marquee flex w-max items-start">
-              <ToolkitMarqueeTrack trackKey="a" />
-              <ToolkitMarqueeTrack trackKey="b" aria-hidden />
-            </div>
+            <InfiniteScrollMarquee
+              durationSec={140}
+              trackClassName="items-start"
+              renderTrack={(instance) => (
+                <ToolkitMarqueeTrack
+                  trackKey={instance}
+                  aria-hidden={instance === "clone" ? true : undefined}
+                />
+              )}
+            />
           </MarqueeEdgeFade>
         </div>
       </div>

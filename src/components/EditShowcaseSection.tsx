@@ -11,6 +11,7 @@ import {
   EDIT_SHOWCASE_TOP_ROW,
   type EditShowcasePhoto,
 } from "@/src/components/edit-showcase/edit-showcase-data";
+import InfiniteScrollMarquee from "@/src/components/InfiniteScrollMarquee";
 import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
 import BlankImagePlaceholder from "@/components/shared/BlankImagePlaceholder";
 import {
@@ -123,7 +124,6 @@ type PhotoMarqueeTrackProps = {
   photos: readonly EditShowcasePhoto[];
   trackKey: string;
   priorityCount?: number;
-  repeats?: number;
   activeCardKey?: string | null;
   onActivate?: (cardKey: string) => void;
   "aria-hidden"?: boolean;
@@ -133,19 +133,16 @@ function PhotoMarqueeTrack({
   photos,
   trackKey,
   priorityCount = 0,
-  repeats = 2,
   activeCardKey = null,
   onActivate,
   "aria-hidden": ariaHidden,
 }: PhotoMarqueeTrackProps) {
-  const items = Array.from({ length: repeats }, () => photos).flat();
-
   return (
     <div
       className="flex shrink-0 items-center gap-3 py-3 pr-3 sm:gap-4 sm:py-4 sm:pr-4"
       aria-hidden={ariaHidden}
     >
-      {items.map((photo, index) => {
+      {photos.map((photo, index) => {
         const cardKey = `${trackKey}-${photo.id}-${index}`;
 
         return (
@@ -185,8 +182,6 @@ function PhotoMarqueeRow({
 }: PhotoMarqueeRowProps) {
   const hoverSpotlightEnabled = useHoverSpotlightEnabled();
   const [activeCardKey, setActiveCardKey] = useState<string | null>(null);
-  const animationClass =
-    direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
   const isSpotlightActive = hoverSpotlightEnabled && activeCardKey !== null;
 
   return (
@@ -200,28 +195,22 @@ function PhotoMarqueeRow({
       }
     >
       <MarqueeEdgeFade>
-        <div
-          className={cn(
-            "edit-showcase-marquee-track flex w-max items-center",
-            animationClass,
+        <InfiniteScrollMarquee
+          direction={direction}
+          durationSec={100}
+          paused={isSpotlightActive}
+          trackClassName="items-center"
+          renderTrack={(instance) => (
+            <PhotoMarqueeTrack
+              photos={photos}
+              trackKey={`${trackKey}-${instance}`}
+              priorityCount={instance === "primary" ? priorityCount : 0}
+              activeCardKey={hoverSpotlightEnabled ? activeCardKey : null}
+              onActivate={hoverSpotlightEnabled ? setActiveCardKey : undefined}
+              aria-hidden={instance === "clone" ? true : undefined}
+            />
           )}
-        >
-          <PhotoMarqueeTrack
-            photos={photos}
-            trackKey={`${trackKey}-a`}
-            priorityCount={priorityCount}
-            activeCardKey={hoverSpotlightEnabled ? activeCardKey : null}
-            onActivate={hoverSpotlightEnabled ? setActiveCardKey : undefined}
-          />
-          <PhotoMarqueeTrack
-            photos={photos}
-            trackKey={`${trackKey}-b`}
-            priorityCount={0}
-            activeCardKey={hoverSpotlightEnabled ? activeCardKey : null}
-            onActivate={hoverSpotlightEnabled ? setActiveCardKey : undefined}
-            aria-hidden
-          />
-        </div>
+        />
       </MarqueeEdgeFade>
     </div>
   );

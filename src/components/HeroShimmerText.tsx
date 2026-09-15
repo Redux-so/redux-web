@@ -6,26 +6,24 @@ import { cn } from "@/lib/utils";
 
 const SHIMMER_CYCLE_MS = 6000;
 const SHIMMER_SWEEP_FRACTION = 0.42;
-const SHIMMER_START_POSITION = 150;
-const SHIMMER_END_POSITION = -50;
+const SHIMMER_TRAVEL_MULTIPLIER = 2.2;
 
 function easeOutCubic(progress: number): number {
   return 1 - (1 - progress) ** 3;
 }
 
-function getShimmerBackgroundPosition(elapsedMs: number): string {
+function getShimmerTranslateX(
+  elapsedMs: number,
+  travelPx: number,
+): number {
   const cycleProgress = (elapsedMs % SHIMMER_CYCLE_MS) / SHIMMER_CYCLE_MS;
 
   if (cycleProgress >= SHIMMER_SWEEP_FRACTION) {
-    return `${SHIMMER_END_POSITION}% center`;
+    return travelPx;
   }
 
   const sweepProgress = easeOutCubic(cycleProgress / SHIMMER_SWEEP_FRACTION);
-  const position =
-    SHIMMER_START_POSITION +
-    sweepProgress * (SHIMMER_END_POSITION - SHIMMER_START_POSITION);
-
-  return `${position.toFixed(2)}% center`;
+  return -travelPx + sweepProgress * (travelPx * SHIMMER_TRAVEL_MULTIPLIER);
 }
 
 type HeroShimmerTextProps = {
@@ -37,11 +35,13 @@ export default function HeroShimmerText({
   children,
   className,
 }: HeroShimmerTextProps) {
+  const rootRef = useRef<HTMLSpanElement>(null);
   const shineRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    const root = rootRef.current;
     const shine = shineRef.current;
-    if (!shine) {
+    if (!(root instanceof HTMLElement) || !(shine instanceof HTMLElement)) {
       return;
     }
 
@@ -49,9 +49,9 @@ export default function HeroShimmerText({
     let frameId = 0;
 
     const tick = (now: number) => {
-      shine.style.backgroundPosition = getShimmerBackgroundPosition(
-        now - startedAt,
-      );
+      const travelPx = root.getBoundingClientRect().width;
+      const translateX = getShimmerTranslateX(now - startedAt, travelPx);
+      shine.style.transform = `translate3d(${translateX.toFixed(2)}px, 0, 0)`;
       frameId = requestAnimationFrame(tick);
     };
 
@@ -63,10 +63,12 @@ export default function HeroShimmerText({
   }, []);
 
   return (
-    <span className={cn("hero-shimmer-text", className)}>
+    <span ref={rootRef} className={cn("hero-shimmer-text", className)}>
       <span className="hero-shimmer-text__base">{children}</span>
-      <span ref={shineRef} className="hero-shimmer-text__shine" aria-hidden>
-        {children}
+      <span className="hero-shimmer-text__shine" aria-hidden>
+        <span ref={shineRef} className="hero-shimmer-text__shine-inner">
+          {children}
+        </span>
       </span>
     </span>
   );
