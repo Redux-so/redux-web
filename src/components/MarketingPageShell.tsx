@@ -22,7 +22,7 @@ export default function MarketingPageShell({
 }: MarketingPageShellProps) {
   return (
     <div
-      className="marketing-resize-smooth min-h-full bg-[#040404]"
+      className="marketing-resize-smooth min-h-full bg-[#02040A]"
       data-page-grid-shell
     >
       <Navbar />
