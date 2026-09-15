@@ -7,7 +7,6 @@ import {
   getColumnBoundaryPercents,
 } from "@/src/components/page-grid/shared";
 import { PAGE_GRID_ALIGNED_FRAME, SECTION_BLEED } from "@/lib/section-styles";
-import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
 const marqueeItems = [
@@ -29,8 +28,7 @@ const internalColumnBoundaries = getColumnBoundaryPercents(marqueeItems.length).
 
 export default function MarqueeStrip() {
   return (
-    <ScrollRevealGroup className="flex min-w-0 w-full flex-col" stagger={0.1}>
-      <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
+    <div className="flex min-w-0 w-full flex-col">
         <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-x-visible")}>
           <p className="m-0 py-6 text-center text-[15px] leading-relaxed text-marketing-muted sm:py-8 sm:text-base lg:text-lg">
             Inspired by workflows from
@@ -89,7 +87,6 @@ export default function MarqueeStrip() {
             </div>
           </div>
         </div>
-      </ScrollRevealItem>
-    </ScrollRevealGroup>
+    </div>
   );
 }

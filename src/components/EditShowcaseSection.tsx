@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   EDIT_SHOWCASE_BOTTOM_ROW,
@@ -26,8 +26,17 @@ import {
   PAGE_GRID_ALIGNED_FRAME,
   SECTION_LAYOUT,
 } from "@/lib/section-styles";
-import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
+
+function useHoverSpotlightEnabled(): boolean {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    setEnabled(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+  }, []);
+
+  return enabled;
+}
 
 type PhotoMarqueeRowProps = {
   photos: readonly EditShowcasePhoto[];
@@ -176,10 +185,11 @@ function PhotoMarqueeRow({
   priorityCount = 0,
 }: PhotoMarqueeRowProps) {
   const prefersReducedMotion = useReducedMotion();
+  const hoverSpotlightEnabled = useHoverSpotlightEnabled();
   const [activeCardKey, setActiveCardKey] = useState<string | null>(null);
   const animationClass =
     direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
-  const isSpotlightActive = activeCardKey !== null;
+  const isSpotlightActive = hoverSpotlightEnabled && activeCardKey !== null;
 
   if (prefersReducedMotion) {
     return (
@@ -203,23 +213,30 @@ function PhotoMarqueeRow({
         "edit-showcase-marquee-row w-full min-w-0",
         isSpotlightActive && "edit-showcase-marquee-row--active",
       )}
-      onMouseLeave={() => setActiveCardKey(null)}
+      onMouseLeave={
+        hoverSpotlightEnabled ? () => setActiveCardKey(null) : undefined
+      }
     >
       <MarqueeEdgeFade>
-        <div className={cn("flex w-max items-center", animationClass)}>
+        <div
+          className={cn(
+            "edit-showcase-marquee-track flex w-max items-center",
+            animationClass,
+          )}
+        >
           <PhotoMarqueeTrack
             photos={photos}
             trackKey={`${trackKey}-a`}
             priorityCount={priorityCount}
-            activeCardKey={activeCardKey}
-            onActivate={setActiveCardKey}
+            activeCardKey={hoverSpotlightEnabled ? activeCardKey : null}
+            onActivate={hoverSpotlightEnabled ? setActiveCardKey : undefined}
           />
           <PhotoMarqueeTrack
             photos={photos}
             trackKey={`${trackKey}-b`}
             priorityCount={0}
-            activeCardKey={activeCardKey}
-            onActivate={setActiveCardKey}
+            activeCardKey={hoverSpotlightEnabled ? activeCardKey : null}
+            onActivate={hoverSpotlightEnabled ? setActiveCardKey : undefined}
             aria-hidden
           />
         </div>
@@ -237,11 +254,8 @@ export default function EditShowcaseSection() {
         </SectionIntro>
       </div>
 
-      <ScrollRevealGroup
-        className="flex flex-col gap-3 sm:gap-4"
-        stagger={0.1}
-      >
-        <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
+      <div className="flex flex-col gap-3 sm:gap-4">
+        <div className="w-full min-w-0">
           <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-x-visible")}>
             <PageGridLeftRail />
             <PhotoMarqueeRow
@@ -251,9 +265,9 @@ export default function EditShowcaseSection() {
               priorityCount={EDIT_SHOWCASE_PRIORITY_COUNT}
             />
           </div>
-        </ScrollRevealItem>
+        </div>
 
-        <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
+        <div className="w-full min-w-0">
           <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-x-visible")}>
             <PageGridLeftRail />
             <PhotoMarqueeRow
@@ -262,8 +276,8 @@ export default function EditShowcaseSection() {
               trackKey="edit-bottom"
             />
           </div>
-        </ScrollRevealItem>
-      </ScrollRevealGroup>
+        </div>
+      </div>
     </div>
   );
 }

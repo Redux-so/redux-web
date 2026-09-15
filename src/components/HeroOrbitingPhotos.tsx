@@ -60,6 +60,9 @@ type OrbitConfig = {
 const ORBIT_TILE_CLASS = "rounded-[6px]";
 const ORBIT_TILE_RADIUS = 6;
 
+/** Cap layout width so tablet portrait doesn't inflate orbit vs phone. */
+const COMPACT_LAYOUT_MAX_WIDTH = 430;
+
 function getOrbitConfig(width: number, height: number): OrbitConfig {
   if (width >= REFERENCE_WIDTH) {
     return {
@@ -72,7 +75,8 @@ function getOrbitConfig(width: number, height: number): OrbitConfig {
     };
   }
 
-  const widthScale = width / REFERENCE_WIDTH;
+  const layoutWidth = Math.min(width, COMPACT_LAYOUT_MAX_WIDTH);
+  const widthScale = layoutWidth / REFERENCE_WIDTH;
 
   const innerIconSize = 96;
   const outerIconSize = 104;
@@ -81,12 +85,18 @@ function getOrbitConfig(width: number, height: number): OrbitConfig {
   let innerRadius = Math.round(DESKTOP_INNER_RADIUS * widthScale);
   let outerRadius = Math.round(DESKTOP_OUTER_RADIUS * widthScale);
 
-  innerRadius = Math.round(
-    Math.max(innerRadius, width * 0.46, height * 0.2),
+  const maxOuterRadius = Math.round(
+    Math.min(width, height) * 0.44 - outerIconSize / 2,
   );
-  outerRadius = Math.round(
-    Math.max(outerRadius, width * 0.68, innerRadius + minRingSeparation),
-  );
+  if (Number.isFinite(maxOuterRadius) && maxOuterRadius > minRingSeparation) {
+    outerRadius = Math.min(outerRadius, maxOuterRadius);
+  }
+
+  if (outerRadius - innerRadius < minRingSeparation) {
+    innerRadius = outerRadius - minRingSeparation;
+  }
+
+  innerRadius = Math.max(innerRadius, Math.round(minRingSeparation * 0.85));
 
   const outerRingExtra = 32;
   if (outerRadius - innerRadius < minRingSeparation + outerRingExtra) {
