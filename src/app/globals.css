@@ -983,9 +983,13 @@ html {
 
   .hero-pill-input {
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
     height: 2.75rem;
+    min-height: 2.75rem;
+    max-height: 2.75rem;
     width: 100%;
-    padding: calc((2.75rem - 1rem) / 2) 12px;
+    padding-inline: 12px;
     border-radius: var(--cta-radius);
     border: 1px solid var(--charcoal-border);
     background: linear-gradient(
@@ -997,22 +1001,33 @@ html {
       inset 0 1px 0 var(--charcoal-inset-top),
       inset 0 -1px 0 var(--charcoal-inset-bottom),
       var(--charcoal-outer-shadow);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1rem;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
     transition:
       background 0.2s ease,
       box-shadow 0.2s ease,
       border-color 0.2s ease;
   }
 
-  .hero-pill-input::placeholder {
+  .hero-pill-input-field {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .hero-pill-input-field::placeholder {
     color: rgba(255, 255, 255, 0.35);
-    line-height: 1rem;
     opacity: 1;
   }
 
@@ -1022,7 +1037,7 @@ html {
     }
   }
 
-  .hero-pill-input:focus-visible {
+  .hero-pill-input:focus-within {
     border-color: rgba(255, 255, 255, 0.12);
     background: linear-gradient(180deg, #2a2a2a, #212121);
     box-shadow:

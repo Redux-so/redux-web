@@ -98,15 +98,17 @@ export default function ShowcaseChatInput({
     <div className={cn(shellClassName, className)}>
       <div
         className={cn(
-          "flex items-start px-3 pb-3 pt-3 sm:px-4",
-          isBentoShell ? "min-h-0 py-3 sm:min-h-[92px]" : "min-h-[76px]",
+          "flex items-start px-3 pb-3 sm:px-4",
+          isBentoShell
+            ? "min-h-0 pt-4 sm:min-h-[92px] sm:pt-3"
+            : "min-h-[76px] pt-3",
         )}
       >
         <div
           className={cn(
             "flex w-full min-w-0 gap-2.5 sm:gap-3.5",
             isBentoDemo
-              ? "items-start overflow-visible sm:items-center sm:overflow-hidden"
+              ? "max-sm:pt-0.5 items-start overflow-visible sm:items-center sm:overflow-hidden sm:pt-0"
               : "items-center overflow-hidden",
           )}
         >
@@ -137,7 +139,7 @@ export default function ShowcaseChatInput({
             className={cn(
               "min-h-[24px] w-full min-w-0 resize-none bg-transparent pt-0 text-[15px] font-normal leading-snug text-white outline-none placeholder:text-[#666666]",
               isBentoDemo
-                ? "max-sm:h-auto max-sm:overflow-hidden max-sm:break-words max-sm:text-[13px] max-sm:leading-[1.35] max-sm:whitespace-normal sm:h-auto sm:overflow-hidden sm:whitespace-nowrap sm:[scrollbar-width:none] sm:[&::-webkit-scrollbar]:hidden"
+                ? "max-sm:mt-0.5 max-sm:h-auto max-sm:overflow-hidden max-sm:break-words max-sm:text-[13px] max-sm:leading-[1.35] max-sm:whitespace-normal sm:mt-0 sm:h-auto sm:overflow-hidden sm:whitespace-nowrap sm:[scrollbar-width:none] sm:[&::-webkit-scrollbar]:hidden"
                 : undefined,
             )}
           />

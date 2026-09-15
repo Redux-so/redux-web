@@ -21,7 +21,7 @@ const MIN_LOADING_MS = 600;
 
 const WAITLIST_SUBMIT_CTA = cn(
   HERO_PILL_CTA_BASE,
-  "hero-pill-cta--purple gap-2",
+  "hero-pill-cta--purple gap-2 max-sm:gap-1.5 max-sm:px-3",
 );
 
 type FormState = "idle" | "loading" | "success";
@@ -117,12 +117,12 @@ export default function WaitlistSection() {
           </ScrollRevealItem>
 
           <ScrollRevealItem className="relative mt-10 flex w-full flex-col items-center">
-            <div className="relative mx-auto w-full max-w-[min(100%,21rem)] sm:max-w-none sm:w-fit">
+            <div className="relative mx-auto w-full sm:w-fit">
             <form
               onSubmit={handleSubmit}
               aria-hidden={formState !== "idle"}
               className={cn(
-                "flex w-full flex-row flex-nowrap items-center justify-center gap-2 sm:w-fit sm:max-w-full sm:gap-4",
+                "flex w-full min-w-0 flex-row flex-nowrap items-stretch justify-center gap-2 sm:w-fit sm:max-w-full sm:gap-4",
                 formState !== "idle" && "pointer-events-none invisible",
               )}
             >
@@ -136,22 +136,21 @@ export default function WaitlistSection() {
                 aria-hidden="true"
                 className="sr-only"
               />
-              <div className="min-w-[9.75rem] flex-1 sm:w-[15rem] sm:flex-none sm:shrink-0">
-                <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="you@example.com"
-                  required
-                  tabIndex={formState === "idle" ? 0 : -1}
-                  aria-invalid={error ? true : undefined}
-                  aria-describedby={error ? "waitlist-error" : undefined}
-                  className={cn(
-                    "hero-pill-input w-full",
-                    "h-11 min-h-11 max-h-11 box-border",
-                  )}
-                />
+              <div className="min-w-0 flex-1 sm:w-[15rem] sm:flex-none sm:shrink-0">
+                <div className="hero-pill-input">
+                  <input
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="you@example.com"
+                    required
+                    tabIndex={formState === "idle" ? 0 : -1}
+                    aria-invalid={error ? true : undefined}
+                    aria-describedby={error ? "waitlist-error" : undefined}
+                    className="hero-pill-input-field"
+                  />
+                </div>
               </div>
               <button
                 type="submit"
