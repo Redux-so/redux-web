@@ -2,6 +2,7 @@
 
 import { Icon } from "@/components/shared/Icon";
 import HeroOrbitingPhotos from "@/src/components/HeroOrbitingPhotos";
+import HeroShimmerText from "@/src/components/HeroShimmerText";
 import {
   ScrollRevealGroup,
   ScrollRevealItem,
@@ -43,12 +44,7 @@ export default function Hero() {
                 href="#waitlist"
                 className={cn(HERO_PILL_CTA_BASE, "hero-pill-cta--purple hero-pill-cta--shimmer")}
               >
-                <span className="hero-pill-cta__shimmer-text">
-                  <span className="hero-pill-cta__shimmer-text-base">Join Waitlist</span>
-                  <span className="hero-pill-cta__shimmer-text-shine" aria-hidden>
-                    Join Waitlist
-                  </span>
-                </span>
+                <HeroShimmerText>Join Waitlist</HeroShimmerText>
               </a>
               <a
                 href="#features"

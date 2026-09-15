@@ -910,21 +910,6 @@ html {
   }
 }
 
-@keyframes hero-cta-shimmer {
-  0% {
-    background-position: 150% center;
-  }
-
-  42% {
-    background-position: -50% center;
-  }
-
-  42.01%,
-  100% {
-    background-position: -50% center;
-  }
-}
-
 @layer components {
   .hero-pill-cta {
     display: inline-flex;
@@ -1061,31 +1046,28 @@ html {
       inset 0 -1px 0 var(--pill-inset-bottom);
   }
 
-  .hero-pill-cta--shimmer {
-    isolation: isolate;
-  }
-
-  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text {
-    display: inline-grid;
-    line-height: 1;
-  }
-
   .hero-pill-cta--shimmer:not(.hero-pill-cta--nav) {
     gap: 8px;
     padding: 0 24px;
   }
 
-  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-base,
-  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
+  .hero-shimmer-text {
+    display: inline-grid;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .hero-shimmer-text__base,
+  .hero-shimmer-text__shine {
     grid-area: 1 / 1;
     line-height: 1;
   }
 
-  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-base {
+  .hero-shimmer-text__base {
     color: #fff;
   }
 
-  .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
+  .hero-shimmer-text__shine {
     color: transparent;
     -webkit-text-fill-color: transparent;
     background: linear-gradient(
@@ -1105,25 +1087,7 @@ html {
     background-position: 150% center;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: hero-cta-shimmer 6s ease-out infinite;
     pointer-events: none;
-    will-change: background-position;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
-      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85))
-        drop-shadow(0 0 14px rgba(255, 255, 255, 0.5));
-    }
-  }
-
-  @media (hover: none), (pointer: coarse) {
-    .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
-      text-shadow:
-        0 0 8px rgba(255, 255, 255, 0.85),
-        0 0 14px rgba(255, 255, 255, 0.5);
-      filter: none;
-    }
   }
 
   .hero-pill-cta--compact {
@@ -1497,8 +1461,8 @@ html {
         .animate-toolkit-marquee *,
         .edit-showcase-marquee-track,
         .edit-showcase-marquee-track *,
-        .hero-pill-cta--shimmer,
-        .hero-pill-cta--shimmer *,
+        .hero-shimmer-text,
+        .hero-shimmer-text *,
         .animate-orbit,
         .animate-orbit *
       )

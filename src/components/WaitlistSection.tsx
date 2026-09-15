@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, useRef, useState } from "react";
 
 import DotGridBackground from "@/src/components/DotGridBackground";
+import HeroShimmerText from "@/src/components/HeroShimmerText";
 import SectionShell from "@/src/components/SectionShell";
 import { Icon } from "@/components/shared/Icon";
 import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
@@ -158,12 +159,7 @@ export default function WaitlistSection() {
                 tabIndex={formState === "idle" ? 0 : -1}
                 className={WAITLIST_SUBMIT_CTA}
               >
-                <span className="hero-pill-cta__shimmer-text">
-                  <span className="hero-pill-cta__shimmer-text-base">Join</span>
-                  <span className="hero-pill-cta__shimmer-text-shine" aria-hidden>
-                    Join
-                  </span>
-                </span>
+                <HeroShimmerText>Join</HeroShimmerText>
                 <Icon
                   name="ArrowNarrowRight"
                   size={16}
