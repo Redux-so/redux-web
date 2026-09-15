@@ -99,7 +99,7 @@ export default function WaitlistSection() {
   return (
     <SectionShell container={false} className="relative z-[1]">
       <div className={cn(PAGE_GRID_ALIGNED_FRAME, "px-10 sm:px-12 lg:px-16")}>
-        <div className="relative w-full overflow-hidden rounded-2xl border border-marketing-strong bg-[#04060E] px-6 py-20 sm:py-24">
+        <div className="relative w-full overflow-hidden rounded-2xl border border-marketing-strong bg-[#04060E] px-8 py-20 sm:px-6 sm:py-24">
         <DotGridBackground className="absolute inset-0 z-0" />
         <div aria-hidden className="waitlist-card-spotlight absolute inset-0 z-10" />
 
@@ -120,12 +120,12 @@ export default function WaitlistSection() {
           </ScrollRevealItem>
 
           <ScrollRevealItem className="relative mt-10 flex w-full flex-col items-center">
-            <div className="relative mx-auto w-fit max-w-full">
+            <div className="relative mx-auto w-full max-w-[16.75rem] sm:max-w-none sm:w-fit">
             <form
               onSubmit={handleSubmit}
               aria-hidden={formState !== "idle"}
               className={cn(
-                "flex w-fit max-w-full flex-row flex-nowrap items-center justify-center gap-2 sm:gap-4",
+                "flex w-full flex-row flex-nowrap items-center justify-center gap-2 sm:w-fit sm:max-w-full sm:gap-4",
                 formState !== "idle" && "pointer-events-none invisible",
               )}
             >
@@ -139,7 +139,7 @@ export default function WaitlistSection() {
                 aria-hidden="true"
                 className="sr-only"
               />
-              <div className="w-[min(100%,13rem)] shrink-0 sm:w-[15rem]">
+              <div className="min-w-0 flex-1 sm:w-[15rem] sm:flex-none sm:shrink-0">
                 <input
                   type="email"
                   name="email"
