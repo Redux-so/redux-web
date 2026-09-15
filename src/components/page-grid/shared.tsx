@@ -14,6 +14,7 @@ export const PAGE_GRID_LEFT_VAR = "--page-grid-left";
 export const PAGE_GRID_WIDTH_VAR = "--page-grid-width";
 export const PAGE_GRID_OVERLAY_FADE_CLASS = "page-grid-overlay-fade";
 export const PAGE_GRID_OVERLAY_LINE_CLASS = "page-grid-overlay-line";
+export const PAGE_GRID_OVERLAY_VERTICAL_CLASS = "page-grid-overlay-vertical";
 
 export type GridColumns = {
   leftX: number;
@@ -55,8 +56,12 @@ export function measureGridColumns(
   /** Shrink offset on narrow viewports so rails stay inside overflow-hidden ancestors. */
   const effectiveOffset = Math.min(gridOffset, insetLeft, insetRight);
 
-  const leftX = insetLeft - effectiveOffset;
-  const rightX = boundsRect.width - insetRight + effectiveOffset;
+  let leftX = insetLeft - effectiveOffset;
+  let rightX = boundsRect.width - insetRight + effectiveOffset;
+
+  /* Keep rails inside the bounds box (avoids a stray left rail when content overflows horizontally). */
+  leftX = Math.max(0, leftX);
+  rightX = Math.min(boundsRect.width, rightX);
 
   if (!Number.isFinite(leftX) || !Number.isFinite(rightX) || rightX <= leftX) {
     return null;
@@ -139,7 +144,11 @@ export function GridOverlayLines({
           {verticalSegments.map((segment, index) => (
             <div
               key={`left-${index}`}
-              className={cn("absolute", PAGE_GRID_OVERLAY_LINE_CLASS)}
+              className={cn(
+                "absolute",
+                PAGE_GRID_OVERLAY_LINE_CLASS,
+                PAGE_GRID_OVERLAY_VERTICAL_CLASS,
+              )}
               style={{
                 top: segment.top,
                 left: geometry.leftX,
@@ -152,7 +161,11 @@ export function GridOverlayLines({
           {verticalSegments.map((segment, index) => (
             <div
               key={`right-${index}`}
-              className={cn("absolute", PAGE_GRID_OVERLAY_LINE_CLASS)}
+              className={cn(
+                "absolute",
+                PAGE_GRID_OVERLAY_LINE_CLASS,
+                PAGE_GRID_OVERLAY_VERTICAL_CLASS,
+              )}
               style={{
                 top: segment.top,
                 left: geometry.rightX,

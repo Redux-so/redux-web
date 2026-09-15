@@ -165,7 +165,7 @@ function PageGridLeftRail() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-y-0 left-0 z-20"
+      className="pointer-events-none absolute inset-y-0 left-0 z-20 hidden md:block"
       style={{
         width: GRID_LINE_WIDTH_PX,
         backgroundColor: GRID_LINE_COLOR,

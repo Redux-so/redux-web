@@ -34,7 +34,7 @@ export default function MarketingPageShell({
       <div data-page-grid-root className={PAGE_GRID_ROOT_CLASS}>
         <div aria-hidden className={NAV_SPACER_CLASS} />
 
-        <main className="relative flex min-w-0 flex-col overflow-x-visible">
+        <main className="relative flex min-w-0 flex-col overflow-x-clip">
           <PageGridColumnPublisher />
           {showTopGlow ? (
             <div aria-hidden className="hero-top-glow pointer-events-none" />

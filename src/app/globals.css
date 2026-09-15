@@ -1210,6 +1210,13 @@ html {
     padding: var(--card-border-width);
   }
 
+  /* Full-height vertical rails are desktop crop guides; hide on narrow viewports. */
+  @media (max-width: 767px) {
+    .page-grid-overlay-vertical {
+      display: none;
+    }
+  }
+
   /* Fade page grid lines out at the top and bottom edges of the overlay. */
   .page-grid-overlay-fade {
     -webkit-mask-image: linear-gradient(

@@ -1,7 +1,7 @@
 "use client";
 
 import { useGridOverlay } from "@/src/components/page-grid/useGridOverlay";
-import { PAGE_CONTAINER_MAX_WIDTH_CLASS } from "@/lib/section-styles";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 /** Publishes --page-grid-left / --page-grid-width without rendering grid lines. */
@@ -20,8 +20,8 @@ export default function PageGridColumnPublisher() {
       <div
         ref={sentinelRef}
         className={cn(
-          "pointer-events-none absolute inset-x-0 top-0 mx-auto h-px w-full opacity-0",
-          PAGE_CONTAINER_MAX_WIDTH_CLASS,
+          "pointer-events-none absolute inset-x-0 top-0 h-px opacity-0",
+          PAGE_CONTAINER,
         )}
       />
     </div>
