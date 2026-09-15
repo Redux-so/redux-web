@@ -22,6 +22,12 @@ type InfiniteScrollMarqueeProps = {
   trackClassName?: string;
 };
 
+type MarqueeTimingState = {
+  startedAt: number;
+  pausedAt: number;
+  totalPausedMs: number;
+};
+
 export default function InfiniteScrollMarquee({
   renderTrack,
   direction = "left",
@@ -31,7 +37,15 @@ export default function InfiniteScrollMarquee({
   trackClassName,
 }: InfiniteScrollMarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(paused);
+  const timingRef = useRef<MarqueeTimingState>({
+    startedAt: 0,
+    pausedAt: 0,
+    totalPausedMs: 0,
+  });
   const [trackWidth, setTrackWidth] = useState(0);
+
+  pausedRef.current = paused;
 
   useLayoutEffect(() => {
     const track = trackRef.current;
@@ -61,21 +75,37 @@ export default function InfiniteScrollMarquee({
     }
 
     if (trackWidth <= 0 || durationSec <= 0) {
-      scroller.style.transform = "";
       return;
     }
 
     const speedPxPerMs = trackWidth / (durationSec * 1000);
-    const startedAt = performance.now();
+    timingRef.current = {
+      startedAt: performance.now(),
+      pausedAt: 0,
+      totalPausedMs: 0,
+    };
+
     let frameId = 0;
+    let pauseActive = false;
 
     const tick = (now: number) => {
-      if (paused) {
+      const timing = timingRef.current;
+
+      if (pausedRef.current) {
+        if (!pauseActive) {
+          timing.pausedAt = now;
+          pauseActive = true;
+        }
         frameId = requestAnimationFrame(tick);
         return;
       }
 
-      const elapsed = now - startedAt;
+      if (pauseActive) {
+        timing.totalPausedMs += now - timing.pausedAt;
+        pauseActive = false;
+      }
+
+      const elapsed = now - timing.startedAt - timing.totalPausedMs;
       const distance = (elapsed * speedPxPerMs) % trackWidth;
 
       const translateX =
@@ -89,9 +119,8 @@ export default function InfiniteScrollMarquee({
 
     return () => {
       cancelAnimationFrame(frameId);
-      scroller.style.transform = "";
     };
-  }, [direction, durationSec, paused, trackWidth]);
+  }, [direction, durationSec, trackWidth]);
 
   return (
     <div
