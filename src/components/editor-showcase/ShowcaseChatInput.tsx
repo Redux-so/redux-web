@@ -8,7 +8,6 @@ import ShowcaseUsageRing from "@/src/components/editor-showcase/ShowcaseUsageRin
 import { PRODUCT_BRAND_BORDER_FOCUS_CLASS } from "@/lib/brand-colors";
 import {
   CHAT_SEND_BTN_DISABLED,
-  CHAT_SURFACE_SHADOW,
   CHAT_TOOLBAR_CHIP,
 } from "@/lib/panel-chrome";
 import { SURFACE_BORDER } from "@/lib/surface-colors";
@@ -89,9 +88,10 @@ export default function ShowcaseChatInput({
           focused && PRODUCT_BRAND_BORDER_FOCUS_CLASS,
         )
       : cn(
-          "overflow-hidden rounded-xl border-2 bg-[#1d1d1d] transition-colors",
-          CHAT_SURFACE_SHADOW,
-          focused ? PRODUCT_BRAND_BORDER_FOCUS_CLASS : "border-[#262626]",
+          UI_CARD_BORDER,
+          "overflow-hidden bg-[#1d1d1d] transition-[border-color,box-shadow] duration-200 max-sm:rounded-[var(--card-radius)]",
+          "sm:rounded-xl sm:border-2 sm:border-[#262626] sm:shadow-[0_1px_3px_rgba(0,0,0,0.32),0_2px_8px_rgba(0,0,0,0.14)]",
+          focused && PRODUCT_BRAND_BORDER_FOCUS_CLASS,
         );
 
   return (

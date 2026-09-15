@@ -1215,6 +1215,21 @@ html {
     .page-grid-overlay-vertical {
       display: none;
     }
+
+    /* Homepage editor showcase : match feature bento `ui-card` chrome on small screens. */
+    [data-showcase-scaler-frame].showcase-frame {
+      padding: 0;
+      border-color: var(--marketing-card-border);
+      background: linear-gradient(
+        180deg,
+        var(--marketing-card-bg-top) 0%,
+        var(--marketing-card-bg-bottom) 100%
+      );
+      box-shadow:
+        inset 0 1px 0 var(--marketing-card-inset-highlight),
+        inset 0 -1px 0 var(--marketing-card-inset-shadow),
+        var(--card-shadow-outer);
+    }
   }
 
   /* Fade page grid lines out at the top and bottom edges of the overlay. */
