@@ -1,7 +1,5 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
-
 import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
 import ToolkitItemCard from "@/src/components/features/ToolkitItemCard";
 import { TOOLKIT_ITEMS } from "@/lib/toolkit-data";
@@ -38,8 +36,6 @@ type ToolkitMarqueeProps = {
 };
 
 export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
     <div
       className={cn("w-full min-w-0", className)}
@@ -64,27 +60,17 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
         </div>
 
         <div className="min-w-0 flex-1">
-          {prefersReducedMotion ? (
-            <ul className="m-0 flex list-none flex-wrap gap-x-6 gap-y-6 p-0 sm:gap-x-8 lg:gap-x-10">
-              {TOOLKIT_ITEMS.map((item) => (
-                <li key={item.name}>
-                  <ToolkitItemCard item={item} />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <MarqueeEdgeFade
-              className={cn(
-                SECTION_BLEED,
-                "lg:relative lg:left-auto lg:w-auto lg:max-w-none lg:translate-x-0",
-              )}
-            >
-              <div className="animate-toolkit-marquee flex w-max items-start">
-                <ToolkitMarqueeTrack trackKey="a" />
-                <ToolkitMarqueeTrack trackKey="b" aria-hidden />
-              </div>
-            </MarqueeEdgeFade>
-          )}
+          <MarqueeEdgeFade
+            className={cn(
+              SECTION_BLEED,
+              "lg:relative lg:left-auto lg:w-auto lg:max-w-none lg:translate-x-0",
+            )}
+          >
+            <div className="animate-toolkit-marquee flex w-max items-start">
+              <ToolkitMarqueeTrack trackKey="a" />
+              <ToolkitMarqueeTrack trackKey="b" aria-hidden />
+            </div>
+          </MarqueeEdgeFade>
         </div>
       </div>
 

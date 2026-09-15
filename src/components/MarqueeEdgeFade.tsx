@@ -17,7 +17,7 @@ export default function MarqueeEdgeFade({
 }: MarqueeEdgeFadeProps) {
   return (
     <div className={cn("relative w-full min-w-0", className)}>
-      <div className="relative isolate overflow-hidden">
+      <div className="relative isolate overflow-hidden" data-marquee-scroll="">
         {children}
         <div
           aria-hidden

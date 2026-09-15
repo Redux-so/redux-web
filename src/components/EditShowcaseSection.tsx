@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import {
@@ -23,7 +22,7 @@ import SectionIntro from "@/src/components/SectionIntro";
 import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
 import {
   PAGE_CONTAINER,
-  PAGE_GRID_ALIGNED_FRAME,
+  PAGE_GRID_MARQUEE_LANE,
   SECTION_LAYOUT,
 } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
@@ -184,28 +183,11 @@ function PhotoMarqueeRow({
   trackKey,
   priorityCount = 0,
 }: PhotoMarqueeRowProps) {
-  const prefersReducedMotion = useReducedMotion();
   const hoverSpotlightEnabled = useHoverSpotlightEnabled();
   const [activeCardKey, setActiveCardKey] = useState<string | null>(null);
   const animationClass =
     direction === "left" ? "animate-marquee-left" : "animate-marquee-right";
   const isSpotlightActive = hoverSpotlightEnabled && activeCardKey !== null;
-
-  if (prefersReducedMotion) {
-    return (
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
-        {photos.map((photo, index) => (
-          <PhotoCard
-            key={photo.id}
-            photo={photo}
-            priority={index < priorityCount}
-            interactive={false}
-            className="!w-full !max-w-full"
-          />
-        ))}
-      </div>
-    );
-  }
 
   return (
     <div
@@ -255,27 +237,23 @@ export default function EditShowcaseSection() {
       </div>
 
       <div className="flex flex-col gap-3 sm:gap-4">
-        <div className="w-full min-w-0">
-          <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-x-visible")}>
-            <PageGridLeftRail />
-            <PhotoMarqueeRow
-              photos={EDIT_SHOWCASE_TOP_ROW}
-              direction="left"
-              trackKey="edit-top"
-              priorityCount={EDIT_SHOWCASE_PRIORITY_COUNT}
-            />
-          </div>
+        <div className={cn(PAGE_GRID_MARQUEE_LANE, "w-full")}>
+          <PageGridLeftRail />
+          <PhotoMarqueeRow
+            photos={EDIT_SHOWCASE_TOP_ROW}
+            direction="left"
+            trackKey="edit-top"
+            priorityCount={EDIT_SHOWCASE_PRIORITY_COUNT}
+          />
         </div>
 
-        <div className="w-full min-w-0">
-          <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-x-visible")}>
-            <PageGridLeftRail />
-            <PhotoMarqueeRow
-              photos={EDIT_SHOWCASE_BOTTOM_ROW}
-              direction="right"
-              trackKey="edit-bottom"
-            />
-          </div>
+        <div className={cn(PAGE_GRID_MARQUEE_LANE, "w-full")}>
+          <PageGridLeftRail />
+          <PhotoMarqueeRow
+            photos={EDIT_SHOWCASE_BOTTOM_ROW}
+            direction="right"
+            trackKey="edit-bottom"
+          />
         </div>
       </div>
     </div>

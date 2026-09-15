@@ -23,6 +23,10 @@ export const SECTION_BLEED =
 export const PAGE_GRID_ALIGNED_FRAME =
   "relative max-w-[var(--page-grid-width,100%)] overflow-x-clip ml-[var(--page-grid-left,0px)] w-[var(--page-grid-width,100%)]";
 
+/** Grid-aligned lane for horizontal marquees (no overflow clip on the lane itself). */
+export const PAGE_GRID_MARQUEE_LANE =
+  "relative min-w-0 w-[var(--page-grid-width,100%)] max-w-[var(--page-grid-width,100%)] ml-[var(--page-grid-left,0px)]";
+
 /** Uppercase section label : Features, FAQ, Edit showcase intros. */
 export const SECTION_LABEL =
   "text-[13px] font-semibold uppercase tracking-wide text-marketing-section-label";

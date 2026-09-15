@@ -257,10 +257,10 @@ html {
 
 @keyframes marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -284,6 +284,13 @@ html {
 .edit-showcase-marquee-track,
 .animate-toolkit-marquee {
   backface-visibility: hidden;
+}
+
+@media (hover: none) {
+  .edit-showcase-marquee-row--active .animate-marquee-left,
+  .edit-showcase-marquee-row--active .animate-marquee-right {
+    animation-play-state: running;
+  }
 }
 
 .edit-showcase-marquee-row--active .animate-marquee-left,
@@ -330,10 +337,10 @@ html {
 
 @keyframes toolkit-marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -342,20 +349,13 @@ html {
   will-change: transform;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee-left,
-  .animate-marquee-right,
-  .animate-toolkit-marquee {
-    animation: none;
-  }
-}
 
 @keyframes hero-photo-marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -1061,6 +1061,10 @@ html {
       inset 0 -1px 0 var(--pill-inset-bottom);
   }
 
+  .hero-pill-cta--shimmer {
+    isolation: isolate;
+  }
+
   .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text {
     display: inline-grid;
     line-height: 1;
@@ -1096,19 +1100,29 @@ html {
       transparent 66%,
       transparent 100%
     );
+    background-repeat: no-repeat;
     background-size: 210% 100%;
+    background-position: 150% center;
     -webkit-background-clip: text;
     background-clip: text;
-    mix-blend-mode: plus-lighter;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85))
-      drop-shadow(0 0 14px rgba(255, 255, 255, 0.5));
     animation: hero-cta-shimmer 6s ease-out infinite;
+    pointer-events: none;
+    will-change: background-position;
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (hover: hover) and (pointer: fine) {
     .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
-      animation: none;
-      background: none;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85))
+        drop-shadow(0 0 14px rgba(255, 255, 255, 0.5));
+    }
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .hero-pill-cta--shimmer .hero-pill-cta__shimmer-text-shine {
+      text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.85),
+        0 0 14px rgba(255, 255, 255, 0.5);
+      filter: none;
     }
   }
 
@@ -1477,6 +1491,14 @@ html {
         [data-slot="accordion-content"] *,
         [class*="animate-marquee"],
         [class*="animate-marquee"] *,
+        [data-marquee-scroll],
+        [data-marquee-scroll] *,
+        .animate-toolkit-marquee,
+        .animate-toolkit-marquee *,
+        .edit-showcase-marquee-track,
+        .edit-showcase-marquee-track *,
+        .hero-pill-cta--shimmer,
+        .hero-pill-cta--shimmer *,
         .animate-orbit,
         .animate-orbit *
       )

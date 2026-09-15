@@ -56,7 +56,7 @@ export default function Home() {
 
       <section
         id="edit-showcase"
-        className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}
+        className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE, "overflow-x-visible")}
       >
         <EditShowcaseSection />
       </section>
