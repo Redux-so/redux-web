@@ -3,8 +3,9 @@
 import { useState } from "react";
 
 import { Icon } from "@/components/shared/Icon";
-import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { SURFACE_BTN_ACTIVE, SURFACE_BTN_IDLE } from "@/lib/surface-colors";
+import { BTN_BRAND_SOLID } from "@/lib/button-styles";
+import { SURFACE_BTN_ACTIVE, SURFACE_BTN_IDLE, SURFACE_BORDER } from "@/lib/surface-colors";
+import { cn } from "@/lib/utils";
 
 import { SHOWCASE_FILENAME } from "./showcase-data";
 
@@ -47,14 +48,15 @@ export default function ShowcaseToolbar() {
   const zoomPercent = `${Math.round(zoom * 100)}%`;
 
   return (
-    <div className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-[#2e2e2e] bg-[#121212] pl-3 pr-3">
+    <div className={`grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b ${SURFACE_BORDER} bg-[#121212] pl-3 pr-3`}>
       <div className="flex min-w-0 shrink-0 items-center justify-self-start gap-3">
         <button
           type="button"
-          className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-2 py-1.5 text-[13px] text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white disabled:cursor-wait disabled:opacity-60"
+          aria-label="Back to Library"
+          title="Back to Library"
+          className="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-[#888888] transition-colors hover:bg-[#1d1d1d] hover:text-white"
         >
-          <Icon name="ChevronLeft" size={16} aria-hidden />
-          Back to Library
+          <Icon name="ChevronLeft" size={24} aria-hidden />
         </button>
       </div>
 
@@ -127,9 +129,9 @@ export default function ShowcaseToolbar() {
         <button
           type="button"
           title="Export / share"
-          className={`${BTN_PRIMARY_SOLID} shrink-0`}
+          className={cn(BTN_BRAND_SOLID, "shrink-0")}
         >
-          <Icon name="Download01" size={16} aria-hidden />
+          <Icon name="Download01" size={16} strokeWidth={2} aria-hidden />
           Export
         </button>
       </div>

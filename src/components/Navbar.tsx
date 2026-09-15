@@ -2,50 +2,55 @@
 
 import { Menu01, XClose } from "@untitledui/icons";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 
 import { DiscordIcon } from "@/lib/brand-social-icons";
 
 import {
   BTN_OUTLINE_BLOCK,
-  BTN_OUTLINE_SOLID,
-  BTN_PRIMARY_SOLID,
 } from "@/lib/button-styles";
-import { BLUEPRINT_FRAME, BLUEPRINT_MAX_WIDTH, BLUEPRINT_PAGE_INSET } from "@/lib/blueprint-grid";
 import { EASE_OUT } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
+/** Matches crop-guide column geometry without async CSS vars (see measureGridColumns). */
+const NAV_GRID_FRAME = cn(
+  "relative box-border min-w-0 overflow-x-clip",
+  "mx-auto w-full max-w-[min(100%,calc(80rem+3rem))] md:max-w-[min(100%,calc(80rem+4rem))]",
+  "px-3 sm:px-4",
+);
+
+const NAV_CONTAINER = cn(
+  NAV_GRID_FRAME,
+  "grid h-[3.75rem] min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:h-16",
+  "md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-3 lg:gap-4",
+);
+
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Features", href: "#features" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Home", href: "/#home" },
+  { label: "Features", href: "/#features" },
+  { label: "FAQ", href: "/#faq" },
 ] as const;
 
 /** Scroll margin for in-page anchor targets below the fixed nav bar. */
 export const NAV_SCROLL_OFFSET_CLASS = "scroll-mt-[3.75rem] sm:scroll-mt-16";
 
-/** Reserves space for the fixed nav bar row inside the blueprint frame. */
+/** Reserves space for the fixed nav bar. */
 export const NAV_SPACER_CLASS = "h-[3.75rem] shrink-0 sm:h-16";
 
-/** Matches `main` horizontal inset so the bar aligns with BlueprintFrame. */
-const NAV_FIXED_INSET = cn(
-  "fixed inset-x-0 top-0 z-50",
-  BLUEPRINT_PAGE_INSET,
+const NAV_FIXED = cn(
+  "nav-backdrop-blur fixed inset-x-0 top-0 z-50 overflow-visible",
 );
 
-const NAV_SHELL_SOLID = "bg-[#161616]";
-const NAV_SHELL_GLASS = "bg-[#161616]/90 backdrop-blur-md";
-const NAV_SHELL_TRANSITION =
-  "transition-[background-color,backdrop-filter] duration-200";
+const NAV_LOGO_HEIGHT_CLASS = "h-5 sm:h-6";
+const NAV_LOGO_INTRINSIC_WIDTH = 471;
+const NAV_LOGO_INTRINSIC_HEIGHT = 117;
 
-/** Shared action button height in the desktop nav bar. */
-const NAV_ACTION_HEIGHT =
-  "!h-[34px] !min-h-[34px] !max-h-[34px] shrink-0 leading-none";
-
-/** Square icon button — width matches height exactly. */
-const NAV_ICON_BUTTON_SIZE =
-  "!size-[34px] !min-h-[34px] !min-w-[34px] !max-h-[34px] !max-w-[34px] shrink-0";
+const NAV_WAITLIST_CTA = cn(
+  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav inline-flex items-center justify-center shrink-0 no-underline",
+);
 
 const PANEL_TRANSITION = { duration: 0.3, ease: EASE_OUT };
 const ICON_TRANSITION = { duration: 0.18, ease: EASE_OUT };
@@ -94,23 +99,14 @@ const menuItemReducedVariants: Variants = {
   },
 };
 
+const navLinkClassName =
+  "whitespace-nowrap text-sm font-medium text-marketing-muted transition-colors hover:text-white";
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    const updateScrollState = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    updateScrollState();
-    window.addEventListener("scroll", updateScrollState, { passive: true });
-
-    return () => window.removeEventListener("scroll", updateScrollState);
-  }, []);
-
-  const navShellClass = isScrolled ? NAV_SHELL_GLASS : NAV_SHELL_SOLID;
 
   const closeMobileMenu = () => setMobileOpen(false);
 
@@ -120,7 +116,7 @@ export default function Navbar() {
       top: 0,
       behavior: prefersReducedMotion ? "auto" : "smooth",
     });
-    window.history.replaceState(null, "", "#home");
+    window.history.replaceState(null, "", "/#home");
     closeMobileMenu();
   };
 
@@ -135,75 +131,57 @@ export default function Navbar() {
     : PANEL_TRANSITION;
 
   return (
-    <header className={NAV_FIXED_INSET}>
-      <div
-        className={cn(
-          "mx-auto w-full border",
-          BLUEPRINT_MAX_WIDTH,
-          BLUEPRINT_FRAME,
-          NAV_SHELL_TRANSITION,
-          navShellClass,
-        )}
-      >
-      <div className="relative flex w-full items-center justify-between gap-4 px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8">
-        <a
-          href="#home"
-          onClick={scrollToTop}
-          className="group inline-flex size-9 shrink-0 items-center justify-center rounded-md"
+    <header className={NAV_FIXED}>
+      <div className={cn(NAV_CONTAINER)}>
+        <Link
+          href="/#home"
+          onClick={isHome ? scrollToTop : undefined}
+          className="group relative z-10 inline-flex h-[34px] min-w-0 max-w-[7rem] items-center justify-self-start rounded-md max-md:ml-2 sm:max-w-[9.5rem] md:max-w-full"
           aria-label="Back to top"
         >
           <Image
-            src="/redux-logo.png"
+            src="/redux-logo-text.png"
             alt="Redux"
-            width={28}
-            height={28}
-            className="h-7 w-7 shrink-0 object-contain transition-[filter] duration-200 group-hover:brightness-75"
+            width={NAV_LOGO_INTRINSIC_WIDTH}
+            height={NAV_LOGO_INTRINSIC_HEIGHT}
+            className={cn(
+              NAV_LOGO_HEIGHT_CLASS,
+              "w-auto max-w-full min-w-0 origin-left object-contain object-left transition-[filter] duration-200 group-hover:brightness-75",
+            )}
             priority
           />
-        </a>
+        </Link>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex"
+          className="hidden min-w-0 items-center justify-self-center gap-4 md:flex lg:gap-6"
           aria-label="Main navigation"
         >
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="whitespace-nowrap text-sm text-white/70 transition-colors hover:text-white"
-            >
+            <Link key={link.href} href={link.href} className={navLinkClassName}>
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2.5">
+        <div className="flex min-w-0 shrink-0 items-center justify-self-end gap-2 sm:gap-3 lg:gap-4">
           <a
             href="https://discord.gg/gzHrud9nee"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Discord"
-            className={cn(
-              BTN_OUTLINE_SOLID,
-              NAV_ICON_BUTTON_SIZE,
-              "hidden !p-0 md:inline-flex",
-            )}
+            className="hidden shrink-0 text-white transition-colors hover:text-white/80 md:inline-flex md:items-center md:justify-center"
           >
-            <DiscordIcon className="size-[18px] shrink-0" />
+            <DiscordIcon className="size-5 shrink-0" />
           </a>
-          <a
-            href="#waitlist"
-            className={cn(
-              BTN_PRIMARY_SOLID,
-              NAV_ACTION_HEIGHT,
-              "px-3.5 text-sm",
-            )}
+          <Link
+            href="/#waitlist"
+            className={cn(NAV_WAITLIST_CTA, "hidden md:inline-flex")}
           >
             Join Waitlist
-          </a>
+          </Link>
           <button
             type="button"
-            className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-lg text-white md:hidden"
+            className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-md text-white md:hidden"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((open) => !open)}
@@ -230,7 +208,7 @@ export default function Navbar() {
                   }
                   transition={ICON_TRANSITION}
                 >
-                  <XClose className="size-[18px]" />
+                  <XClose className="size-5" />
                 </motion.span>
               ) : (
                 <motion.span
@@ -253,7 +231,7 @@ export default function Navbar() {
                   }
                   transition={ICON_TRANSITION}
                 >
-                  <Menu01 className="size-[18px]" />
+                  <Menu01 className="size-5" />
                 </motion.span>
               )}
             </AnimatePresence>
@@ -265,7 +243,7 @@ export default function Navbar() {
         {mobileOpen ? (
           <motion.div
             key="mobile-menu"
-            className="overflow-hidden border-t border-[#2e2e2e] md:hidden"
+            className="overflow-hidden border-t border-white/10 md:hidden"
             variants={panelVariants}
             initial="hidden"
             animate="visible"
@@ -273,7 +251,7 @@ export default function Navbar() {
             transition={panelTransition}
           >
             <motion.div
-              className="px-4 py-3.5 sm:px-6"
+              className={cn(NAV_GRID_FRAME, "py-3.5")}
               variants={
                 prefersReducedMotion ? menuListReducedVariants : menuListVariants
               }
@@ -286,18 +264,18 @@ export default function Navbar() {
               >
                 {navLinks.map((link) => (
                   <motion.div key={link.href} variants={itemVariants}>
-                    <a
+                    <Link
                       href={link.href}
-                      className="block rounded-lg px-3 py-2.5 text-[15px] text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                      className="block rounded-md px-3 py-2.5 text-[15px] font-medium text-marketing-muted transition-colors hover:bg-white/5 hover:text-white"
                       onClick={closeMobileMenu}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </motion.div>
                 ))}
               </nav>
 
-              <div className="mt-3">
+              <div className="mt-3 flex flex-col gap-2">
                 <motion.div variants={itemVariants}>
                   <a
                     href="https://discord.gg/gzHrud9nee"
@@ -310,12 +288,20 @@ export default function Navbar() {
                     Discord
                   </a>
                 </motion.div>
+                <motion.div variants={itemVariants}>
+                  <Link
+                    href="/#waitlist"
+                    onClick={closeMobileMenu}
+                    className={cn(NAV_WAITLIST_CTA, "flex w-full")}
+                  >
+                    Join Waitlist
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>
         ) : null}
       </AnimatePresence>
-      </div>
     </header>
   );
 }

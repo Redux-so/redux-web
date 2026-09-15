@@ -1,131 +1,105 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
+import { Alata } from "next/font/google";
 
+import FooterPageGrid from "@/src/components/FooterPageGrid";
+import FooterWatermark from "@/src/components/FooterWatermark";
 import {
-  DiscordIcon,
-  GithubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  XSocialIcon,
-} from "@/lib/brand-social-icons";
-import { blueprintBorderT, blueprintCol } from "@/lib/blueprint-grid";
-import {
-  ScrollReveal,
-  ScrollRevealGroup,
-  ScrollRevealItem,
-} from "@/lib/scroll-motion";
+  legalLinks,
+  navigationLinks,
+  SITE_MOTTO,
+  socialLinks,
+} from "@/lib/footer-content";
+import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
-const socialLinks = [
-  {
-    label: "X",
-    href: "https://x.com/tryredux",
-    icon: XSocialIcon,
-    external: true,
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/tryredux/",
-    icon: InstagramIcon,
-    external: true,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/company/tryredux",
-    icon: LinkedinIcon,
-    external: true,
-  },
-  {
-    label: "Discord",
-    href: "https://discord.gg/gzHrud9nee",
-    icon: DiscordIcon,
-    external: true,
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com/Redux-so",
-    icon: GithubIcon,
-    external: true,
-  },
-] as const;
+const FOOTER_LOGO_WIDTH = 471;
+const FOOTER_LOGO_HEIGHT = 117;
+const FOOTER_LOGO_HEIGHT_CLASS = "h-5 sm:h-6";
 
-const navigationLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Features", href: "#features" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "mailto:admin@redux.so" },
-] as const;
+const footerWordmarkFont = Alata({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
-const legalLinks = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
-] as const;
+const footerLinkClassName =
+  "text-sm text-marketing-subtle transition-colors hover:text-white";
+
+function FooterLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} className={footerLinkClassName}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} className={footerLinkClassName}>
+      {children}
+    </a>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer>
-      <ScrollRevealGroup
-        className="grid grid-cols-1 lg:grid-cols-3"
-        stagger={0.1}
-      >
-        <ScrollRevealItem
-          className={cn(blueprintCol, "flex flex-col items-start gap-5 px-4 py-10 sm:px-8 lg:px-10")}
-        >
-          <Image
-            src="/redux-logo.png"
-            alt="Redux"
-            width={28}
-            height={28}
-            className="h-7 w-7 object-contain"
-          />
-          <p className="text-sm leading-relaxed text-white/60">
-            Organize, edit, and export photos, all from your browser
-          </p>
-        </ScrollRevealItem>
+    <footer className="footer-bottom-glow relative sticky bottom-0 z-0 bg-[#02040A] text-white">
+      <FooterPageGrid />
+      <div className="relative z-[1]">
+        <div className={cn(PAGE_CONTAINER, "relative z-10")}>
+        <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16 lg:py-16">
+          <div className="flex flex-col items-start gap-5">
+            <Image
+              src="/redux-logo-text.png"
+              alt="Redux"
+              width={FOOTER_LOGO_WIDTH}
+              height={FOOTER_LOGO_HEIGHT}
+              className={cn(
+                FOOTER_LOGO_HEIGHT_CLASS,
+                "block w-auto object-contain object-left",
+              )}
+            />
+            <p className="max-w-xs text-sm leading-snug text-marketing-subtle">
+              {SITE_MOTTO}
+            </p>
+          </div>
 
-        <ScrollRevealItem
-          className={cn(blueprintCol, "px-4 py-10 sm:px-8 lg:px-10")}
-        >
-          <p className="text-sm font-medium text-white">Navigation</p>
-          <ul className="mt-4 space-y-3">
-            {navigationLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="text-sm text-white/60 transition-colors hover:text-white"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </ScrollRevealItem>
+          <div className="flex flex-wrap items-start gap-12 sm:gap-16">
+            <nav aria-label="Footer navigation">
+              <p className="text-sm font-medium text-white">Navigation</p>
+              <ul className="mt-4 space-y-3">
+                {navigationLinks.map((link) => (
+                  <li key={link.label}>
+                    <FooterLink href={link.href}>{link.label}</FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-        <ScrollRevealItem
-          className={cn(blueprintCol, "px-4 py-10 sm:px-8 lg:px-10")}
-        >
-          <p className="text-sm font-medium text-white">Legal</p>
-          <ul className="mt-4 space-y-3">
-            {legalLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="text-sm text-white/60 transition-colors hover:text-white"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </ScrollRevealItem>
-      </ScrollRevealGroup>
+            <nav aria-label="Legal">
+              <p className="text-sm font-medium text-white">Legal</p>
+              <ul className="mt-4 space-y-3">
+                {legalLinks.map((link) => (
+                  <li key={link.label}>
+                    <FooterLink href={link.href}>{link.label}</FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </div>
 
-      <ScrollReveal variant="fadeIn">
-        <div className={blueprintBorderT}>
-          <div className="flex flex-col gap-4 px-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
-            <p className="text-sm text-white/50">
-              © Redux 2026. All rights reserved.
+        <div data-footer-grid-divider className="relative">
+          <div className="flex flex-col gap-4 pt-6 pb-3 sm:flex-row sm:items-center sm:justify-between sm:pb-4">
+            <p className="text-sm text-white/36">
+              © 2026 Redux
             </p>
             <div className="flex shrink-0 items-center gap-4 sm:gap-5">
               {socialLinks.map((social) => (
@@ -133,13 +107,15 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  target={"external" in social && social.external ? "_blank" : undefined}
+                  target={
+                    "external" in social && social.external ? "_blank" : undefined
+                  }
                   rel={
                     "external" in social && social.external
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  className="text-white/50 transition-colors hover:text-white"
+                  className="text-white/36 transition-colors hover:text-white"
                 >
                   <social.icon className="size-5" />
                 </a>
@@ -147,7 +123,10 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </ScrollReveal>
+        </div>
+
+        <FooterWatermark fontClassName={footerWordmarkFont.className} />
+      </div>
     </footer>
   );
 }

@@ -4,7 +4,6 @@ import * as React from "react";
 import { Minus, Plus } from "@untitledui/icons";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 
-import { blueprintBorderB } from "@/lib/blueprint-grid";
 import { cn } from "@/lib/utils";
 
 function Accordion({
@@ -27,7 +26,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn(blueprintBorderB, "last:border-b-0", className)}
+      className={cn("border-b border-white/10 last:border-b-0", className)}
       {...props}
     />
   );
@@ -46,7 +45,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "group/accordion-trigger flex flex-1 items-center justify-between gap-4 py-4 text-left text-sm font-medium text-white transition-all outline-none hover:text-white/90 focus-visible:text-white disabled:pointer-events-none disabled:opacity-50 sm:py-5 sm:text-base",
+          "group/accordion-trigger flex min-w-0 flex-1 items-center justify-between gap-4 py-4 text-left text-sm font-medium text-balance text-white transition-all outline-none hover:text-white/90 focus-visible:text-white disabled:pointer-events-none disabled:opacity-50 sm:py-5 sm:text-base",
           className,
         )}
         {...props}
@@ -54,11 +53,11 @@ function AccordionTrigger({
         {children}
         <Icon
           aria-hidden
-          className="size-5 shrink-0 text-white/70 group-data-[state=open]/accordion-trigger:hidden"
+          className="size-5 shrink-0 text-marketing-muted group-data-[state=open]/accordion-trigger:hidden"
         />
         <Minus
           aria-hidden
-          className="hidden size-5 shrink-0 text-white/70 group-data-[state=open]/accordion-trigger:block"
+          className="hidden size-5 shrink-0 text-marketing-muted group-data-[state=open]/accordion-trigger:block"
         />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
@@ -67,18 +66,24 @@ function AccordionTrigger({
 
 function AccordionContent({
   className,
+  outerClassName,
   children,
   ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Content>) {
+}: React.ComponentProps<typeof AccordionPrimitive.Content> & {
+  outerClassName?: string;
+}) {
   return (
     <AccordionPrimitive.Content
       data-slot="accordion-content"
-      className="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up"
+      className={cn(
+        "overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up",
+        outerClassName,
+      )}
       {...props}
     >
       <div
         className={cn(
-          "pb-4 text-sm leading-relaxed text-white/70 sm:pb-5",
+          "pb-4 text-sm leading-relaxed text-marketing-muted sm:pb-5",
           className,
         )}
       >

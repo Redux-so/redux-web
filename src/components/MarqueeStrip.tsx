@@ -1,87 +1,95 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment } from "react";
 
-import { blueprintRow } from "@/lib/blueprint-grid";
+import {
+  GRID_LINE_COLOR,
+  getColumnBoundaryPercents,
+} from "@/src/components/page-grid/shared";
+import { PAGE_GRID_ALIGNED_FRAME, SECTION_BLEED } from "@/lib/section-styles";
 import { ScrollRevealGroup, ScrollRevealItem } from "@/lib/scroll-motion";
 import { cn } from "@/lib/utils";
 
 const marqueeItems = [
   { src: "/marquee/photoshop.png", alt: "Adobe Photoshop", width: 152, height: 126 },
   { src: "/marquee/lightroom.png", alt: "Adobe Lightroom", width: 157, height: 142 },
-  { src: "/marquee/luminar-neo.png", alt: "Luminar Neo", width: 500, height: 88 },
   { src: "/marquee/canva.png", alt: "Canva", width: 354, height: 125 },
   { src: "/marquee/figma.png", alt: "Figma", width: 356, height: 106 },
+  { src: "/marquee/luminar-neo.png", alt: "Luminar Neo", width: 500, height: 88 },
 ] as const;
 
-const TRACK_REPEATS = 1;
+const MARQUEE_LOGO_CLASS = "marquee-logo-cell__image";
+const MARQUEE_LOGO_CELL_CLASS =
+  "marquee-logo-cell contained-accent-glow group/marquee-logo relative flex h-full w-full min-h-[3.75rem] items-center justify-center overflow-hidden px-0.5 sm:min-h-[5.5rem] lg:min-h-[6.5rem]";
 
-type MarqueeTrackProps = {
-  trackKey: string;
-  "aria-hidden"?: boolean;
-};
-
-function MarqueeTrack({ trackKey, "aria-hidden": ariaHidden }: MarqueeTrackProps) {
-  const items = Array.from({ length: TRACK_REPEATS }, () => marqueeItems).flat();
-
-  return (
-    <div
-      className="flex shrink-0 items-center gap-10 pr-10 sm:gap-14 sm:pr-14"
-      aria-hidden={ariaHidden}
-    >
-      {items.map((item, index) => (
-        <Fragment key={`${trackKey}-${index}`}>
-          {index > 0 ? (
-            <span className="text-white/30" aria-hidden="true">
-              ·
-            </span>
-          ) : null}
-          <Image
-            src={item.src}
-            alt={item.alt}
-            width={item.width}
-            height={item.height}
-            unoptimized
-            className="h-6 w-auto sm:h-7 lg:h-8"
-            draggable={false}
-          />
-        </Fragment>
-      ))}
-    </div>
-  );
-}
+/** Internal dividers only — outer edges come from PageGrid. */
+const internalColumnBoundaries = getColumnBoundaryPercents(marqueeItems.length).filter(
+  (leftPercent) => leftPercent > 0 && leftPercent < 100,
+);
 
 export default function MarqueeStrip() {
   return (
-    <section className={cn(blueprintRow, "bg-brand-bg")}>
-      <ScrollRevealGroup
-        className="flex w-full flex-col px-4 py-5 sm:px-8 sm:py-6 lg:px-10"
-        stagger={0.1}
-      >
-        <ScrollRevealItem>
-          <p className="mb-6 text-center text-sm text-white/70 sm:mb-8 sm:text-base">
+    <ScrollRevealGroup className="flex min-w-0 w-full flex-col" stagger={0.1}>
+      <ScrollRevealItem variant="fadeIn" className="w-full min-w-0">
+        <div className={cn(PAGE_GRID_ALIGNED_FRAME, "overflow-x-visible")}>
+          <p className="m-0 py-6 text-center text-[15px] leading-relaxed text-marketing-muted sm:py-8 sm:text-base lg:text-lg">
             Inspired by workflows from
           </p>
-        </ScrollRevealItem>
 
-        <ScrollRevealItem variant="fadeIn" className="w-full">
-          <div className="relative mx-auto w-full max-w-xl overflow-hidden sm:max-w-2xl md:max-w-3xl lg:max-w-4xl">
-            <div className="animate-marquee flex w-max items-center">
-              <MarqueeTrack trackKey="a" />
-              <MarqueeTrack trackKey="b" aria-hidden />
+          <div className="relative min-w-0">
+            <div
+              className={cn(SECTION_BLEED, "pointer-events-none absolute inset-y-0")}
+              aria-hidden
+            >
+              <div
+                className="absolute inset-x-0 top-0 h-px"
+                style={{ backgroundColor: GRID_LINE_COLOR }}
+              />
+              <div
+                className="absolute inset-x-0 bottom-0 h-px"
+                style={{ backgroundColor: GRID_LINE_COLOR }}
+              />
             </div>
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-brand-bg to-transparent sm:w-14 lg:w-16"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-brand-bg to-transparent sm:w-14 lg:w-16"
-            />
+
+            <div className="relative min-w-0">
+              {internalColumnBoundaries.map((leftPercent) => (
+                <div
+                  key={`rail-${leftPercent}`}
+                  className="pointer-events-none absolute inset-y-0 w-px"
+                  style={{
+                    left: `${leftPercent}%`,
+                    transform: "translateX(-50%)",
+                    backgroundColor: GRID_LINE_COLOR,
+                  }}
+                  aria-hidden
+                />
+              ))}
+
+              <ul className="relative z-[1] m-0 grid min-w-0 list-none grid-cols-5 items-stretch p-0">
+                {marqueeItems.map((item) => (
+                  <li key={item.src} className="min-w-0">
+                    <div className={MARQUEE_LOGO_CELL_CLASS} aria-label={item.alt}>
+                      <Image
+                        src={item.src}
+                        alt=""
+                        width={item.width}
+                        height={item.height}
+                        unoptimized
+                        className={cn(
+                          MARQUEE_LOGO_CLASS,
+                          item.src.includes("luminar-neo") &&
+                            "marquee-logo-cell__image--luminar",
+                        )}
+                        draggable={false}
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </ScrollRevealItem>
-      </ScrollRevealGroup>
-    </section>
+        </div>
+      </ScrollRevealItem>
+    </ScrollRevealGroup>
   );
 }

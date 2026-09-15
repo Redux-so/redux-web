@@ -5,7 +5,7 @@ export type LibraryShowcaseImage = {
   alt: string;
 };
 
-export const SHOWCASE_LIBRARY_GREETING = "Good afternoon, Levi";
+export const SHOWCASE_LIBRARY_GREETING = "Good afternoon, John";
 
 export type SmartSearchDemoScenario = {
   id: string;
@@ -13,143 +13,156 @@ export type SmartSearchDemoScenario = {
   results: LibraryShowcaseImage[];
 };
 
-export const SHOWCASE_SKYLINE_RESULTS: LibraryShowcaseImage[] = [
+const SEARCH_RESULTS_BASE = "/features/smart-search/results";
+
+export const SHOWCASE_F1_RESULTS: LibraryShowcaseImage[] = [
   {
-    id: "s1",
-    filename: "skyline-1.jpg",
-    src: "/features/smart-search/skyline-1.jpg",
-    alt: "Manhattan skyline with Empire State Building at golden hour",
-  },
-  {
-    id: "s2",
-    filename: "skyline-2.jpg",
-    src: "/features/smart-search/skyline-2.jpg",
-    alt: "Manhattan Bridge framed by brick buildings in Dumbo, Brooklyn",
-  },
-  {
-    id: "s3",
-    filename: "skyline-3.jpg",
-    src: "/features/smart-search/skyline-3.jpg",
-    alt: "Neon-lit Shibuya crossing at night, Tokyo",
-  },
-  {
-    id: "s4",
-    filename: "skyline-4.jpg",
-    src: "/features/smart-search/skyline-4.jpg",
-    alt: "Tokyo Tower illuminated above the city at dusk",
-  },
-  {
-    id: "s5",
-    filename: "skyline-5.jpg",
-    src: "/features/smart-search/skyline-5.jpg",
-    alt: "Motion-blurred pedestrians crossing an urban street at night",
+    id: "f1-1",
+    filename: "f1-1.jpg",
+    src: `${SEARCH_RESULTS_BASE}/f1-1.jpg`,
+    alt: "Formula One race car on track",
   },
 ];
 
 export const SHOWCASE_MOUNTAIN_RESULTS: LibraryShowcaseImage[] = [
   {
-    id: "m1",
-    filename: "filler-3.jpg",
-    src: "/features/smart-search/filler-3.jpg",
-    alt: "Snow-capped mountain peaks above a sea of clouds",
+    id: "mountain-1",
+    filename: "mountain-1.jpg",
+    src: `${SEARCH_RESULTS_BASE}/mountain-1.jpg`,
+    alt: "Mountain lake landscape",
   },
   {
-    id: "m2",
-    filename: "filler-4.jpg",
-    src: "/features/smart-search/filler-4.jpg",
-    alt: "Mount Fuji reflected in a lake at twilight",
+    id: "mountain-2",
+    filename: "mountain-2.jpg",
+    src: `${SEARCH_RESULTS_BASE}/mountain-2.jpg`,
+    alt: "Snowy mountain peaks",
   },
   {
-    id: "m3",
-    filename: "filler-7.jpg",
-    src: "/features/smart-search/filler-7.jpg",
-    alt: "Scottish highlands valley with mist and sunset light",
+    id: "mountain-3",
+    filename: "mountain-3.jpg",
+    src: `${SEARCH_RESULTS_BASE}/mountain-3.jpg`,
+    alt: "Mountain range at sunrise",
   },
   {
-    id: "m4",
-    filename: "filler-2.jpg",
-    src: "/features/smart-search/filler-2.jpg",
-    alt: "Desert canyon with sandstone cliffs",
+    id: "mountain-4",
+    filename: "mountain-4.jpg",
+    src: `${SEARCH_RESULTS_BASE}/mountain-4.jpg`,
+    alt: "Green mountain valley",
   },
 ];
 
-export const SHOWCASE_F1_RESULTS: LibraryShowcaseImage[] = [
+export const SHOWCASE_URBAN_RESULTS: LibraryShowcaseImage[] = [
   {
-    id: "car1",
-    filename: "filler-6.jpg",
-    src: "/features/smart-search/filler-6.jpg",
-    alt: "Aston Martin Formula 1 racing car close-up",
+    id: "urban-1",
+    filename: "urban-1.jpg",
+    src: `${SEARCH_RESULTS_BASE}/urban-1.jpg`,
+    alt: "Big Ben and the Palace of Westminster",
+  },
+  {
+    id: "urban-2",
+    filename: "urban-2.jpg",
+    src: `${SEARCH_RESULTS_BASE}/urban-2.jpg`,
+    alt: "New York City skyline",
+  },
+  {
+    id: "urban-3",
+    filename: "urban-3.jpg",
+    src: `${SEARCH_RESULTS_BASE}/urban-3.jpg`,
+    alt: "Modern waterfront city skyline",
+  },
+  {
+    id: "urban-4",
+    filename: "urban-4.jpg",
+    src: `${SEARCH_RESULTS_BASE}/urban-4.jpg`,
+    alt: "Tokyo street crossing at night",
   },
 ];
 
+/** Fixed demo order: Mountain landscape → Urban city → Formula one car. */
 export const SHOWCASE_SEARCH_SCENARIOS: SmartSearchDemoScenario[] = [
-  { id: "skyline", query: "skyline", results: SHOWCASE_SKYLINE_RESULTS },
-  { id: "mountains", query: "mountains", results: SHOWCASE_MOUNTAIN_RESULTS },
-  { id: "f1-car", query: "f1 car", results: SHOWCASE_F1_RESULTS },
+  {
+    id: "mountains",
+    query: "Mountain landscape",
+    results: SHOWCASE_MOUNTAIN_RESULTS,
+  },
+  { id: "urban", query: "Urban city", results: SHOWCASE_URBAN_RESULTS },
+  { id: "f1-car", query: "Formula one car", results: SHOWCASE_F1_RESULTS },
 ];
 
+/** All showcase photos — source pool for the RECENT grid. */
 export const SHOWCASE_LIBRARY_FILLER: LibraryShowcaseImage[] = [
-  {
-    id: "f1",
-    filename: "filler-1.jpg",
-    src: "/features/smart-search/filler-1.jpg",
-    alt: "Full moon against a black sky",
-  },
-  {
-    id: "f2",
-    filename: "filler-2.jpg",
-    src: "/features/smart-search/filler-2.jpg",
-    alt: "Desert canyon with sandstone cliffs",
-  },
-  {
-    id: "f3",
-    filename: "filler-3.jpg",
-    src: "/features/smart-search/filler-3.jpg",
-    alt: "Snow-capped mountain peaks above a sea of clouds",
-  },
-  {
-    id: "f4",
-    filename: "filler-4.jpg",
-    src: "/features/smart-search/filler-4.jpg",
-    alt: "Mount Fuji reflected in a lake at twilight",
-  },
-  {
-    id: "f5",
-    filename: "filler-5.jpg",
-    src: "/features/smart-search/filler-5.jpg",
-    alt: "Coastal scene with concrete blocks at golden hour",
-  },
-  {
-    id: "f6",
-    filename: "filler-6.jpg",
-    src: "/features/smart-search/filler-6.jpg",
-    alt: "Aston Martin Formula 1 racing car close-up",
-  },
-  {
-    id: "f7",
-    filename: "filler-7.jpg",
-    src: "/features/smart-search/filler-7.jpg",
-    alt: "Scottish highlands valley with mist and sunset light",
-  },
-  {
-    id: "f8",
-    filename: "filler-8.jpg",
-    src: "/features/smart-search/filler-8.jpg",
-    alt: "Secluded beach with cliffs and turquoise water",
-  },
-  {
-    id: "f9",
-    filename: "filler-9.jpg",
-    src: "/features/smart-search/filler-9.jpg",
-    alt: "Minimal interior with open door and monstera plant",
-  },
-  {
-    id: "f10",
-    filename: "filler-10.jpg",
-    src: "/features/smart-search/filler-10.jpg",
-    alt: "Cozy bedroom with neutral tones and soft natural light",
-  },
+  ...SHOWCASE_F1_RESULTS,
+  ...SHOWCASE_MOUNTAIN_RESULTS,
+  ...SHOWCASE_URBAN_RESULTS,
 ];
+
+const RECENT_BLOCKED_FIRST_IDS = new Set([
+  "f1-1",
+  "mountain-1",
+  "urban-1",
+]);
+
+function ensureValidRecentLeadImage(
+  images: LibraryShowcaseImage[],
+): LibraryShowcaseImage[] {
+  if (images.length === 0 || !RECENT_BLOCKED_FIRST_IDS.has(images[0].id)) {
+    return images;
+  }
+
+  const swapIndex = images.findIndex(
+    (image) => !RECENT_BLOCKED_FIRST_IDS.has(image.id),
+  );
+  if (swapIndex <= 0) {
+    return images;
+  }
+
+  const reordered = [...images];
+  [reordered[0], reordered[swapIndex]] = [
+    reordered[swapIndex],
+    reordered[0],
+  ];
+  return reordered;
+}
+
+function buildMixedFillerGrid(
+  pickPoolIndex: (availablePoolIndices: number[]) => number,
+): LibraryShowcaseImage[] {
+  const pools = [
+    [...SHOWCASE_F1_RESULTS],
+    [...SHOWCASE_MOUNTAIN_RESULTS],
+    [...SHOWCASE_URBAN_RESULTS],
+  ];
+  const mixed: LibraryShowcaseImage[] = [];
+
+  while (mixed.length < SHOWCASE_LIBRARY_FILLER.length) {
+    const availablePoolIndices = pools
+      .map((pool, index) => (pool.length > 0 ? index : -1))
+      .filter((index) => index >= 0);
+    const poolIndex = pickPoolIndex(availablePoolIndices);
+    mixed.push(pools[poolIndex].shift()!);
+  }
+
+  return ensureValidRecentLeadImage(mixed);
+}
+
+/** Stable grid for SSR + hydration — round-robin across category pools. */
+export function getDefaultFillerGrid(): LibraryShowcaseImage[] {
+  let roundRobinCursor = 0;
+  return buildMixedFillerGrid((availablePoolIndices) => {
+    const pick =
+      availablePoolIndices[roundRobinCursor % availablePoolIndices.length];
+    roundRobinCursor += 1;
+    return pick;
+  });
+}
+
+/** One random pick per group, interleaved — Big Ben, F1, and Mount Fuji never lead. */
+export function createMixedFillerGrid(): LibraryShowcaseImage[] {
+  return buildMixedFillerGrid((availablePoolIndices) => {
+    const randomIndex = Math.floor(Math.random() * availablePoolIndices.length);
+    return availablePoolIndices[randomIndex];
+  });
+}
 
 export const SHOWCASE_LIBRARY_ALBUMS = [
   { id: "a1", name: "Travel" },

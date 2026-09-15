@@ -1,0 +1,83 @@
+import type { ReactNode } from "react";
+
+import { Icon, type IconName } from "@/components/shared/Icon";
+import { UI_CARD, UI_CHIP_ACCENT } from "@/lib/ui-surface-styles";
+import { cn } from "@/lib/utils";
+
+const FEATURE_PILL_CTA =
+  "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav inline-flex items-center justify-center shrink-0 no-underline";
+
+type FeatureSmallCardProps = {
+  headline: string;
+  description: string;
+  icon?: IconName;
+  cta?: string;
+  trailing?: ReactNode;
+  topRightLabel?: string;
+  className?: string;
+};
+
+export default function FeatureSmallCard({
+  headline,
+  description,
+  icon,
+  cta,
+  trailing,
+  topRightLabel,
+  className,
+}: FeatureSmallCardProps) {
+  return (
+    <article
+      className={cn(
+        "flex h-full min-w-0 flex-row items-center justify-between gap-3 overflow-hidden p-5 sm:gap-6 sm:p-6",
+        UI_CARD,
+        className,
+      )}
+    >
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+        <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
+          <h3 className="m-0 font-display text-base font-semibold tracking-tight text-balance text-white sm:text-lg">
+            {headline}
+          </h3>
+          {topRightLabel ? (
+            <span className="shrink-0 text-xs text-neutral-500">{topRightLabel}</span>
+          ) : null}
+        </div>
+        <p className="m-0 text-sm leading-relaxed text-marketing-muted">
+          {description}
+        </p>
+        {cta ? (
+          <a href="#waitlist" className={cn(FEATURE_PILL_CTA, "mt-1 w-fit")}>
+            <span className="leading-none">{cta}</span>
+            <Icon
+              name="ArrowUpRight"
+              size={16}
+              strokeWidth={2}
+              className="shrink-0 text-white"
+              aria-hidden
+            />
+          </a>
+        ) : null}
+      </div>
+
+      {trailing ?? (
+        <div
+          className={cn(
+            "flex size-12 shrink-0 items-center justify-center sm:size-14",
+            UI_CHIP_ACCENT,
+          )}
+          aria-hidden
+        >
+          {icon ? (
+            <Icon
+              name={icon}
+              size={24}
+              strokeWidth={1.75}
+              className="text-brand-purple"
+            />
+          ) : null}
+        </div>
+      )}
+    </article>
+  );
+}

@@ -5,9 +5,19 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useMotionValue, useTransform, animate } from "framer-motion";
 
 import { Icon } from "@/components/shared/Icon";
-import { CHAT_USER_BUBBLE_CLASS } from "@/lib/brand-colors";
-import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { PANEL_HEADER, PANEL_TITLE } from "@/lib/panel-chrome";
+import BlankImagePlaceholder from "@/components/shared/BlankImagePlaceholder";
+import { BTN_PRIMARY_COMPACT } from "@/lib/button-styles";
+import { isBlankImageSrc } from "@/lib/blank-image";
+import {
+  CHAT_ASSISTANT_BUBBLE,
+  CHAT_AVATAR_SHELL,
+  CHAT_BTN_SECONDARY,
+  CHAT_SURFACE_SHADOW,
+  CHAT_USER_MESSAGE_TEXT,
+  PANEL_HEADER,
+  PANEL_TITLE,
+} from "@/lib/panel-chrome";
+import { SURFACE_BG_PANEL, SURFACE_BORDER } from "@/lib/surface-colors";
 
 import {
   SHOWCASE_CHAT_MESSAGES,
@@ -15,87 +25,39 @@ import {
   type ShowcaseChatMessage,
   type ShowcasePendingChange,
 } from "./showcase-data";
+import ShowcaseChatInput from "./ShowcaseChatInput";
+import { SHOWCASE_CHAT_PANEL_WIDTH } from "./showcase-layout";
 
-const CHAT_SURFACE_SHADOW =
-  "shadow-[0_1px_3px_rgba(0,0,0,0.32),0_2px_8px_rgba(0,0,0,0.14)]";
-const TOOLBAR_CHIP_H = "h-8";
-const TOOLBAR_CHIP =
-  "rounded-md border border-[#2e2e2e] bg-[#1d1d1d] shadow-[0_1px_2px_rgba(0,0,0,0.26),0_2px_5px_rgba(0,0,0,0.12)]";
-const BTN_SECONDARY =
-  "inline-flex items-center justify-center h-8 px-3.5 rounded-md border border-[#2e2e2e] bg-[#1d1d1d] text-[12px] font-semibold text-white/90 hover:border-[#3a3a3a] transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed";
+const CHAT_PANEL_GUTTER_CLASS = "px-8";
+const CHAT_PANEL_GUTTER_MARGIN_CLASS = "mx-8";
+const CHAT_AVATAR_LOGO_PX = 38;
+const CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX = 164;
 
-const RING_RADIUS = 7.5;
-const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
-/** Demo: 12 of 20 free messages remaining */
-const SHOWCASE_USAGE_PROGRESS = 12 / 20;
-
-function ringOffsetForProgress(progress: number): number {
-  const clamped = Math.max(0, Math.min(1, progress));
-  return RING_CIRCUMFERENCE * (1 - clamped);
-}
-
-function ShowcaseUsageRing() {
-  const targetOffset = ringOffsetForProgress(SHOWCASE_USAGE_PROGRESS);
-  const [displayOffset, setDisplayOffset] = useState<number | null>(null);
-  const [transitionEnabled, setTransitionEnabled] = useState(false);
-  const hasInitializedRef = useRef(false);
-
-  useEffect(() => {
-    if (!hasInitializedRef.current) {
-      hasInitializedRef.current = true;
-      setDisplayOffset(RING_CIRCUMFERENCE);
-      const frame = requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTransitionEnabled(true);
-          setDisplayOffset(targetOffset);
-        });
-      });
-      return () => cancelAnimationFrame(frame);
-    }
-
-    setDisplayOffset(targetOffset);
-  }, [targetOffset]);
-
-  const strokeTransition = transitionEnabled
-    ? "stroke-dashoffset 600ms ease-out"
-    : "none";
+function ShowcaseChatAvatar({ role }: { role: "user" | "assistant" }) {
+  if (role === "assistant") {
+    return (
+      <div className={CHAT_AVATAR_SHELL} aria-hidden>
+        <Image
+          src="/r-logo.png"
+          alt=""
+          width={CHAT_AVATAR_LOGO_PX}
+          height={CHAT_AVATAR_LOGO_PX}
+          className="shrink-0"
+          aria-hidden
+        />
+      </div>
+    );
+  }
 
   return (
-    <button
-      type="button"
-      aria-label="12 free messages remaining"
-      className="relative inline-flex shrink-0 items-center justify-center rounded-md p-0.5 text-[#888888] transition-colors cursor-default focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20"
+    <div
+      className={`${CHAT_AVATAR_SHELL} text-[13px] font-medium uppercase text-white`}
+      aria-hidden
     >
-      <svg viewBox="0 0 20 20" className="h-5 w-5 shrink-0" aria-hidden>
-        <g transform="rotate(-90 10 10)">
-          <circle
-            cx="10"
-            cy="10"
-            r={RING_RADIUS}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-[#444444]"
-          />
-          <circle
-            cx="10"
-            cy="10"
-            r={RING_RADIUS}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeDasharray={RING_CIRCUMFERENCE}
-            strokeDashoffset={displayOffset ?? RING_CIRCUMFERENCE}
-            style={{ transition: strokeTransition }}
-            className="text-[#888888]"
-          />
-        </g>
-      </svg>
-    </button>
+      JD
+    </div>
   );
 }
-
 
 type ShowcaseChatPanelProps = {
   collapsed: boolean;
@@ -127,7 +89,7 @@ export default function ShowcaseChatPanel({
     demoMode && autoScrollActive && !prefersReducedMotion && scrollDistance > 0;
 
   const trackHeight = Math.max(0, viewportHeight - 40);
-  /** Short decorative thumb — matches the original ~32% track height. */
+  /** Short decorative thumb : matches the original ~32% track height. */
   const thumbHeight = Math.max(24, trackHeight * 0.32);
   const maxThumbTop = Math.max(0, trackHeight - thumbHeight);
 
@@ -185,14 +147,17 @@ export default function ShowcaseChatPanel({
     <div
       className={[
         "flex h-full min-w-0 shrink-0 flex-col overflow-hidden transition-[width] duration-200 ease-out",
-        "rounded-l-2xl border-l border-[#2e2e2e] bg-[#121212]",
-        collapsed ? "w-[44px]" : "w-[360px]",
+        `rounded-l-2xl border-l ${SURFACE_BORDER} ${SURFACE_BG_PANEL}`,
       ].join(" ")}
+      style={{
+        width: collapsed ? 44 : SHOWCASE_CHAT_PANEL_WIDTH,
+      }}
     >
       <div
         className={[
           PANEL_HEADER,
-          collapsed ? "justify-center px-0" : "px-4",
+          "relative",
+          collapsed ? "justify-center px-0" : CHAT_PANEL_GUTTER_CLASS,
         ].join(" ")}
       >
         {collapsed ? (
@@ -204,24 +169,28 @@ export default function ShowcaseChatPanel({
           >
             <Icon name="ChevronLeft" size={16} aria-hidden />
           </button>
-        ) : (
-          <div className="flex min-w-0 items-center gap-2">
-            {demoMode ? (
-              <span className="shrink-0 text-[#888888]" aria-hidden>
-                <Icon name="ChevronRight" size={16} />
-              </span>
-            ) : (
-              <button
-                type="button"
-                aria-label="Collapse chat panel"
-                onClick={onToggleCollapse}
-                className="shrink-0 cursor-pointer text-[#888888] transition-colors hover:text-white"
-              >
-                <Icon name="ChevronRight" size={16} aria-hidden />
-              </button>
-            )}
+        ) : demoMode ? (
+          <>
+            <span
+              className="absolute left-[18px] top-1/2 shrink-0 -translate-x-1/2 -translate-y-1/2 text-[#888888]"
+              aria-hidden
+            >
+              <Icon name="ChevronRight" size={16} />
+            </span>
             <span className={PANEL_TITLE}>Chat</span>
-          </div>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              aria-label="Collapse chat panel"
+              onClick={onToggleCollapse}
+              className="absolute left-[18px] top-1/2 shrink-0 -translate-x-1/2 -translate-y-1/2 cursor-pointer text-[#888888] transition-colors hover:text-white"
+            >
+              <Icon name="ChevronRight" size={16} aria-hidden />
+            </button>
+            <span className={PANEL_TITLE}>Chat</span>
+          </>
         )}
       </div>
 
@@ -230,38 +199,58 @@ export default function ShowcaseChatPanel({
           <div ref={messagesContainerRef} className="relative min-h-0 flex-1 overflow-hidden">
             <div
               ref={messagesViewportRef}
-              className="showcase-chat-messages h-full overflow-hidden px-6 py-5 pr-7"
+              className={`showcase-chat-messages h-full overflow-hidden py-5 ${CHAT_PANEL_GUTTER_CLASS}`}
             >
               <motion.div
                 ref={messagesListRef}
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-10"
                 style={{ y: messageScrollY }}
               >
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
-                    className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
+                    className="flex w-full flex-col items-start gap-[4px]"
                   >
-                    {msg.imagePreview ? (
-                      <div className="mb-1.5">
-                        <Image
-                          src={msg.imagePreview}
-                          alt=""
-                          width={140}
-                          height={100}
-                          unoptimized
-                          className="max-h-[100px] max-w-[140px] rounded-lg border border-white/[0.08] object-cover"
-                        />
+                    <div className="flex w-full items-start gap-5">
+                      <ShowcaseChatAvatar role={msg.role} />
+                      <div className="flex min-w-0 flex-1 flex-col gap-2.5">
+                        {msg.imagePreview ? (
+                          <div>
+                            {isBlankImageSrc(msg.imagePreview) ? (
+                              <BlankImagePlaceholder
+                                className="rounded-lg"
+                                iconSize={20}
+                                style={{
+                                  width: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
+                                  height: 100,
+                                  maxWidth: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
+                                }}
+                              />
+                            ) : (
+                              <Image
+                                src={msg.imagePreview}
+                                alt=""
+                                width={CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX}
+                                height={100}
+                                unoptimized
+                                className="max-h-[100px] rounded-lg border border-[#212121] object-cover"
+                                style={{
+                                  maxWidth: CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX,
+                                }}
+                              />
+                            )}
+                          </div>
+                        ) : null}
+                        <div
+                          className={
+                            msg.role === "user"
+                              ? CHAT_USER_MESSAGE_TEXT
+                              : `min-w-0 whitespace-pre-wrap break-words leading-relaxed ${CHAT_ASSISTANT_BUBBLE}`
+                          }
+                        >
+                          {msg.content}
+                        </div>
                       </div>
-                    ) : null}
-                    <div
-                      className={`max-w-[320px] whitespace-pre-wrap break-words leading-relaxed ${
-                        msg.role === "user"
-                          ? CHAT_USER_BUBBLE_CLASS
-                          : "rounded-lg border border-[#2e2e2e] bg-[#1d1d1d] px-3 py-2.5 text-[14px] text-[#e5e5e5]"
-                      }`}
-                    >
-                      {msg.content}
                     </div>
                   </div>
                 ))}
@@ -281,7 +270,7 @@ export default function ShowcaseChatPanel({
           </div>
 
           <div
-            className={`mx-6 mb-2 shrink-0 overflow-hidden rounded-md border border-white/[0.08] bg-white/[0.04] ${CHAT_SURFACE_SHADOW}`}
+            className={`${CHAT_PANEL_GUTTER_MARGIN_CLASS} mb-2 shrink-0 overflow-hidden rounded-md border ${SURFACE_BORDER} bg-white/[0.04] ${CHAT_SURFACE_SHADOW}`}
           >
             <div className="flex min-w-0 items-center gap-2 px-3 py-2">
               {demoMode ? (
@@ -315,7 +304,7 @@ export default function ShowcaseChatPanel({
               <div className="ml-auto flex shrink-0 items-center gap-2">
                 <button
                   type="button"
-                  className={BTN_SECONDARY}
+                  className={CHAT_BTN_SECONDARY}
                   tabIndex={demoMode ? -1 : undefined}
                   aria-hidden={demoMode}
                 >
@@ -323,7 +312,7 @@ export default function ShowcaseChatPanel({
                 </button>
                 <button
                   type="button"
-                  className={`${BTN_PRIMARY_SOLID} !h-8 !px-3.5 !text-[12px] !font-semibold !rounded-md`}
+                  className={BTN_PRIMARY_COMPACT}
                   tabIndex={demoMode ? -1 : undefined}
                   aria-hidden={demoMode}
                 >
@@ -333,7 +322,7 @@ export default function ShowcaseChatPanel({
             </div>
 
             {!demoMode && changesExpanded ? (
-              <div className="space-y-1.5 border-t border-white/[0.06] px-3 py-2">
+              <div className={`space-y-1.5 border-t ${SURFACE_BORDER} px-3 py-2`}>
                 {pendingChanges.map((change) => (
                   <div
                     key={change.key}
@@ -346,60 +335,8 @@ export default function ShowcaseChatPanel({
             ) : null}
           </div>
 
-          <div className="shrink-0 px-6 pb-4 pt-2">
-            <div
-              className={`overflow-hidden rounded-xl border border-[#2e2e2e] bg-[#1d1d1d] ${CHAT_SURFACE_SHADOW}`}
-            >
-              <div className="flex min-h-[76px] items-start px-4 pb-3 pt-3">
-                <div className="flex w-full items-center gap-3.5">
-                  <Image
-                    src="/r-logo.png"
-                    alt=""
-                    width={42}
-                    height={42}
-                    className="shrink-0 rounded"
-                    aria-hidden
-                  />
-                  <textarea
-                    readOnly
-                    disabled
-                    rows={1}
-                    placeholder="Describe the edit you want..."
-                    className="min-h-[24px] w-full resize-none bg-transparent pt-0 text-[15px] font-normal leading-snug text-white outline-none placeholder:text-[#666666] disabled:cursor-default disabled:opacity-50"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between gap-2 border-t border-[#2e2e2e] px-4 pb-3 pt-3">
-                <div className="flex min-w-0 shrink-0 items-center gap-1.5">
-                  <div
-                    className={`${TOOLBAR_CHIP} flex ${TOOLBAR_CHIP_H} w-8 items-center justify-center opacity-50`}
-                  >
-                    <Icon name="Paperclip" size={16} aria-hidden />
-                  </div>
-
-                  <div
-                    className={`${TOOLBAR_CHIP} flex ${TOOLBAR_CHIP_H} cursor-default items-center gap-1 px-2`}
-                  >
-                    <span className="truncate text-[12px] font-semibold text-white/90">
-                      Claude Sonnet 4.5
-                    </span>
-                    <Icon name="ChevronDown" size={16} className="text-[#888888]" aria-hidden />
-                  </div>
-
-                  <ShowcaseUsageRing />
-                </div>
-
-                <button
-                  type="button"
-                  disabled
-                  title="Send"
-                  className="flex h-8 w-8 shrink-0 cursor-not-allowed items-center justify-center rounded-md bg-white/[0.08] text-[#666666] opacity-50"
-                >
-                  <Icon name="Send01" size={16} aria-hidden />
-                </button>
-              </div>
-            </div>
+          <div className={`shrink-0 pb-4 pt-2 ${CHAT_PANEL_GUTTER_CLASS}`}>
+            <ShowcaseChatInput value="" demoMode={demoMode} />
           </div>
         </div>
       ) : null}

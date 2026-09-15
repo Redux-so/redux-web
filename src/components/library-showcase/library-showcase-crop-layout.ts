@@ -1,5 +1,6 @@
 import {
   LIBRARY_SEARCH_CROP_LEFT,
+  LIBRARY_SEARCH_CROP_TOP_OFFSET,
   LIBRARY_SEARCH_CROP_WIDTH,
   LIBRARY_SHOWCASE_DESIGN_HEIGHT,
   LIBRARY_SHOWCASE_DESIGN_WIDTH,
@@ -31,6 +32,7 @@ export function computeLibrarySearchCropLayout(
   const scaledWidth = LIBRARY_SHOWCASE_DESIGN_WIDTH * scale;
   const scaledHeight = LIBRARY_SHOWCASE_DESIGN_HEIGHT * scale;
   const offsetX = -LIBRARY_SEARCH_CROP_LEFT * scale;
+  const offsetY = -LIBRARY_SEARCH_CROP_TOP_OFFSET * scale;
 
-  return { scale, scaledWidth, scaledHeight, offsetX, offsetY: 0 };
+  return { scale, scaledWidth, scaledHeight, offsetX, offsetY };
 }

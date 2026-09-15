@@ -1,12 +1,15 @@
 "use client";
 
 import EditorShowcaseScaler from "@/src/components/editor-showcase/EditorShowcaseScaler";
+import SectionShell from "@/src/components/SectionShell";
 import { ScrollReveal } from "@/lib/scroll-motion";
 
 export default function Showcase() {
   return (
-    <ScrollReveal className="relative w-full">
-      <EditorShowcaseScaler />
-    </ScrollReveal>
+    <SectionShell>
+      <ScrollReveal className="min-w-0 w-full">
+        <EditorShowcaseScaler />
+      </ScrollReveal>
+    </SectionShell>
   );
 }

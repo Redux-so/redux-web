@@ -1,215 +1,148 @@
 "use client";
 
-import Image from "next/image";
-import { Fragment } from "react";
-
-import { Icon } from "@/components/shared/Icon";
 import ConversationalEditingShowcaseCrop from "@/src/components/features/ConversationalEditingShowcaseCrop";
+import { BeforeAfterSlider } from "@/src/components/features/BeforeAfterSlider";
+import FeatureBentoCard from "@/src/components/features/FeatureBentoCard";
+import FeatureSmallCard from "@/src/components/features/FeatureSmallCard";
 import SmartSearchShowcaseCrop from "@/src/components/features/SmartSearchShowcaseCrop";
 import StyleMatchShowcaseCrop from "@/src/components/features/StyleMatchShowcaseCrop";
-import { BTN_PRIMARY_SOLID } from "@/lib/button-styles";
-import { BLUEPRINT_BORDER, blueprintBorderB } from "@/lib/blueprint-grid";
+import SectionIntro from "@/src/components/SectionIntro";
+import SectionShell from "@/src/components/SectionShell";
 import {
-  ScrollReveal,
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+} from "@/components/ui/avatar";
+import { Icon } from "@/components/shared/Icon";
+import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
+import {
   ScrollRevealGroup,
   ScrollRevealItem,
 } from "@/lib/scroll-motion";
-import { cn } from "@/lib/utils";
-
-type Feature = {
-  headline: string;
-  description: string;
-  cta: string;
-  imagePosition: "left" | "right";
-  image?: string;
-  imageAlt?: string;
-  imageCrop?: "left" | "right" | "center";
-  showcaseScenario?: "conversational" | "styleMatch" | "smartSearch";
-};
-
-const imageCropClasses = {
-  left: "object-cover object-center object-top lg:object-left-top",
-  right: "object-cover object-center object-top lg:object-right-top",
-  center: "object-cover object-center object-top",
-} as const;
-
-const FEATURE_IMAGE_WIDTH = "lg:w-[62%]";
-const FEATURE_TEXT_WIDTH = "lg:w-[38%]";
-/** Shared image column sizing — fixed row height on desktop keeps all three features identical. */
-const FEATURE_ROW_HEIGHT = "lg:h-[360px] xl:h-[420px]";
-const FEATURE_IMAGE_HEIGHT =
-  "aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0 lg:shrink-0";
-
-const FEATURE_SHOWCASE_FRAME = cn(
-  "overflow-hidden rounded-2xl border bg-brand-bg",
-  BLUEPRINT_BORDER,
-);
-
-const FEATURES_SECTION_LABEL =
-  "text-[13px] font-semibold uppercase tracking-wide text-[#888888]";
-
-/** Equal space above/below each card and around centered grid dividers. */
-const FEATURE_CARD_SPACE = "my-8 sm:my-10";
-const FEATURE_CARD_STACK_PADDING = "py-8 sm:py-10";
-
-const features: Feature[] = [
-  {
-    headline: "Conversational Editing",
-    description:
-      "Describe your edits, and our AI applies professional changes instantly. Review and refine in real-time until your photo is perfect.",
-    cta: "Ask AI",
-    imagePosition: "left",
-    image: "/features/conversational-editing.png",
-    imageAlt:
-      "Redux editor with AI chat applying blue hour color edits to a mountain landscape",
-    imageCrop: "right",
-    showcaseScenario: "conversational",
-  },
-  {
-    headline: "Style Match",
-    description:
-      "Recreate any style instantly. Upload a reference image, and our AI applies its aesthetic to your photo.",
-    cta: "Match a Style",
-    imagePosition: "right",
-    image: "/features/style-match.png",
-    imageAlt:
-      "Redux editor applying Style Match to Mount Fuji via AI chat with a reference image",
-    imageCrop: "right",
-    showcaseScenario: "styleMatch",
-  },
-  {
-    headline: "Smart Search",
-    description:
-      "Find any photo by describing its content. Search by keywords and instantly surface matching images.",
-    cta: "Search Now",
-    imagePosition: "left",
-    image: "/features/smart-search.png",
-    imageAlt:
-      "Redux library search showing mountain photo results for a rural mountains query",
-    imageCrop: "left",
-    showcaseScenario: "smartSearch",
-  },
-];
-
-function FeatureRow({ feature }: { feature: Feature }) {
-  const imageOnRight = feature.imagePosition === "right";
-
-  return (
-    <div
-      className={cn(
-        "flex flex-col lg:flex-row lg:items-stretch",
-        FEATURE_ROW_HEIGHT,
-      )}
-    >
-      <div
-        className={cn(
-          "relative w-full",
-          FEATURE_IMAGE_WIDTH,
-          FEATURE_IMAGE_HEIGHT,
-          FEATURE_SHOWCASE_FRAME,
-          imageOnRight ? "lg:order-2" : "lg:order-1",
-        )}
-      >
-        {feature.showcaseScenario === "conversational" ? (
-          <ConversationalEditingShowcaseCrop />
-        ) : feature.showcaseScenario === "styleMatch" ? (
-          <StyleMatchShowcaseCrop />
-        ) : feature.showcaseScenario === "smartSearch" ? (
-          <SmartSearchShowcaseCrop />
-        ) : feature.image ? (
-          <Image
-            src={feature.image}
-            alt={feature.imageAlt ?? ""}
-            fill
-            unoptimized
-            sizes="(max-width: 1024px) 100vw, 62vw"
-            className={imageCropClasses[feature.imageCrop ?? "center"]}
-          />
-        ) : null}
-      </div>
-
-      <div
-        className={cn(
-          "flex flex-col justify-center px-4 py-8 sm:px-8 lg:py-0",
-          FEATURE_TEXT_WIDTH,
-          imageOnRight ? "lg:order-1" : "lg:order-2",
-        )}
-      >
-        <div className="flex flex-col gap-4">
-          <h3 className="m-0 font-display text-xl font-semibold tracking-tight text-white sm:text-2xl">
-            {feature.headline}
-          </h3>
-          <p className="m-0 text-sm leading-relaxed text-white/70 sm:text-base">
-            {feature.description}
-          </p>
-          <a
-            href="#waitlist"
-            className={cn(
-              BTN_PRIMARY_SOLID,
-              "w-fit shrink-0 gap-1 px-3.5 leading-none",
-            )}
-          >
-            <span className="leading-none">{feature.cta}</span>
-            <Icon
-              name="ArrowUpRight"
-              size={16}
-              className="shrink-0"
-              aria-hidden
-            />
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FeaturesSectionIntro() {
-  return (
-    <ScrollReveal
-      variant="fadeIn"
-      className={cn(
-        blueprintBorderB,
-        "px-4 py-5 sm:px-8 sm:py-6 lg:px-10",
-      )}
-    >
-      <p className={cn("m-0", FEATURES_SECTION_LABEL)}>Features</p>
-    </ScrollReveal>
-  );
-}
 
 export default function Features() {
   return (
-    <div className="flex flex-col">
-      <FeaturesSectionIntro />
+    <SectionShell
+      intro={
+        <SectionIntro variant="headline">
+          A <span className={BRAND_HEADLINE_ACCENT_CLASS}>Smarter Way</span> to Edit
+        </SectionIntro>
+      }
+    >
       <ScrollRevealGroup
-        className={cn("flex flex-col", FEATURE_CARD_STACK_PADDING)}
-        stagger={0.12}
+        className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2"
+        stagger={0.1}
       >
-      {features.map((feature, index) => {
-        const row =
-          feature.showcaseScenario === "styleMatch" ? (
-            <div key={feature.headline}>
-              <FeatureRow feature={feature} />
-            </div>
-          ) : (
-            <ScrollRevealItem key={feature.headline}>
-              <FeatureRow feature={feature} />
-            </ScrollRevealItem>
-          );
+        {/* Row 1: large hero card */}
+        <ScrollRevealItem className="min-w-0 md:col-span-2">
+          <FeatureBentoCard
+            size="large"
+            headline="Semantic Search"
+            description="Find images by describing scenes, subjects, or keywords."
+            cta="Search Now"
+          >
+            <SmartSearchShowcaseCrop />
+          </FeatureBentoCard>
+        </ScrollRevealItem>
 
-        return (
-          <Fragment key={feature.headline}>
-            {row}
-            {index < features.length - 1 ? (
-              <div
-                aria-hidden
-                className={cn(blueprintBorderB, FEATURE_CARD_SPACE)}
-              />
-            ) : null}
-          </Fragment>
-        );
-      })}
+        {/* Row 2: medium cards */}
+        <ScrollRevealItem className="min-w-0">
+          <FeatureBentoCard
+            size="medium"
+            headline="Style Match"
+            description="Match your photo to a reference image instantly."
+            cta="Match a Style"
+          >
+            <StyleMatchShowcaseCrop />
+          </FeatureBentoCard>
+        </ScrollRevealItem>
+
+        <ScrollRevealItem className="min-w-0">
+          <FeatureBentoCard
+            size="medium"
+            headline="Conversational Editing"
+            description="Describe edits in plain language and AI applies them instantly."
+            cta="Ask AI"
+            className="h-full gap-3"
+            showcaseBare
+            showcaseCentered
+            showcaseClassName="overflow-visible"
+          >
+            <ConversationalEditingShowcaseCrop />
+          </FeatureBentoCard>
+        </ScrollRevealItem>
+
+        {/* Row 3: small pill cards */}
+        <ScrollRevealItem className="min-w-0">
+          <FeatureSmallCard
+            headline="Auto Photo Enhance"
+            description="Balance exposure, color, and detail in one click."
+            trailing={
+              <div className="relative flex shrink-0 items-center">
+                <div className="feature-collab-actions-glow" aria-hidden />
+                <div className="relative z-[1] w-[9.25rem] shrink-0 sm:w-[10rem] md:w-[10.5rem]">
+                  <BeforeAfterSlider
+                    beforeSrc="/features/auto-enhance/after.jpg"
+                    afterSrc="/features/auto-enhance/before.jpg"
+                    className="h-[5.75rem] w-full sm:h-[6rem]"
+                  />
+                </div>
+              </div>
+            }
+          />
+        </ScrollRevealItem>
+
+        <ScrollRevealItem className="min-w-0">
+          <FeatureSmallCard
+            headline="Collaborative Editing"
+            description="Invite others and edit photos together in real time."
+            topRightLabel="Coming soon"
+            trailing={
+              <div className="relative flex shrink-0 items-center">
+                <div className="feature-collab-actions-glow" aria-hidden />
+                <div className="relative z-[1] flex items-center gap-2 sm:gap-3">
+                  <button
+                    type="button"
+                    className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-white px-2.5 py-1.5 text-xs font-medium text-neutral-900 sm:text-sm"
+                  >
+                    <Icon
+                      name="UserPlus01"
+                      size={16}
+                      strokeWidth={2}
+                      className="text-neutral-900"
+                    />
+                    Invite
+                  </button>
+                  <AvatarGroup
+                    aria-hidden
+                    className="*:data-[slot=avatar]:ring-0 *:data-[slot=avatar]:after:border-0"
+                  >
+                    <Avatar className="h-7 w-7">
+                      <AvatarFallback className="bg-blue-900 text-xs text-white">
+                        A
+                      </AvatarFallback>
+                    </Avatar>
+                    <Avatar className="h-7 w-7">
+                      <AvatarFallback className="bg-sky-400 text-xs text-white">
+                        R
+                      </AvatarFallback>
+                    </Avatar>
+                    <Avatar className="h-7 w-7">
+                      <AvatarFallback className="bg-red-500 text-xs text-white">
+                        L
+                      </AvatarFallback>
+                    </Avatar>
+                    <AvatarGroupCount className="h-7 w-7 bg-neutral-700 text-xs text-white ring-0">
+                      +2
+                    </AvatarGroupCount>
+                  </AvatarGroup>
+                </div>
+              </div>
+            }
+          />
+        </ScrollRevealItem>
       </ScrollRevealGroup>
-    </div>
+    </SectionShell>
   );
 }

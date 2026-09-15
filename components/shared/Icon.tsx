@@ -3,7 +3,7 @@
  *
  * Rules:
  *   - Nothing else imports from @untitledui/icons directly.
- *   - size is restricted to 16 | 20 | 24 — no other values.
+ *   - size is restricted to 16 | 20 | 24 : no other values.
  *   - strokeWidth defaults to 1.5 everywhere.
  *   - aria-hidden defaults to true (decorative); pass aria-hidden={false} on
  *     icon-only interactive controls that lack a separate visible label.

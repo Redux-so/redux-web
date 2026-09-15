@@ -55,6 +55,7 @@ export function ScrollReveal({
   return (
     <motion.div
       className={className}
+      data-scroll-motion=""
       variants={variant === "fadeIn" ? fadeIn : fadeInUp}
       initial="hidden"
       whileInView="visible"
@@ -82,6 +83,7 @@ export function ScrollRevealGroup({
   return (
     <motion.div
       className={className}
+      data-scroll-motion=""
       variants={staggerContainer(stagger, delayChildren)}
       initial="hidden"
       whileInView="visible"
@@ -107,6 +109,7 @@ export function ScrollRevealItem({
   return (
     <motion.div
       className={className}
+      data-scroll-motion=""
       variants={variant === "fadeIn" ? fadeIn : fadeInUp}
       {...props}
     >
