@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { addToWaitlist } from "@/lib/loops";
-import { isTurnstileConfigured, verifyTurnstileToken } from "@/lib/turnstile";
 import {
   getWaitlistClientIp,
   isWaitlistRateLimited,
@@ -18,7 +17,6 @@ import {
 type WaitlistRequestBody = {
   email?: string;
   website?: string;
-  turnstileToken?: string;
   formLoadedAt?: number;
 };
 
@@ -50,7 +48,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const { email: rawEmail, website, turnstileToken, formLoadedAt } = body;
+  const { email: rawEmail, website, formLoadedAt } = body;
 
   if (website?.trim()) {
     return NextResponse.json({ success: true });
@@ -70,16 +68,6 @@ export async function POST(req: NextRequest) {
   }
 
   const clientIp = getWaitlistClientIp(req);
-
-  if (isTurnstileConfigured()) {
-    const tokenValid = await verifyTurnstileToken(turnstileToken ?? "", clientIp);
-    if (!tokenValid) {
-      return NextResponse.json(
-        { error: "Unable to join waitlist. Please try again." },
-        { status: 400 },
-      );
-    }
-  }
 
   if (await isWaitlistRateLimited(clientIp, email)) {
     return NextResponse.json(
