@@ -73,7 +73,7 @@ export default function ToolkitMarquee({ className }: ToolkitMarqueeProps) {
               renderTrack={(instance) => (
                 <ToolkitMarqueeTrack
                   trackKey={instance}
-                  aria-hidden={instance === "clone" ? true : undefined}
+                  aria-hidden
                 />
               )}
             />

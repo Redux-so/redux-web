@@ -150,9 +150,10 @@ function PhotoMarqueeTrack({
             cardKey={cardKey}
             photo={photo}
             alt={ariaHidden ? "" : photo.alt}
+            interactive={!ariaHidden}
             isActive={activeCardKey === cardKey}
             isDimmed={activeCardKey !== null && activeCardKey !== cardKey}
-            onActivate={onActivate}
+            onActivate={ariaHidden ? undefined : onActivate}
           />
         );
       })}

@@ -361,7 +361,15 @@ html {
 
 .animate-hero-photo-marquee {
   animation: hero-photo-marquee 90s linear infinite;
+}
+
+/* Moving marquee scroller (CSS or rAF-driven transform). */
+.marquee-track {
   will-change: transform;
+}
+
+.marquee-track[data-paused="true"] {
+  animation-play-state: paused;
 }
 
 .group\/hero-photo-marquee:hover .animate-hero-photo-marquee,

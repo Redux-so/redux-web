@@ -5,6 +5,7 @@ import { useReducedMotion } from "framer-motion";
 
 import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
 import { MarketingIcon } from "@/components/shared/MarketingIcon";
+import { useMarqueeInView } from "@/lib/use-marquee-in-view";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_PLACEHOLDER_COUNT = 10;
@@ -59,26 +60,26 @@ function HeroPhotoCard({ src, alt, offset }: HeroPhotoCardProps) {
 type HeroPhotoMarqueeTrackProps = {
   items: readonly (string | null)[];
   trackKey: string;
-  placeholderAlt: string;
-  "aria-hidden"?: boolean;
+  /** Decorative loop copy — empty alts, hidden from assistive tech. */
+  decorative?: boolean;
 };
 
 function HeroPhotoMarqueeTrack({
   items,
   trackKey,
-  placeholderAlt,
-  "aria-hidden": ariaHidden,
+  decorative = false,
 }: HeroPhotoMarqueeTrackProps) {
   return (
     <div
       className="flex shrink-0 items-center gap-3 py-3 pr-3 sm:gap-4 sm:py-4 sm:pr-4"
-      aria-hidden={ariaHidden}
+      aria-hidden={decorative ? true : undefined}
+      inert={decorative ? true : undefined}
     >
       {items.map((src, index) => (
         <HeroPhotoCard
           key={`${trackKey}-${index}`}
           src={src}
-          alt={placeholderAlt}
+          alt=""
           offset={index % 2 === 0 ? "up" : "down"}
         />
       ))}
@@ -99,9 +100,12 @@ export default function HeroPhotoMarquee({
   className,
 }: HeroPhotoMarqueeProps) {
   const prefersReducedMotion = useReducedMotion();
+  const { rootRef, inView } = useMarqueeInView(false);
+  const isPaused = !inView;
 
   return (
     <div
+      ref={rootRef}
       className={cn("group/hero-photo-marquee w-full", className)}
       aria-label="Sample photo edits"
     >
@@ -119,18 +123,12 @@ export default function HeroPhotoMarquee({
             ))}
           </ul>
         ) : (
-          <div className="animate-hero-photo-marquee flex w-max items-center">
-            <HeroPhotoMarqueeTrack
-              items={images}
-              trackKey="a"
-              placeholderAlt={placeholderAlt}
-            />
-            <HeroPhotoMarqueeTrack
-              items={images}
-              trackKey="b"
-              placeholderAlt={placeholderAlt}
-              aria-hidden
-            />
+          <div
+            className="marquee-track animate-hero-photo-marquee flex w-max items-center"
+            data-paused={isPaused ? "true" : "false"}
+          >
+            <HeroPhotoMarqueeTrack items={images} trackKey="a" decorative />
+            <HeroPhotoMarqueeTrack items={images} trackKey="b" decorative />
           </div>
         )}
       </MarqueeEdgeFade>

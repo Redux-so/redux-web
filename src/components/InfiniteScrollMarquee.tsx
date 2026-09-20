@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 
+import { useMarqueeInView } from "@/lib/use-marquee-in-view";
 import { cn } from "@/lib/utils";
 
 type MarqueeTrackInstance = "primary" | "clone";
@@ -37,6 +38,7 @@ export default function InfiniteScrollMarquee({
   trackClassName,
 }: InfiniteScrollMarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const pausedRef = useRef(paused);
   const timingRef = useRef<MarqueeTimingState>({
     startedAt: 0,
@@ -44,8 +46,11 @@ export default function InfiniteScrollMarquee({
     totalPausedMs: 0,
   });
   const [trackWidth, setTrackWidth] = useState(0);
+  const { rootRef, inView } = useMarqueeInView(false);
 
-  pausedRef.current = paused;
+  const isPaused = paused || !inView;
+
+  pausedRef.current = isPaused;
 
   useLayoutEffect(() => {
     const track = trackRef.current;
@@ -69,7 +74,7 @@ export default function InfiniteScrollMarquee({
 
   useEffect(() => {
     const track = trackRef.current;
-    const scroller = track?.parentElement;
+    const scroller = scrollerRef.current;
     if (!(track instanceof HTMLElement) || !(scroller instanceof HTMLElement)) {
       return;
     }
@@ -123,15 +128,23 @@ export default function InfiniteScrollMarquee({
   }, [direction, durationSec, trackWidth]);
 
   return (
-    <div
-      className={cn("flex w-max will-change-transform", className)}
-      data-marquee-scroll=""
-    >
-      <div ref={trackRef} className={cn("flex shrink-0", trackClassName)}>
-        {renderTrack("primary")}
-      </div>
-      <div className={cn("flex shrink-0", trackClassName)} aria-hidden>
-        {renderTrack("clone")}
+    <div ref={rootRef} className={cn("min-w-0", className)}>
+      <div
+        ref={scrollerRef}
+        className="marquee-track flex w-max"
+        data-marquee-scroll=""
+        data-paused={isPaused ? "true" : "false"}
+      >
+        <div ref={trackRef} className={cn("flex shrink-0", trackClassName)}>
+          {renderTrack("primary")}
+        </div>
+        <div
+          className={cn("flex shrink-0", trackClassName)}
+          aria-hidden
+          inert
+        >
+          {renderTrack("clone")}
+        </div>
       </div>
     </div>
   );
