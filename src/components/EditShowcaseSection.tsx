@@ -7,7 +7,9 @@ import {
   EDIT_SHOWCASE_BOTTOM_ROW,
   EDIT_SHOWCASE_PHOTO_ASPECT,
   EDIT_SHOWCASE_PHOTO_FRAME,
-  EDIT_SHOWCASE_PRIORITY_COUNT,
+  EDIT_SHOWCASE_PHOTO_HEIGHT,
+  EDIT_SHOWCASE_PHOTO_SIZES,
+  EDIT_SHOWCASE_PHOTO_WIDTH,
   EDIT_SHOWCASE_TOP_ROW,
   type EditShowcasePhoto,
 } from "@/src/components/edit-showcase/edit-showcase-data";
@@ -42,12 +44,11 @@ type PhotoMarqueeRowProps = {
   photos: readonly EditShowcasePhoto[];
   direction: "left" | "right";
   trackKey: string;
-  priorityCount?: number;
 };
 
 function PhotoCard({
   photo,
-  priority = false,
+  alt,
   className,
   interactive = true,
   cardKey,
@@ -56,7 +57,7 @@ function PhotoCard({
   onActivate,
 }: {
   photo: EditShowcasePhoto;
-  priority?: boolean;
+  alt: string;
   className?: string;
   interactive?: boolean;
   cardKey?: string;
@@ -69,12 +70,12 @@ function PhotoCard({
   ) : (
     <Image
       src={photo.src}
-      alt={photo.alt}
-      fill
-      loading="eager"
-      priority={priority}
-      sizes="(max-width: 640px) 260px, (max-width: 1920px) 480px, 600px"
-      className="object-cover"
+      alt={alt}
+      width={EDIT_SHOWCASE_PHOTO_WIDTH}
+      height={EDIT_SHOWCASE_PHOTO_HEIGHT}
+      loading="lazy"
+      sizes={EDIT_SHOWCASE_PHOTO_SIZES}
+      className="size-full object-cover"
       draggable={false}
     />
   );
@@ -123,7 +124,6 @@ function PhotoCard({
 type PhotoMarqueeTrackProps = {
   photos: readonly EditShowcasePhoto[];
   trackKey: string;
-  priorityCount?: number;
   activeCardKey?: string | null;
   onActivate?: (cardKey: string) => void;
   "aria-hidden"?: boolean;
@@ -132,7 +132,6 @@ type PhotoMarqueeTrackProps = {
 function PhotoMarqueeTrack({
   photos,
   trackKey,
-  priorityCount = 0,
   activeCardKey = null,
   onActivate,
   "aria-hidden": ariaHidden,
@@ -140,7 +139,7 @@ function PhotoMarqueeTrack({
   return (
     <div
       className="flex shrink-0 items-center gap-3 py-3 pr-3 sm:gap-4 sm:py-4 sm:pr-4"
-      aria-hidden={ariaHidden}
+      aria-hidden={ariaHidden ? true : undefined}
     >
       {photos.map((photo, index) => {
         const cardKey = `${trackKey}-${photo.id}-${index}`;
@@ -150,7 +149,7 @@ function PhotoMarqueeTrack({
             key={cardKey}
             cardKey={cardKey}
             photo={photo}
-            priority={!ariaHidden && index < priorityCount}
+            alt={ariaHidden ? "" : photo.alt}
             isActive={activeCardKey === cardKey}
             isDimmed={activeCardKey !== null && activeCardKey !== cardKey}
             onActivate={onActivate}
@@ -178,7 +177,6 @@ function PhotoMarqueeRow({
   photos,
   direction,
   trackKey,
-  priorityCount = 0,
 }: PhotoMarqueeRowProps) {
   const hoverSpotlightEnabled = useHoverSpotlightEnabled();
   const [activeCardKey, setActiveCardKey] = useState<string | null>(null);
@@ -204,10 +202,9 @@ function PhotoMarqueeRow({
             <PhotoMarqueeTrack
               photos={photos}
               trackKey={`${trackKey}-${instance}`}
-              priorityCount={instance === "primary" ? priorityCount : 0}
               activeCardKey={hoverSpotlightEnabled ? activeCardKey : null}
               onActivate={hoverSpotlightEnabled ? setActiveCardKey : undefined}
-              aria-hidden={instance === "clone" ? true : undefined}
+              aria-hidden={instance === "clone"}
             />
           )}
         />
@@ -232,7 +229,6 @@ export default function EditShowcaseSection() {
             photos={EDIT_SHOWCASE_TOP_ROW}
             direction="left"
             trackKey="edit-top"
-            priorityCount={EDIT_SHOWCASE_PRIORITY_COUNT}
           />
         </div>
 

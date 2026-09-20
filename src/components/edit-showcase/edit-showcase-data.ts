@@ -72,5 +72,6 @@ export const EDIT_SHOWCASE_PHOTO_HEIGHT = 450;
 export const EDIT_SHOWCASE_PHOTO_FRAME =
   "w-[max(16rem,calc((var(--page-grid-width,100%)-3.75rem)/3.75))] shrink-0 sm:w-[max(19rem,calc((var(--page-grid-width,100%)-5rem)/3.75))]";
 
-/** First visible row images : preload via next/image priority. */
-export const EDIT_SHOWCASE_PRIORITY_COUNT = 3;
+/** Matches rendered card width (~16rem mobile, ~337px desktop). */
+export const EDIT_SHOWCASE_PHOTO_SIZES =
+  "(max-width: 640px) 256px, 337px";
