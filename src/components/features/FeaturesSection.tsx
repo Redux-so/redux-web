@@ -102,8 +102,8 @@ export default function FeaturesSection() {
                 <div className="feature-collab-actions-glow" aria-hidden />
                 <div className="relative z-[1] w-[9.25rem] shrink-0 sm:w-[10rem] md:w-[10.5rem]">
                   <BeforeAfterSlider
-                    beforeSrc={AUTO_ENHANCE_AFTER}
-                    afterSrc={AUTO_ENHANCE_BEFORE}
+                    beforeSrc={AUTO_ENHANCE_AFTER.src}
+                    afterSrc={AUTO_ENHANCE_BEFORE.src}
                     className="h-[5.75rem] w-full sm:h-[6rem]"
                   />
                 </div>

@@ -59,7 +59,6 @@ type OrbitConfig = {
 };
 
 const ORBIT_TILE_CLASS = "rounded-[6px]";
-const ORBIT_TILE_RADIUS = 6;
 
 /** Cap layout width so tablet portrait doesn't inflate orbit vs phone. */
 const COMPACT_LAYOUT_MAX_WIDTH = 430;
@@ -487,7 +486,6 @@ export default function HeroOrbitingPhotos() {
               iconSize={config.innerIconSize}
               path={false}
               radius={config.innerRadius}
-              style={{ borderRadius: ORBIT_TILE_RADIUS }}
             >
               {Array.from({ length: INNER_TILE_COUNT }, (_, index) => {
                 const photo = getHeroOrbitPhoto(index);
@@ -507,7 +505,6 @@ export default function HeroOrbitingPhotos() {
               iconSize={config.outerIconSize}
               path={false}
               radius={config.outerRadius}
-              style={{ borderRadius: ORBIT_TILE_RADIUS }}
             >
               {Array.from({ length: OUTER_TILE_COUNT }, (_, index) => {
                 const photo = getHeroOrbitPhoto(index + INNER_TILE_COUNT);

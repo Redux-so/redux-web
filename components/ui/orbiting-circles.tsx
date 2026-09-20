@@ -59,9 +59,9 @@ export function OrbitingCircles({
             key={index}
             style={
               {
-                "--duration": calculatedDuration,
-                "--radius": radius,
-                "--angle": angle,
+                "--duration": String(calculatedDuration),
+                "--radius": String(radius),
+                "--angle": String(angle),
                 "--icon-size": `${iconSize}px`,
                 transform: getOrbitArmTransform(angle, radius),
                 ...style,

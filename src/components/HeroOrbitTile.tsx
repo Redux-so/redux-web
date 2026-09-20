@@ -4,7 +4,7 @@ import BlankImagePlaceholder from "@/components/shared/BlankImagePlaceholder";
 import type { AppImageSrc } from "@/lib/image-src";
 import { cn } from "@/lib/utils";
 
-const TILE_RADIUS_PX = 6;
+const ORBIT_TILE_RADIUS_CLASS = "rounded-[6px]";
 
 const ORBIT_TILE_SIZES =
   "(max-width: 640px) 104px, 120px";
@@ -25,9 +25,9 @@ export default function HeroOrbitTile({
     <div
       className={cn(
         "relative size-full overflow-hidden bg-brand-surface-card",
+        ORBIT_TILE_RADIUS_CLASS,
         className,
       )}
-      style={{ borderRadius: TILE_RADIUS_PX }}
     >
       {src ? (
         <Image
@@ -36,16 +36,14 @@ export default function HeroOrbitTile({
           aria-hidden
           width={tileSize}
           height={tileSize}
-          className="size-full object-cover"
-          style={{ borderRadius: TILE_RADIUS_PX }}
+          className={cn("size-full object-cover", ORBIT_TILE_RADIUS_CLASS)}
           sizes={ORBIT_TILE_SIZES}
           draggable={false}
         />
       ) : (
         <BlankImagePlaceholder
-          className="size-full"
+          className={cn("size-full", ORBIT_TILE_RADIUS_CLASS)}
           iconSize={16}
-          style={{ borderRadius: TILE_RADIUS_PX }}
         />
       )}
     </div>
