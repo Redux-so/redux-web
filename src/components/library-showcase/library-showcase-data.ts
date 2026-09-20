@@ -1,7 +1,19 @@
+import type { StaticImageData } from "next/image";
+
+import f1_1 from "@/public/features/smart-search/results/f1-1.jpg";
+import mountain1 from "@/public/features/smart-search/results/mountain-1.jpg";
+import mountain2 from "@/public/features/smart-search/results/mountain-2.jpg";
+import mountain3 from "@/public/features/smart-search/results/mountain-3.jpg";
+import mountain4 from "@/public/features/smart-search/results/mountain-4.jpg";
+import urban1 from "@/public/features/smart-search/results/urban-1.jpg";
+import urban2 from "@/public/features/smart-search/results/urban-2.jpg";
+import urban3 from "@/public/features/smart-search/results/urban-3.jpg";
+import urban4 from "@/public/features/smart-search/results/urban-4.jpg";
+
 export type LibraryShowcaseImage = {
   id: string;
   filename: string;
-  src: string;
+  src: StaticImageData;
   alt: string;
 };
 
@@ -13,13 +25,11 @@ export type SmartSearchDemoScenario = {
   results: LibraryShowcaseImage[];
 };
 
-const SEARCH_RESULTS_BASE = "/features/smart-search/results";
-
 export const SHOWCASE_F1_RESULTS: LibraryShowcaseImage[] = [
   {
     id: "f1-1",
     filename: "f1-1.jpg",
-    src: `${SEARCH_RESULTS_BASE}/f1-1.jpg`,
+    src: f1_1,
     alt: "Formula One race car on track",
   },
 ];
@@ -28,25 +38,25 @@ export const SHOWCASE_MOUNTAIN_RESULTS: LibraryShowcaseImage[] = [
   {
     id: "mountain-1",
     filename: "mountain-1.jpg",
-    src: `${SEARCH_RESULTS_BASE}/mountain-1.jpg`,
+    src: mountain1,
     alt: "Mountain lake landscape",
   },
   {
     id: "mountain-2",
     filename: "mountain-2.jpg",
-    src: `${SEARCH_RESULTS_BASE}/mountain-2.jpg`,
+    src: mountain2,
     alt: "Snowy mountain peaks",
   },
   {
     id: "mountain-3",
     filename: "mountain-3.jpg",
-    src: `${SEARCH_RESULTS_BASE}/mountain-3.jpg`,
+    src: mountain3,
     alt: "Mountain range at sunrise",
   },
   {
     id: "mountain-4",
     filename: "mountain-4.jpg",
-    src: `${SEARCH_RESULTS_BASE}/mountain-4.jpg`,
+    src: mountain4,
     alt: "Green mountain valley",
   },
 ];
@@ -55,25 +65,25 @@ export const SHOWCASE_URBAN_RESULTS: LibraryShowcaseImage[] = [
   {
     id: "urban-1",
     filename: "urban-1.jpg",
-    src: `${SEARCH_RESULTS_BASE}/urban-1.jpg`,
+    src: urban1,
     alt: "Big Ben and the Palace of Westminster",
   },
   {
     id: "urban-2",
     filename: "urban-2.jpg",
-    src: `${SEARCH_RESULTS_BASE}/urban-2.jpg`,
+    src: urban2,
     alt: "New York City skyline",
   },
   {
     id: "urban-3",
     filename: "urban-3.jpg",
-    src: `${SEARCH_RESULTS_BASE}/urban-3.jpg`,
+    src: urban3,
     alt: "Modern waterfront city skyline",
   },
   {
     id: "urban-4",
     filename: "urban-4.jpg",
-    src: `${SEARCH_RESULTS_BASE}/urban-4.jpg`,
+    src: urban4,
     alt: "Tokyo street crossing at night",
   },
 ];

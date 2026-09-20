@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer
 
 import { MarketingIcon } from "@/components/shared/MarketingIcon";
 import MarketingNavLink from "@/src/components/MarketingNavLink";
+import { REDUX_LOGO_TEXT } from "@/lib/marketing-logos";
 import { DiscordIcon } from "@/lib/brand-social-icons";
 
 import {
@@ -127,7 +128,7 @@ export default function Navbar() {
           className="group relative z-10 inline-flex h-[34px] min-w-0 max-w-[7rem] items-center justify-self-start rounded-md max-md:ml-2 sm:max-w-[9.5rem] md:max-w-full"
         >
           <Image
-            src="/redux-logo-text.png"
+            src={REDUX_LOGO_TEXT}
             alt="Redux"
             width={NAV_LOGO_INTRINSIC_WIDTH}
             height={NAV_LOGO_INTRINSIC_HEIGHT}

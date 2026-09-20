@@ -6,23 +6,16 @@ import {
   GRID_LINE_COLOR,
   getColumnBoundaryPercents,
 } from "@/src/components/page-grid/shared";
+import { MARQUEE_LOGOS } from "@/lib/marquee-logos";
 import { PAGE_GRID_ALIGNED_FRAME, SECTION_BLEED } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
-
-const marqueeItems = [
-  { src: "/marquee/photoshop.png", alt: "Adobe Photoshop", width: 152, height: 126 },
-  { src: "/marquee/lightroom.png", alt: "Adobe Lightroom", width: 157, height: 142 },
-  { src: "/marquee/canva.png", alt: "Canva", width: 354, height: 125 },
-  { src: "/marquee/figma.png", alt: "Figma", width: 356, height: 106 },
-  { src: "/marquee/luminar-neo.png", alt: "Luminar Neo", width: 500, height: 88 },
-] as const;
 
 const MARQUEE_LOGO_CLASS = "marquee-logo-cell__image";
 const MARQUEE_LOGO_CELL_CLASS =
   "marquee-logo-cell contained-accent-glow group/marquee-logo relative flex h-full w-full min-h-[3.75rem] items-center justify-center overflow-hidden px-0.5 sm:min-h-[5.5rem] lg:min-h-[6.5rem]";
 
 /** Internal dividers only — outer edges come from PageGrid. */
-const internalColumnBoundaries = getColumnBoundaryPercents(marqueeItems.length).filter(
+const internalColumnBoundaries = getColumnBoundaryPercents(MARQUEE_LOGOS.length).filter(
   (leftPercent) => leftPercent > 0 && leftPercent < 100,
 );
 
@@ -64,8 +57,8 @@ export default function MarqueeStrip() {
               ))}
 
               <ul className="relative z-[1] m-0 grid min-w-0 list-none grid-cols-5 items-stretch p-0">
-                {marqueeItems.map((item) => (
-                  <li key={item.src} className="min-w-0">
+                {MARQUEE_LOGOS.map((item) => (
+                  <li key={item.alt} className="min-w-0">
                     <div className={MARQUEE_LOGO_CELL_CLASS} aria-label={item.alt}>
                       <Image
                         src={item.src}
@@ -75,8 +68,7 @@ export default function MarqueeStrip() {
                         unoptimized
                         className={cn(
                           MARQUEE_LOGO_CLASS,
-                          item.src.includes("luminar-neo") &&
-                            "marquee-logo-cell__image--luminar",
+                          item.wide && "marquee-logo-cell__image--luminar",
                         )}
                         draggable={false}
                       />

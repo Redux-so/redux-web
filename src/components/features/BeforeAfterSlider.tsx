@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Icon } from "@/components/shared/Icon";
+import { resolveImageUrl, type AppImageSrc } from "@/lib/image-src";
 import { cn } from "@/lib/utils";
 
 type BeforeAfterSliderProps = {
-  beforeSrc?: string;
-  afterSrc?: string;
+  beforeSrc?: AppImageSrc;
+  afterSrc?: AppImageSrc;
   className?: string;
 };
 
@@ -92,7 +93,7 @@ export function BeforeAfterSlider({
       <div className="absolute inset-0 flex items-center justify-center bg-neutral-800">
         {afterSrc ? (
           <img
-            src={afterSrc}
+            src={resolveImageUrl(afterSrc)}
             alt="Enhanced"
             draggable={false}
             className="pointer-events-none h-full w-full object-cover select-none"
@@ -120,7 +121,7 @@ export function BeforeAfterSlider({
         >
           {beforeSrc ? (
             <img
-              src={beforeSrc}
+              src={resolveImageUrl(beforeSrc)}
               alt="Original"
               draggable={false}
               className="pointer-events-none h-full w-full object-cover select-none"

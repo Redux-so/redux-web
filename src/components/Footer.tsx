@@ -14,6 +14,7 @@ import {
   DEFERRED_SECTION,
   DEFERRED_SECTION_FOOTER,
 } from "@/lib/deferred-section-styles";
+import { REDUX_LOGO_TEXT } from "@/lib/marketing-logos";
 import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
@@ -67,7 +68,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[1fr_auto] lg:items-start lg:gap-16 lg:py-16">
           <div className="flex flex-col items-start gap-5">
             <Image
-              src="/redux-logo-text.png"
+              src={REDUX_LOGO_TEXT}
               alt="Redux"
               width={FOOTER_LOGO_WIDTH}
               height={FOOTER_LOGO_HEIGHT}

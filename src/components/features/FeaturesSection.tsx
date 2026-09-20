@@ -1,5 +1,9 @@
 import dynamic from "next/dynamic";
 
+import {
+  AUTO_ENHANCE_AFTER,
+  AUTO_ENHANCE_BEFORE,
+} from "@/lib/auto-enhance-images";
 import FeatureBentoCard from "@/src/components/features/FeatureBentoCard";
 import FeatureSmallCard from "@/src/components/features/FeatureSmallCard";
 import FeaturesScrollReveal, {
@@ -98,8 +102,8 @@ export default function FeaturesSection() {
                 <div className="feature-collab-actions-glow" aria-hidden />
                 <div className="relative z-[1] w-[9.25rem] shrink-0 sm:w-[10rem] md:w-[10.5rem]">
                   <BeforeAfterSlider
-                    beforeSrc="/features/auto-enhance/after.jpg"
-                    afterSrc="/features/auto-enhance/before.jpg"
+                    beforeSrc={AUTO_ENHANCE_AFTER}
+                    afterSrc={AUTO_ENHANCE_BEFORE}
                     className="h-[5.75rem] w-full sm:h-[6rem]"
                   />
                 </div>

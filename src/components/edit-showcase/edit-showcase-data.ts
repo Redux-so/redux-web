@@ -1,36 +1,46 @@
+import type { StaticImageData } from "next/image";
+
+import bottom1 from "@/public/edit-showcase/bottom/bottom-1.webp";
+import bottom2 from "@/public/edit-showcase/bottom/bottom-2.webp";
+import bottom3 from "@/public/edit-showcase/bottom/bottom-3.webp";
+import bottom4 from "@/public/edit-showcase/bottom/bottom-4.webp";
+import bottom5 from "@/public/edit-showcase/bottom/bottom-5.webp";
+import shibuyaCrossing from "@/public/edit-showcase/top/shibuya-crossing.webp";
+import snowyShrineLanterns from "@/public/edit-showcase/top/snowy-shrine-lanterns.webp";
+import stadiumNight from "@/public/edit-showcase/top/stadium-night.webp";
+import top2 from "@/public/edit-showcase/top/top-2.webp";
+import top4 from "@/public/edit-showcase/top/top-4.webp";
+
 export type EditShowcasePhoto = {
   id: string;
-  src: string;
+  src: StaticImageData;
   alt: string;
 };
-
-const EDIT_SHOWCASE_TOP_BASE = "/edit-showcase/top";
-const EDIT_SHOWCASE_BOTTOM_BASE = "/edit-showcase/bottom";
 
 export const EDIT_SHOWCASE_TOP_ROW: EditShowcasePhoto[] = [
   {
     id: "top-1",
-    src: `${EDIT_SHOWCASE_TOP_BASE}/shibuya-crossing.webp`,
+    src: shibuyaCrossing,
     alt: "Shibuya Crossing at dusk with neon billboards and pedestrians",
   },
   {
     id: "top-2",
-    src: `${EDIT_SHOWCASE_TOP_BASE}/top-2.webp`,
+    src: top2,
     alt: "Palm trees and beachfront hotels on a sunny day",
   },
   {
     id: "top-3",
-    src: `${EDIT_SHOWCASE_TOP_BASE}/snowy-shrine-lanterns.webp`,
+    src: snowyShrineLanterns,
     alt: "Snow-covered shrine gate with glowing paper lanterns at night",
   },
   {
     id: "top-4",
-    src: `${EDIT_SHOWCASE_TOP_BASE}/top-4.webp`,
+    src: top4,
     alt: "Golden Gate Bridge above rolling fog",
   },
   {
     id: "top-5",
-    src: `${EDIT_SHOWCASE_TOP_BASE}/stadium-night.webp`,
+    src: stadiumNight,
     alt: "Soccer stadium at night during a match under floodlights",
   },
 ];
@@ -38,27 +48,27 @@ export const EDIT_SHOWCASE_TOP_ROW: EditShowcasePhoto[] = [
 export const EDIT_SHOWCASE_BOTTOM_ROW: EditShowcasePhoto[] = [
   {
     id: "bottom-1",
-    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-1.webp`,
+    src: bottom1,
     alt: "Minimal product photo of hand sanitizer bottles on linen",
   },
   {
     id: "bottom-2",
-    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-2.webp`,
+    src: bottom2,
     alt: "Mercedes E-Class at sunset in the hills",
   },
   {
     id: "bottom-3",
-    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-3.webp`,
+    src: bottom3,
     alt: "Rolex Datejust watch close-up on a dark surface",
   },
   {
     id: "bottom-4",
-    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-4.webp`,
+    src: bottom4,
     alt: "Modern open-concept living and dining room",
   },
   {
     id: "bottom-5",
-    src: `${EDIT_SHOWCASE_BOTTOM_BASE}/bottom-5.webp`,
+    src: bottom5,
     alt: "Close-up of monstera leaves with natural light",
   },
 ];

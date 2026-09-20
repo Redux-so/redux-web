@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import BlankImagePlaceholder from "@/components/shared/BlankImagePlaceholder";
+import type { AppImageSrc } from "@/lib/image-src";
 import { cn } from "@/lib/utils";
 
 const TILE_RADIUS_PX = 6;
@@ -10,7 +11,7 @@ const ORBIT_TILE_SIZES =
 
 type HeroOrbitTileProps = {
   className?: string;
-  src?: string | null;
+  src?: AppImageSrc | null;
   /** Rendered tile edge length in CSS pixels (matches orbit iconSize). */
   tileSize: number;
 };
