@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 import { getHeroOrbitPhoto } from "@/src/components/hero-orbit-photos";
 import HeroOrbitTile from "@/src/components/HeroOrbitTile";
 
+const PREFERS_REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
 const INNER_TILE_COUNT = 7;
 const OUTER_TILE_COUNT = 8;
 
@@ -258,6 +260,31 @@ function clearOrbitTileDepth(root: HTMLElement): void {
   });
 }
 
+/** Lock each tile's current layout transform and pause CSS orbit animation. */
+function freezeOrbitAnimation(root: HTMLElement): void {
+  root.querySelectorAll<HTMLElement>(".animate-orbit").forEach((tile) => {
+    if (tile.dataset.orbitFrozen === "true") {
+      return;
+    }
+
+    const { transform } = getComputedStyle(tile);
+    if (transform && transform !== "none") {
+      tile.style.transform = transform;
+    }
+
+    tile.style.animationPlayState = "paused";
+    tile.dataset.orbitFrozen = "true";
+  });
+}
+
+function unfreezeOrbitAnimation(root: HTMLElement): void {
+  root.querySelectorAll<HTMLElement>(".animate-orbit").forEach((tile) => {
+    tile.style.removeProperty("transform");
+    tile.style.animationPlayState = "running";
+    delete tile.dataset.orbitFrozen;
+  });
+}
+
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
@@ -303,7 +330,7 @@ export default function HeroOrbitingPhotos() {
   const configRef = useRef(config);
   const parallaxTargetRef = useRef<ParallaxOffset>({ x: 0, y: 0 });
   const parallaxCurrentRef = useRef<ParallaxOffset>({ x: 0, y: 0 });
-  const parallaxEnabledRef = useRef(true);
+  const motionAllowedRef = useRef(true);
   configRef.current = config;
 
   useEffect(() => {
@@ -349,12 +376,8 @@ export default function HeroOrbitingPhotos() {
       return;
     }
 
-    parallaxEnabledRef.current = !window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
     const handlePointerMove = (event: PointerEvent) => {
-      if (!parallaxEnabledRef.current) {
+      if (!motionAllowedRef.current) {
         return;
       }
 
@@ -388,6 +411,23 @@ export default function HeroOrbitingPhotos() {
       return;
     }
 
+    const reducedMotionQuery = window.matchMedia(PREFERS_REDUCED_MOTION_QUERY);
+
+    const syncMotionPreference = () => {
+      motionAllowedRef.current = !reducedMotionQuery.matches;
+
+      if (reducedMotionQuery.matches) {
+        requestAnimationFrame(() => {
+          freezeOrbitAnimation(root);
+        });
+      } else {
+        unfreezeOrbitAnimation(root);
+      }
+    };
+
+    syncMotionPreference();
+    reducedMotionQuery.addEventListener("change", syncMotionPreference);
+
     let frameId = 0;
 
     const tick = () => {
@@ -399,7 +439,7 @@ export default function HeroOrbitingPhotos() {
         offsetWrapper.style.transform = `translate3d(${offset.x.toFixed(2)}px, ${offset.y.toFixed(2)}px, 0)`;
       }
 
-      if (stage instanceof HTMLElement && parallaxEnabledRef.current) {
+      if (motionAllowedRef.current && stage instanceof HTMLElement) {
         const target = parallaxTargetRef.current;
         const current = parallaxCurrentRef.current;
 
@@ -422,11 +462,8 @@ export default function HeroOrbitingPhotos() {
     frameId = window.requestAnimationFrame(tick);
 
     return () => {
+      reducedMotionQuery.removeEventListener("change", syncMotionPreference);
       window.cancelAnimationFrame(frameId);
-      clearOrbitTileDepth(root);
-      if (stage instanceof HTMLElement) {
-        resetOrbitParallax(stage);
-      }
     };
   }, []);
 

@@ -85,6 +85,10 @@
   }
 }
 
+.animate-orbit {
+  animation: orbit calc(var(--duration) * 1s) linear infinite;
+}
+
 :root {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -910,7 +914,7 @@ html {
   }
 
   .animate-orbit {
-    animation: none;
+    animation-play-state: paused !important;
   }
 
   .hero-photo-card:hover .hero-photo-card__inner {
@@ -1428,85 +1432,83 @@ html {
   display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  [data-page-grid-shell].marketing-resize-smooth [data-page-grid-root] {
-    transition-property: border-radius;
-    transition-duration: var(--layout-resize-duration);
-    transition-timing-function: var(--layout-resize-ease);
-  }
+[data-page-grid-shell].marketing-resize-smooth [data-page-grid-root] {
+  transition-property: border-radius;
+  transition-duration: var(--layout-resize-duration);
+  transition-timing-function: var(--layout-resize-ease);
+}
 
-  [data-page-grid-shell].marketing-resize-smooth
-    :where(
-      nav,
-      nav a,
-      nav button,
-      footer,
-      main,
-      main section,
-      main section div,
-      main :where(h1, h2, h3, h4, p, a, button, label, input, textarea),
-      .ui-card,
-      .showcase-frame,
-      .hero-pill-cta,
-      .faq-heading-glow,
-      .page-grid-overlay-line
-    ):not(
-      :is(
-        [data-scroll-motion],
-        [data-scroll-motion] *,
-        [data-showcase-scaler-frame],
-        [data-showcase-scaler-frame] *,
-        .editor-showcase,
-        .editor-showcase *,
-        .library-showcase,
-        .library-showcase *,
-        [data-slot="accordion-content"],
-        [data-slot="accordion-content"] *,
-        [class*="animate-marquee"],
-        [class*="animate-marquee"] *,
-        [data-marquee-scroll],
-        [data-marquee-scroll] *,
-        .animate-toolkit-marquee,
-        .animate-toolkit-marquee *,
-        .edit-showcase-marquee-track,
-        .edit-showcase-marquee-track *,
+[data-page-grid-shell].marketing-resize-smooth
+  :where(
+    nav,
+    nav a,
+    nav button,
+    footer,
+    main,
+    main section,
+    main section div,
+    main :where(h1, h2, h3, h4, p, a, button, label, input, textarea),
+    .ui-card,
+    .showcase-frame,
+    .hero-pill-cta,
+    .faq-heading-glow,
+    .page-grid-overlay-line
+  ):not(
+    :is(
+      [data-scroll-motion],
+      [data-scroll-motion] *,
+      [data-showcase-scaler-frame],
+      [data-showcase-scaler-frame] *,
+      .editor-showcase,
+      .editor-showcase *,
+      .library-showcase,
+      .library-showcase *,
+      [data-slot="accordion-content"],
+      [data-slot="accordion-content"] *,
+      [class*="animate-marquee"],
+      [class*="animate-marquee"] *,
+      [data-marquee-scroll],
+      [data-marquee-scroll] *,
+      .animate-toolkit-marquee,
+      .animate-toolkit-marquee *,
+      .edit-showcase-marquee-track,
+      .edit-showcase-marquee-track *,
         .animate-orbit,
         .animate-orbit *
-      )
-    ) {
-    transition-property:
-      font-size,
-      line-height,
-      letter-spacing,
-      padding,
-      margin,
-      gap,
-      row-gap,
-      column-gap,
-      width,
-      max-width,
-      min-width,
-      height,
-      max-height,
-      min-height,
-      flex-basis,
-      border-radius,
-      top,
-      left,
-      right,
-      bottom;
-    transition-duration: var(--layout-resize-duration);
-    transition-timing-function: var(--layout-resize-ease);
-  }
+    )
+  ) {
+  transition-property:
+    font-size,
+    line-height,
+    letter-spacing,
+    padding,
+    margin,
+    gap,
+    row-gap,
+    column-gap,
+    width,
+    max-width,
+    min-width,
+    height,
+    max-height,
+    min-height,
+    flex-basis,
+    border-radius,
+    top,
+    left,
+    right,
+    bottom;
+  transition-duration: var(--layout-resize-duration);
+  transition-timing-function: var(--layout-resize-ease);
+}
 
-  [data-showcase-scaler-frame],
-  [data-showcase-scaler-frame] .showcase-resize-smooth-scale,
-  .showcase-crop-layout,
-  .showcase-crop-layout .showcase-resize-smooth-scale {
-    transition-property: width, height, transform, left, top;
-    transition-duration: var(--layout-resize-duration);
-    transition-timing-function: var(--layout-resize-ease);
-  }
+[data-showcase-scaler-frame],
+[data-showcase-scaler-frame] .showcase-resize-smooth-scale,
+.showcase-crop-layout,
+.showcase-crop-layout .showcase-resize-smooth-scale {
+  transition-property: width, height, transform, left, top;
+  transition-duration: var(--layout-resize-duration);
+  transition-timing-function: var(--layout-resize-ease);
 }
 
 @layer base {

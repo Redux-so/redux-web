@@ -14,6 +14,10 @@ export interface OrbitingCirclesProps extends React.HTMLAttributes<HTMLDivElemen
   speed?: number
 }
 
+function getOrbitArmTransform(angle: number, radius: number): string {
+  return `translate(-50%, -50%) rotate(${angle}deg) translateY(${radius}px) rotate(${-angle}deg)`
+}
+
 export function OrbitingCircles({
   className,
   children,
@@ -27,6 +31,8 @@ export function OrbitingCircles({
   ...props
 }: OrbitingCirclesProps) {
   const calculatedDuration = duration / speed
+  const childCount = React.Children.count(children)
+
   return (
     <>
       {path && (
@@ -46,7 +52,8 @@ export function OrbitingCircles({
         </svg>
       )}
       {React.Children.map(children, (child, index) => {
-        const angle = (360 / React.Children.count(children)) * index
+        const angle = childCount > 0 ? (360 / childCount) * index : 0
+
         return (
           <div
             key={index}
@@ -56,13 +63,14 @@ export function OrbitingCircles({
                 "--radius": radius,
                 "--angle": angle,
                 "--icon-size": `${iconSize}px`,
+                transform: getOrbitArmTransform(angle, radius),
                 ...style,
               } as React.CSSProperties
             }
             className={cn(
-              "animate-orbit absolute left-1/2 top-1/2 flex size-(--icon-size) transform-gpu items-center justify-center overflow-hidden",
-              { "[animation-direction:reverse]": reverse },
-              className
+              "animate-orbit absolute left-1/2 top-1/2 flex size-(--icon-size) items-center justify-center overflow-hidden",
+              reverse && "[animation-direction:reverse]",
+              className,
             )}
             {...props}
           >
