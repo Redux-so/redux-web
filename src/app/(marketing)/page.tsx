@@ -12,6 +12,14 @@ import {
 } from "@/src/components/marketing/MarketingSectionPlaceholders";
 import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
 import WaitlistSection from "@/src/components/WaitlistSection";
+import {
+  DEFERRED_SECTION,
+  DEFERRED_SECTION_EDIT_SHOWCASE,
+  DEFERRED_SECTION_FAQ,
+  DEFERRED_SECTION_FEATURES,
+  DEFERRED_SECTION_TOOLKIT,
+  DEFERRED_SECTION_WAITLIST,
+} from "@/lib/deferred-section-styles";
 import { SECTION_DIVIDE, SECTION_VERTICAL_PADDING } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
@@ -61,25 +69,49 @@ export default function Home() {
 
       <section
         id="features"
-        className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}
+        className={cn(
+          NAV_SCROLL_OFFSET_CLASS,
+          SECTION_BASE,
+          DEFERRED_SECTION,
+          DEFERRED_SECTION_FEATURES,
+        )}
       >
         <FeaturesSection />
       </section>
 
-      <section aria-label="The Full Toolkit" className={SECTION_BASE}>
+      <section
+        aria-label="The Full Toolkit"
+        className={cn(
+          SECTION_BASE,
+          DEFERRED_SECTION,
+          DEFERRED_SECTION_TOOLKIT,
+        )}
+      >
         <ToolkitMarquee />
       </section>
 
       <section
         id="edit-showcase"
-        className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE, "overflow-x-visible")}
+        className={cn(
+          NAV_SCROLL_OFFSET_CLASS,
+          SECTION_BASE,
+          "overflow-x-visible",
+          DEFERRED_SECTION,
+          DEFERRED_SECTION_EDIT_SHOWCASE,
+        )}
       >
         <EditShowcaseSection />
       </section>
 
       <section
         id="faq"
-        className={cn(NAV_SCROLL_OFFSET_CLASS, "relative z-[1]", SECTION_DIVIDE)}
+        className={cn(
+          NAV_SCROLL_OFFSET_CLASS,
+          "relative z-[1]",
+          SECTION_DIVIDE,
+          DEFERRED_SECTION,
+          DEFERRED_SECTION_FAQ,
+        )}
       >
         <FAQ />
       </section>
@@ -91,6 +123,8 @@ export default function Home() {
           "relative z-[1]",
           SECTION_DIVIDE,
           "py-10 sm:py-12 lg:py-16",
+          DEFERRED_SECTION,
+          DEFERRED_SECTION_WAITLIST,
         )}
       >
         <WaitlistSection />

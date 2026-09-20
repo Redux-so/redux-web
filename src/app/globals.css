@@ -1512,3 +1512,86 @@ html {
     @apply font-body;
   }
 }
+
+/*
+ * Below-the-fold landing sections: skip layout/paint until near the viewport.
+ * Unsupported browsers ignore this block (@supports) and render normally.
+ */
+@supports (content-visibility: auto) {
+  .deferred-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
+  /* Features bento grid — tallest on narrow stacked layout. */
+  .deferred-section--features {
+    contain-intrinsic-size: auto 2600px;
+  }
+
+  @media (min-width: 768px) {
+    .deferred-section--features {
+      contain-intrinsic-size: auto 2100px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .deferred-section--features {
+      contain-intrinsic-size: auto 1850px;
+    }
+  }
+
+  /* Toolkit headline + horizontal marquee lane. */
+  .deferred-section--toolkit {
+    contain-intrinsic-size: auto 980px;
+  }
+
+  @media (min-width: 1024px) {
+    .deferred-section--toolkit {
+      contain-intrinsic-size: auto 920px;
+    }
+  }
+
+  /* “See how Redux can edit” dual photo marquees. */
+  .deferred-section--edit-showcase {
+    contain-intrinsic-size: auto 1120px;
+  }
+
+  @media (min-width: 640px) {
+    .deferred-section--edit-showcase {
+      contain-intrinsic-size: auto 1180px;
+    }
+  }
+
+  /* FAQ heading + accordion column layout. */
+  .deferred-section--faq {
+    contain-intrinsic-size: auto 920px;
+  }
+
+  @media (min-width: 1024px) {
+    .deferred-section--faq {
+      contain-intrinsic-size: auto 780px;
+    }
+  }
+
+  /* Waitlist card block (custom vertical padding on section). */
+  .deferred-section--waitlist {
+    contain-intrinsic-size: auto 820px;
+  }
+
+  @media (min-width: 640px) {
+    .deferred-section--waitlist {
+      contain-intrinsic-size: auto 760px;
+    }
+  }
+
+  /* Footer links + watermark (sticky reveal sibling). */
+  .deferred-section--footer {
+    contain-intrinsic-size: auto 980px;
+  }
+
+  @media (min-width: 1024px) {
+    .deferred-section--footer {
+      contain-intrinsic-size: auto 920px;
+    }
+  }
+}

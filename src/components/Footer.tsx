@@ -10,6 +10,10 @@ import {
   SITE_MOTTO,
   socialLinks,
 } from "@/lib/footer-content";
+import {
+  DEFERRED_SECTION,
+  DEFERRED_SECTION_FOOTER,
+} from "@/lib/deferred-section-styles";
 import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
@@ -50,7 +54,13 @@ function FooterLink({
 
 export default function Footer() {
   return (
-    <footer className="footer-bottom-glow relative sticky bottom-0 z-0 bg-[#02040A] text-white">
+    <footer
+      className={cn(
+        "footer-bottom-glow relative sticky bottom-0 z-0 bg-[#02040A] text-white",
+        DEFERRED_SECTION,
+        DEFERRED_SECTION_FOOTER,
+      )}
+    >
       <FooterPageGrid />
       <div className="relative z-[1]">
         <div className={cn(PAGE_CONTAINER, "relative z-10")}>
