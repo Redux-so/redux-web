@@ -5,16 +5,20 @@ import { cn } from "@/lib/utils";
 
 const TILE_RADIUS_PX = 6;
 
+const ORBIT_TILE_SIZES =
+  "(max-width: 640px) 104px, 120px";
+
 type HeroOrbitTileProps = {
-  alt?: string;
   className?: string;
   src?: string | null;
+  /** Rendered tile edge length in CSS pixels (matches orbit iconSize). */
+  tileSize: number;
 };
 
 export default function HeroOrbitTile({
-  alt = "",
   className,
   src,
+  tileSize,
 }: HeroOrbitTileProps) {
   return (
     <div
@@ -27,12 +31,13 @@ export default function HeroOrbitTile({
       {src ? (
         <Image
           src={src}
-          alt={alt}
-          fill
-          unoptimized
-          className="object-cover"
+          alt=""
+          aria-hidden
+          width={tileSize}
+          height={tileSize}
+          className="size-full object-cover"
           style={{ borderRadius: TILE_RADIUS_PX }}
-          sizes="(max-width: 640px) 96px, 120px"
+          sizes={ORBIT_TILE_SIZES}
           draggable={false}
         />
       ) : (

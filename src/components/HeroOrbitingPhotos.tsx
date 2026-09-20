@@ -458,7 +458,7 @@ export default function HeroOrbitingPhotos() {
                   <HeroOrbitTile
                     key={`hero-orbit-inner-${index}`}
                     src={photo.src}
-                    alt={photo.alt}
+                    tileSize={config.innerIconSize}
                   />
                 );
               })}
@@ -478,7 +478,7 @@ export default function HeroOrbitingPhotos() {
                   <HeroOrbitTile
                     key={`hero-orbit-outer-${index}`}
                     src={photo.src}
-                    alt={photo.alt}
+                    tileSize={config.outerIconSize}
                   />
                 );
               })}
