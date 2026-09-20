@@ -1,10 +1,10 @@
 "use client";
 
-import { Menu01, XClose } from "@untitledui/icons";
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 
+import { MarketingIcon } from "@/components/shared/MarketingIcon";
 import MarketingNavLink from "@/src/components/MarketingNavLink";
 import { DiscordIcon } from "@/lib/brand-social-icons";
 
@@ -199,7 +199,7 @@ export default function Navbar() {
                   }
                   transition={ICON_TRANSITION}
                 >
-                  <XClose className="size-5" />
+                  <MarketingIcon name="XClose" size={20} className="size-5" aria-hidden />
                 </motion.span>
               ) : (
                 <motion.span
@@ -222,7 +222,7 @@ export default function Navbar() {
                   }
                   transition={ICON_TRANSITION}
                 >
-                  <Menu01 className="size-5" />
+                  <MarketingIcon name="Menu01" size={20} className="size-5" aria-hidden />
                 </motion.span>
               )}
             </AnimatePresence>

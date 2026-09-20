@@ -5,7 +5,7 @@ import { FormEvent, useRef, useState } from "react";
 
 import DotGridBackground from "@/src/components/DotGridBackground";
 import SectionShell from "@/src/components/SectionShell";
-import { Icon } from "@/components/shared/Icon";
+import { MarketingIcon } from "@/components/shared/MarketingIcon";
 import { BRAND_HEADLINE_ACCENT_CLASS } from "@/lib/brand-colors";
 import { HERO_PILL_CTA_BASE } from "@/lib/button-styles";
 import {
@@ -158,7 +158,7 @@ export default function WaitlistSection() {
                 className={WAITLIST_SUBMIT_CTA}
               >
                 <span className="leading-none">Join</span>
-                <Icon
+                <MarketingIcon
                   name="ArrowNarrowRight"
                   size={16}
                   strokeWidth={2}

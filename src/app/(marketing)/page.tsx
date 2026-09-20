@@ -1,23 +1,39 @@
+import dynamic from "next/dynamic";
+
 import PageGrid from "@/src/components/PageGrid";
-import EditShowcasePreload from "@/src/components/EditShowcasePreload";
-import EditShowcaseSection from "@/src/components/EditShowcaseSection";
 import FAQ from "@/src/components/FAQ";
-import Features from "@/src/components/Features";
-import ToolkitMarquee from "@/src/components/features/ToolkitMarquee";
+import FeaturesSection from "@/src/components/features/FeaturesSection";
 import Hero from "@/src/components/Hero";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
+import {
+  EditShowcaseMarqueePlaceholder,
+  EditorShowcaseSectionPlaceholder,
+  ToolkitMarqueePlaceholder,
+} from "@/src/components/marketing/MarketingSectionPlaceholders";
 import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
-import Showcase from "@/src/components/Showcase";
 import WaitlistSection from "@/src/components/WaitlistSection";
 import { SECTION_DIVIDE, SECTION_VERTICAL_PADDING } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
 const SECTION_BASE = cn("relative z-[1]", SECTION_DIVIDE, SECTION_VERTICAL_PADDING);
 
+const Showcase = dynamic(() => import("@/src/components/Showcase"), {
+  loading: () => <EditorShowcaseSectionPlaceholder />,
+});
+
+const ToolkitMarquee = dynamic(
+  () => import("@/src/components/features/ToolkitMarquee"),
+  { loading: () => <ToolkitMarqueePlaceholder /> },
+);
+
+const EditShowcaseSection = dynamic(
+  () => import("@/src/components/EditShowcaseSection"),
+  { loading: () => <EditShowcaseMarqueePlaceholder /> },
+);
+
 export default function Home() {
   return (
     <>
-      <EditShowcasePreload />
       <PageGrid />
       <section
         id="home"
@@ -47,7 +63,7 @@ export default function Home() {
         id="features"
         className={cn(NAV_SCROLL_OFFSET_CLASS, SECTION_BASE)}
       >
-        <Features />
+        <FeaturesSection />
       </section>
 
       <section aria-label="The Full Toolkit" className={SECTION_BASE}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon } from "@/components/shared/Icon";
+import { MarketingIcon } from "@/components/shared/MarketingIcon";
 import HeroOrbitingPhotos from "@/src/components/HeroOrbitingPhotos";
 import MarketingNavLink from "@/src/components/MarketingNavLink";
 import {
@@ -51,7 +51,7 @@ export default function Hero() {
                 className={cn(HERO_CTA_WITH_ICON, "hero-pill-cta--charcoal")}
               >
                 <span className="leading-none">See how it works</span>
-                <Icon
+                <MarketingIcon
                   name="ArrowNarrowDown"
                   size={16}
                   strokeWidth={2}

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import MarketingNavLink from "@/src/components/MarketingNavLink";
-import { Icon, type IconName } from "@/components/shared/Icon";
+import { MarketingIcon, type MarketingIconName } from "@/components/shared/MarketingIcon";
 import { UI_CARD, UI_CHIP_ACCENT } from "@/lib/ui-surface-styles";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +11,7 @@ const FEATURE_PILL_CTA =
 type FeatureSmallCardProps = {
   headline: string;
   description: string;
-  icon?: IconName;
+  icon?: MarketingIconName;
   cta?: string;
   trailing?: ReactNode;
   topRightLabel?: string;
@@ -53,7 +53,7 @@ export default function FeatureSmallCard({
             className={cn(FEATURE_PILL_CTA, "mt-1 w-fit")}
           >
             <span className="leading-none">{cta}</span>
-            <Icon
+            <MarketingIcon
               name="ArrowUpRight"
               size={16}
               strokeWidth={2}
@@ -73,7 +73,7 @@ export default function FeatureSmallCard({
           aria-hidden
         >
           {icon ? (
-            <Icon
+            <MarketingIcon
               name={icon}
               size={24}
               strokeWidth={1.75}

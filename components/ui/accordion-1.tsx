@@ -1,10 +1,44 @@
 "use client";
 
 import * as React from "react";
-import { Minus, Plus } from "@untitledui/icons";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 
+import { MarketingIcon } from "@/components/shared/MarketingIcon";
 import { cn } from "@/lib/utils";
+
+function AccordionPlusIcon({
+  className,
+  "aria-hidden": ariaHidden,
+}: {
+  className?: string;
+  "aria-hidden"?: boolean;
+}) {
+  return (
+    <MarketingIcon
+      name="Plus"
+      size={20}
+      className={className}
+      aria-hidden={ariaHidden}
+    />
+  );
+}
+
+function AccordionMinusIcon({
+  className,
+  "aria-hidden": ariaHidden,
+}: {
+  className?: string;
+  "aria-hidden"?: boolean;
+}) {
+  return (
+    <MarketingIcon
+      name="Minus"
+      size={20}
+      className={className}
+      aria-hidden={ariaHidden}
+    />
+  );
+}
 
 function Accordion({
   className,
@@ -35,7 +69,7 @@ function AccordionItem({
 function AccordionTrigger({
   className,
   children,
-  icon: Icon = Plus,
+  icon: Icon = AccordionPlusIcon,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Trigger> & {
   icon?: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
@@ -55,7 +89,7 @@ function AccordionTrigger({
           aria-hidden
           className="size-5 shrink-0 text-marketing-muted group-data-[state=open]/accordion-trigger:hidden"
         />
-        <Minus
+        <AccordionMinusIcon
           aria-hidden
           className="hidden size-5 shrink-0 text-marketing-muted group-data-[state=open]/accordion-trigger:block"
         />

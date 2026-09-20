@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 
 import MarqueeEdgeFade from "@/src/components/MarqueeEdgeFade";
-import { Icon } from "@/components/shared/Icon";
+import { MarketingIcon } from "@/components/shared/MarketingIcon";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_PLACEHOLDER_COUNT = 10;
@@ -42,7 +42,7 @@ function HeroPhotoCard({ src, alt, offset }: HeroPhotoCardProps) {
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <Icon
+            <MarketingIcon
               name="Image01"
               size={24}
               strokeWidth={1.5}

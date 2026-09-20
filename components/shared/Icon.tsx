@@ -8,14 +8,7 @@
  *   - aria-hidden defaults to true (decorative); pass aria-hidden={false} on
  *     icon-only interactive controls that lack a separate visible label.
  */
-import type { FC, SVGProps } from "react";
-import * as UntitledIcons from "@untitledui/icons";
-
-export type IconName = keyof typeof UntitledIcons;
-
-type UntitledIconComponent = FC<
-  SVGProps<SVGSVGElement> & { color?: string; size?: number }
->;
+import { ICON_REGISTRY, type IconName } from "@/components/shared/icon-registry";
 
 interface IconProps {
   name: IconName;
@@ -27,6 +20,8 @@ interface IconProps {
   "aria-label"?: string;
 }
 
+export type { IconName };
+
 export function Icon({
   name,
   size = 20,
@@ -35,11 +30,11 @@ export function Icon({
   "aria-hidden": ariaHidden = true,
   "aria-label": ariaLabel,
 }: IconProps) {
-  const IconComponent = UntitledIcons[name] as UntitledIconComponent | undefined;
+  const IconComponent = ICON_REGISTRY[name];
 
   if (!IconComponent) {
     if (process.env.NODE_ENV !== "production") {
-      console.warn(`[Icon] "${name}" not found in @untitledui/icons`);
+      console.warn(`[Icon] "${name}" not found in icon registry`);
     }
     return null;
   }

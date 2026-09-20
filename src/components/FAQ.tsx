@@ -1,7 +1,5 @@
 "use client";
 
-import { Plus } from "@untitledui/icons";
-
 import {
   Accordion,
   AccordionContent,
@@ -113,10 +111,7 @@ export default function FAQ() {
                 value={`faq-${index}`}
                 className={FAQ_ITEM_CLASS}
               >
-                <AccordionTrigger
-                  icon={Plus}
-                  className="relative z-[1] px-6 py-5 text-base sm:px-8 sm:py-6 sm:text-lg lg:px-10 xl:px-12"
-                >
+                <AccordionTrigger className="relative z-[1] px-6 py-5 text-base sm:px-8 sm:py-6 sm:text-lg lg:px-10 xl:px-12">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent

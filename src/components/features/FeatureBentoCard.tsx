@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import MarketingNavLink from "@/src/components/MarketingNavLink";
-import { Icon } from "@/components/shared/Icon";
+import { MarketingIcon } from "@/components/shared/MarketingIcon";
 import { UI_CARD, SHOWCASE_FRAME } from "@/lib/ui-surface-styles";
 import { cn } from "@/lib/utils";
 
@@ -83,7 +83,7 @@ export default function FeatureBentoCard({
           className={cn(FEATURE_PILL_CTA, "mt-1 w-fit")}
         >
           <span className="leading-none">{cta}</span>
-          <Icon
+          <MarketingIcon
             name="ArrowUpRight"
             size={16}
             strokeWidth={2}
