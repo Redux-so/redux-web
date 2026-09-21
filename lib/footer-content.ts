@@ -22,15 +22,15 @@ export const socialLinks = [
     external: true,
   },
   {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/company/tryredux",
-    icon: LinkedinIcon,
-    external: true,
-  },
-  {
     label: "Discord",
     href: "https://discord.gg/gzHrud9nee",
     icon: DiscordIcon,
+    external: true,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/tryredux",
+    icon: LinkedinIcon,
     external: true,
   },
   {
