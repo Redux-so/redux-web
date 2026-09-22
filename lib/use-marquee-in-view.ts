@@ -36,11 +36,19 @@ function getMarqueeIntersectionObserver(): IntersectionObserver | null {
  * Shared IntersectionObserver for marquee lanes — pauses offscreen animation
  * without one observer per card/item.
  */
-export function useMarqueeInView(defaultInView = false) {
+export function useMarqueeInView(
+  defaultInView = false,
+  /** When false, skip observing (for marquees driven by a parent’s shared in-view state). */
+  enabled = true,
+) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(defaultInView);
 
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     const element = rootRef.current;
     const observer = getMarqueeIntersectionObserver();
     if (!element || !observer) {
@@ -58,7 +66,7 @@ export function useMarqueeInView(defaultInView = false) {
       marqueeInViewListeners.delete(element);
       observer.unobserve(element);
     };
-  }, []);
+  }, [enabled]);
 
   return { rootRef, inView };
 }

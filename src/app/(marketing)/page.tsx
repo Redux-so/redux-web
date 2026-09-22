@@ -6,10 +6,10 @@ import FeaturesSection from "@/src/components/features/FeaturesSection";
 import Hero from "@/src/components/Hero";
 import MarqueeStrip from "@/src/components/MarqueeStrip";
 import {
-  EditShowcaseMarqueePlaceholder,
   EditorShowcaseSectionPlaceholder,
   ToolkitMarqueePlaceholder,
 } from "@/src/components/marketing/MarketingSectionPlaceholders";
+import EditShowcaseSection from "@/src/components/EditShowcaseSection";
 import { NAV_SCROLL_OFFSET_CLASS } from "@/src/components/Navbar";
 import WaitlistSection from "@/src/components/WaitlistSection";
 import {
@@ -32,11 +32,6 @@ const Showcase = dynamic(() => import("@/src/components/Showcase"), {
 const ToolkitMarquee = dynamic(
   () => import("@/src/components/features/ToolkitMarquee"),
   { loading: () => <ToolkitMarqueePlaceholder /> },
-);
-
-const EditShowcaseSection = dynamic(
-  () => import("@/src/components/EditShowcaseSection"),
-  { loading: () => <EditShowcaseMarqueePlaceholder /> },
 );
 
 export default function Home() {

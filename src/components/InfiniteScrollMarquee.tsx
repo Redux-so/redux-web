@@ -19,6 +19,8 @@ type InfiniteScrollMarqueeProps = {
   /** Seconds to scroll one full track width. */
   durationSec?: number;
   paused?: boolean;
+  /** When set, visibility is controlled by the parent (e.g. shared observer for multiple rows). */
+  inView?: boolean;
   className?: string;
   trackClassName?: string;
 };
@@ -34,6 +36,7 @@ export default function InfiniteScrollMarquee({
   direction = "left",
   durationSec = 100,
   paused = false,
+  inView: inViewProp,
   className,
   trackClassName,
 }: InfiniteScrollMarqueeProps) {
@@ -46,7 +49,9 @@ export default function InfiniteScrollMarquee({
     totalPausedMs: 0,
   });
   const [trackWidth, setTrackWidth] = useState(0);
-  const { rootRef, inView } = useMarqueeInView(false);
+  const observeSelf = inViewProp === undefined;
+  const { rootRef, inView: selfInView } = useMarqueeInView(false, observeSelf);
+  const inView = inViewProp ?? selfInView;
 
   const isPaused = paused || !inView;
 
@@ -128,7 +133,7 @@ export default function InfiniteScrollMarquee({
   }, [direction, durationSec, trackWidth]);
 
   return (
-    <div ref={rootRef} className={cn("min-w-0", className)}>
+    <div ref={observeSelf ? rootRef : undefined} className={cn("min-w-0", className)}>
       <div
         ref={scrollerRef}
         className="marquee-track flex w-max"
