@@ -1,6 +1,6 @@
 /** Open Graph / Twitter card image — used site-wide in root metadata. */
 export const SOCIAL_PREVIEW_IMAGE = {
-  url: "/og-image.jpg",
+  url: "/social-preview-v2.png",
   width: 1024,
   height: 537,
   alt: "Redux — agentic photo editing platform",
