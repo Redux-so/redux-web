@@ -31,33 +31,8 @@ export const metadata: Metadata = {
     images: [SOCIAL_PREVIEW_IMAGE_PATH],
   },
   icons: {
-    icon: [
-      {
-        url: "/favicon-light-32x32.png",
-        sizes: "32x32",
-        type: "image/png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/favicon-light-16x16.png",
-        sizes: "16x16",
-        type: "image/png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/favicon-dark-32x32.png",
-        sizes: "32x32",
-        type: "image/png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/favicon-dark-16x16.png",
-        sizes: "16x16",
-        type: "image/png",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
-    apple: "/apple-touch-icon.png",
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: [{ url: "/apple-touch-icon.png" }],
   },
 };
 
