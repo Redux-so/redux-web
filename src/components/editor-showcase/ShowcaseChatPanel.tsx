@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useMotionValue, useTransform, animate } from "framer-motion";
 
+import ProductBrandLogo from "@/components/shared/ProductBrandLogo";
 import { Icon } from "@/components/shared/Icon";
 import BlankImagePlaceholder from "@/components/shared/BlankImagePlaceholder";
 import { BTN_PRIMARY_COMPACT } from "@/lib/button-styles";
@@ -30,20 +31,18 @@ import { SHOWCASE_CHAT_PANEL_WIDTH } from "./showcase-layout";
 
 const CHAT_PANEL_GUTTER_CLASS = "px-8";
 const CHAT_PANEL_GUTTER_MARGIN_CLASS = "mx-8";
-const CHAT_AVATAR_LOGO_PX = 38;
+const CHAT_AVATAR_LOGO_PX = 32;
 const CHAT_MESSAGE_ATTACHMENT_MAX_WIDTH_PX = 164;
 
 function ShowcaseChatAvatar({ role }: { role: "user" | "assistant" }) {
   if (role === "assistant") {
     return (
       <div className={CHAT_AVATAR_SHELL} aria-hidden>
-        <Image
-          src="/r-logo.png"
-          alt=""
+        <ProductBrandLogo
           width={CHAT_AVATAR_LOGO_PX}
           height={CHAT_AVATAR_LOGO_PX}
           className="shrink-0"
-          aria-hidden
+          decorative
         />
       </div>
     );

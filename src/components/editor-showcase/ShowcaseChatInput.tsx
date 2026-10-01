@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+import ProductBrandLogo from "@/components/shared/ProductBrandLogo";
 import { Icon } from "@/components/shared/Icon";
 import ShowcaseUsageRing from "@/src/components/editor-showcase/ShowcaseUsageRing";
 import { PRODUCT_BRAND_BORDER_FOCUS_CLASS } from "@/lib/brand-colors";
@@ -112,19 +112,17 @@ export default function ShowcaseChatInput({
               : "items-center overflow-hidden",
           )}
         >
-          <Image
-            src="/r-logo.png"
-            alt=""
+          <ProductBrandLogo
             width={CHAT_INPUT_LOGO_PX}
             height={CHAT_INPUT_LOGO_PX}
             className={cn(
-              "shrink-0 rounded",
+              "shrink-0",
               isBentoDemo ? "size-10 sm:size-[46px]" : "size-[46px]",
               isBentoShell
                 ? "max-sm:-translate-y-1.5 sm:-translate-y-0.5"
                 : "-translate-y-1",
             )}
-            aria-hidden
+            decorative
           />
           <textarea
             ref={textareaRef}

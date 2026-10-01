@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Alata } from "next/font/google";
 
+import { footerWatermarkFont } from "@/lib/footer-watermark-font";
 import FooterPageGrid from "@/src/components/FooterPageGrid";
 import MarketingNavLink from "@/src/components/MarketingNavLink";
 import FooterWatermark from "@/src/components/FooterWatermark";
@@ -18,15 +18,9 @@ import { REDUX_LOGO_TEXT } from "@/lib/marketing-logos";
 import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
-const FOOTER_LOGO_WIDTH = 471;
-const FOOTER_LOGO_HEIGHT = 117;
-const FOOTER_LOGO_HEIGHT_CLASS = "h-5 sm:h-6";
-
-const footerWordmarkFont = Alata({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
+const FOOTER_LOGO_WIDTH = 1024;
+const FOOTER_LOGO_HEIGHT = 343;
+const FOOTER_LOGO_HEIGHT_CLASS = "h-8 sm:h-9";
 
 const footerLinkClassName =
   "text-sm text-marketing-subtle transition-colors hover:text-white";
@@ -136,7 +130,7 @@ export default function Footer() {
         </div>
         </div>
 
-        <FooterWatermark fontClassName={footerWordmarkFont.className} />
+        <FooterWatermark fontClassName={footerWatermarkFont.className} />
       </div>
     </footer>
   );
