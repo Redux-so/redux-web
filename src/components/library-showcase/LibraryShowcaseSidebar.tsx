@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 
+import ProductAppChromeLogo from "@/components/shared/ProductAppChromeLogo";
 import { Icon, type IconName } from "@/components/shared/Icon";
 import { DiscordIcon, GithubIcon } from "@/lib/brand-social-icons";
 import {
@@ -42,28 +42,17 @@ export default function LibraryShowcaseSidebar({
       style={{ width: LIBRARY_SHOWCASE_SIDEBAR_WIDTH }}
     >
       <div className="shrink-0">
-        <div className="flex items-center px-5 pt-4 pb-0">
+        <div className="flex items-center px-3 pt-4 pb-0">
           {demoMode ? (
-            <span className="inline-flex items-center">
-              <Image
-                src="/redux-logo.png"
-                alt="Redux"
-                width={88}
-                height={24}
-                className="h-6 w-auto"
-                priority
-              />
+            <span className="inline-flex items-center pl-2.5">
+              <ProductAppChromeLogo className="-ml-1" />
             </span>
           ) : (
-            <Link href="/library" className="inline-flex items-center no-underline">
-              <Image
-                src="/redux-logo.png"
-                alt="Redux"
-                width={88}
-                height={24}
-                className="h-6 w-auto"
-                priority
-              />
+            <Link
+              href="/library"
+              className="inline-flex items-center pl-2.5 no-underline transition-opacity duration-150 hover:opacity-80 focus-visible:opacity-80"
+            >
+              <ProductAppChromeLogo className="-ml-1" />
             </Link>
           )}
         </div>
