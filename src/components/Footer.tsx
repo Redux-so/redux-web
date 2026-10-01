@@ -18,9 +18,9 @@ import { REDUX_LOGO_TEXT } from "@/lib/marketing-logos";
 import { PAGE_CONTAINER } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 
-const FOOTER_LOGO_WIDTH = 471;
-const FOOTER_LOGO_HEIGHT = 117;
-const FOOTER_LOGO_HEIGHT_CLASS = "h-5 sm:h-6";
+const FOOTER_LOGO_WIDTH = 1024;
+const FOOTER_LOGO_HEIGHT = 343;
+const FOOTER_LOGO_HEIGHT_CLASS = "h-8 sm:h-9";
 
 const footerWordmarkFont = Alata({
   weight: "400",

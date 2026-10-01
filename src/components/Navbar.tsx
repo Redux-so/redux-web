@@ -44,9 +44,9 @@ const NAV_FIXED = cn(
   "nav-backdrop-blur fixed inset-x-0 top-0 z-50 overflow-visible",
 );
 
-const NAV_LOGO_HEIGHT_CLASS = "h-5 sm:h-6";
-const NAV_LOGO_INTRINSIC_WIDTH = 471;
-const NAV_LOGO_INTRINSIC_HEIGHT = 117;
+const NAV_LOGO_HEIGHT_CLASS = "h-8 sm:h-9";
+const NAV_LOGO_INTRINSIC_WIDTH = 1024;
+const NAV_LOGO_INTRINSIC_HEIGHT = 343;
 
 const NAV_WAITLIST_CTA = cn(
   "hero-pill-cta hero-pill-cta--purple hero-pill-cta--nav inline-flex items-center justify-center shrink-0 no-underline",
